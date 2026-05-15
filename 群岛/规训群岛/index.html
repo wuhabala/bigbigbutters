@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>规训群岛 · 用福柯的眼睛,看今天的中国</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #f5f1ea;
+    --paper: #ede7dc;
+    --paper-deep: #e4ddd0;
+    --ink: #1a1614;
+    --ink-soft: #4a4239;
+    --ink-faint: #8b8074;
+    --accent: #a8331e;
+    --accent-soft: #c97560;
+    --rule: #d3c9b8;
+    --serif: 'Noto Serif SC', Georgia, serif;
+    --sans: 'Noto Sans SC', -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ============ Masthead ============ */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .brand {
+    font-family: var(--serif);
+    font-size: 15px;
+    letter-spacing: 0.25em;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .brand a { color: var(--ink); }
+  .brand .sep { margin: 0 12px; color: var(--ink-faint); font-weight: 300; }
+  .brand .now { color: var(--accent); }
+  .nav-main { display: flex; gap: 28px; }
+  .nav-main a { transition: color 0.2s; }
+  .nav-main a:hover { color: var(--accent); }
+  .nav-main a.current { color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 4px; }
+
+  /* ============ 面包屑 ============ */
+  .breadcrumb {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 22px 32px 0;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  .breadcrumb a { color: var(--ink-faint); transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { margin: 0 12px; }
+  .breadcrumb .here { color: var(--ink); }
+
+  /* ============ Hero ============ */
+  .hero {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 80px 32px 64px;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    margin-bottom: 32px;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-eyebrow::after {
+    content: "";
+    flex: 0 0 40px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(56px, 10vw, 110px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin-bottom: 28px;
+    color: var(--ink);
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 600; }
+  .hero-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 24px;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    max-width: 700px;
+  }
+  .hero-lead {
+    font-size: 18px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    max-width: 640px;
+    margin-bottom: 48px;
+  }
+  .hero-lead strong { color: var(--ink); font-weight: 600; }
+  .hero-meta {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--ink-faint);
+    display: flex;
+    gap: 36px;
+    flex-wrap: wrap;
+    padding-top: 26px;
+    border-top: 1px solid var(--rule);
+    max-width: 700px;
+  }
+  .hero-meta span { display: flex; align-items: baseline; gap: 10px; }
+  .hero-meta strong { color: var(--ink); font-weight: 500; }
+  .hero-meta em { font-style: italic; color: var(--accent); font-weight: 500; }
+
+  /* ============ 发刊词节选 ============ */
+  .preface {
+    background: var(--paper);
+    margin: 0;
+    max-width: none;
+    padding: 96px 32px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .preface-inner { max-width: 760px; margin: 0 auto; }
+  .preface-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+  .preface-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 26px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 32px;
+    border-left: 3px solid var(--accent);
+    padding-left: 28px;
+  }
+  .preface-source {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+  .preface-body {
+    color: var(--ink-soft);
+    font-size: 17px;
+    line-height: 1.85;
+    margin-bottom: 16px;
+  }
+  .preface-body strong { color: var(--ink); }
+  .preface-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 24px;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 6px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: gap 0.3s;
+  }
+  .preface-cta:hover { gap: 18px; }
+
+  /* ============ section 通用 ============ */
+  section { max-width: 1080px; margin: 0 auto; padding: 96px 32px; }
+  .sect-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .sect-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(28px, 4.5vw, 44px);
+    line-height: 1.2;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  .sect-title em { font-style: italic; color: var(--accent); }
+  .sect-lead {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 680px;
+    margin-bottom: 56px;
+    line-height: 1.85;
+  }
+  .sect-lead strong { color: var(--ink); }
+
+  /* ============ 十期航线 ============ */
+  .voyage {
+    margin: 0;
+    border-top: 1px solid var(--ink);
+  }
+  .stop {
+    border-bottom: 1px solid var(--rule);
+    padding: 32px 0;
+    display: grid;
+    grid-template-columns: 90px 1fr 200px;
+    gap: 32px;
+    align-items: start;
+    transition: background 0.3s, padding-left 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+  .stop.live { cursor: pointer; }
+  .stop.upcoming { cursor: default; }
+  .stop.live:hover {
+    background: var(--paper);
+    padding-left: 16px;
+  }
+  .stop:last-child { border-bottom: 1px solid var(--ink); }
+
+  /* 期号区块 */
+  .stop-num {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    position: relative;
+    padding-top: 4px;
+  }
+  .stop-num::before {
+    content: "";
+    position: absolute;
+    left: -4px;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+  .stop.live .stop-num::before { background: var(--accent); }
+  .stop.live .stop-num { color: var(--accent); }
+  .stop.current .stop-num::before {
+    background: var(--accent);
+    box-shadow: 0 0 0 4px rgba(168, 51, 30, 0.2);
+  }
+  .stop.upcoming .stop-num { color: var(--ink-faint); font-weight: 400; }
+
+  /* 中间内容 */
+  .stop-main { padding-right: 16px; }
+  .stop-title {
+    font-family: var(--serif);
+    font-size: 23px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.35;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .stop.upcoming .stop-title { color: var(--ink-soft); }
+  .stop-anchor {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .stop-anchor em { font-style: italic; color: var(--accent); font-weight: 500; }
+  .stop-thesis {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+  .stop.upcoming .stop-thesis { color: var(--ink-faint); }
+
+  /* 右侧状态区 */
+  .stop-side {
+    text-align: right;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .stop-status {
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .stop.live .stop-status { color: var(--accent); }
+  .stop.upcoming .stop-status { color: var(--ink-faint); }
+  .stop-meta {
+    color: var(--ink-faint);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+  }
+  .stop-meta strong { color: var(--ink); font-weight: 500; }
+  .stop-arrow {
+    display: inline-block;
+    margin-top: 14px;
+    font-family: var(--sans);
+    color: var(--accent);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .stop.live:hover .stop-arrow { opacity: 1; transform: translateX(4px); }
+
+  /* ============ 工具箱 ============ */
+  .toolbox {
+    background: var(--ink);
+    color: var(--bg);
+    margin: 0;
+    max-width: none;
+    padding: 96px 32px;
+  }
+  .toolbox-inner { max-width: 1080px; margin: 0 auto; }
+  .toolbox .sect-num { color: var(--accent-soft); }
+  .toolbox .sect-title { color: var(--bg); }
+  .toolbox .sect-lead { color: rgba(245, 241, 234, 0.7); }
+  .tool-grid {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+  }
+  .tool {
+    background: rgba(245, 241, 234, 0.04);
+    border: 1px solid rgba(245, 241, 234, 0.1);
+    padding: 36px 32px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.35s;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+  }
+  .tool:hover {
+    background: rgba(168, 51, 30, 0.15);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+  .tool-mark {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--accent-soft);
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+  .tool-name {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--bg);
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .tool-desc {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: rgba(245, 241, 234, 0.7);
+    line-height: 1.75;
+    margin-bottom: 28px;
+    flex-grow: 1;
+  }
+  .tool-meta {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: var(--accent-soft);
+    text-transform: uppercase;
+    padding-top: 18px;
+    border-top: 1px solid rgba(245, 241, 234, 0.12);
+  }
+
+  /* ============ 三种权力分析框架 ============ */
+  .framework { padding: 96px 32px; }
+  .powers-row {
+    margin: 56px 0 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .pw {
+    padding: 36px 32px;
+    background: var(--paper);
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+  .pw:last-child { border-right: none; }
+  .pw-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.25;
+  }
+  .pw-fr {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-faint);
+    margin-bottom: 16px;
+  }
+  .pw-tag {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .pw-body { font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
+  .pw-body strong { color: var(--ink); }
+
+  /* ============ 关于本专栏 ============ */
+  .about-column {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 96px 32px;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .about-body p {
+    color: var(--ink-soft);
+    font-size: 17px;
+    line-height: 1.85;
+    margin-bottom: 18px;
+  }
+  .about-body p strong { color: var(--ink); }
+  .about-body p em { font-style: italic; color: var(--accent); }
+  .about-side {
+    border-left: 1px solid var(--rule);
+    padding-left: 40px;
+  }
+  .about-side-block { margin-bottom: 28px; }
+  .about-side-block:last-child { margin-bottom: 0; }
+  .about-side-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .about-side-value {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+  .about-side-value em { font-style: italic; color: var(--accent); }
+
+  /* ============ 下一座群岛预告 ============ */
+  .next-island {
+    background: var(--paper-deep);
+    margin: 0;
+    max-width: none;
+    padding: 64px 32px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+  }
+  .next-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .next-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  .next-title strong { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  /* ============ Footer ============ */
+  footer {
+    background: var(--ink);
+    color: rgba(245, 241, 234, 0.5);
+    padding: 64px 32px 48px;
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+  }
+  footer .footer-brand {
+    font-family: var(--serif);
+    font-size: 17px;
+    letter-spacing: 0.3em;
+    color: var(--bg);
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+  footer .footer-brand em { font-style: normal; color: var(--accent-soft); }
+  footer .footer-line { margin-bottom: 10px; }
+  footer a { color: rgba(245, 241, 234, 0.7); border-bottom: 1px dotted rgba(245, 241, 234, 0.3); }
+  footer .footer-rights { margin-top: 28px; padding-top: 28px; border-top: 1px solid rgba(245, 241, 234, 0.12); color: rgba(245, 241, 234, 0.3); }
+
+  /* ============ Responsive ============ */
+  @media (max-width: 760px) {
+    body { font-size: 16px; }
+    .masthead { padding: 14px 22px; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .nav-main { gap: 16px; flex-wrap: wrap; }
+    .breadcrumb { padding: 18px 22px 0; }
+    .hero { padding: 56px 22px 48px; }
+    .hero h1 { font-size: 48px; }
+    .hero-sub { font-size: 19px; }
+    .preface { padding: 64px 22px; }
+    .preface-quote { font-size: 21px; padding-left: 20px; }
+    section, .toolbox, .framework, .about-column { padding: 64px 22px; }
+    .stop {
+      grid-template-columns: 56px 1fr;
+      gap: 18px;
+      padding: 26px 0;
+    }
+    .stop-num { font-size: 24px; }
+    .stop-side {
+      grid-column: 1 / 3;
+      text-align: left;
+      padding-left: 74px;
+      margin-top: -4px;
+    }
+    .tool-grid { grid-template-columns: 1fr; }
+    .powers-row { grid-template-columns: 1fr; }
+    .pw { border-right: none; border-bottom: 1px solid var(--rule); }
+    .pw:last-child { border-bottom: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 36px; }
+    .about-side { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 28px; }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ============ Masthead ============ -->
+<div class="masthead">
+  <div class="brand">
+    <a href="../../">大大黄油</a>
+    <span class="sep">/</span>
+    <span class="now">规训群岛</span>
+  </div>
+  <div class="nav-main">
+    <a href="00-发刊词/">本期</a>
+    <a href="#voyage" class="current">文章库</a>
+    <a href="../../map.html">概念图谱</a>
+    <a href="案例库/">案例库</a>
+    <a href="那然后呢墙/">那然后呢墙</a>
+    <a href="../../about.html">关于</a>
+  </div>
+</div>
+
+<!-- ============ 面包屑 ============ -->
+<div class="breadcrumb">
+  <a href="../../">大大黄油</a>
+  <span class="sep">/</span>
+  <span class="here">规训群岛</span>
+</div>
+
+<!-- ============ Hero ============ -->
+<header class="hero">
+  <div class="hero-eyebrow">大大黄油 · 第一座群岛</div>
+  <h1>规训<em>群岛</em></h1>
+  <p class="hero-sub">用福柯的眼睛,看今天的中国。<br>从达米安到健康码,269 年。</p>
+  <p class="hero-lead">十期专栏,锚定福柯《规训与惩罚》(辅以《必须保卫社会》《性史》)。每一期挑一个你正在经历的当代现象——挂人、健康码、钉钉、鸡娃、A4 腰、信用分、算法、催婚——拆开看它后面的<strong>君主权力 / 规训权力 / 生命权力</strong>是怎样同时在场的。</p>
+  <div class="hero-meta">
+    <span>进度 · <em>1 / 10</em></span>
+    <span>出航日 · <strong>2026 · 05 · 12</strong></span>
+    <span>下一期 · <strong>2026 · 05 · 26</strong></span>
+    <span>节奏 · <strong>双周二</strong></span>
+  </div>
+</header>
+
+<!-- ============ 发刊词节选 ============ -->
+<section class="preface">
+  <div class="preface-inner">
+    <div class="preface-label">来自发刊词</div>
+    <div class="preface-quote">
+      现代社会从对"肉体"的公开酷刑,转向了对"灵魂"的精细管理;这不是"人道主义的胜利",而是一种更深、更经济、更高效的权力形式——规训权力的兴起。
+    </div>
+    <div class="preface-source">福柯《规训与惩罚》</div>
+    <p class="preface-body">从达米安到我们之间,权力从来没有消失,也没有减弱——它只是<strong>变了形态</strong>。从可见的、暴力的、间歇性的"君主权力",变成了不可见的、规范化的、连续渗透的"规训权力"。</p>
+    <p class="preface-body">更狡猾的是:规训权力不"压迫"你。<strong>它塑造你</strong>。它让你以为是你在自由地选择——选择 996、选择鸡娃、选择减肥、选择刷算法、选择催孩子结婚——而每一次"选择"都恰好是它需要的样子。</p>
+    <a href="00-发刊词/" class="preface-cta">阅读完整发刊词 →</a>
+  </div>
+</section>
+
+<!-- ============ 十期航线 ============ -->
+<section id="voyage">
+  <div class="sect-num">I 航线</div>
+  <h2 class="sect-title">十期<em>航线</em>,从开场到收束</h2>
+  <p class="sect-lead">每一期锚定一段原书 + 一个当代现象。点击进入已上线的港口;计划中的港口标注预计上线日期。<strong>建议从第 #00 期发刊词读起</strong>——后面所有期都建立在它给出的三种权力框架之上。</p>
+
+  <div class="voyage">
+
+    <a href="00-发刊词/" class="stop live current">
+      <div class="stop-num">#00</div>
+      <div class="stop-main">
+        <div class="stop-title">发刊词 · 从达米安到健康码</div>
+        <div class="stop-anchor">锚定原书 · <em>《规训与惩罚》开篇</em></div>
+        <div class="stop-thesis">福柯式专栏的开场。三种权力的并置、八期目录预告、阅读地图、那然后呢的来历。</div>
+      </div>
+      <div class="stop-side">
+        <div class="stop-status">已上线</div>
+        <div class="stop-meta"><strong>2026.05.12</strong> · 18 分钟</div>
+        <div class="stop-arrow">阅读 →</div>
+      </div>
+    </a>
+
+    <a href="01-微博挂人/" class="stop live">
+      <div class="stop-num">#01</div>
+      <div class="stop-main">
+        <div class="stop-title">微博挂人是 21 世纪的断头台</div>
+        <div class="stop-anchor">锚定原书 · <em>第一编《酷刑》</em></div>
+        <div class="stop-thesis">君主权力的数字复辟。为什么"挂"这个动作,和 18 世纪格列夫广场上拉马,共享同一套权力语法。</div>
+      </div>
+      <div class="stop-side">
+        <div class="stop-status">已上线</div>
+        <div class="stop-meta"><strong>2026.05.26</strong> · 20 分钟</div>
+        <div class="stop-arrow">阅读 →</div>
+      </div>
+    </a>
+
+    <a href="02-健康码/" class="stop live">
+      <div class="stop-num">#02</div>
+      <div class="stop-main">
+        <div class="stop-title">健康码:18 世纪的图纸,21 世纪的实装</div>
+        <div class="stop-anchor">锚定原书 · <em>第三编《全景敞视主义》</em></div>
+        <div class="stop-thesis">三种权力共振的极端案例。一个二维码同时是君主令、规训装置、生命权力的入口。</div>
+      </div>
+      <div class="stop-side">
+        <div class="stop-status">已上线</div>
+        <div class="stop-meta"><strong>2026.06.09</strong> · 22 分钟</div>
+        <div class="stop-arrow">阅读 →</div>
+      </div>
+    </a>
+
+    <a href="03-钉钉打卡/" class="stop live">
+      <div class="stop-num">#03</div>
+      <div class="stop-main">
+        <div class="stop-title">钉钉打卡:下班这件事是怎么死的</div>
+        <div class="stop-anchor">锚定原书 · <em>第三编《规训技术》《考试》</em></div>
+        <div class="stop-thesis">从规训到控制社会。时间的私有边界,被怎样一层一层吃掉。</div>
+      </div>
+      <div class="stop-side">
+        <div class="stop-status">已上线</div>
+        <div class="stop-meta"><strong>2026.06.23</strong> · 24 分钟</div>
+        <div class="stop-arrow">阅读 →</div>
+      </div>
+    </a>
+
+    <a href="04-鸡娃父母/" class="stop live">
+      <div class="stop-num">#04</div>
+      <div class="stop-main">
+        <div class="stop-title">鸡娃父母是新自由主义的理性投资人</div>
+        <div class="stop-anchor">锚定原书 · <em>第三编《考试》《规范化裁决》</em></div>
+        <div class="stop-thesis">规训 + 治理术。父母不是在"逼孩子",是在替系统计算资产。</div>
+      </div>
+      <div class="stop-side">
+        <div class="stop-status">已上线</div>
+        <div class="stop-meta"><strong>2026.06.30</strong> · 25 分钟</div>
+        <div class="stop-arrow">阅读 →</div>
+      </div>
+    </a>
+
+    <a href="05-A4腰/" class="stop live">
+      <div class="stop-num">#05</div>
+      <div class="stop-main">
+        <div class="stop-title">A4 腰是温柔的酷刑</div>
+        <div class="stop-anchor">锚定原书 · <em>第三编《驯顺的肉体》</em></div>
+        <div class="stop-thesis">规训技术在身体上的最纯粹形态。不需要任何人下令,身体自己已经在服从。</div>
+      </div>
+      <div class="stop-side">
+        <div class="stop-status">已上线</div>
+        <div class="stop-meta"><strong>2026.07.21</strong> · 22 分钟</div>
+        <div class="stop-arrow">阅读 →</div>
+      </div>
+    </a>
+
+    <a href="06-信用分/" class="stop upcoming">
+      <div class="stop-num">#06</div>
+      <div class="stop-main">
+        <div class="stop-title">信用分让监狱"消失"了</div>
+        <div class="stop-anchor">锚定原书 · <em>第四编《监狱》</em></div>
+        <div class="stop-thesis">惩罚的毛细化。当所有地方都是监狱时,监狱就不需要墙了。</div>
+      </div>
+      <div class="stop-side">
+        <div class="stop-status">已立项</div>
+        <div class="stop-meta">预计 <strong>2026.10.13</strong></div>
+      </div>
+    </a>
+
+    <a href="07-算法不是工具/" class="stop upcoming">
+      <div class="stop-num">#07</div>
+      <div class="stop-main">
+        <div class="stop-title">算法不是工具,是新的看守</div>
+        <div class="stop-anchor">锚定原书 · <em>第三编《全景敞视主义》《知识—权力》</em></div>
+        <div class="stop-thesis">Panopticon 的反转。不再是少数监视多数,而是多数主动暴露给少数。</div>
+      </div>
+      <div class="stop-side">
+        <div class="stop-status">已立项</div>
+        <div class="stop-meta">预计 <strong>2026.11.10</strong></div>
+      </div>
+    </a>
+
+    <a href="08-催婚与三胎/" class="stop upcoming">
+      <div class="stop-num">#08</div>
+      <div class="stop-main">
+        <div class="stop-title">催婚与三胎:卧室里的人口政治</div>
+        <div class="stop-anchor">锚定原书 · <em>第三编 + 《性史》第一卷</em></div>
+        <div class="stop-thesis">生命权力。最私密的事是怎么变成最公共的政策的。</div>
+      </div>
+      <div class="stop-side">
+        <div class="stop-status">已立项</div>
+        <div class="stop-meta">预计 <strong>2026.12.08</strong></div>
+      </div>
+    </a>
+
+    <a href="09-那然后呢/" class="stop upcoming">
+      <div class="stop-num">#09</div>
+      <div class="stop-main">
+        <div class="stop-title">那然后呢——看清形状之后</div>
+        <div class="stop-anchor">锚定原书 · <em>福柯访谈与晚期讲座</em></div>
+        <div class="stop-thesis">这套思想很擅长说明问题,但不擅长解决问题。诚实地承认这一点,比假装它有答案更重要。</div>
+      </div>
+      <div class="stop-side">
+        <div class="stop-status">已立项</div>
+        <div class="stop-meta">预计 <strong>2027.01.05</strong></div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ============ 三种权力分析框架 ============ -->
+<section class="framework">
+  <div class="sect-num">II 框架</div>
+  <h2 class="sect-title">本专栏始终在<br>这三层之间<em>切换</em></h2>
+  <p class="sect-lead">本专栏最核心的分析假设:你今天感到的每一种压力,几乎都是这三种权力在你身上叠加的结果。每一期都会标注三种权力的占比——可以在<a href="案例库/" style="color: var(--accent); border-bottom: 1px solid currentColor;">案例库</a>里互相对比。</p>
+
+  <div class="powers-row">
+    <div class="pw">
+      <div class="pw-name">君主权力</div>
+      <div class="pw-fr">pouvoir souverain</div>
+      <div class="pw-tag">可见 · 强制 · 戏剧化</div>
+      <div class="pw-body">通过<strong>展演</strong>运作。经典形态:公开处决、断头台、流放。当代回响:焊门的铁皮、微博挂人、平台封号公示。</div>
+    </div>
+    <div class="pw">
+      <div class="pw-name">规训权力</div>
+      <div class="pw-fr">pouvoir disciplinaire</div>
+      <div class="pw-tag">不可见 · 连续 · 规范化</div>
+      <div class="pw-body">通过<strong>塑造肉体</strong>运作。经典形态:军营、修道院、学校、工厂、医院的细微纪律。当代回响:KPI、考勤打卡、健身环、A4 腰。</div>
+    </div>
+    <div class="pw">
+      <div class="pw-name">生命权力</div>
+      <div class="pw-fr">bio-pouvoir</div>
+      <div class="pw-tag">人口为对象 · 管理生死</div>
+      <div class="pw-body">以<strong>统计为语言、健康为旗帜</strong>。经典形态:公共卫生、人口政策、流行病学。当代回响:健康码、三胎政策、BMI、医保数据。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 工具箱 ============ -->
+<section class="toolbox">
+  <div class="toolbox-inner">
+    <div class="sect-num">III 工具箱</div>
+    <h2 class="sect-title">除了读,<br>还可以<em>动手</em>玩</h2>
+    <p class="sect-lead">规训群岛不是文章列表。三件横跨整个专栏的产品级资产,各自承担"诊断、地图、汇集"三件事。</p>
+
+    <div class="tool-grid">
+      <a href="../../map.html" class="tool">
+        <div class="tool-mark">一</div>
+        <div class="tool-name">概念图谱</div>
+        <div class="tool-desc">以"规训权力"为中心节点的可视化网络。点击任一概念,看简明释义、原书出处、当代案例、相关概念、对应期号。</div>
+        <div class="tool-meta">路径 C · 概念入门</div>
+      </a>
+
+      <a href="案例库/" class="tool">
+        <div class="tool-mark">二</div>
+        <div class="tool-name">案例库</div>
+        <div class="tool-desc">8 期专栏覆盖的全部当代现象。每个案例标注三种权力的占比雷达图,可比较、可筛选、可叠加。</div>
+        <div class="tool-meta">路径 B · 现象导入</div>
+      </a>
+
+      <a href="那然后呢墙/" class="tool">
+        <div class="tool-mark">三</div>
+        <div class="tool-name">那然后呢墙</div>
+        <div class="tool-desc">每期文末的开放问题,所有人的回答汇聚的公共笔记本。不打分、不评判、可匿名。这是本专栏最重要的部分。</div>
+        <div class="tool-meta">读完之后 · 你的话</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 关于本专栏 ============ -->
+<section class="about-column">
+  <div class="sect-num">IV 关于</div>
+  <h2 class="sect-title">为什么<em>福柯</em>,<br>为什么<em>现在</em></h2>
+  <div class="about-grid">
+    <div class="about-body">
+      <p>福柯不是一个会让你心情变好的思想家。他不告诉你"封控是对是错""挂人是对是错""鸡娃是对是错"——他只告诉你:<em>它让你看见了一直在那儿的东西。</em></p>
+      <p>这套思想<strong>在"诊断"上极其有力,在"治疗"上几乎沉默</strong>。这不是后来者偶然没接上,而是福柯本人主动选择的姿态:他反复拒绝扮演"先知"或"立法者",说自己只提供"工具箱",谁愿意用谁用。</p>
+      <p>这听起来很谦逊,但其实也很方便——把"那然后呢"的负担永远转交给读者。</p>
+      <p>所以这份专栏想做的,是<strong>把这份工具箱递给你,顺便,把你和其他读者递给彼此</strong>。每期文末的开放问题,所有人的回答汇入那然后呢墙。看清形状之后,我们一起,试着长出新的语言。</p>
+    </div>
+    <div class="about-side">
+      <div class="about-side-block">
+        <div class="about-side-label">主要文本</div>
+        <div class="about-side-value">福柯《规训与惩罚》<br><em>刘北成、杨远婴译,三联书店</em></div>
+      </div>
+      <div class="about-side-block">
+        <div class="about-side-label">辅助文本</div>
+        <div class="about-side-value">《必须保卫社会》<br>《性史》第一卷<br>《安全、领土与人口》<br>Deleuze《福柯》</div>
+      </div>
+      <div class="about-side-block">
+        <div class="about-side-label">出航节奏</div>
+        <div class="about-side-value">双周二上午十点<br>2026.05 → 2027.01</div>
+      </div>
+      <div class="about-side-block">
+        <div class="about-side-label">建议读法</div>
+        <div class="about-side-value">系统读者 → 路径 A<br>急用工具 → 路径 B<br>想懂福柯 → 路径 C</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 下一座群岛预告 ============ -->
+<div class="next-island">
+  <div class="next-label">大大黄油 · 下一座群岛(筹备中)</div>
+  <div class="next-title"><strong>内卷与意义崩塌</strong><br>个体理性叠加出的结构性陷阱,<br>以及一个时代里"好"的尺子怎么变窄的。</div>
+</div>
+
+<!-- ============ Footer ============ -->
+<footer>
+  <div class="footer-brand">大大<em>黄油</em> · 规训群岛</div>
+  <div class="footer-line">10 期 · 自 2026.05.12 启航 · 双周二靠岸</div>
+  <div class="footer-line">本专栏文字遵循 CC BY-NC 4.0 协议</div>
+  <div class="footer-line"><a href="../../">← 回到大大黄油首页</a></div>
+  <div class="footer-rights">© 2026 大大黄油 · 规训群岛 · 第一座群岛</div>
+</footer>
+
+<script>
+  // 滚动入场动画
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('section, header.hero').forEach(s => {
+    s.classList.add('fade-in');
+    observer.observe(s);
+  });
+
+  // 防止 upcoming 期点击跳转(因为暂无内容)
+  document.querySelectorAll('.stop.upcoming').forEach(s => {
+    s.addEventListener('click', (e) => e.preventDefault());
+  });
+</script>
+
+</body>
+</html>

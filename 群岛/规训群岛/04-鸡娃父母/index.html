@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>规训群岛｜#04 鸡娃父母是新自由主义的理性投资人</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #f5f1ea;
+    --paper: #ede7dc;
+    --paper-deep: #e4ddd0;
+    --ink: #1a1614;
+    --ink-soft: #4a4239;
+    --ink-faint: #8b8074;
+    --accent: #a8331e;
+    --accent-soft: #c97560;
+    --rule: #d3c9b8;
+    --serif: 'Noto Serif SC', Georgia, serif;
+    --sans: 'Noto Sans SC', -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ======= Masthead ======= */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .masthead .brand { color: var(--ink); font-weight: 500; letter-spacing: 0.3em; }
+  .masthead .brand em { font-style: normal; color: var(--accent); }
+  .masthead .right { display: flex; gap: 24px; }
+  .masthead a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .masthead a:hover { color: var(--accent); }
+
+  /* ======= Breadcrumb ======= */
+  .breadcrumb {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 20px 32px 0;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+  }
+  .breadcrumb a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { margin: 0 10px; }
+  .breadcrumb .here { color: var(--ink); }
+
+  /* ======= Hero ======= */
+  .hero {
+    min-height: 88vh;
+    padding: 80px 32px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero::before {
+    content: "#04";
+    position: absolute;
+    top: 60px; right: 32px;
+    font-family: var(--serif);
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--ink-faint);
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 36px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(34px, 5.5vw, 58px);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 600; }
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: 20px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 36px;
+    font-style: italic;
+  }
+  .hero-lead {
+    font-size: 16.5px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    max-width: 600px;
+    margin-bottom: 48px;
+  }
+  .hero-meta {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--rule);
+    padding-top: 24px;
+  }
+  .hero-meta span { display: flex; align-items: baseline; gap: 8px; }
+  .hero-meta strong { color: var(--ink); font-weight: 500; }
+
+  /* ======= 通用正文 section ======= */
+  section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 32px;
+    position: relative;
+  }
+  .sect-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .sect-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(26px, 4vw, 38px);
+    line-height: 1.25;
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+  }
+  .sect-title em { font-style: italic; color: var(--accent); }
+  p { margin-bottom: 22px; color: var(--ink-soft); }
+  p strong { color: var(--ink); font-weight: 600; }
+  p em { font-style: italic; }
+  h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 21px;
+    color: var(--ink);
+    margin: 44px 0 16px;
+    line-height: 1.35;
+  }
+
+  /* ======= 引文块 ======= */
+  .quote {
+    background: var(--paper);
+    border-left: 3px solid var(--accent);
+    padding: 28px 32px;
+    margin: 36px 0;
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--ink);
+  }
+  .quote p { color: var(--ink); margin-bottom: 14px; }
+  .quote p:last-child { margin-bottom: 0; }
+  .quote-source {
+    display: block;
+    margin-top: 16px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  /* ======= 注脚 ======= */
+  .footnote {
+    background: var(--paper);
+    border-left: 2px solid var(--rule);
+    padding: 20px 28px;
+    margin: 28px 0;
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+  .footnote strong { color: var(--ink); }
+
+  /* ======= Pull quote ======= */
+  .pull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 21px;
+    line-height: 1.55;
+    color: var(--ink);
+    border-left: 2px solid var(--accent);
+    padding: 8px 0 8px 24px;
+    margin: 32px 0;
+  }
+
+  .divider { text-align: center; color: var(--rule); font-size: 18px; letter-spacing: 1em; padding: 24px 0; }
+  .divider::before { content: "·   ·   ·"; }
+
+  /* ======= 三种配方手风琴 ======= */
+  .configs { margin: 36px 0; }
+  .config {
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    padding: 24px 28px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .config:hover { border-color: var(--accent-soft); }
+  .config.open { border-color: var(--accent); background: var(--bg); }
+  .config-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .config-title {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .config-tag {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-faint);
+  }
+  .config.open .config-tag { color: var(--accent); }
+  .config-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, margin-top 0.4s ease;
+    font-size: 15.5px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+  .config.open .config-body {
+    max-height: 420px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+  }
+  .config-body p { margin-bottom: 8px; color: var(--ink-soft); }
+  .config-body strong { color: var(--ink); }
+
+  /* ======= 资本三角 ======= */
+  .capital-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 28px 0;
+  }
+  .capital-card {
+    border: 1px solid var(--rule);
+    padding: 18px 16px;
+    background: var(--paper);
+    border-radius: 2px;
+  }
+  .capital-name {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .capital-body { font-size: 14.5px; line-height: 1.65; color: var(--ink-soft); }
+
+  /* ======= 资本转换映射 ======= */
+  .capital-map { margin: 28px 0; }
+  .cm-row {
+    display: grid;
+    grid-template-columns: 160px 24px 1fr;
+    gap: 10px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+    font-size: 15.5px;
+    color: var(--ink-soft);
+  }
+  .cm-row:first-child { border-top: 1px solid var(--rule); }
+  .cm-item { font-weight: 500; color: var(--ink); }
+  .cm-arrow { text-align: center; color: var(--accent); }
+  .cm-result { font-style: italic; }
+
+  /* ======= 理论家卡片 ======= */
+  .theorists { margin: 36px 0; }
+  .theorist {
+    background: var(--paper);
+    border-left: 3px solid var(--accent);
+    padding: 22px 26px;
+    margin-bottom: 10px;
+  }
+  .theorist-name {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+    line-height: 1.3;
+  }
+  .theorist-book {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-faint);
+    margin-bottom: 12px;
+  }
+  .theorist-body { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .theorist-body strong { color: var(--ink); }
+
+  /* ======= versus ======= */
+  .versus {
+    margin: 36px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+  .versus-col { padding: 28px 26px; border-right: 1px solid var(--rule); }
+  .versus-col:last-child { border-right: none; }
+  .versus-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .versus-label.active { color: var(--accent); }
+  .versus-head { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 14px; line-height: 1.35; }
+  .versus-body { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .versus-body strong { color: var(--ink); }
+  .versus-body em { font-style: italic; color: var(--accent-soft); }
+
+  /* ======= 开放问题 ======= */
+  .open-qs { margin: 32px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .oq {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.75;
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 16px;
+  }
+  .oq:last-child { border-bottom: none; }
+  .oq-dot { color: var(--accent); font-size: 20px; line-height: 1.5; }
+  .oq strong { color: var(--ink); }
+
+  /* ======= 雷达图浮动 ======= */
+  .radar-float {
+    position: fixed;
+    top: 80px; right: 32px;
+    width: 136px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 14px;
+    z-index: 100;
+    opacity: 0;
+    transform: translateX(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+  }
+  .radar-float.visible { opacity: 1; transform: translateX(0); }
+  .radar-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .radar-svg { display: block; width: 100%; }
+  .radar-legend { margin-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+  .radar-item {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+  }
+  .radar-item span:last-child { color: var(--accent); font-weight: 600; }
+
+  /* ======= 那然后呢墙 ======= */
+  .ranr {
+    background: var(--paper);
+    margin: 0;
+    max-width: none;
+    padding: 96px 32px;
+  }
+  .ranr-inner { max-width: 760px; margin: 0 auto; }
+  .ranr-inner p { color: var(--ink-soft); }
+  .ranr-inner p strong { color: var(--ink); }
+
+  /* 岔路 */
+  .fork {
+    margin: 32px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .fork-path {
+    padding: 22px 20px;
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    border-radius: 2px;
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+  .fork-path.alt { border-color: var(--accent-soft); }
+  .fork-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .fork-path.alt .fork-label { color: var(--accent); }
+  .fork-path p { margin-bottom: 10px; font-size: 15.5px; }
+  .fork-path p:last-child { margin-bottom: 0; }
+
+  /* 三问 */
+  .questions { margin: 36px 0; }
+  .question {
+    padding: 26px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .question:first-child { border-top: 1px solid var(--rule); }
+  .question-num {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .question-text {
+    font-family: var(--serif);
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  /* 反向引导 */
+  .checklist { margin: 28px 0; }
+  .checklist-group { margin-bottom: 28px; }
+  .checklist-group-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .checklist ul { list-style: none; padding: 0; }
+  .checklist li {
+    padding: 10px 0 10px 28px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+    position: relative;
+  }
+  .checklist li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  .checklist li strong { color: var(--ink); }
+
+  /* 互动模块 */
+  .modules { margin: 32px 0; display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .module {
+    border: 1px solid var(--rule);
+    padding: 20px 24px;
+    background: var(--bg);
+    border-radius: 2px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .module-arrow { color: var(--accent); font-size: 18px; flex-shrink: 0; }
+  .module-body { font-size: 16px; line-height: 1.65; color: var(--ink-soft); }
+  .module-body strong { color: var(--ink); }
+
+  /* 留言框 */
+  .submit-area {
+    margin-top: 36px;
+    border: 1px dashed var(--rule);
+    background: var(--bg);
+    padding: 28px 32px;
+    text-align: center;
+    border-radius: 2px;
+  }
+  .submit-area .s-hint { font-family: var(--sans); font-size: 12px; letter-spacing: 0.1em; color: var(--ink-faint); margin-bottom: 10px; }
+  .submit-area .s-empty { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--ink-faint); margin-bottom: 16px; }
+  .submit-area .s-note { font-family: var(--sans); font-size: 11px; letter-spacing: 0.05em; color: var(--ink-faint); }
+  .submit-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 28px;
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  /* ======= 延伸阅读 ======= */
+  .reading { background: var(--paper-deep); margin: 0; max-width: none; padding: 80px 32px; }
+  .reading-inner { max-width: 760px; margin: 0 auto; }
+  .reading-list { margin: 28px 0 0; }
+  .reading-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 14px;
+  }
+  .reading-item:first-child { border-top: 1px solid var(--rule); }
+  .reading-dot { color: var(--accent); font-size: 14px; padding-top: 4px; }
+  .reading-content { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .reading-content strong { color: var(--ink); font-weight: 600; }
+  .reading-content em { font-style: italic; color: var(--ink-faint); }
+
+  /* ======= 结语 ======= */
+  .ending {
+    background: var(--ink);
+    color: var(--bg);
+    margin: 0;
+    max-width: none;
+    padding: 96px 32px;
+    text-align: center;
+  }
+  .ending-inner { max-width: 680px; margin: 0 auto; }
+  .ending .sect-num { color: var(--accent-soft); }
+  .ending-quote {
+    font-family: var(--serif);
+    font-size: clamp(18px, 2.8vw, 23px);
+    line-height: 1.9;
+    color: rgba(245,241,234,0.88);
+    margin: 36px 0;
+  }
+  .ending-quote em { font-style: italic; color: var(--accent-soft); }
+  .ending-quote strong { color: var(--bg); font-style: normal; }
+  .ending-next {
+    margin-top: 56px;
+    padding-top: 36px;
+    border-top: 1px solid rgba(245, 241, 234, 0.18);
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: rgba(245, 241, 234, 0.55);
+  }
+  .ending-next strong { color: var(--accent-soft); letter-spacing: 0.1em; }
+
+  /* ======= 导航 ======= */
+  .nav-episodes {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    border-top: 1px solid var(--rule);
+  }
+  .nav-ep {
+    padding: 24px 26px;
+    border: 1px solid var(--rule);
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    background: var(--paper);
+  }
+  .nav-ep:hover { border-color: var(--accent-soft); background: var(--bg); }
+  .nav-ep-dir { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 8px; }
+  .nav-ep-num { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--accent-soft); margin-bottom: 6px; }
+  .nav-ep-title { font-family: var(--serif); font-size: 16px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+  .nav-ep.next { text-align: right; }
+
+  footer {
+    text-align: center;
+    padding: 48px 32px;
+    color: var(--ink-faint);
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    border-top: 1px solid var(--rule);
+    line-height: 2;
+  }
+  footer a { color: var(--ink-faint); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 768px) {
+    .radar-float { display: none; }
+    .versus { grid-template-columns: 1fr; }
+    .versus-col { border-right: none; border-bottom: 1px solid var(--rule); }
+    .versus-col:last-child { border-bottom: none; }
+    .capital-grid { grid-template-columns: 1fr 1fr; }
+    .fork { grid-template-columns: 1fr; }
+    .nav-episodes { grid-template-columns: 1fr; gap: 14px; padding: 48px 22px; }
+    .nav-ep.next { text-align: left; }
+  }
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    .hero { padding: 56px 22px 36px; }
+    .hero h1 { font-size: 30px; }
+    .hero-sub { font-size: 18px; }
+    section { padding: 60px 22px; }
+    .ranr, .ending { padding: 64px 22px; }
+    .capital-grid { grid-template-columns: 1fr; }
+    .masthead { padding: 14px 22px; flex-direction: column; gap: 8px; align-items: flex-start; }
+    .masthead .right { gap: 18px; }
+    .cm-row { grid-template-columns: 1fr; gap: 4px; }
+    .cm-arrow { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 雷达图浮动：君主1 规训8 生命6 -->
+<div class="radar-float" id="radarFloat">
+  <div class="radar-label">#04 三种权力</div>
+  <svg class="radar-svg" viewBox="0 0 160 145" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="80,68 90,86 70,86" fill="none" stroke="#d3c9b8" stroke-width="0.8"/>
+    <polygon points="80,56 100,92 60,92" fill="none" stroke="#d3c9b8" stroke-width="0.8"/>
+    <polygon points="80,44 110,98 50,98" fill="none" stroke="#d3c9b8" stroke-width="0.8"/>
+    <polygon points="80,32 120,104 40,104" fill="none" stroke="#d3c9b8" stroke-width="0.8"/>
+    <polygon points="80,20 130,110 30,110" fill="none" stroke="#d3c9b8" stroke-width="1"/>
+    <line x1="80" y1="80" x2="80" y2="20" stroke="#d3c9b8" stroke-width="0.8"/>
+    <line x1="80" y1="80" x2="130" y2="110" stroke="#d3c9b8" stroke-width="0.8"/>
+    <line x1="80" y1="80" x2="30" y2="110" stroke="#d3c9b8" stroke-width="0.8"/>
+    <!-- 君主1: (80, 80-60*0.1)=(80,74) 规训8: (80+60*0.8*0.866,80+60*0.8*0.5)=(121.6,104) 生命6: (80-60*0.6*0.866,80+60*0.6*0.5)=(48.8,98) -->
+    <polygon points="80,74 121.6,104 48.8,98" fill="rgba(168,51,30,0.18)" stroke="#a8331e" stroke-width="1.5" stroke-linejoin="round"/>
+    <circle cx="80" cy="74" r="3" fill="#a8331e"/>
+    <circle cx="121.6" cy="104" r="3" fill="#a8331e"/>
+    <circle cx="48.8" cy="98" r="3" fill="#a8331e"/>
+    <text x="80" y="13" text-anchor="middle" font-family="'Noto Sans SC', sans-serif" font-size="10" fill="#1a1614" letter-spacing="1">君主</text>
+    <text x="138" y="122" text-anchor="start" font-family="'Noto Sans SC', sans-serif" font-size="10" fill="#4a4239" letter-spacing="1">规训</text>
+    <text x="22" y="122" text-anchor="end" font-family="'Noto Sans SC', sans-serif" font-size="10" fill="#4a4239" letter-spacing="1">生命</text>
+  </svg>
+  <div class="radar-legend">
+    <div class="radar-item"><span>君主</span><span>1 / 10</span></div>
+    <div class="radar-item"><span>规训</span><span>8 / 10</span></div>
+    <div class="radar-item"><span>生命</span><span>6 / 10</span></div>
+  </div>
+</div>
+
+<!-- 刊号牌 -->
+<div class="masthead">
+  <div class="brand"><a href="../../../" style="color:inherit;text-decoration:none">大大<em>黄油</em></a> · 规训群岛</div>
+  <div class="right">
+    <a href="../">文章库</a>
+    <a href="../../../map.html">概念图谱</a>
+    <a href="../案例库/">案例库</a>
+    <a href="../那然后呢墙/">那然后呢墙</a>
+    <a href="../../../about.html">关于</a>
+  </div>
+</div>
+
+<!-- 面包屑 -->
+<div class="breadcrumb">
+  <a href="../../../">大大黄油</a>
+  <span class="sep">/</span>
+  <a href="../">规训群岛</a>
+  <span class="sep">/</span>
+  <span class="here">#04 鸡娃父母</span>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">规训群岛 · 第 #04 期 · 鸡娃父母</div>
+  <h1>鸡娃父母<br>是新自由主义的<br><em>理性投资人</em></h1>
+  <p class="hero-sub">"当家庭被重组为'未来劳动力的生产工坊'，<br>'爱孩子'这个词被什么吃掉了？"</p>
+  <p class="hero-lead">锚定原书：第三编《考试》《规范化裁决》《发生组织》。主轴：规训权力 + 治理术——家庭被殖民为人力资本的最末端工坊。本期包含原书引文、思想史脉络（卢梭 / 普鲁士 / 福柯 / Bourdieu / Dardot & Laval / Brown / 韩炳哲）、当代案例与本期【那然后呢墙】。</p>
+  <div class="hero-meta">
+    <span>出刊 · <strong>2026.06.30</strong></span>
+    <span>阅读 · <strong>约 25 分钟</strong></span>
+    <span>锚定原书 · <strong>《规训与惩罚》第三编</strong></span>
+  </div>
+</header>
+
+<!-- ============ I ============ -->
+<section>
+  <div class="sect-num">I 两份 1762</div>
+  <h2 class="sect-title">卢梭与腓特烈，<br>两套关于孩子的<em>针锋相对</em></h2>
+  <p>1762 年，卢梭出版《爱弥儿，或论教育》（<em>Émile, ou De l'éducation</em>）。这是西方教育思想史上最重要的一本书之一，被康德称为"教育学的哥白尼革命"。</p>
+  <p>卢梭在书里宣告了一件在当时极其激进的事——<strong>孩子是孩子，不是小大人</strong>。</p>
+  <div class="quote">
+    <p>童年是人生的一个<strong>独立阶段</strong>——它本身是目的，不是为成人生活做准备的工具。</p>
+    <p>教育不应该是把成人世界的标准强加给孩子，而应该让孩子按照自己的"自然节奏"长成。</p>
+    <p>12 岁之前，孩子最需要的是<strong>身体的自由</strong>、<strong>感官的发展</strong>、<strong>对世界的好奇</strong>——而不是读书写字。</p>
+  </div>
+  <p>卢梭甚至写了一句让 21 世纪父母无法接受的话——</p>
+  <div class="quote">"你最需要让孩子学会的，是<strong>怎么无聊</strong>。"</div>
+  <div class="footnote">
+    <strong>一个必要的注脚</strong>——卢梭的儿童观本身有它的盲点。《爱弥儿》第五卷里的 Sophie 那一段——卢梭关于"女孩教育"的论述——按今天的标准是赤裸的性别本质主义：女孩从小被教来"取悦男人"，她的教育目的是成为爱弥儿合格的伴侣。把卢梭当作反鸡娃的精神祖先，需要承认这种选择性引用。但《爱弥儿》提出的"童年作为人生的独立阶段"这一洞见——独立于它的性别盲点——仍然是西方教育思想最重要的一次哥白尼革命。这是本节调用卢梭的有限授权。
+  </div>
+  <p>第二年，1763 年——普鲁士国王腓特烈二世签了一道法令：<strong>所有 5–13 岁的孩子，必须上学</strong>。这是人类历史上第一个国家级强制教育系统。</p>
+  <h3>腓特烈的真实意图</h3>
+  <p>腓特烈的目的不是"为了孩子"。这一点他在私人信件里写得很坦白——</p>
+  <div class="quote">
+    <p>"我需要识字的士兵——他们必须能读懂军令。"</p>
+    <p>"我需要有纪律的工人——工厂需要他们按时到岗。"</p>
+    <p>"我需要统一的'国家身份'——所有普鲁士孩子从小学一样的历史、一样的诗歌、一样的国王。"</p>
+  </div>
+  <p>普鲁士教育模式后来被全世界复制——1840 年代，美国教育改革家 Horace Mann 把它带回美国；1872 年，日本明治维新颁布《学制》；1905 年，中国清廷废除科举，引入西式学堂。而所有这些版本——都以"为孩子好"的名义运作。</p>
+  <h3>两套答案，谁赢了？</h3>
+  <p>卢梭和腓特烈在 1762 和 1763 年提出了两套关于"孩子是什么"的针锋相对的答案。260 年过去了。<strong>赢的是腓特烈那一套</strong>。</p>
+  <p>但有一件连腓特烈也没做到的事——让父母<strong>自愿、主动、不计成本地，把孩子当作一项需要持续优化的资产去经营</strong>。腓特烈的强制教育系统至少是国家强制的——它可以被反对、被改革、被讨论。</p>
+  <p>21 世纪的家长不需要被强制。他们<strong>自己</strong>承担起了腓特烈当年想做但没做到的事——自己做工头、自己定 KPI、自己监督执行、自己规范化裁决。</p>
+  <p class="pull">而这套系统在中国有一个名字。叫——<em>鸡娃</em>。</p>
+  <h3>福柯的关键判断</h3>
+  <p>福柯在《规训与惩罚》第三编里讲了"考试"（l'examen）作为现代权力技术的诞生。他说：</p>
+  <div class="quote">
+    <p>17—19 世纪西方学校的"考试"不是中性的测量工具。它是一种<strong>生产</strong>——它生产关于这个学生的<strong>真理</strong>：他是优秀的还是平庸的、是有前途的还是没希望的、是值得保留还是该淘汰。</p>
+    <p>考试把"层级监视"和"规范化裁决"组合在一起，让权力既能<strong>看见</strong>个体（监视），又能<strong>判定</strong>个体（评级）。</p>
+    <span class="quote-source">福柯《规训与惩罚》第三编 · 刘北成、杨远婴译</span>
+  </div>
+  <p>这一套微观工程学，今天有一个新名字。它叫——<strong>升学规划</strong>。只是修道院的钟楼和学堂的铃声，换成了你手机里的"作业 APP 提醒"和"家长群消息红点"。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ II ============ -->
+<section>
+  <div class="sect-num">II 鸡娃生活：三种配方</div>
+  <h2 class="sect-title">权力配方<em>各不相同</em>，<br>深层核心只有一个</h2>
+  <p>我们日常笼统说的"鸡娃"，其实是<strong>几种权力配方非常不同</strong>的事——</p>
+  <div class="configs">
+    <div class="config" data-c>
+      <div class="config-label">配方 A</div>
+      <div class="config-title">学业资本积累</div>
+      <div class="config-tag">规训权力（主轴）+ 高考时刻的君主性显现</div>
+      <div class="config-body">
+        <p>升学路径规划、学区房、补习班、奥数英语编程、错题本、试卷打印机、寒暑假预习、刷题群、小升初密考、中考分流焦虑、高考冲刺、自主招生准备、强基计划准备。</p>
+        <p>它是连续的、规范化的考试纪律，但在每年 6 月 7 日—9 日，会触发一次戏剧化的<strong>"最终审判"</strong>仪式。特征：戏剧性高、规则相对明确、有高考那个戏剧化的终点——即便实际上没有终点。</p>
+      </div>
+    </div>
+    <div class="config" data-c>
+      <div class="config-label">配方 B</div>
+      <div class="config-title">文化资本积累</div>
+      <div class="config-tag">规训 + 文化资本的代际转译</div>
+      <div class="config-body">
+        <p>钢琴、小提琴、舞蹈、绘画、马术、围棋、击剑、博物馆研学、英文原版书阅读量、艺术修养、电影鉴赏、留学夏校、辩论队。</p>
+        <p>表面上是"兴趣"，本质上是<strong>简历上看起来不像功利的功利</strong>——这是布尔迪厄意义上最隐蔽的资本传递方式。</p>
+      </div>
+    </div>
+    <div class="config" data-c>
+      <div class="config-label">配方 C</div>
+      <div class="config-title">社会资本积累</div>
+      <div class="config-tag">治理术（主轴）+ 阶级再生产</div>
+      <div class="config-body">
+        <p>国际夏令营、外籍家庭友好圈、家长资源置换群、校友会、领导力训练、研学营、世界顶级科学家面对面、藤校招生官 1v1、海外义工项目、模拟联合国、商赛、科研营。</p>
+        <p>以"开阔视野"为名，行"人脉投资"之实——这是新自由主义把"教育"重新定义为"资产配置"的<strong>最纯粹形态</strong>。</p>
+      </div>
+    </div>
+  </div>
+  <h3>布尔迪厄：三种资本</h3>
+  <p>这三种"资本"是法国社会学家<strong>布尔迪厄</strong>（Pierre Bourdieu）1986 年论文《资本的形式》（<em>The Forms of Capital</em>）里区分出来的。他说现代社会的不平等，至少包括三种资本——</p>
+  <div class="capital-grid">
+    <div class="capital-card">
+      <div class="capital-name">经济资本</div>
+      <div class="capital-body">钱、房、股票、不动产。最容易显眼。</div>
+    </div>
+    <div class="capital-card">
+      <div class="capital-name">文化资本</div>
+      <div class="capital-body">教育、品味、说话方式、艺术修养——通过家庭代际传递。最难撼动。</div>
+    </div>
+    <div class="capital-card">
+      <div class="capital-name">社会资本</div>
+      <div class="capital-body">人脉、关系网、被引荐的能力——你认识谁，比你是谁更重要。最不为外人所见。</div>
+    </div>
+  </div>
+  <p>当代鸡娃做的事，就是<strong>同时</strong>把这三种资本传给孩子。而每一种"鸡"都对应一种资本的代际再生产——</p>
+  <div class="capital-map">
+    <div class="cm-row"><span class="cm-item">学区房</span><span class="cm-arrow">→</span><span class="cm-result">经济资本 → 学业资本</span></div>
+    <div class="cm-row"><span class="cm-item">钢琴 / 马术</span><span class="cm-arrow">→</span><span class="cm-result">文化资本（让孩子未来在新阶层里看起来"不像新进的"）</span></div>
+    <div class="cm-row"><span class="cm-item">国际夏令营</span><span class="cm-arrow">→</span><span class="cm-result">社会资本（让孩子从小进入"那个圈子"）</span></div>
+  </div>
+  <p>三类配方权力机制不同，但共享同一个<strong>深层核心</strong>——<strong>孩子作为一项可被持续优化的资产</strong>。让"养育"这件事，从一个"陪伴成长"的过程，变成一种 24 小时不间断的资产经营。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ III ============ -->
+<section>
+  <div class="sect-num">III 第一层｜君主性</div>
+  <h2 class="sect-title">高考<br>作为<em>现代仪式</em></h2>
+  <p>如果福柯今天回到我们当中，他会立刻认出一件事——<strong>高考是君主权力的现代仪式</strong>。它具备所有要素：</p>
+  <p><strong>公开</strong>——所有人都看着。考场外的家长穿旗袍（"旗开得胜"）。送考的警车开道。新闻直播倒计时。每个城市都有"最有人情味的考点"。</p>
+  <p><strong>剧场化</strong>——填志愿、查分、放榜、状元采访、985 录取通知书晒朋友圈、谢师宴。每一步都有脚本。</p>
+  <p><strong>不对称</strong>——你不知道阅卷标准是怎么定的、自主招生标准是怎么定的、强基计划标准是怎么定的、综合评价标准是怎么定的。判决一旦下来——不可上诉。</p>
+  <p><strong>警告效应</strong>——一年一次的"分数命运故事"，比任何说教都管用——</p>
+  <div class="quote">
+    <p>你听说了吗？隔壁老王家孩子才考 480 分。</p>
+    <p>你听说了吗？你三姨二舅家孩子上了清华。</p>
+    <p>你听说了吗？那个没上本科的孩子现在送外卖。</p>
+  </div>
+  <h3>高考的真实功能</h3>
+  <p>高考的功能，不只是选拔。是<strong>警告</strong>——警告所有还在路上的家庭：12 年的鸡娃，浓缩进 6 月那三天。全国 1300 多万家庭，被一张分数线<strong>同时</strong>裁决一次。</p>
+  <p>它的戏剧性不需要每年加码——它<strong>只需要存在</strong>。存在，本身就是规训。它告诉所有还在路上的家长：你今天每一笔补习费、每一节奥数课、每一次"再坚持一下"，最后都要在那张分数线上<strong>兑现</strong>。</p>
+  <h3>高考的"必要性"幻觉</h3>
+  <p>值得专门挑出来的一点——很多人会替高考辩护："这是中国社会最公平的上升通道。"这部分是真的。但它<strong>也</strong>是一个让所有人<strong>接受这套筛选机制的合法性发生器</strong>。</p>
+  <div class="quote">
+    <p>没有高考，所有人都会问："凭什么是 TA 升而不是我？"</p>
+    <p>有了高考，所有人都说："分数说话，公平。"</p>
+  </div>
+  <p>高考的存在，让 12 年的鸡娃有了一个绝对合法的终点。它把"孩子被持续评估"这件事，变成了"为了那个公平时刻做准备"——而这种"公平时刻"的承诺，使得一切为它做准备的过程也<strong>自动获得合法性</strong>。</p>
+  <p class="pull">这是君主仪式最聪明的功能：<em>它不只是惩罚，它生产合法性</em>。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ IV ============ -->
+<section>
+  <div class="sect-num">IV 第二层｜规训性</div>
+  <h2 class="sect-title">家庭<br>作为<em>新的修道院</em></h2>
+  <p>挂人那一期我们说过：规训权力最完美的胜利，是让你自己承担起监视自己的工作。鸡娃这一套，是这一原则在<strong>家庭层级</strong>的精确实装。</p>
+  <p>而且——这一层最深的、几乎从来没被命名的事是——<strong>不是孩子在鸡自己，是父母自己承担起了"工头"的角色</strong>。</p>
+  <p>父母自己设定 KPI（每天必须背 20 个单词）。父母自己做绩效评估（"今天作业怎么样"）。父母自己做规范化裁决（"班上前 10 名才算优秀"）。父母自己做层级监视（家长群里的"晒成绩接龙"）。父母自己做时间安排（暑假表精确到 30 分钟）。父母自己做动作分解（"先做数学，再做英语，最后语文"）。</p>
+  <p>没有人在父母身边强迫。但没有这些动作，父母会觉得<strong>自己</strong>在"犯罪"——犯了"对孩子未来不负责任"的罪。</p>
+  <p class="pull">这才是规训权力最深的一层：它甚至不需要强制谁。它只需要让"<em>不这么做</em>"变得不可想象。</p>
+  <h3>福柯的"考试"原来在说这个</h3>
+  <p>福柯第三编里专门用一节讲"<strong>考试</strong>"。读这一节时，所有当代中国家长应该会汗毛竖起——</p>
+  <div class="quote">
+    <p>考试不是中性的测量。它是一种<strong>生产</strong>——它生产关于这个孩子的<strong>真理</strong>：他是优秀的还是平庸的、是有潜力的还是没希望的、是值得投入的还是该放手的。</p>
+    <p>考试把每一个孩子<strong>变成一个可记录、可追踪、可比较的档案</strong>。</p>
+    <p>从这个意义上说，"个体"作为现代意义上的概念，<strong>是被考试生产出来的</strong>——在考试出现之前，人首先是"某个家族的人"、"某个村庄的人"、"某个职业的人"。考试之后，人<strong>首先</strong>是"某个分数的人"。</p>
+    <span class="quote-source">福柯《规训与惩罚》第三编 · 刘北成、杨远婴译</span>
+  </div>
+  <p>而当代鸡娃的天才发明是——把这种"生产"<strong>永久化</strong>了。从早教评估（0–3 岁）、入园面试（3 岁）、幼小衔接（6 岁），到月考、期中考、期末考、模拟考、统考、联考、自招、高考、考研、考公——孩子从 3 岁开始，<strong>一辈子都在考试</strong>。</p>
+  <p>不再有"考完试"的那一刻。只有从一个被评估的状态，<strong>调制</strong>到下一个被评估的状态。你不再"毕业"，你只是从一种被允许的状态，滑到另一种被允许的状态。</p>
+  <h3>福柯的"规范化裁决"</h3>
+  <p>福柯第三编还有一节叫"<strong>规范化裁决</strong>"（la sanction normalisatrice）。他说：</p>
+  <div class="quote">
+    <p>规训权力发明了一种<strong>新的惩罚方式</strong>——它不再像君主那样直接惩罚"罪行"，而是用<strong>与"规范"的偏差</strong>来定义"应受惩罚"。</p>
+    <p>你不是因为做错了什么被罚——你是因为<strong>没达到那个标准</strong>被罚。</p>
+    <p>"他比同龄人晚学了 3 个月的算术。" → 这就成了一个<strong>问题</strong>。<br>
+    "他还不会背 100 首唐诗。" → 这就成了一个<strong>缺陷</strong>。<br>
+    "他班上排第 20 名。" → 这就成了一种<strong>轻微的惩罚</strong>。</p>
+    <span class="quote-source">福柯《规训与惩罚》第三编 · 刘北成、杨远婴译</span>
+  </div>
+  <p>读到这里，所有家长应该都会忽然意识到一件事——你"对孩子失望"的那一刻、你说"别人家孩子……"的那一刻、你皱眉看成绩单的那一刻——你正在做的，是福柯所说的"规范化裁决"。</p>
+  <p>而最深的一层——当父母自己<strong>没意识到</strong>自己在做"规范化裁决"时，这种裁决才<strong>最有效</strong>——因为孩子感觉到的不是"我妈在惩罚我"，而是<strong>"我让我妈失望了"</strong>。后者比前者更深、更内化、更难愈合。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ V ============ -->
+<section>
+  <div class="sect-num">V 第三层｜生命权力 + 治理术</div>
+  <h2 class="sect-title">你不是在爱孩子，<br>你是在做<em>资产配置</em></h2>
+  <p>接下来要说一件让人不舒服的事。学区房、补习班、奥数英语编程、夏校留学——它们的真正逻辑，<strong>不是"爱"</strong>。是<strong>新自由主义的家庭资产配置</strong>。</p>
+  <h3>福柯：治理术与人力资本</h3>
+  <p>福柯在 1978–1979 年的法兰西学院讲座《生命政治的诞生》（<em>Naissance de la biopolitique</em>）里，专门用半个学期讲了一件事——<strong>新自由主义如何重新定义"人"</strong>。</p>
+  <div class="quote">
+    <p>18 世纪的古典政治经济学说：劳动是商品，工资是劳动的价格。</p>
+    <p>20 世纪后期的新自由主义说：<strong>人本身是资本</strong>——一个需要被持续投资、持续优化、持续提升回报率的资本。</p>
+    <span class="quote-source">福柯《生命政治的诞生》· 法兰西学院讲座 1978–1979</span>
+  </div>
+  <div class="footnote">
+    <strong>福柯讲 Becker，不是在赞同 Becker。</strong>他是把 Becker 的人力资本理论当作一个<strong>症候</strong>来分析——一个让新自由主义如何重新定义"人"这件事，在数学语言里变得可见的症候。福柯到底有多同情新自由主义，这件事在哲学史上是被反复争论的（参见 Michael Behrent 与 Daniel Zamora 关于福柯晚年的辩论）。但有一点是清楚的——他不是 Becker 的辩护人，他是 Becker 的<strong>分析师</strong>。
+  </div>
+  <p>Becker 1964 年的《人力资本》（<em>Human Capital</em>）的核心主张——"教育"在经济学意义上不是"陶冶"或"培养"，而是<strong>对人力资本的投资</strong>——投入 X 元的教育支出，预期产出 Y 元的未来薪资差异，年化收益率 Z%。家庭的生育决策、教育决策、健康决策——都可以用<strong>资本投资模型</strong>来分析。</p>
+  <h3>你以为你在爱孩子……</h3>
+  <div class="quote">
+    <p>"学区房" = 房产 + 教育资本的复合金融工具。</p>
+    <p>"国际学校" = 一份持续 12 年的预付款产品，以"藤校录取概率"为收益指标。</p>
+    <p>"奥数英语编程" = 三项明确写进招生官评估表的"加分资产"。</p>
+    <p>"藤校规划顾问" = 真正存在的、按小时计费的、年收入 50 万美元的、专门管理孩子作为"资产组合"的职业。</p>
+    <p>"国际幼儿园 + 国际小学 + 国际中学 + 美国大学 + 美国名校研究生" = 一条完整的"贵族版人力资本流水线"，每一段都有明码标价。</p>
+  </div>
+  <p>这一切看起来都是"为孩子好"。但<strong>计算的逻辑</strong>——是资本投资的逻辑。</p>
+  <h3>把几位理论家放在一起看</h3>
+  <p>福柯、Becker、Dardot &amp; Laval、Brown、韩炳哲——他们看的是同一件事的不同切面：</p>
+  <div class="theorists">
+    <div class="theorist">
+      <div class="theorist-name">福柯</div>
+      <div class="theorist-book">《生命政治的诞生》· 法兰西学院讲座 1978–1979</div>
+      <div class="theorist-body">人被重新定义为"人力资本"是一种<strong>治理术</strong>的转变——它不再依赖国家强制，它依赖每个人<strong>自愿</strong>接受这种自我定义。而 Becker 的数学，让这次改写显形。</div>
+    </div>
+    <div class="theorist">
+      <div class="theorist-name">Dardot &amp; Laval</div>
+      <div class="theorist-book">《世界的新理性》· La Nouvelle Raison du Monde · 2009</div>
+      <div class="theorist-body">新自由主义不只是经济政策，它是一种<strong>生命形式</strong>——让你用市场的语言看你自己、看你的配偶、看你的孩子。你以为你在爱孩子。它告诉你：<strong>你在做资产配置</strong>。而最聪明的是——它不强迫你这么做，它只是让"不这么做"变得不可想象。</div>
+    </div>
+    <div class="theorist">
+      <div class="theorist-name">Wendy Brown</div>
+      <div class="theorist-book">《撤销民主》· Undoing the Demos · 2015</div>
+      <div class="theorist-body">当"人"被重新定义为"人力资本"时——<strong>公民</strong>消失了，<strong>童年</strong>消失了，<strong>家庭</strong>消失了。最终消失的是民主——因为民主预设"每个人作为完整的人参与公共生活"，但当所有人都把自己看作"持续优化的资产"时，公共生活也就消失了。</div>
+    </div>
+    <div class="theorist">
+      <div class="theorist-name">韩炳哲</div>
+      <div class="theorist-book">《倦怠社会》· Müdigkeitsgesellschaft · 2010</div>
+      <div class="theorist-body">当代社会最深的一层暴政，是把"自我剥削"包装成"自我实现"。孩子不再被父母强迫——孩子<strong>自己</strong>学会鞭打自己。新自由主义最深的胜利：它把工头装进了你 8 岁孩子的脑子里。</div>
+    </div>
+  </div>
+  <p>而那张图——就是你打开家长群、看到一条"哪位家长有奥数押题班资源"消息时，那个让你<strong>胃部一紧</strong>的感觉的来源。</p>
+  <h3>两种"主动"</h3>
+  <p>但这里要做一个<strong>重要的区分</strong>，否则这段批判会滑向"一切教育都是规训"的虚无主义——</p>
+  <div class="versus">
+    <div class="versus-col">
+      <div class="versus-label">健康的热爱</div>
+      <div class="versus-head">TA 和那件事之间有真实的联系</div>
+      <div class="versus-body">
+        TA 今天累了就放下，明天继续。TA 在题做完之后会兴奋地告诉你解法。TA 在被打断时会有点失落，但<strong>不会感到自我崩塌</strong>。<br><br>
+        区分标志：<em>TA 能允许自己今天不学</em>。
+      </div>
+    </div>
+    <div class="versus-col">
+      <div class="versus-label active">韩炳哲讨论的那种主动</div>
+      <div class="versus-head">TA 停不下来</div>
+      <div class="versus-body">
+        TA 在被允许休息时<strong>反而焦虑</strong>。TA 做完了一套题立刻问"还有吗"——不是因为兴奋，是因为<strong>害怕没有题</strong>。<strong>不努力</strong>对 TA 来说成了对自我存在的否定。<br><br>
+        区分标志：<em>TA 不允许自己不是"优秀"的自己</em>。
+      </div>
+    </div>
+  </div>
+  <p>区分这两种"主动"的，<strong>不是 TA 学了多少</strong>——是 TA <strong>能不能允许自己今天不学</strong>。而最容易看走眼的是父母自己——你从来没见过 TA 在不学习时是什么样，因为 TA 从来不允许自己不学习。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ VI ============ -->
+<section>
+  <div class="sect-num">VI 一个不舒服的问题</div>
+  <h2 class="sect-title">"爱"这个词，<br>被什么<em>吃掉了</em>？</h2>
+  <p>这一节不问"该不该鸡娃"。它问的是——<strong>"爱"这个词，在这套话语里还剩下什么</strong>。</p>
+  <p>如果这套机制看上去这么深，为什么我们接受了？因为<strong>社会确实在筛选</strong>。学区还是学区。升学率还是升学率。差距还是差距。你"不鸡娃"，孩子可能就上不了那个学校；上不了那个学校，可能就找不到那种工作；找不到那种工作，可能就要面对你这一代曾经面对的那种焦虑。这些都不是阴谋。否认这一点，是另一种意识形态。</p>
+  <h3>几个绕不开的问题</h3>
+  <div class="open-qs">
+    <div class="oq">
+      <div class="oq-dot">·</div>
+      <div>你不鸡娃，是把孩子留给了一个仍然在筛选的世界。你鸡娃，是把孩子提前送进了那台筛选机器，并且用 12 年时间帮它<strong>磨好刀</strong>。哪一种更"爱"？</div>
+    </div>
+    <div class="oq">
+      <div class="oq-dot">·</div>
+      <div>当<strong>整个社会都在鸡娃</strong>时，"我不鸡"会不会只是把成本转嫁给孩子的未来？</div>
+    </div>
+    <div class="oq">
+      <div class="oq-dot">·</div>
+      <div>当"为孩子好"和"为我自己心安"已经<strong>分不开</strong>时，我有没有可能在做"为我自己心安"的事——并以"为 TA 好"作为不必反思的借口？</div>
+    </div>
+    <div class="oq">
+      <div class="oq-dot">·</div>
+      <div>当孩子在 8 岁就<strong>主动</strong>说"我要继续刷题"时——他在选择，还是已经被<strong>预先选择了</strong>？</div>
+    </div>
+  </div>
+  <p>这些问题不止在中国相关。它们也是韩国"补习地狱"（hagwon culture）的核心、是新加坡"虎妈"现象持续辩论的焦点、是美国 Amy Chua 引发的"虎妈战歌"争议的来源、是法国关于精英学校（grandes écoles）阶级再生产的几十年持续讨论。<strong>这是一个全球性的问题，不是某一处的特殊处境。</strong></p>
+  <h3>福柯式的更深一问</h3>
+  <p>但福柯式分析想问的不是"该不该鸡娃"。它想问的是：</p>
+  <div class="quote">
+    当 18 世纪修道院的考试，被以 21 世纪"为孩子好"的名义全面实装；那是这套规训技术足够好，还是 21 世纪的我们还没想清楚——在"竞争力"和"做一个完整的人"之间，那条线究竟该画在哪里？
+  </div>
+  <p>这是一个真正的开放问题。它指向的不是"取消高考"，也不是"加倍鸡娃"，而是——<strong>一种我们仍在共同摸索的童年想象</strong>：孩子作为一个完整的存在，而不是一份持续可被优化的人力资本。</p>
+  <p>这种想象需要的不是更多的福柯，是另一种思想资源——也许是卢梭关于"自然成长"的洞见、是儒家关于"成人之美"的传统、是阿伦特关于"出生性"（natality）的哲学。到 #09 终刊我们会再正面碰它一次。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ VII 那然后呢 ============ -->
+<section class="ranr">
+  <div class="ranr-inner">
+    <div class="sect-num">VII 那然后呢</div>
+    <h2 class="sect-title">一个 40 分钟，<br>与鸡娃时代的<em>反向引导</em></h2>
+    <p>想象一下这样的一个夜晚——你 8 岁的孩子刚刚做完作业。TA 抬起头，犹豫了几秒，问你——</p>
+    <div class="quote">"妈妈，今天我们能去看蚂蚁吗？"</div>
+    <p>这一刻，有两条岔路。</p>
+    <div class="fork">
+      <div class="fork-path">
+        <div class="fork-label">熟悉的那条路</div>
+        <p>你说："妈妈知道你想玩，但我们说好今天要把这两套卷子做完的，对吗？乖，做完再说。"</p>
+        <p>TA 低下头。你叹了口气，回到手机上回工作消息。这一刻在 TA 的童年里<strong>消失了</strong>，像从来没发生过。</p>
+      </div>
+      <div class="fork-path alt">
+        <div class="fork-label">很久没走过的那条路</div>
+        <p>你说："好啊。"然后你放下手机。TA 牵起你的手。你们走到楼下，蹲了 40 分钟看一窝蚂蚁搬家。TA 兴奋地告诉你哪只是工蚁、哪只是兵蚁、它们怎么把一片饼干碎屑搬回家。</p>
+      </div>
+    </div>
+    <p>这一个 40 分钟，是这一节剩下所有清单的<strong>全部意义</strong>。它不是"高效育儿建议"，也不是"用陪伴替代鸡娃"的鸡汤。它是一次极其微小的、几乎没有外部效果的<strong>微观抵抗</strong>——让"筛选机器"停转 40 分钟，给 TA 留下一个 30 年后还能想起来的、不在任何简历里的、不为任何投资回报服务的——童年片段。</p>
+    <div class="footnote">
+      <strong>一个必要的承认</strong>——下面的反向引导清单都是<strong>个体层面</strong>的最低限度操作。它们不解决结构问题——教育资源不平等、阶级流动收窄、劳动力市场对人力资本的过度要求——这些<strong>不是单个家长选择能改变</strong>的。事实上，新自由主义对家庭最深的一刀，<strong>恰恰</strong>是这个前提——它让结构性问题被翻译成"家长选择题"。我们仍然需要一种更大的对话：关于教育资源、关于劳动力市场、关于阶级流动、关于"幸福"这个词应该由谁定义。这种对话留到 #09。
+    </div>
+    <h3>鸡娃时代的反向引导清单</h3>
+    <div class="checklist">
+      <div class="checklist-group">
+        <div class="checklist-group-title">关于时间</div>
+        <ul>
+          <li>给孩子留出每天<strong>至少 1 小时的"空白时间"</strong>——不安排、不规划、不"寓教于乐"。</li>
+          <li>暑假<strong>不排满</strong>。哪怕只留一周"什么也不做"，也是给 TA 一个未来能想起来的童年。</li>
+          <li>不在孩子无聊时<strong>立刻</strong>给 TA 解决方案——让 TA 学会和无聊待在一起。</li>
+        </ul>
+      </div>
+      <div class="checklist-group">
+        <div class="checklist-group-title">关于评价</div>
+        <ul>
+          <li>不在饭桌上<strong>只问</strong>"今天作业怎么样"。试试"今天什么让你开心？""今天什么让你难过？"</li>
+          <li>不把"班上排名"当家庭议程的常驻话题。</li>
+          <li>当孩子拿成绩单回来时——<strong>先看 TA 的脸</strong>，再看分数。</li>
+        </ul>
+      </div>
+      <div class="checklist-group">
+        <div class="checklist-group-title">关于"为你好"的话术</div>
+        <ul>
+          <li>在脱口而出"为你好"之前，停一秒钟，问自己一次"是为 TA 好，还是为我自己心安？"</li>
+          <li>不把"你必须做"包装成"妈妈是为你"——直接说"这是我的要求，因为……"反而更诚实。</li>
+          <li>区分<strong>"教育的焦虑"</strong>和<strong>"对自己人生的焦虑"</strong>——很多时候你在鸡娃，是因为你在鸡你自己未完成的部分。</li>
+        </ul>
+      </div>
+      <div class="checklist-group">
+        <div class="checklist-group-title">关于家长群</div>
+        <ul>
+          <li><strong>退出</strong>那些只比成绩的家长群。或者至少<strong>关掉提醒</strong>。</li>
+          <li>不晒孩子的奖状、获奖证书、成绩排名。</li>
+          <li>注意：你在家长群里发的每一条"感谢老师""老师辛苦了"，都在制造一种集体的过度规训氛围。</li>
+        </ul>
+      </div>
+      <div class="checklist-group">
+        <div class="checklist-group-title">关于"竞争"的姿态</div>
+        <ul>
+          <li>让孩子至少做<strong>一件不能写进简历</strong>的事——养小动物、捏黏土、看蚂蚁、追星、玩泥巴。</li>
+          <li>当 TA 喜欢上一件"没用"的事时——<strong>护住它</strong>，不要试图把它"变成有用的"。</li>
+          <li>在每一次"再坚持一下"涌上心头时，停一秒钟，问自己一次："这是 TA 需要坚持的，还是我需要 TA 坚持的？"</li>
+        </ul>
+      </div>
+    </div>
+    <p class="pull">新自由主义时代的反向引导，不是"裸辞鸡娃"。它是——<em>在每一次"为你好"涌上心头时，停一秒，问自己一次："为 TA 好，还是为我自己心安？"</em></p>
+    <h3>本期【那然后呢墙】三问</h3>
+    <div class="questions">
+      <div class="question">
+        <div class="question-num">问题一</div>
+        <div class="question-text">你最近一次"为孩子好"的决定——TA 当时的反应是什么？你看见了吗？</div>
+      </div>
+      <div class="question">
+        <div class="question-num">问题二</div>
+        <div class="question-text">如果取消所有补习班、所有考试、所有升学焦虑——你今天会带 TA 做什么？你能想得起来吗？</div>
+      </div>
+      <div class="question">
+        <div class="question-num">问题三</div>
+        <div class="question-text">你 8 岁的时候，最快乐的一件事是什么？那件事，TA 现在还有机会经历吗？</div>
+      </div>
+    </div>
+    <div class="submit-area">
+      <div class="s-hint">留言区 · 可匿名 · 不打分 · 不评判</div>
+      <div class="s-empty">这堵墙正在等第一句话。</div>
+      <div class="s-note">留言功能即将上线 · 月底整合进【那然后呢墙】</div>
+      <div class="submit-btn">提交留言（即将开放）</div>
+    </div>
+    <p style="margin-top:36px;font-family:var(--sans);font-size:12px;letter-spacing:0.1em;color:var(--ink-faint);">
+      → 前往 <a href="../那然后呢墙/" style="color:var(--accent);text-decoration:underline;">【那然后呢墙】</a> 查看其他期的开放问题与留言汇聚
+    </p>
+    <h3>本期互动模块</h3>
+    <div class="modules">
+      <div class="module">
+        <div class="module-arrow">→</div>
+        <div class="module-body"><strong>鸡娃 KPI 仪表盘</strong>：输入你给孩子安排的所有项目，自动生成一份"季度资产配置报告"——以反讽的金融语言，让你看见你已经用什么语言对待你的孩子</div>
+      </div>
+      <div class="module">
+        <div class="module-arrow">→</div>
+        <div class="module-body"><strong>童年时间机器</strong>：输入你和你孩子的年龄，分别生成"你 8 岁时的一周时间表"和"你孩子这一周的时间表"——做并列对比</div>
+      </div>
+      <div class="module">
+        <div class="module-arrow">→</div>
+        <div class="module-body"><a href="../那然后呢墙/" style="color: var(--accent); text-decoration: underline;"><strong>那然后呢墙</strong></a>：本期三问留言聚合</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 延伸阅读 -->
+<section class="reading">
+  <div class="reading-inner">
+    <div class="sect-num">延伸阅读</div>
+    <h2 class="sect-title" style="font-size:clamp(22px,3.5vw,30px);margin-bottom:8px;">原典与二手文献</h2>
+    <div class="reading-list">
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>福柯《规训与惩罚》第三编</strong>——"规训的手段""考试""规范化裁决" <em>刘北成、杨远婴译，三联书店</em> — 本期主要原书锚点。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>福柯《生命政治的诞生》</strong> <em>法兰西学院讲座 1978–1979，上海人民出版社</em> — 治理术与人力资本理论的原始论述。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>卢梭《爱弥儿，或论教育》</strong> <em>李平沤译，商务印书馆</em> — "童年作为独立阶段"的哥白尼革命。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>Pierre Bourdieu · The Forms of Capital</strong> <em>1986</em> — 经济资本、文化资本、社会资本的三分框架。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>Gary Becker · Human Capital</strong> <em>1964</em> — 人力资本理论的奠基文本。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>Pierre Dardot &amp; Christian Laval · La Nouvelle Raison du Monde</strong> <em>2009，中译《世界的新理性》</em> — 新自由主义作为生命形式。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>Wendy Brown · Undoing the Demos</strong> <em>2015，中译《撤销民主》</em> — 人力资本如何消灭公民与童年。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>韩炳哲《倦怠社会》</strong> <em>中信出版社中译本</em> — 自我剥削与自我实现的混同。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>Annette Lareau · Unequal Childhoods</strong> <em>2003</em> — 美国中产 vs 工人阶级家庭的鸡娃方式对照。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content">本站 <a href="../../../map.html" style="color:var(--accent);text-decoration:underline;">【概念图谱】</a> → "规训权力""考试""规范化裁决""治理术""生命权力"</div>
+      </div>
+    </div>
+    <p style="margin-top:28px;font-family:var(--sans);font-size:12px;letter-spacing:0.1em;color:var(--ink-faint);">
+      本站所有原书引文以"刘北成、杨远婴译，三联书店 2019 年版"为准。本专栏文字遵循 CC BY-NC 4.0 协议，转载请注明出处。
+    </p>
+  </div>
+</section>
+
+<!-- VIII 最后一句 -->
+<section class="ending">
+  <div class="ending-inner">
+    <div class="sect-num">VIII 最后一句</div>
+    <div class="ending-quote">
+      卢梭说，孩子应该有一个<strong>"长成自己"</strong>的童年。<br><br>
+      260 年过去了，我们用<em>"为 TA 好"</em>亲手把那个童年抢了回来——<br><br>
+      然后装进了一张<strong>资产配置表</strong>里。
+    </div>
+    <div class="ending-next">
+      <div style="margin-bottom: 12px;">下期预告 · <strong>#05 A4 腰是温柔的酷刑</strong></div>
+      <div style="margin-bottom: 12px;">上线 · 2026 · 07 · 21 · 双周二</div>
+      <div style="margin-top: 20px; font-style: italic; color: rgba(245, 241, 234, 0.75);">第一个开放问题已经挂在【那然后呢墙】：<br>你最近一次"对自己的身体不满意"，是因为什么？是它出问题了，还是它没"达标"？</div>
+    </div>
+  </div>
+</section>
+
+<!-- 导航 -->
+<nav class="nav-episodes">
+  <a href="../03-钉钉打卡/" class="nav-ep prev">
+    <div class="nav-ep-dir">← 上一期</div>
+    <div class="nav-ep-num">#03 · 2026.06.23</div>
+    <div class="nav-ep-title">钉钉打卡：下班这件事是怎么死的</div>
+  </a>
+  <a href="../05-A4腰/" class="nav-ep next">
+    <div class="nav-ep-dir">下一期 →</div>
+    <div class="nav-ep-num">#05 · 2026.07.21</div>
+    <div class="nav-ep-title">A4 腰是温柔的酷刑</div>
+  </a>
+</nav>
+
+<footer>
+  规训群岛 · 第 #04 期 · 2026.06.30 · 大大黄油<br>
+  <a href="../../../">大大黄油母站</a> · <a href="../">规训群岛文章库</a> · <a href="../../../map.html">概念图谱</a> · <a href="../案例库/">案例库</a><br>
+  本专栏文字遵循 CC BY-NC 4.0 协议
+</footer>
+
+<script>
+  // 三种配方手风琴
+  document.querySelectorAll('.config[data-c]').forEach(c => {
+    c.addEventListener('click', () => c.classList.toggle('open'));
+  });
+
+  // 雷达图浮动：滚过 hero 后出现
+  const hero = document.querySelector('.hero');
+  const radar = document.getElementById('radarFloat');
+  if (hero && radar) {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => radar.classList.toggle('visible', !e.isIntersecting));
+    }, { threshold: 0 });
+    obs.observe(hero);
+  }
+
+  // 滚动入场动画
+  const fadeObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('section, header.hero, .ranr, .ending, .reading, nav.nav-episodes').forEach(el => {
+    el.classList.add('fade-in');
+    fadeObs.observe(el);
+  });
+</script>
+
+</body>
+</html>

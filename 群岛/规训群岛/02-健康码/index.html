@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>规训群岛｜#02 健康码：18 世纪的图纸，21 世纪的实装</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #f5f1ea;
+    --paper: #ede7dc;
+    --paper-deep: #e4ddd0;
+    --ink: #1a1614;
+    --ink-soft: #4a4239;
+    --ink-faint: #8b8074;
+    --accent: #a8331e;
+    --accent-soft: #c97560;
+    --rule: #d3c9b8;
+    --serif: 'Noto Serif SC', Georgia, serif;
+    --sans: 'Noto Sans SC', -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ======= masthead ======= */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .masthead .brand { color: var(--ink); font-weight: 500; letter-spacing: 0.3em; }
+  .masthead .brand em { font-style: normal; color: var(--accent); }
+  .masthead .right { display: flex; gap: 24px; }
+  .masthead a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .masthead a:hover { color: var(--accent); }
+
+  /* ======= breadcrumb ======= */
+  .breadcrumb {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 20px 32px 0;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+  }
+  .breadcrumb a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { margin: 0 10px; }
+  .breadcrumb .here { color: var(--ink); }
+
+  /* ======= hero ======= */
+  .hero {
+    min-height: 85vh;
+    padding: 72px 32px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero::before {
+    content: "#02";
+    position: absolute;
+    top: 56px;
+    right: 32px;
+    font-family: var(--serif);
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--ink-faint);
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 32px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(34px, 5.5vw, 58px);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 600; }
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: 21px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+  .hero-lead {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    max-width: 580px;
+    margin-bottom: 48px;
+  }
+  .hero-meta {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--rule);
+    padding-top: 24px;
+  }
+  .hero-meta span { display: flex; align-items: baseline; gap: 8px; }
+  .hero-meta strong { color: var(--ink); font-weight: 500; }
+
+  /* ======= 三权力雷达图 浮动 ======= */
+  .radar-float {
+    position: fixed;
+    top: 80px;
+    right: 32px;
+    width: 136px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 14px;
+    z-index: 100;
+    opacity: 0;
+    transform: translateX(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+  }
+  .radar-float.visible { opacity: 1; transform: translateX(0); }
+  .radar-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .radar-svg { display: block; width: 100%; }
+  .radar-legend { margin-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+  .radar-item {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+  }
+  .radar-item span:last-child { color: var(--accent); font-weight: 600; }
+
+  /* ======= section base ======= */
+  section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 32px;
+    position: relative;
+  }
+  .sect-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .sect-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(26px, 4vw, 38px);
+    line-height: 1.25;
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+  }
+  .sect-title em { font-style: italic; color: var(--accent); }
+  .sect-sub {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 48px 0 18px;
+  }
+  p { margin-bottom: 22px; color: var(--ink-soft); }
+  p strong { color: var(--ink); font-weight: 600; }
+  p em { font-style: italic; }
+
+  /* ======= Panopticon 示意图 ======= */
+  .panopticon-wrap {
+    margin: 36px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .panopticon-caption {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  /* ======= quote ======= */
+  .quote {
+    background: var(--paper);
+    border-left: 3px solid var(--accent);
+    padding: 26px 30px;
+    margin: 32px 0;
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+  .quote p { color: var(--ink); margin-bottom: 12px; }
+  .quote p:last-child { margin-bottom: 0; }
+  .quote-source {
+    display: block;
+    margin-top: 14px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  .pull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 21px;
+    line-height: 1.55;
+    color: var(--ink);
+    border-left: 2px solid var(--accent);
+    padding: 6px 0 6px 22px;
+    margin: 32px 0;
+  }
+  .pull em { color: var(--accent); }
+  .pull strong { font-style: normal; color: var(--ink); }
+
+  .divider { text-align: center; color: var(--rule); font-size: 18px; letter-spacing: 1em; padding: 20px 0; }
+  .divider::before { content: "·   ·   ·"; }
+
+  /* ======= 扫码对应图 ======= */
+  .panopticon-compare {
+    margin: 36px 0;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+  }
+  .pc-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--rule);
+  }
+  .pc-row:last-child { border-bottom: none; }
+  .pc-cell {
+    padding: 16px 22px;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    border-right: 1px solid var(--rule);
+  }
+  .pc-cell:last-child { border-right: none; }
+  .pc-cell.head {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    background: var(--paper-deep);
+    font-weight: 600;
+  }
+  .pc-cell.head.right { color: var(--accent); }
+  .pc-cell strong { color: var(--ink); }
+
+  /* ======= 三种配方卡片 ======= */
+  .recipes { margin: 36px 0; }
+  .recipe {
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    padding: 24px 28px;
+    margin-bottom: 12px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: border-color 0.25s;
+  }
+  .recipe:hover { border-color: var(--accent-soft); }
+  .recipe-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .recipe-title {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .recipe-tag {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-faint);
+  }
+  .recipe-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, margin-top 0.4s ease;
+    font-size: 15.5px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+  .recipe.open { border-color: var(--accent); background: var(--bg); }
+  .recipe.open .recipe-body { max-height: 320px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--rule); }
+  .recipe.open .recipe-tag { color: var(--accent); }
+  .recipe-body strong { color: var(--ink); }
+
+  /* ======= 一天扫码时间线 ======= */
+  .timeline {
+    margin: 32px 0 40px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 24px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-time {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+  .tl-body { color: var(--ink-soft); font-size: 16px; line-height: 1.7; }
+  .tl-body strong { color: var(--ink); }
+
+  /* ======= 规训 vs 控制 对比 ======= */
+  .versus {
+    margin: 36px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+  .versus-col {
+    padding: 28px 26px;
+    border-right: 1px solid var(--rule);
+  }
+  .versus-col:last-child { border-right: none; }
+  .versus-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .versus-label.active { color: var(--accent); }
+  .versus-head {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .versus-body {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+  .versus-body strong { color: var(--ink); }
+  .versus-body em { font-style: italic; color: var(--accent-soft); }
+
+  /* ======= 韩炳哲 + Zuboff 并置 ======= */
+  .thinkers {
+    margin: 36px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .thinker {
+    background: var(--paper);
+    border-left: 3px solid var(--accent);
+    padding: 26px 24px;
+  }
+  .thinker-name {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .thinker-book {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-faint);
+    margin-bottom: 14px;
+  }
+  .thinker-body { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .thinker-body strong { color: var(--ink); }
+
+  /* ======= 治理术问题清单 ======= */
+  .open-qs {
+    margin: 32px 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .oq {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-soft);
+    font-size: 16.5px;
+    line-height: 1.75;
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 16px;
+  }
+  .oq:last-child { border-bottom: none; }
+  .oq-dot { color: var(--accent); font-size: 20px; line-height: 1.5; }
+  .oq strong { color: var(--ink); }
+
+  /* ======= 那然后呢 ======= */
+  .ranr {
+    background: var(--paper);
+    margin: 0;
+    max-width: none;
+    padding: 96px 32px;
+  }
+  .ranr-inner { max-width: 760px; margin: 0 auto; }
+  .ranr-inner p { color: var(--ink-soft); }
+  .ranr-inner p strong { color: var(--ink); }
+
+  /* 反向引导分类 */
+  .countercat { margin: 36px 0 0; }
+  .cc-head {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin: 32px 0 12px;
+    font-weight: 600;
+  }
+  .cc-head:first-child { margin-top: 0; }
+  .counterlist {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .counterlist li {
+    padding: 12px 0 12px 20px;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.7;
+    position: relative;
+  }
+  .counterlist li:first-child { border-top: 1px solid var(--rule); }
+  .counterlist li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  .counterlist li strong { color: var(--ink); }
+
+  /* 那然后呢三问 */
+  .questions { margin: 40px 0 36px; }
+  .question {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .question:first-child { border-top: 1px solid var(--rule); }
+  .q-num {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .q-text {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* 留言框占位 */
+  .submit-area {
+    margin-top: 36px;
+    border: 1px dashed var(--rule);
+    background: var(--bg);
+    padding: 28px 32px;
+    text-align: center;
+    border-radius: 2px;
+  }
+  .submit-area .s-hint { font-family: var(--sans); font-size: 12px; letter-spacing: 0.1em; color: var(--ink-faint); margin-bottom: 10px; }
+  .submit-area .s-empty { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--ink-faint); margin-bottom: 16px; }
+  .submit-area .s-note { font-family: var(--sans); font-size: 11px; letter-spacing: 0.05em; color: var(--ink-faint); }
+  .submit-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 28px;
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  /* ======= 延伸阅读 ======= */
+  .reading {
+    background: var(--paper-deep);
+    margin: 0;
+    max-width: none;
+    padding: 80px 32px;
+  }
+  .reading-inner { max-width: 760px; margin: 0 auto; }
+  .reading-list { margin: 28px 0 0; }
+  .reading-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 14px;
+  }
+  .reading-item:first-child { border-top: 1px solid var(--rule); }
+  .reading-dot { color: var(--accent); font-size: 14px; padding-top: 4px; }
+  .reading-content { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .reading-content strong { color: var(--ink); font-weight: 600; }
+  .reading-content em { font-style: italic; color: var(--ink-faint); }
+
+  /* ======= 结语 ======= */
+  .ending {
+    background: var(--ink);
+    color: var(--bg);
+    margin: 0;
+    max-width: none;
+    padding: 96px 32px;
+    text-align: center;
+  }
+  .ending-inner { max-width: 640px; margin: 0 auto; }
+  .ending .sect-num { color: var(--accent-soft); }
+  .ending-quote {
+    font-family: var(--serif);
+    font-size: clamp(17px, 2.8vw, 22px);
+    line-height: 1.85;
+    color: rgba(245,241,234,0.9);
+    margin: 36px 0;
+  }
+  .ending-quote em { font-style: italic; color: var(--accent-soft); }
+  .ending-quote strong { color: var(--bg); font-style: normal; }
+
+  /* ======= 上一期/下一期 ======= */
+  .nav-episodes {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    border-top: 1px solid var(--rule);
+  }
+  .nav-ep {
+    padding: 24px 26px;
+    border: 1px solid var(--rule);
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    background: var(--paper);
+  }
+  .nav-ep:hover { border-color: var(--accent-soft); background: var(--bg); }
+  .nav-ep-dir { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 8px; }
+  .nav-ep-num { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--accent-soft); margin-bottom: 6px; }
+  .nav-ep-title { font-family: var(--serif); font-size: 16px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+  .nav-ep.next { text-align: right; }
+
+  /* ======= footer ======= */
+  footer {
+    text-align: center;
+    padding: 48px 32px;
+    color: var(--ink-faint);
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    border-top: 1px solid var(--rule);
+    line-height: 2;
+  }
+  footer a { color: var(--ink-faint); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  /* ======= 响应式 ======= */
+  @media (max-width: 768px) {
+    .radar-float { display: none; }
+    .thinkers { grid-template-columns: 1fr; }
+    .versus { grid-template-columns: 1fr; }
+    .versus-col { border-right: none; border-bottom: 1px solid var(--rule); }
+    .versus-col:last-child { border-bottom: none; }
+  }
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    .masthead { padding: 14px 22px; flex-direction: column; gap: 10px; align-items: flex-start; }
+    .masthead .right { gap: 14px; font-size: 11px; }
+    .breadcrumb { padding: 16px 22px 0; }
+    .hero { padding: 56px 22px 36px; min-height: auto; }
+    .hero h1 { font-size: 30px; }
+    .hero-sub { font-size: 18px; }
+    .hero::before { display: none; }
+    section { padding: 60px 22px; }
+    .ranr, .ending, .reading { padding: 64px 22px; }
+    .tl-row { grid-template-columns: 80px 1fr; gap: 14px; }
+    .pc-row { grid-template-columns: 1fr; }
+    .pc-cell.head:last-child { border-top: 1px solid var(--rule); }
+    .nav-episodes { grid-template-columns: 1fr; gap: 14px; padding: 48px 22px; }
+    .nav-ep.next { text-align: left; }
+  }
+
+  /* ======= 淡入动画 ======= */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- 雷达图浮动窗：君主7 规训8 生命9 -->
+<div class="radar-float" id="radarFloat">
+  <div class="radar-label">#02 三种权力</div>
+  <svg class="radar-svg" viewBox="0 0 160 145" xmlns="http://www.w3.org/2000/svg">
+    <!-- 网格 -->
+    <polygon points="80,68 90,86 70,86" fill="none" stroke="#d3c9b8" stroke-width="0.8"/>
+    <polygon points="80,56 100,92 60,92" fill="none" stroke="#d3c9b8" stroke-width="0.8"/>
+    <polygon points="80,44 110,98 50,98" fill="none" stroke="#d3c9b8" stroke-width="0.8"/>
+    <polygon points="80,32 120,104 40,104" fill="none" stroke="#d3c9b8" stroke-width="0.8"/>
+    <polygon points="80,20 130,110 30,110" fill="none" stroke="#d3c9b8" stroke-width="1"/>
+    <!-- 轴线 -->
+    <line x1="80" y1="80" x2="80" y2="20" stroke="#d3c9b8" stroke-width="0.8"/>
+    <line x1="80" y1="80" x2="130" y2="110" stroke="#d3c9b8" stroke-width="0.8"/>
+    <line x1="80" y1="80" x2="30" y2="110" stroke="#d3c9b8" stroke-width="0.8"/>
+    <!-- 数据多边形：君主7 规训8 生命9 -->
+    <!-- 君主(top,7): (80, 80-60*0.7)=(80,38) -->
+    <!-- 规训(bottom-right,8): (80+60*0.8*0.866, 80+60*0.8*0.5)=(121.6,104) -->
+    <!-- 生命(bottom-left,9): (80-60*0.9*0.866, 80+60*0.9*0.5)=(33.2,107) -->
+    <polygon
+      points="80,38 121.6,104 33.2,107"
+      fill="rgba(168,51,30,0.18)"
+      stroke="#a8331e"
+      stroke-width="1.5"
+      stroke-linejoin="round"
+    />
+    <circle cx="80" cy="38" r="3" fill="#a8331e"/>
+    <circle cx="121.6" cy="104" r="3" fill="#a8331e"/>
+    <circle cx="33.2" cy="107" r="3" fill="#a8331e"/>
+    <!-- 轴标签 -->
+    <text x="80" y="13" text-anchor="middle" font-family="'Noto Sans SC', sans-serif" font-size="10" fill="#1a1614" letter-spacing="1">君主</text>
+    <text x="138" y="122" text-anchor="start" font-family="'Noto Sans SC', sans-serif" font-size="10" fill="#4a4239" letter-spacing="1">规训</text>
+    <text x="22" y="122" text-anchor="end" font-family="'Noto Sans SC', sans-serif" font-size="10" fill="#4a4239" letter-spacing="1">生命</text>
+  </svg>
+  <div class="radar-legend">
+    <div class="radar-item"><span>君主</span><span>7 / 10</span></div>
+    <div class="radar-item"><span>规训</span><span>8 / 10</span></div>
+    <div class="radar-item"><span>生命</span><span>9 / 10</span></div>
+  </div>
+</div>
+
+<!-- masthead -->
+<div class="masthead">
+  <div class="brand"><a href="../../../" style="color:inherit;text-decoration:none">大大<em>黄油</em></a> · 规训群岛</div>
+  <div class="right">
+    <a href="../">文章库</a>
+    <a href="../../../map.html">概念图谱</a>
+    <a href="../案例库/">案例库</a>
+    <a href="../那然后呢墙/">那然后呢墙</a>
+    <a href="../../../about.html">关于</a>
+  </div>
+</div>
+
+<!-- breadcrumb -->
+<div class="breadcrumb">
+  <a href="../../../">大大黄油</a>
+  <span class="sep">/</span>
+  <a href="../">规训群岛</a>
+  <span class="sep">/</span>
+  <span class="here">#02 健康码</span>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">规训群岛 · 第 #02 期 · 锚定原书：第三编《全景敞视主义》</div>
+  <h1>健康码:<br>18 世纪的<em>图纸</em>,<br>21 世纪的实装</h1>
+  <p class="hero-sub">"全景敞视主义——现代社会的一般图式。"</p>
+  <p class="hero-lead">边沁 1791 年画了一张圆形监狱的设计图，整整 230 年没人造出来——直到 2020 年，我们造出了它的完美版，而且每个人主动揣在口袋里。本期拆解数字通行码的三层权力结构，从君主性仪式到规训的内化，再到生命权力的人口政治。</p>
+  <div class="hero-meta">
+    <span>出刊 · <strong>2026.06.09</strong></span>
+    <span>阅读 · <strong>约 24 分钟</strong></span>
+    <span>主轴 · <strong>三种权力共振</strong></span>
+    <span>锚定 · <strong>第三编《全景敞视主义》</strong></span>
+  </div>
+</header>
+
+<!-- I 一张躺了 230 年的图纸 -->
+<section>
+  <div class="sect-num">I 一张躺了 230 年的图纸</div>
+  <h2 class="sect-title">边沁的设计,<br>福柯的<em>解读</em></h2>
+
+  <p>1791 年,英国哲学家杰里米·边沁（Jeremy Bentham）画了一张图。</p>
+  <p>他叫它 <em>Panopticon</em>——希腊语"<em>pan</em>"（全部）+ "<em>opticon</em>"（看见），合起来是"全见"。</p>
+
+  <!-- Panopticon SVG 示意图 -->
+  <div class="panopticon-wrap">
+    <svg viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg" style="max-width:320px;width:100%;">
+      <!-- 外圆（囚室环） -->
+      <circle cx="140" cy="100" r="88" fill="none" stroke="#d3c9b8" stroke-width="1.5"/>
+      <!-- 内圆（瞭望塔） -->
+      <circle cx="140" cy="100" r="28" fill="#e4ddd0" stroke="#a8331e" stroke-width="1.5"/>
+      <!-- 瞭望塔标签 -->
+      <text x="140" y="96" text-anchor="middle" font-family="'Noto Sans SC',sans-serif" font-size="9" fill="#a8331e" letter-spacing="0.5">瞭望塔</text>
+      <text x="140" y="108" text-anchor="middle" font-family="'Noto Sans SC',sans-serif" font-size="8" fill="#8b8074">可见，不可知</text>
+      <!-- 囚室格 (12 个扇形格) -->
+      <g stroke="#d3c9b8" stroke-width="1" fill="none">
+        <line x1="140" y1="12" x2="140" y2="128"/>
+        <line x1="228" y1="56" x2="107" y2="100" transform="rotate(30,140,100)"/>
+        <line x1="228" y1="56" x2="107" y2="100" transform="rotate(60,140,100)"/>
+        <line x1="228" y1="56" x2="107" y2="100" transform="rotate(90,140,100)"/>
+        <line x1="228" y1="56" x2="107" y2="100" transform="rotate(120,140,100)"/>
+        <line x1="228" y1="56" x2="107" y2="100" transform="rotate(150,140,100)"/>
+        <line x1="228" y1="56" x2="107" y2="100" transform="rotate(180,140,100)"/>
+        <line x1="228" y1="56" x2="107" y2="100" transform="rotate(210,140,100)"/>
+        <line x1="228" y1="56" x2="107" y2="100" transform="rotate(240,140,100)"/>
+        <line x1="228" y1="56" x2="107" y2="100" transform="rotate(270,140,100)"/>
+        <line x1="228" y1="56" x2="107" y2="100" transform="rotate(300,140,100)"/>
+        <line x1="228" y1="56" x2="107" y2="100" transform="rotate(330,140,100)"/>
+      </g>
+      <!-- 标注箭头 -->
+      <text x="140" y="5" text-anchor="middle" font-family="'Noto Sans SC',sans-serif" font-size="8.5" fill="#4a4239">囚室：不知何时被看</text>
+      <!-- 可见性说明 -->
+      <text x="4" y="100" font-family="'Noto Sans SC',sans-serif" font-size="7.5" fill="#8b8074" writing-mode="tb" text-anchor="middle">囚室对塔透明</text>
+    </svg>
+    <div class="panopticon-caption">边沁 Panopticon 结构示意 · 1791 年</div>
+  </div>
+
+  <div class="quote">
+    <p>中心一座瞭望塔，四周一圈环形囚室。塔里的看守可以看到任何一间囚室，但囚室里的人看不到塔内的情况。</p>
+    <p>囚徒不知道自己什么时候被看；他必须时刻假定自己正在被看。</p>
+    <p>监视的效果<strong>自动化、非个人化</strong>——权力从"具体的监视者"中分离出来，变成一种结构性效应。最终，囚徒<strong>自己承担起监视自己的工作</strong>。</p>
+  </div>
+
+  <p>边沁觉得这是一个伟大的发明。他写了一本书向英国政府推销，强调它有多经济、多高效、多人道。</p>
+  <p><strong>没人买账。</strong></p>
+  <p>这张图躺了 230 年。直到 2020 年——它被造出来了。但它不是一座监狱。是一个 APP。而且，每个人<strong>主动</strong>把它揣在自己口袋里。</p>
+
+  <h3 class="sect-sub">福柯的关键判断</h3>
+
+  <p>福柯在《规训与惩罚》第三编里专门讨论了 Panopticon：</p>
+
+  <div class="quote">
+    "全景敞视主义"不只是一座监狱。它是<strong>现代社会的一般图式</strong>——学校、医院、工厂、办公室、城市，乃至当今的数字平台，都可以被理解为某种 Panopticon 的变体。
+    <span class="quote-source">福柯《规训与惩罚》· 第三编《全景敞视主义》· 刘北成、杨远婴译</span>
+  </div>
+
+  <p>有时候隐喻会成真。数字通行码就是边沁那张图的<strong>字面实装</strong>——不是隐喻意义上的，而是几乎一对一的工程实现：</p>
+
+  <div class="panopticon-compare">
+    <div class="pc-row">
+      <div class="pc-cell head">Panopticon · 1791</div>
+      <div class="pc-cell head right">数字通行码 · 2020+</div>
+    </div>
+    <div class="pc-row">
+      <div class="pc-cell">中心瞭望塔</div>
+      <div class="pc-cell"><strong>云端服务器</strong></div>
+    </div>
+    <div class="pc-row">
+      <div class="pc-cell">不知何时被看</div>
+      <div class="pc-cell"><strong>随时可能被扫</strong></div>
+    </div>
+    <div class="pc-row">
+      <div class="pc-cell">囚徒自我监视</div>
+      <div class="pc-cell"><strong>自己主动亮码</strong></div>
+    </div>
+    <div class="pc-row">
+      <div class="pc-cell">监视者隐形</div>
+      <div class="pc-cell"><strong>后台看不见</strong></div>
+    </div>
+    <div class="pc-row">
+      <div class="pc-cell">权力的自动化</div>
+      <div class="pc-cell"><strong>算法判定通过/不通过</strong></div>
+    </div>
+    <div class="pc-row">
+      <div class="pc-cell">物理墙 = 监狱边界</div>
+      <div class="pc-cell"><strong>整座城市 = Panopticon</strong></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- II 扫码生活：三种配方 -->
+<section>
+  <div class="sect-num">II 扫码生活</div>
+  <h2 class="sect-title">三种<em>配方</em></h2>
+
+  <p>我们日常笼统说的"扫码"，其实是<strong>几种权力配方非常不同</strong>的事——</p>
+
+  <div class="recipes">
+    <div class="recipe" data-r>
+      <div class="recipe-label">(a) 应急性核验</div>
+      <div class="recipe-title">公共卫生事件、大型活动入场、跨境通行</div>
+      <div class="recipe-tag">君主权力 + 生命权力</div>
+      <div class="recipe-body">
+        强制性强、戏剧性高、时段相对集中，有明确的"开始"和"应当结束"。权力主轴是戏剧化的强制可见，同时以"人口的健康"为治理对象。
+      </div>
+    </div>
+    <div class="recipe" data-r>
+      <div class="recipe-label">(b) 持续性身份认证</div>
+      <div class="recipe-title">实名制、人脸识别门禁、场所码、电子政务</div>
+      <div class="recipe-tag">规训权力为主</div>
+      <div class="recipe-body">
+        日常、普及、不引人注目，几乎渗透你每一次"过门"的瞬间，<strong>没有明确的"结束"</strong>。它已经不再被感觉为"管制"，只是"日常"。
+      </div>
+    </div>
+    <div class="recipe" data-r>
+      <div class="recipe-label">(c) 自愿性自我量化</div>
+      <div class="recipe-title">健身环、智能手表、睡眠监测、营养追踪</div>
+      <div class="recipe-tag">自我规训 + 治理术</div>
+      <div class="recipe-body">
+        完全主动、看起来"为自己好"、不需要任何外部强制。这是规训的最高形态：<strong>你自己成为自己的监督者，并把这种监督感受为"自由"</strong>。
+      </div>
+    </div>
+  </div>
+
+  <p>三类配方权力机制不同，但共享同一个深层核心——<strong>身份的连续可读化</strong>：让你"是你"这件事，每时每刻都能被扫描、读取、记录、比对。</p>
+  <p>→ 站点的 <a href="../案例库/" style="color:var(--accent);text-decoration:underline;">【案例库】</a>把每一类的代表性场景标注成一张<strong>三种权力雷达图</strong>，让这个区分变成可视化的工具。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- III 君主性 -->
+<section>
+  <div class="sect-num">III 第一层</div>
+  <h2 class="sect-title">君主性:<br>"亮码通过"<em>作为现代仪式</em></h2>
+
+  <p>如果福柯今天回到我们当中，他会立刻认出一件事——</p>
+  <p class="pull"><em>"亮码通过"</em>是君主权力的现代仪式。</p>
+
+  <p>它具备所有要素：</p>
+
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-time">公开</div>
+      <div class="tl-body">你必须把屏幕亮给对方看。<strong>看不见，就过不去。</strong></div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">剧场化</div>
+      <div class="tl-body">举起手机 → 解锁 → 打开 APP → 等待加载 → 屏幕变成某种颜色 → 守门者点头 → 你通过。每一步都有脚本。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">不对称</div>
+      <div class="tl-body">你看不到对方的后台。你的身份对系统完全透明，系统对你完全不透明。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">警告效应</div>
+      <div class="tl-body">一次未通过的扫码，能让你停在原地、错过班次、被另眼相看——这些"小代价"的可见，本身就是对所有其他人的隐性提醒。</div>
+    </div>
+  </div>
+
+  <p>边沁的瞭望塔变成了门口的二维码。中心位置上没有看守了——但有一个看不见的服务器，在做完全相同的工作。</p>
+
+  <h3 class="sect-sub">仪式的下沉</h3>
+
+  <p>这种君主性，在 (a) 类应急性场景中最显眼——戏剧化、强制、时段集中。它的"君主性"几乎写在脸上。</p>
+  <p>但当它变成 (b) 类的日常背景——刷地铁、刷工卡、刷门禁、刷支付——这种戏剧性会<strong>下沉、退色、被习惯化</strong>。</p>
+  <p>仪式还在。你仍然要举起手机，仍然要等待加载，仍然要在屏幕上看到某种"通过"的反馈。只是它不再被感觉为仪式。它被感觉为"打开一扇门"。</p>
+
+  <div class="quote">
+    福柯曾说权力的最高境界是"<strong>变得不像权力</strong>"。当一种君主性的仪式被习惯化到不再被注意，它就完成了向规训的转化。
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- IV 规训性 -->
+<section>
+  <div class="sect-num">IV 第二层</div>
+  <h2 class="sect-title">规训性:<br>你自己承担起<em>扫自己的工作</em></h2>
+
+  <p>上一期我们说过：规训权力最完美的胜利，是让你自己承担起监视自己的工作。数字通行码这一套，是这一原则的精确实装。</p>
+
+  <p>你出门前<strong>自己</strong>亮码。<strong>自己</strong>核对状态。<strong>自己</strong>确认有效期。<strong>自己</strong>向守门人证明"我是合格的"。</p>
+  <p>没有人在你身边强迫。但没有这些动作，你过不去。</p>
+
+  <div class="quote">
+    你不知道何时被看，所以你必须时刻假定自己正被看。监视的效果<strong>自动化、非个人化</strong>——权力从"具体的监视者"中分离出来，变成一种结构性效应。最终，被监视者<strong>自己承担起监视自己的工作</strong>。
+    <span class="quote-source">福柯《规训与惩罚》· 第三编《全景敞视主义》</span>
+  </div>
+
+  <h3 class="sect-sub">一天的扫码轨迹</h3>
+  <p>回想昨天，从醒来到睡前，你被扫了多少次——</p>
+
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-time">早晨醒来</div>
+      <div class="tl-body">第一件事是看手机，顺便看一眼昨晚的<strong>睡眠分数</strong>（手表已经扫了你一整夜）。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">早餐</div>
+      <div class="tl-body">扫码点单，并被推送"是否成为我们的会员"。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">通勤</div>
+      <div class="tl-body">刷地铁实名码，进站、出站各一次。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">进单位</div>
+      <div class="tl-body">刷工卡 + 人脸识别 + 工位签到打卡。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">中午</div>
+      <div class="tl-body">订外卖，骑手出示证件，扫了，送进来。开会，扫会议室二维码签到 + 文件水印。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">傍晚</div>
+      <div class="tl-body">买菜，扫码支付 + 会员积分。进小区，刷脸开门 + 电梯刷卡。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">睡前</div>
+      <div class="tl-body">戴上手表让它<strong>继续扫你一整夜</strong>。</div>
+    </div>
+  </div>
+
+  <p class="pull">你一天下来被扫了<em>几十次</em>。但你已经记不清了。<br>因为扫码已经从"事件"变成了<strong>呼吸</strong>。</p>
+
+  <h3 class="sect-sub">从规训到控制：德勒兹的补充</h3>
+
+  <p>法国哲学家德勒兹（Gilles Deleuze）1990 年发表了极短的文章《后记：论控制社会》，说福柯描述的"规训社会"已经在让位给一种新形态——</p>
+
+  <div class="versus">
+    <div class="versus-col">
+      <div class="versus-label">规训社会 · Foucault</div>
+      <div class="versus-head">通过封闭空间运作</div>
+      <div class="versus-body">
+        你"入学"、"在校"、"毕业"；你"入职"、"在岗"、"退休"；你"入院"、"住院"、"出院"。<br>
+        <strong>每个阶段有明确边界。</strong>
+      </div>
+    </div>
+    <div class="versus-col">
+      <div class="versus-label active">控制社会 · Deleuze</div>
+      <div class="versus-head">通过连续调制运作</div>
+      <div class="versus-body">
+        你不再"出狱"或"毕业"。你只是从一个被允许的状态，调制到另一个被允许的状态。<br>
+        你的码是绿的还是黄的、信用分是 750 还是 680——这些都是<em>连续变化的允许阈值</em>。
+      </div>
+    </div>
+  </div>
+
+  <p>健康码、信用分、平台等级——是德勒兹笔下"控制"概念的<strong>纯粹形态</strong>。它已经不再"管制"你。它只是<strong>让你在某种状态里持续可读</strong>。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- V 生命权力 -->
+<section>
+  <div class="sect-num">V 第三层</div>
+  <h2 class="sect-title">生命权力:<br>它的真正对象<em>不是你</em></h2>
+
+  <p>接下来要说一件容易被忽略的事。健康码、运动 APP、信用分、KYC 系统——它们的真正对象<strong>不是你</strong>。是"人口"。</p>
+
+  <div class="quote">
+    <p>它不再像君主那样关心"杀谁、放谁"，也不再像规训那样只关心"如何塑造一个具体的肉体"。它关心的是——整个人群的出生率、死亡率、流行病曲线、年龄分布、健康水平、生产能力。</p>
+    <p>它把"人"翻译成"指标"，把"指标"聚合为"人口"，再用"人口"的统计语言来治理。</p>
+    <span class="quote-source">福柯《必须保卫社会》· 1976 法兰西学院讲座 · "生命权力"概念</span>
+  </div>
+
+  <p>健康码是这种语言的完美载体——它把每一个个体翻译成一组可比较、可追踪、可聚合的数据；然后再把这些数据加总，回看整个"人口的健康曲线"。</p>
+  <p>但生命权力不止于公共卫生场景。在 (c) 类自愿性自我量化里，它完成了内化。</p>
+
+  <h3 class="sect-sub">两位当代思想者的并置</h3>
+
+  <div class="thinkers">
+    <div class="thinker">
+      <div class="thinker-name">韩炳哲</div>
+      <div class="thinker-book">Byung-Chul Han · 《精神政治学》· 2014</div>
+      <div class="thinker-body">
+        旧时代的权力是<strong>生命政治</strong>——它管理你的身体、你的人口、你的繁殖。<br><br>
+        当代的权力是<strong>精神政治</strong>——它管理你的注意力、你的情绪、你的欲望。<br><br>
+        旧时代的权力需要监视你。<strong>当代的权力不需要监视你</strong>——你自愿把所有数据交出去。
+      </div>
+    </div>
+    <div class="thinker">
+      <div class="thinker-name">Shoshana Zuboff</div>
+      <div class="thinker-book">《监视资本主义》· The Age of Surveillance Capitalism · 2019</div>
+      <div class="thinker-body">
+        你以为你的健康数据是"为你"采集的。<strong>其实你是这个数据链上的原料。</strong><br><br>
+        平台把你的睡眠、心率、运动、消费、定位、社交聚合起来，做成<strong>行为剩余</strong>（behavioral surplus），卖给广告商、保险公司、雇主背调系统、消费金融评估系统。
+      </div>
+    </div>
+  </div>
+
+  <div class="quote">
+    <p><strong>韩炳哲解释了你为什么"愿意"</strong>：当代权力塑造你成为一个渴望自我量化、并把这种量化体验为"自由"和"自我提升"的主体。</p>
+    <p><strong>Zuboff 解释了你"愿意"之后数据去了哪里</strong>：你那些被自愿交出的数据，进入一个你看不见的市场，被加工、组合、定价，最终被卖回给那些想预测、推动、塑造你下一个决定的人。</p>
+    <p>"自愿"和"被开采"——是同一种治理逻辑的两面，它们互为支撑。</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VI 紧急与日常之间 -->
+<section>
+  <div class="sect-num">VI 一个不舒服的问题</div>
+  <h2 class="sect-title">紧急与<em>日常</em>之间</h2>
+
+  <p>如果这套机制看上去这么深，为什么我们接受了？</p>
+  <p>因为它常常确实"管用"。公共卫生事件是真实的。传染病的危险是真实的。流行病学指标在某些情形下确实救命。这些都不是阴谋。否认这一点，是另一种意识形态。</p>
+  <p>但这里有一种<strong>真实的张力</strong>——</p>
+
+  <div class="quote">紧急时刻的工具，能不能、应不应该、会不会——<strong>留在日常</strong>？</div>
+
+  <h3 class="sect-sub">治理术：温和的累积性扩张</h3>
+
+  <p>要描述"紧急工具留在日常"这件事，可以借阿甘本的"例外状态"——但那套话语对应的是戒严令、紧急法令这类<strong>主权对法律的中断</strong>，套到健康码身上其实并不合身。</p>
+  <p>更贴合的工具，是福柯晚期的概念——<strong>治理术</strong>（<em>gouvernementalité</em>）：</p>
+
+  <div class="quote">
+    <p>从 18 世纪开始，西方治理的核心问题不再是"主权者如何宣告法律"，而是"如何最经济、最有效地管理人口的健康、安全、流动、生产力"。</p>
+    <p>这种治理不依赖戏剧化的暴力，不依赖明文的法令；它依赖<strong>统计、登记、调查、流行病学、保险、风险计算</strong>这些看似中性的行政技术。</p>
+    <p>它运作的逻辑是：<strong>通过看上去"为你好"的安排，引导人口走向特定的状态</strong>——更健康、更安全、更可计算、更可被服务。</p>
+    <span class="quote-source">福柯《安全、领土、人口》· 《生命政治的诞生》· 1977–1979 法兰西学院讲座</span>
+  </div>
+
+  <p>健康码的留存机制，正是治理术的纯粹形态——它<strong>不需要</strong>任何主权者的明文宣告。它只需要在公共卫生事件中被"临时"建立；然后，因为它"看上去好用"，一项一项地、以各种"安全"与"便利"的名义被保留下来。</p>
+  <p>而越是被沉淀为日常默认，它就越不容易被讨论、越不容易被收回。因为一个以"为你好"的名义存在的工具，质疑它，会显得你在反对"好"本身。</p>
+
+  <h3 class="sect-sub">几个绕不开的边界问题</h3>
+
+  <div class="open-qs">
+    <div class="oq">
+      <div class="oq-dot">·</div>
+      <div>一个为应对极端情况而设计的工具，能否在情况缓和后<strong>真正退场</strong>？</div>
+    </div>
+    <div class="oq">
+      <div class="oq-dot">·</div>
+      <div>一种以"健康"名义铺开的数据采集，能否在"健康"危机过去后<strong>回到原来的边界</strong>？</div>
+    </div>
+    <div class="oq">
+      <div class="oq-dot">·</div>
+      <div>当一个工具同时具备"为你好"和"管理你"两种功能时，<strong>前者如何不被后者吞没</strong>？</div>
+    </div>
+    <div class="oq">
+      <div class="oq-dot">·</div>
+      <div>公共危机的回应方式，能否做到既有效，又不让<strong>"全员持续可读化"变成永久的默认</strong>？</div>
+    </div>
+  </div>
+
+  <p>这些问题不止在中国相关。它们也是欧盟疫苗证书争论的核心、是新加坡 TraceTogether 持续辩论的焦点、是以色列 Shin Bet 追踪权扩张的争议点。这是一个<strong>全球性的问题</strong>，不是某一处的特殊处境。</p>
+
+  <div class="quote">
+    <p>当 18 世纪的图纸，被以 21 世纪的健康名义全面实装；<br>
+    那是这张图纸足够好，<br>
+    还是 21 世纪的我们还没想清楚——<em>"管"与"治"的边界究竟在哪里</em>？</p>
+  </div>
+</section>
+
+<!-- VII 那然后呢 -->
+<section class="ranr">
+  <div class="ranr-inner">
+    <div class="sect-num">VII 那然后呢</div>
+    <h2 class="sect-title">数字时代的<em>反向引导</em></h2>
+
+    <p>福柯的"<strong>反向引导</strong>"（contre-conduite）到了数字时代有它具体的形态——</p>
+    <p>数字时代的反向引导，不是"卸载所有 APP"。它是——<strong>在每一次"同意"之前停一秒</strong>。那一秒不会改变系统，但它会改变你和系统的关系。</p>
+
+    <div class="countercat">
+      <div class="cc-head">关于授权</div>
+      <ul class="counterlist">
+        <li><strong>默认关闭</strong>位置权限。需要时再开。</li>
+        <li>每三个月清理一次 APP 授权列表。</li>
+        <li>不为了一杯打折咖啡，再绑定一个新的会员系统。</li>
+        <li>不把"同意"作为下意识动作——读那个对话框，哪怕一句。</li>
+      </ul>
+
+      <div class="cc-head">关于设备</div>
+      <ul class="counterlist">
+        <li>下班后<strong>把手表摘下来</strong>——让睡眠不被打分。</li>
+        <li>不在朋友圈晒睡眠分数、运动排名、健康打卡。</li>
+        <li>偶尔过一天"无数据日"——不戴任何穿戴设备。</li>
+      </ul>
+
+      <div class="cc-head">关于"为你好"的话术</div>
+      <ul class="counterlist">
+        <li>当任何一个 APP 说"为了更好地服务您，请允许……"时，停一秒。</li>
+        <li>当任何一个机构说"为了您的健康/安全/便利……"时，问一句"还有别的方式吗？"</li>
+        <li>不把"便利"等同于"自由"。它们不是一回事。</li>
+      </ul>
+    </div>
+
+    <h3 class="sect-sub" style="margin-top:56px;">本期【那然后呢墙】三问</h3>
+
+    <div class="questions">
+      <div class="question">
+        <div class="q-num">问题一</div>
+        <div class="q-text">你过去一周里，被扫过多少次码 / 验过多少次身份？你能回忆起其中几次？</div>
+      </div>
+      <div class="question">
+        <div class="q-num">问题二</div>
+        <div class="q-text">你身上的智能设备——手表、手环、手机健康 APP——是它在服务你，还是你在服务它？</div>
+      </div>
+      <div class="question">
+        <div class="q-num">问题三</div>
+        <div class="q-text">如果"健康码"不再以"健康"的名义出现，而是以"安全""信用""效率""便利"的名义出现，你会愿意亮码吗？</div>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <div class="s-hint">留言区 · 可匿名 · 不打分 · 不评判</div>
+      <div class="s-empty">这堵墙正在等第一句话。</div>
+      <div class="s-note">留言功能即将上线 · 月底整合进【那然后呢墙】</div>
+      <div class="submit-btn">提交留言（即将开放）</div>
+    </div>
+
+    <p style="margin-top:36px;font-family:var(--sans);font-size:12px;letter-spacing:0.1em;color:var(--ink-faint);">
+      → 前往 <a href="../那然后呢墙/" style="color:var(--accent);text-decoration:underline;">【那然后呢墙】</a> 查看其他期的开放问题与留言汇聚
+    </p>
+  </div>
+</section>
+
+<!-- 延伸阅读 -->
+<section class="reading">
+  <div class="reading-inner">
+    <div class="sect-num">延伸阅读</div>
+    <h2 class="sect-title" style="font-size:clamp(22px,3.5vw,30px);margin-bottom:8px;">原典与二手文献</h2>
+    <div class="reading-list">
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>福柯《规训与惩罚》第三编"全景敞视主义"</strong> <em>刘北成、杨远婴译，三联书店</em> — 本期主要原书锚点。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>福柯《必须保卫社会》</strong> <em>1976 法兰西学院讲座，钱翰译，上海人民出版社</em> — "生命权力"概念的原始论述。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>Gilles Deleuze · Postscript on the Societies of Control</strong> <em>1990</em> — 从规训到控制的关键短文，仅 5 页，值得原文阅读。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>Byung-Chul Han · Psychopolitik</strong> <em>2014，中译《精神政治学》</em> — 为什么"自由"成了新的束缚。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>Giorgio Agamben · State of Exception</strong> <em>2003，中译《例外状态》</em> — 临时如何变成永久。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>Shoshana Zuboff · The Age of Surveillance Capitalism</strong> <em>2019</em> — 你的数据是谁的财产。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content">本站 <a href="../../../map.html" style="color:var(--accent);text-decoration:underline;">【概念图谱】</a> → "全景敞视""生命权力""控制社会""治理术""精神政治学"</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content">本站 <a href="../../../" style="color:var(--accent);text-decoration:underline;">【框架对照：新冠封控】</a> — 更深入的当代案例分析。</div>
+      </div>
+    </div>
+    <p style="margin-top:28px;font-family:var(--sans);font-size:12px;letter-spacing:0.1em;color:var(--ink-faint);">
+      本文所有《规训与惩罚》引文以"刘北成、杨远婴译，三联书店 2019 年版"为准。本专栏文字遵循 CC BY-NC 4.0 协议，转载请注明出处。
+    </p>
+  </div>
+</section>
+
+<!-- VIII 结语 -->
+<section class="ending">
+  <div class="ending-inner">
+    <div class="sect-num">VIII 最后一句</div>
+    <div class="ending-quote">
+      边沁画完那张图时，他相信他设计的是一座<strong>监狱</strong>。<br><br>
+      没有人能想到，230 年后，<br>这张图最完美的实装——<br><br>
+      <em>是一个 APP，</em><br>
+      <em>每个人主动把它揣在口袋里。</em>
+    </div>
+  </div>
+</section>
+
+<!-- 上一期 / 下一期 -->
+<nav class="nav-episodes">
+  <a href="../01-微博挂人/" class="nav-ep prev">
+    <div class="nav-ep-dir">← 上一期</div>
+    <div class="nav-ep-num">#01 · 2026.05.26</div>
+    <div class="nav-ep-title">微博挂人是 21 世纪的断头台</div>
+  </a>
+  <a href="../03-钉钉打卡/" class="nav-ep next">
+    <div class="nav-ep-dir">下一期 →</div>
+    <div class="nav-ep-num">#03 · 2026.06.23</div>
+    <div class="nav-ep-title">钉钉打卡:下班这件事是怎么死的</div>
+  </a>
+</nav>
+
+<footer>
+  规训群岛 · 第 #02 期 · 2026.06.09 · 大大黄油<br>
+  <a href="../../../">大大黄油母站</a> · <a href="../">规训群岛文章库</a> · <a href="../../../map.html">概念图谱</a> · <a href="../案例库/">案例库</a><br>
+  本专栏文字遵循 CC BY-NC 4.0 协议
+</footer>
+
+<script>
+  // 三种配方展开
+  document.querySelectorAll('.recipe').forEach(r => {
+    r.addEventListener('click', () => r.classList.toggle('open'));
+  });
+
+  // 雷达图浮动：滚过 hero 后出现
+  const hero = document.querySelector('.hero');
+  const radar = document.getElementById('radarFloat');
+  const radarObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      radar.classList.toggle('visible', !entry.isIntersecting);
+    });
+  }, { threshold: 0 });
+  radarObserver.observe(hero);
+
+  // 滚动入场动画
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('section, header.hero, .ranr, .ending, .reading, nav.nav-episodes').forEach(el => {
+    el.classList.add('fade-in');
+    fadeObserver.observe(el);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>大大黄油 · 个人哲学站点</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #f5f1ea;
+    --paper: #ede7dc;
+    --paper-deep: #e4ddd0;
+    --ink: #1a1614;
+    --ink-soft: #4a4239;
+    --ink-faint: #8b8074;
+    --accent: #a8331e;
+    --accent-soft: #c97560;
+    --rule: #d3c9b8;
+    --serif: 'Noto Serif SC', Georgia, serif;
+    --sans: 'Noto Sans SC', -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ============ 海图背景层 ============ */
+  .seachart {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .seachart svg { width: 100%; height: 100%; display: block; }
+
+  /* ============ 顶部 masthead ============ */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    background: var(--bg);
+  }
+  .brand {
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: 0.35em;
+    font-family: var(--serif);
+    font-size: 16px;
+  }
+  .brand em { font-style: normal; color: var(--accent); }
+  .nav-main { display: flex; gap: 28px; }
+  .nav-main a { transition: color 0.2s; }
+  .nav-main a:hover { color: var(--accent); }
+
+  /* ============ Hero ============ */
+  .hero {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 120px 32px 80px;
+    position: relative;
+  }
+  .hero::before {
+    content: "N";
+    position: absolute;
+    top: 70px;
+    right: 32px;
+    font-family: var(--serif);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--ink-faint);
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    top: 92px;
+    right: 30px;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--ink-faint);
+    border-radius: 50%;
+    background:
+      linear-gradient(to bottom, transparent 49%, var(--accent) 49%, var(--accent) 51%, transparent 51%);
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.35em;
+    color: var(--accent);
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(44px, 8vw, 88px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+    max-width: 760px;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 600; }
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: 23px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-bottom: 28px;
+    max-width: 640px;
+  }
+  .hero-lead {
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    max-width: 620px;
+    margin-bottom: 56px;
+  }
+  .hero-meta {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--ink-faint);
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    max-width: 620px;
+  }
+  .hero-meta span { display: flex; align-items: baseline; gap: 10px; }
+  .hero-meta strong { color: var(--ink); font-weight: 500; }
+
+  /* ============ section 通用 ============ */
+  section { max-width: 980px; margin: 0 auto; padding: 80px 32px; position: relative; }
+  .sect-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .sect-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(28px, 4.5vw, 42px);
+    line-height: 1.22;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  .sect-title em { font-style: italic; color: var(--accent); }
+  .sect-lead {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 620px;
+    margin-bottom: 40px;
+  }
+
+  /* ============ 当期主推 ============ */
+  .featured {
+    background: var(--paper);
+    margin: 0;
+    max-width: none;
+    padding: 80px 32px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .featured-inner { max-width: 980px; margin: 0 auto; }
+  .featured-tag {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .featured-tag::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .featured-card {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 56px;
+    align-items: start;
+  }
+  .featured-headline {
+    font-family: var(--serif);
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.18;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  .featured-headline em { font-style: italic; color: var(--accent); }
+  .featured-headline a:hover { color: var(--accent); }
+  .featured-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+  .featured-body {
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+  .featured-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--sans);
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 6px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: gap 0.3s;
+  }
+  .featured-cta:hover { gap: 18px; }
+  .featured-side {
+    border-left: 1px solid var(--rule);
+    padding-left: 32px;
+  }
+  .featured-meta-block {
+    margin-bottom: 24px;
+  }
+  .featured-meta-block:last-child { margin-bottom: 0; }
+  .featured-meta-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .featured-meta-value {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .featured-meta-value em { font-style: italic; color: var(--accent); }
+
+  /* ============ 群岛网格 ============ */
+  .archipelagos { padding-top: 96px; }
+  .island-grid {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .island {
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    padding: 32px 30px;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .island.active { border-color: var(--accent); background: var(--paper); }
+  .island.upcoming { background: transparent; }
+  .island:hover { border-color: var(--accent-soft); transform: translateY(-2px); }
+  .island.upcoming:hover { transform: none; cursor: default; }
+  .island-icon {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 48px;
+    height: 32px;
+    opacity: 0.4;
+  }
+  .island.active .island-icon { opacity: 0.7; }
+  .island-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .island.active .island-label { color: var(--accent); }
+  .island-name {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .island-tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+  .island-meta {
+    display: flex;
+    gap: 18px;
+    align-items: baseline;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+  .island-meta strong { color: var(--ink); font-weight: 500; }
+  .island.active .island-meta strong { color: var(--accent); }
+  .island-progress {
+    flex: 1;
+    height: 2px;
+    background: var(--rule);
+    position: relative;
+    margin-left: 8px;
+    top: -3px;
+  }
+  .island-progress::after {
+    content: "";
+    position: absolute;
+    left: 0; top: 0;
+    height: 100%;
+    background: var(--accent);
+    width: var(--p, 0%);
+  }
+  .upcoming-veil {
+    color: var(--ink-faint);
+  }
+  .upcoming-veil .island-name { color: var(--ink-soft); font-weight: 500; }
+  .upcoming-veil .island-tagline { color: var(--ink-faint); }
+  .upcoming-veil .island-meta { color: var(--ink-faint); }
+
+  /* ============ 三个入口 ============ */
+  .three-doors {
+    background: var(--ink);
+    color: var(--bg);
+    margin: 0;
+    max-width: none;
+    padding: 96px 32px;
+  }
+  .three-doors-inner { max-width: 980px; margin: 0 auto; }
+  .three-doors .sect-num { color: var(--accent-soft); }
+  .three-doors .sect-title { color: var(--bg); }
+  .three-doors .sect-lead { color: rgba(245, 241, 234, 0.7); }
+  .door-grid {
+    margin-top: 56px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+  }
+  .door {
+    padding: 36px 32px;
+    background: rgba(245, 241, 234, 0.04);
+    border: 1px solid rgba(245, 241, 234, 0.1);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.35s;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .door:hover {
+    background: rgba(168, 51, 30, 0.15);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+  .door-mark {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 60px;
+    font-weight: 300;
+    color: var(--accent-soft);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .door-name {
+    font-family: var(--serif);
+    font-size: 23px;
+    font-weight: 600;
+    color: var(--bg);
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .door-desc {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: rgba(245, 241, 234, 0.7);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .door-path {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--accent-soft);
+    text-transform: uppercase;
+    padding-top: 18px;
+    border-top: 1px solid rgba(245, 241, 234, 0.12);
+  }
+
+  /* ============ 那然后呢墙 片段 ============ */
+  .wall-glimpse {
+    background: var(--paper);
+    margin: 0;
+    max-width: none;
+    padding: 80px 32px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .wall-inner { max-width: 980px; margin: 0 auto; }
+  .wall-empty {
+    margin: 40px 0;
+    padding: 56px 40px;
+    background: var(--bg);
+    border: 1px dashed var(--rule);
+    border-radius: 2px;
+    text-align: center;
+  }
+  .wall-empty-msg {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .wall-empty-q {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .wall-empty-q::before { content: "Q · "; color: var(--accent); font-style: italic; }
+  .wall-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 12px 24px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+  .wall-cta:hover { background: var(--accent); color: var(--bg); }
+
+  /* ============ 关于 ============ */
+  .about-strip {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 96px 32px;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .about-body p {
+    color: var(--ink-soft);
+    font-size: 17px;
+    line-height: 1.85;
+    margin-bottom: 18px;
+  }
+  .about-body p strong { color: var(--ink); }
+  .about-side {
+    border-left: 1px solid var(--rule);
+    padding-left: 40px;
+  }
+  .about-side-block { margin-bottom: 32px; }
+  .about-side-block:last-child { margin-bottom: 0; }
+  .about-side-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .about-side-value {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+  .about-side-value a { color: var(--accent); border-bottom: 1px solid currentColor; }
+
+  /* ============ Footer ============ */
+  footer {
+    background: var(--ink);
+    color: rgba(245, 241, 234, 0.5);
+    padding: 64px 32px 48px;
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+  }
+  footer .footer-brand {
+    font-family: var(--serif);
+    font-size: 18px;
+    letter-spacing: 0.3em;
+    color: var(--bg);
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+  footer .footer-brand em { font-style: normal; color: var(--accent-soft); }
+  footer .footer-line { margin-bottom: 10px; }
+  footer .footer-rights { margin-top: 28px; padding-top: 28px; border-top: 1px solid rgba(245, 241, 234, 0.12); color: rgba(245, 241, 234, 0.3); }
+
+  /* ============ Responsive ============ */
+  @media (max-width: 760px) {
+    body { font-size: 16px; }
+    .masthead { padding: 14px 22px; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .nav-main { gap: 18px; flex-wrap: wrap; }
+    .hero { padding: 72px 22px 56px; }
+    .hero h1 { font-size: 40px; }
+    .hero-sub { font-size: 19px; }
+    section, .featured, .three-doors, .wall-glimpse, .about-strip { padding: 64px 22px; }
+    .featured-card { grid-template-columns: 1fr; gap: 32px; }
+    .featured-side { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 28px; }
+    .island-grid { grid-template-columns: 1fr; }
+    .door-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-side { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 28px; }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- 海图背景 -->
+<div class="seachart">
+<svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <pattern id="paper" patternUnits="userSpaceOnUse" width="6" height="6">
+      <rect width="6" height="6" fill="transparent"/>
+      <circle cx="3" cy="3" r="0.3" fill="#8b8074" opacity="0.08"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="900" fill="url(#paper)"/>
+  <!-- 等高线/海岸线 -->
+  <g fill="none" stroke="#8b8074" stroke-width="0.6" opacity="0.18">
+    <path d="M -20,200 Q 200,160 400,220 T 800,200 T 1220,240"/>
+    <path d="M -20,260 Q 200,220 400,280 T 800,260 T 1220,300"/>
+    <path d="M -20,640 Q 250,600 500,660 T 900,640 T 1220,680"/>
+    <path d="M -20,700 Q 250,660 500,720 T 900,700 T 1220,740"/>
+  </g>
+  <!-- 远处的群岛轮廓 -->
+  <g fill="#8b8074" opacity="0.08">
+    <ellipse cx="180" cy="450" rx="40" ry="12"/>
+    <ellipse cx="240" cy="455" rx="22" ry="7"/>
+    <ellipse cx="950" cy="420" rx="55" ry="14"/>
+    <ellipse cx="1030" cy="430" rx="20" ry="6"/>
+    <ellipse cx="1070" cy="425" rx="14" ry="4"/>
+  </g>
+  <!-- 经纬线刻度 -->
+  <g stroke="#8b8074" stroke-width="0.3" opacity="0.15">
+    <line x1="100" y1="0" x2="100" y2="900"/>
+    <line x1="600" y1="0" x2="600" y2="900"/>
+    <line x1="1100" y1="0" x2="1100" y2="900"/>
+  </g>
+</svg>
+</div>
+
+<!-- ============ Masthead ============ -->
+<div class="masthead">
+  <div class="brand">大大<em>黄油</em></div>
+  <div class="nav-main">
+    <a href="群岛/规训群岛/00-发刊词/">本期</a>
+    <a href="群岛/规训群岛/">文章库</a>
+    <a href="map.html">概念图谱</a>
+    <a href="群岛/规训群岛/案例库/">案例库</a>
+    <a href="群岛/规训群岛/那然后呢墙/">那然后呢墙</a>
+    <a href="about.html">关于</a>
+  </div>
+</div>
+
+<!-- ============ Hero ============ -->
+<header class="hero">
+  <div class="hero-eyebrow">个人哲学站点 · 自 2026 · 不定期出航</div>
+  <h1>把每一期哲学思考,<br>做成可以在浏览器里<br><em>操作</em>的研究刊。</h1>
+  <p class="hero-sub">公众号是引子和评论场,<br>这里是沉下来读、动手玩、留下话的地方。</p>
+  <p class="hero-lead">大大黄油是一片海。它名下每一个深度专栏,叫做一座<strong>群岛</strong>——一组围绕同一母问题展开的十期左右的旅程。每一期既能读,也能在装置上动手;每一个概念都能在图谱上找到位置;每一句"那然后呢",会被汇入公共笔记本。</p>
+  <div class="hero-meta">
+    <span>当前在航 · <strong>规训群岛</strong></span>
+    <span>已发布 · <strong>1 / 10 期</strong></span>
+    <span>下期 · <strong>2026.05.26</strong></span>
+  </div>
+</header>
+
+<!-- ============ 当期主推 ============ -->
+<section class="featured">
+  <div class="featured-inner">
+    <div class="featured-tag">本期主推 · #00</div>
+    <div class="featured-card">
+      <div>
+        <h2 class="featured-headline">
+          <a href="群岛/规训群岛/00-发刊词/">从达米安到健康码:<br>一份福柯式专栏的<em>开场</em></a>
+        </h2>
+        <p class="featured-sub">"现代社会从对'肉体'的公开酷刑,转向了对'灵魂'的精细管理。"</p>
+        <p class="featured-body">规训群岛的发刊词。带你穿过 269 年,看清三种权力(君主 / 规训 / 生命)是怎样同时出现在你今天的一天里。文末附八期目录、三条阅读路径、原书引文与延伸阅读。</p>
+        <a href="群岛/规训群岛/00-发刊词/" class="featured-cta">阅读全文 →</a>
+      </div>
+      <div class="featured-side">
+        <div class="featured-meta-block">
+          <div class="featured-meta-label">所属群岛</div>
+          <div class="featured-meta-value"><em>规训群岛</em></div>
+        </div>
+        <div class="featured-meta-block">
+          <div class="featured-meta-label">锚定原书</div>
+          <div class="featured-meta-value">福柯<br>《规训与惩罚》开篇</div>
+        </div>
+        <div class="featured-meta-block">
+          <div class="featured-meta-label">阅读时长</div>
+          <div class="featured-meta-value">约 18 分钟</div>
+        </div>
+        <div class="featured-meta-block">
+          <div class="featured-meta-label">出刊日</div>
+          <div class="featured-meta-value">2026 · 05 · 12</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 群岛网格 ============ -->
+<section class="archipelagos">
+  <div class="sect-num">II 群岛</div>
+  <h2 class="sect-title">所有<em>群岛</em></h2>
+  <p class="sect-lead">每一座群岛是一段十期左右的旅程。下面是已在航的、和已经在海图上规划的位置。每座群岛都会按自己的节奏展开,不抢时间。</p>
+
+  <div class="island-grid">
+    <!-- 已在航 -->
+    <a href="群岛/规训群岛/" class="island active">
+      <svg class="island-icon" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="14" cy="22" rx="12" ry="4" fill="#a8331e" opacity="0.7"/>
+        <ellipse cx="32" cy="20" rx="10" ry="3.5" fill="#a8331e" opacity="0.55"/>
+        <ellipse cx="42" cy="22" rx="5" ry="2" fill="#a8331e" opacity="0.4"/>
+        <path d="M2 30 Q14 28 26 30 T46 30" stroke="#a8331e" stroke-width="0.6" fill="none" opacity="0.4"/>
+      </svg>
+      <div>
+        <div class="island-label">已在航 · #01</div>
+        <div class="island-name">规训群岛</div>
+        <div class="island-tagline">用福柯的眼睛,看今天的中国。<br>从达米安到健康码,269 年。</div>
+      </div>
+      <div class="island-meta">
+        <span><strong>6/ 10</strong></span>
+        <div class="island-progress" style="--p: 60%"></div>
+      </div>
+    </a>
+
+    <!-- 筹备中 1 -->
+    <div class="island upcoming">
+      <svg class="island-icon" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="24" cy="22" rx="14" ry="4" fill="#8b8074" opacity="0.4"/>
+        <ellipse cx="42" cy="23" rx="4" ry="1.5" fill="#8b8074" opacity="0.3"/>
+      </svg>
+      <div class="upcoming-veil">
+        <div class="island-label">筹备中</div>
+        <div class="island-name">内卷与意义崩塌</div>
+        <div class="island-tagline">个体理性叠加出的结构性陷阱,<br>以及一个时代里"好"的尺子怎么变窄的。</div>
+      </div>
+      <div class="island-meta upcoming-veil">
+        <span>立项中</span>
+      </div>
+    </div>
+
+    <!-- 筹备中 2 -->
+    <div class="island upcoming">
+      <svg class="island-icon" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="10" cy="22" rx="6" ry="2" fill="#8b8074" opacity="0.35"/>
+        <ellipse cx="28" cy="22" rx="10" ry="3" fill="#8b8074" opacity="0.35"/>
+        <ellipse cx="42" cy="22" rx="4" ry="1.5" fill="#8b8074" opacity="0.3"/>
+      </svg>
+      <div class="upcoming-veil">
+        <div class="island-label">海图待绘</div>
+        <div class="island-name">算法与新主体性</div>
+        <div class="island-tagline">从订阅到沉默——算法塑造的<br>"我喜欢什么",还是不是我的。</div>
+      </div>
+      <div class="island-meta upcoming-veil">
+        <span>方向草拟</span>
+      </div>
+    </div>
+
+    <!-- 筹备中 3 -->
+    <div class="island upcoming">
+      <svg class="island-icon" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="18" cy="22" rx="14" ry="4" fill="#8b8074" opacity="0.32"/>
+      </svg>
+      <div class="upcoming-veil">
+        <div class="island-label">海图待绘</div>
+        <div class="island-name">关系与亲密的语法</div>
+        <div class="island-tagline">从客体关系到当代友谊,<br>从浪漫爱的祛魅到失语的父母这一代。</div>
+      </div>
+      <div class="island-meta upcoming-veil">
+        <span>方向草拟</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 三入口 ============ -->
+<section class="three-doors">
+  <div class="three-doors-inner">
+    <div class="sect-num">III 入口</div>
+    <h2 class="sect-title">三种<em>读法</em>,<br>没有先后</h2>
+    <p class="sect-lead">无论你想顺着读、急着用、还是先搞清楚概念,都有为你准备的入口。</p>
+
+    <div class="door-grid">
+      <a href="群岛/规训群岛/" class="door">
+        <div>
+          <div class="door-mark">一</div>
+          <div class="door-name">文章库</div>
+          <div class="door-desc">按期号阅读全文,从 #00 到 #09。每期 15–20 分钟。带原书引文、注释、延伸阅读。</div>
+        </div>
+        <div class="door-path">路径 A · 循序而读</div>
+      </a>
+
+      <a href="群岛/规训群岛/案例库/" class="door">
+        <div>
+          <div class="door-mark">二</div>
+          <div class="door-name">案例库</div>
+          <div class="door-desc">8 期专栏覆盖的全部当代现象,每个案例标注三种权力的占比雷达图。可比较、可筛选、可叠加。</div>
+        </div>
+        <div class="door-path">路径 B · 现象导入</div>
+      </a>
+
+      <a href="map.html" class="door">
+        <div>
+          <div class="door-mark">三</div>
+          <div class="door-name">概念图谱</div>
+          <div class="door-desc">以"规训权力"为中心节点的可视化网络。点击任一概念,看简明释义、原书出处、当代案例、相关概念、对应期号。</div>
+        </div>
+        <div class="door-path">路径 C · 概念入门</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 那然后呢墙片段 ============ -->
+<section class="wall-glimpse">
+  <div class="wall-inner">
+    <div class="sect-num">IV 那然后呢墙</div>
+    <h2 class="sect-title">一个<em>公共</em>笔记本</h2>
+    <p class="sect-lead">每期文末都会留一个开放问题。所有人的回答会汇聚到这堵墙——按期、按高赞、按时间排序。不打分、不评判、可匿名。这是站点最重要的部分。</p>
+
+    <div class="wall-empty">
+      <div class="wall-empty-msg">这堵墙还在等第一句话。</div>
+      <div class="wall-empty-q">你最近一次看见自己被规训,是什么时候?</div>
+      <a href="群岛/规训群岛/那然后呢墙/" class="wall-cta">去留一句 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 关于 ============ -->
+<section class="about-strip">
+  <div class="sect-num">V 关于</div>
+  <h2 class="sect-title">大大<em>黄油</em>是什么</h2>
+  <div class="about-grid">
+    <div class="about-body">
+      <p>这是一个<strong>个人哲学站点</strong>,慢、不商业、不接广告。每隔双周二,这里会发布一期围绕当下处境的深度专题。每期都有公众号版和站点版——公众号给你引子,站点给你完整的研究、可操作的装置、和留下话的地方。</p>
+      <p>你今天看到的每一个标签——内卷、规训、算法、催婚、信用分——都是结构在你身上的折叠。我们想做的不是"教你怎么办",而是把这些折叠展开,让你能看清形状。</p>
+      <p><strong>诊断不是治疗。但看清,本身已经是开始。</strong></p>
+    </div>
+    <div class="about-side">
+      <div class="about-side-block">
+        <div class="about-side-label">出航节奏</div>
+        <div class="about-side-value">双周二上午十点</div>
+      </div>
+      <div class="about-side-block">
+        <div class="about-side-label">公众号</div>
+        <div class="about-side-value">【大大黄油】<br>同名</div>
+      </div>
+      <div class="about-side-block">
+        <div class="about-side-label">引用与版权</div>
+        <div class="about-side-value">文字遵循 CC BY-NC 4.0<br>转载请注明出处</div>
+      </div>
+      <div class="about-side-block">
+        <div class="about-side-label">联系</div>
+        <div class="about-side-value">可在那然后呢墙留言,<br>所有留言都会被读到</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Footer ============ -->
+<footer>
+  <div class="footer-brand">大大<em>黄油</em></div>
+  <div class="footer-line">把每一期哲学思考,做成可以操作的研究刊</div>
+  <div class="footer-line">规训群岛 · 内卷与意义崩塌 · 算法与新主体性 · 关系与亲密的语法 · ······</div>
+  <div class="footer-rights">© 2026 大大黄油 · CC BY-NC 4.0</div>
+</footer>
+
+<script>
+  // 滚动入场动画
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('section').forEach(s => {
+    s.classList.add('fade-in');
+    observer.observe(s);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>那然后呢墙｜规训群岛</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #f5f1ea;
+    --paper: #ede7dc;
+    --paper-deep: #e4ddd0;
+    --ink: #1a1614;
+    --ink-soft: #4a4239;
+    --ink-faint: #8b8074;
+    --accent: #a8331e;
+    --accent-soft: #c97560;
+    --rule: #d3c9b8;
+    --serif: 'Noto Serif SC', Georgia, serif;
+    --sans: 'Noto Sans SC', -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ======= Masthead ======= */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .masthead .brand { color: var(--ink); font-weight: 500; letter-spacing: 0.3em; }
+  .masthead .brand em { font-style: normal; color: var(--accent); }
+  .masthead .right { display: flex; gap: 24px; }
+  .masthead a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .masthead a:hover { color: var(--accent); }
+
+  /* ======= Breadcrumb ======= */
+  .breadcrumb {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 32px 0;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+  }
+  .breadcrumb a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { margin: 0 10px; }
+  .breadcrumb .here { color: var(--ink); }
+
+  /* ======= Hero ======= */
+  .hero {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 32px 64px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-desc {
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    max-width: 620px;
+    margin-bottom: 36px;
+  }
+  .hero-desc strong { color: var(--ink); }
+  .hero-rule {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--rule);
+    margin-top: 36px;
+  }
+  .hero-rule-item {
+    padding: 18px 22px;
+    border-right: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 12px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+  }
+  .hero-rule-item:last-child { border-right: none; }
+  .hero-rule-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  /* ======= 当期问题区 ======= */
+  .current-q-wrap {
+    background: var(--ink);
+    padding: 72px 32px;
+  }
+  .current-q-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .current-q-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent-soft);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .current-q-label::after {
+    content: "";
+    flex: 0 0 32px;
+    height: 1px;
+    background: var(--accent-soft);
+  }
+  .current-q-issue {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: rgba(245,241,234,0.4);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .current-q-text {
+    font-family: var(--serif);
+    font-size: clamp(22px, 3.5vw, 34px);
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bg);
+    margin-bottom: 40px;
+    max-width: 700px;
+  }
+  .current-q-text em { font-style: italic; color: var(--accent-soft); }
+
+  /* 留言框 */
+  .submit-box {
+    background: rgba(245,241,234,0.05);
+    border: 1px solid rgba(245,241,234,0.15);
+    padding: 28px 32px;
+    max-width: 640px;
+  }
+  .submit-box-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: rgba(245,241,234,0.4);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .submit-textarea {
+    width: 100%;
+    background: rgba(245,241,234,0.06);
+    border: 1px solid rgba(245,241,234,0.2);
+    color: var(--bg);
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.75;
+    padding: 14px 16px;
+    resize: vertical;
+    min-height: 100px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .submit-textarea::placeholder { color: rgba(245,241,234,0.25); }
+  .submit-textarea:focus { border-color: rgba(168,51,30,0.6); }
+  .submit-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    gap: 16px;
+  }
+  .submit-anon {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: rgba(245,241,234,0.35);
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  .submit-anon input[type="checkbox"] {
+    accent-color: var(--accent);
+    width: 13px; height: 13px;
+  }
+  .submit-btn {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 9px 22px;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .submit-btn:hover { background: var(--accent-soft); }
+  .submit-coming {
+    margin-top: 14px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(245,241,234,0.25);
+  }
+
+  /* ======= 工具栏 ======= */
+  .wall-toolbar {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 28px 32px 0;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .wall-toolbar-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-right: 16px;
+  }
+  .sort-btn {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    padding: 8px 16px;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: var(--ink-faint);
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-transform: uppercase;
+    margin-bottom: -1px;
+  }
+  .sort-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    cursor: default;
+    opacity: 1;
+  }
+  .wall-count {
+    margin-left: auto;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    padding-bottom: 8px;
+  }
+
+  /* ======= 问题列表 ======= */
+  .wall-body {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+
+  /* 每一期组 */
+  .issue-group {
+    border-bottom: 1px solid var(--rule);
+  }
+  .issue-group:last-child { border-bottom: none; }
+
+  .issue-header {
+    padding: 32px 0 0;
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 20px;
+    align-items: baseline;
+    cursor: pointer;
+  }
+  .issue-header:hover .issue-toggle { color: var(--accent); }
+  .issue-num {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .issue-num.locked { color: var(--ink-faint); }
+  .issue-title {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .issue-title.locked { color: var(--ink-faint); font-weight: 400; }
+  .issue-date {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    margin-top: 4px;
+  }
+  .issue-toggle {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    transition: color 0.2s;
+    white-space: nowrap;
+    padding-bottom: 4px;
+  }
+
+  /* 问题卡 */
+  .issue-questions {
+    overflow: hidden;
+    transition: max-height 0.45s ease;
+  }
+  .issue-questions.collapsed { max-height: 0; }
+  .issue-questions.expanded { max-height: 800px; }
+
+  .q-card {
+    padding: 28px 0 28px 76px;
+    border-top: 1px solid var(--rule);
+    position: relative;
+  }
+  .q-card:first-child { margin-top: 20px; }
+  .q-index {
+    position: absolute;
+    left: 0;
+    top: 30px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    width: 56px;
+    text-align: right;
+    padding-right: 16px;
+  }
+  .q-text {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.55;
+    margin-bottom: 16px;
+  }
+  .q-empty {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .q-empty-line {
+    flex: 0 0 28px;
+    height: 1px;
+    background: var(--rule);
+  }
+  .q-empty-text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-faint);
+  }
+  .q-link {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-soft);
+    padding-bottom: 1px;
+    text-transform: uppercase;
+    transition: border-color 0.2s;
+  }
+  .q-link:hover { border-color: var(--accent); }
+
+  /* 未发布期 */
+  .issue-locked {
+    padding: 28px 0;
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+  }
+  .issue-locked-num {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--rule);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 56px;
+  }
+  .issue-locked-text {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--rule);
+    font-style: italic;
+  }
+
+  /* ======= 关于这堵墙 ======= */
+  .about-wall {
+    background: var(--paper);
+    border-top: 1px solid var(--rule);
+    padding: 64px 32px;
+  }
+  .about-wall-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .about-wall-title {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .about-wall p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  .about-wall p strong { color: var(--ink); }
+  .about-wall p:last-child { margin-bottom: 0; }
+  .about-faq {}
+  .faq-item {
+    padding: 16px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .faq-item:last-child { border-bottom: 1px solid var(--rule); }
+  .faq-q {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .faq-a {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+
+  /* ======= fade-in ======= */
+  .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ======= 移动端 ======= */
+  @media (max-width: 600px) {
+    .masthead { padding: 14px 20px; flex-direction: column; gap: 8px; }
+    .breadcrumb, .hero, .wall-toolbar, .wall-body, .about-wall { padding-left: 20px; padding-right: 20px; }
+    .current-q-wrap { padding: 48px 20px; }
+    .hero-rule { grid-template-columns: 1fr; }
+    .hero-rule-item { border-right: none; border-bottom: 1px solid var(--rule); }
+    .hero-rule-item:last-child { border-bottom: none; }
+    .about-wall-inner { grid-template-columns: 1fr; gap: 36px; }
+    .q-card { padding-left: 0; }
+    .q-index { display: none; }
+    .issue-header { grid-template-columns: 40px 1fr auto; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Masthead -->
+<header>
+  <div class="masthead">
+    <div class="brand">大大<em>黄</em>油</div>
+    <nav class="right">
+      <a href="../../../index.html">群岛首页</a>
+      <a href="../index.html">规训群岛</a>
+      <a href="#">关于</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb">
+  <a href="../../../index.html">群岛</a>
+  <span class="sep">/</span>
+  <a href="../index.html">规训群岛</a>
+  <span class="sep">/</span>
+  <span class="here">那然后呢墙</span>
+</div>
+
+<!-- Hero -->
+<div class="hero fade-in">
+  <div class="hero-eyebrow">规训群岛 · 那然后呢墙</div>
+  <h1>看清形状之后，<br><em>我们说什么</em></h1>
+  <p class="hero-desc">每一期文末留一个开放问题。这里是所有问题、所有回答汇聚的地方。<strong>不打分，不评判，可匿名</strong>——这是本专栏最重要的部分，因为福柯的工具箱只管诊断，"那然后呢"必须由我们一起来回答。</p>
+  <div class="hero-rule">
+    <div class="hero-rule-item">
+      <div class="hero-rule-label">规则</div>
+      不打分 · 不评判 · 可匿名 · 不限字数
+    </div>
+    <div class="hero-rule-item">
+      <div class="hero-rule-label">节奏</div>
+      每期发布后开放新问题 · 月底汇整"墙的回声"
+    </div>
+    <div class="hero-rule-item">
+      <div class="hero-rule-label">状态</div>
+      留言功能即将上线 · 目前展示开放问题
+    </div>
+  </div>
+</div>
+
+<!-- 当期问题 -->
+<div class="current-q-wrap fade-in">
+  <div class="current-q-inner">
+    <div class="current-q-label">当期问题</div>
+    <div class="current-q-issue">#05 · A4腰是温柔的酷刑 · 2026.07.21</div>
+    <div class="current-q-text">
+      你最近一次"对自己的身体不满意"——是因为它<em>出问题了</em>，还是它<em>没"达标"</em>？这两件事你分得清吗？
+    </div>
+
+    <div class="submit-box">
+      <div class="submit-box-label">写下你的回答</div>
+      <textarea class="submit-textarea" placeholder="不需要完整的答案。一个片段、一个场景、一句话也行。" disabled></textarea>
+      <div class="submit-footer">
+        <label class="submit-anon">
+          <input type="checkbox" checked disabled> 匿名提交
+        </label>
+        <button class="submit-btn" disabled>提交</button>
+      </div>
+      <div class="submit-coming">留言功能即将上线，感谢等待。</div>
+    </div>
+  </div>
+</div>
+
+<!-- 工具栏 -->
+<div class="wall-toolbar fade-in">
+  <span class="wall-toolbar-label">浏览</span>
+  <button class="sort-btn active">按期号</button>
+  <button class="sort-btn">高赞优先</button>
+  <button class="sort-btn">最新回答</button>
+  <span class="wall-count">共 16 个开放问题 · 6 期已发布</span>
+</div>
+
+<!-- 问题列表 -->
+<div class="wall-body fade-in">
+
+  <!-- #05 -->
+  <div class="issue-group">
+    <div class="issue-header" onclick="toggleIssue('i05')">
+      <div class="issue-num">#05</div>
+      <div>
+        <div class="issue-title">A4腰是温柔的酷刑</div>
+        <div class="issue-date">2026.07.21 · 规训权力 · 驯顺的肉体</div>
+      </div>
+      <div class="issue-toggle" id="t05">收起 ↑</div>
+    </div>
+    <div class="issue-questions expanded" id="i05">
+      <div class="q-card">
+        <div class="q-index">Q1</div>
+        <div class="q-text">你最近一次"对自己的身体不满意"——是因为它出问题了，还是它没"达标"？这两件事你分得清吗？</div>
+        <div class="q-empty">
+          <div class="q-empty-line"></div>
+          <div class="q-empty-text">这堵墙正在等第一句话。</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-index">Q2</div>
+        <div class="q-text">如果全世界都不看你、不评价你、不给你打分——你还会做今天这套身体管理吗？</div>
+        <div class="q-empty">
+          <div class="q-empty-line"></div>
+          <div class="q-empty-text">这堵墙正在等第一句话。</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-index">Q3</div>
+        <div class="q-text">你妈妈/姥姥的身体从来没被 Apple Watch 量化过。她的身体快乐是什么样的？你还有机会问问她吗？</div>
+        <div class="q-empty">
+          <div class="q-empty-line"></div>
+          <div class="q-empty-text">这堵墙正在等第一句话。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- #04 -->
+  <div class="issue-group">
+    <div class="issue-header" onclick="toggleIssue('i04')">
+      <div class="issue-num">#04</div>
+      <div>
+        <div class="issue-title">鸡娃父母是新自由主义的理性投资人</div>
+        <div class="issue-date">2026.06.30 · 规训权力 + 治理术</div>
+      </div>
+      <div class="issue-toggle" id="t04">展开 ↓</div>
+    </div>
+    <div class="issue-questions collapsed" id="i04">
+      <div class="q-card">
+        <div class="q-index">Q1</div>
+        <div class="q-text">你最近一次"为孩子好"的决定——TA 当时的反应是什么？你看见了吗？</div>
+        <div class="q-empty">
+          <div class="q-empty-line"></div>
+          <div class="q-empty-text">这堵墙正在等第一句话。</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-index">Q2</div>
+        <div class="q-text">如果取消所有补习班、所有考试、所有升学焦虑——你今天会带 TA 做什么？你能想得起来吗？</div>
+        <div class="q-empty">
+          <div class="q-empty-line"></div>
+          <div class="q-empty-text">这堵墙正在等第一句话。</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-index">Q3</div>
+        <div class="q-text">你 8 岁的时候，最快乐的一件事是什么？那件事，TA 现在还有机会经历吗？</div>
+        <div class="q-empty">
+          <div class="q-empty-line"></div>
+          <div class="q-empty-text">这堵墙正在等第一句话。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- #03 -->
+  <div class="issue-group">
+    <div class="issue-header" onclick="toggleIssue('i03')">
+      <div class="issue-num">#03</div>
+      <div>
+        <div class="issue-title">钉钉打卡：下班这件事是怎么死的</div>
+        <div class="issue-date">2026.06.23 · 规训权力 · 控制社会</div>
+      </div>
+      <div class="issue-toggle" id="t03">展开 ↓</div>
+    </div>
+    <div class="issue-questions collapsed" id="i03">
+      <div class="q-card">
+        <div class="q-index">Q1</div>
+        <div class="q-text">你上一次"真正下班"是什么时候？那一刻你做了什么？</div>
+        <div class="q-empty">
+          <div class="q-empty-line"></div>
+          <div class="q-empty-text">这堵墙正在等第一句话。</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-index">Q2</div>
+        <div class="q-text">如果取消所有打卡、所有 KPI、所有周报——你今天会做什么？你能想得起来吗？</div>
+        <div class="q-empty">
+          <div class="q-empty-line"></div>
+          <div class="q-empty-text">这堵墙正在等第一句话。</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-index">Q3</div>
+        <div class="q-text">当你在朋友圈说"今天好累"时——你是在抱怨，还是在为这种"累"提供一种合法性证明？</div>
+        <div class="q-empty">
+          <div class="q-empty-line"></div>
+          <div class="q-empty-text">这堵墙正在等第一句话。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- #02 -->
+  <div class="issue-group">
+    <div class="issue-header" onclick="toggleIssue('i02')">
+      <div class="issue-num">#02</div>
+      <div>
+        <div class="issue-title">健康码：18 世纪的图纸，21 世纪的实装</div>
+        <div class="issue-date">2026.06.09 · 三种权力共振</div>
+      </div>
+      <div class="issue-toggle" id="t02">展开 ↓</div>
+    </div>
+    <div class="issue-questions collapsed" id="i02">
+      <div class="q-card">
+        <div class="q-index">Q1</div>
+        <div class="q-text">你过去一周里，被扫过多少次码 / 验过多少次身份？你能回忆起其中几次？</div>
+        <div class="q-empty">
+          <div class="q-empty-line"></div>
+          <div class="q-empty-text">这堵墙正在等第一句话。</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-index">Q2</div>
+        <div class="q-text">你身上的智能设备——手表、手环、手机健康 APP——是它在服务你，还是你在服务它？</div>
+        <div class="q-empty">
+          <div class="q-empty-line"></div>
+          <div class="q-empty-text">这堵墙正在等第一句话。</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-index">Q3</div>
+        <div class="q-text">如果"健康码"不再以"健康"的名义出现，而是以"安全""信用""效率""便利"的名义出现，你会愿意亮码吗？</div>
+        <div class="q-empty">
+          <div class="q-empty-line"></div>
+          <div class="q-empty-text">这堵墙正在等第一句话。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- #01 -->
+  <div class="issue-group">
+    <div class="issue-header" onclick="toggleIssue('i01')">
+      <div class="issue-num">#01</div>
+      <div>
+        <div class="issue-title">微博挂人是 21 世纪的断头台</div>
+        <div class="issue-date">2026.05.26 · 君主权力</div>
+      </div>
+      <div class="issue-toggle" id="t01">展开 ↓</div>
+    </div>
+    <div class="issue-questions collapsed" id="i01">
+      <div class="q-card">
+        <div class="q-index">Q1</div>
+        <div class="q-text">你最近一次"参与挂人"是什么时候？哪怕只是一次转发、一次点赞、一次截图保存？</div>
+        <div class="q-empty">
+          <div class="q-empty-line"></div>
+          <div class="q-empty-text">这堵墙正在等第一句话。</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-index">Q2</div>
+        <div class="q-text">如果被挂的人确实做了让你愤怒的事，你对自己的"参与"感受会不一样吗？为什么？</div>
+        <div class="q-empty">
+          <div class="q-empty-line"></div>
+          <div class="q-empty-text">这堵墙正在等第一句话。</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-index">Q3</div>
+        <div class="q-text">你有没有过这样一种时刻——一句话打到一半，又删掉了——只因为脑子里闪过一个念头："这会不会被传出去"？</div>
+        <div class="q-empty">
+          <div class="q-empty-line"></div>
+          <div class="q-empty-text">这堵墙正在等第一句话。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- #00 -->
+  <div class="issue-group">
+    <div class="issue-header" onclick="toggleIssue('i00')">
+      <div class="issue-num">#00</div>
+      <div>
+        <div class="issue-title">发刊词 · 从达米安到健康码</div>
+        <div class="issue-date">2026.05.12 · 开篇</div>
+      </div>
+      <div class="issue-toggle" id="t00">展开 ↓</div>
+    </div>
+    <div class="issue-questions collapsed" id="i00">
+      <div class="q-card">
+        <div class="q-index">Q1</div>
+        <div class="q-text">你最近一次看见自己被规训，是什么时候？</div>
+        <div class="q-empty">
+          <div class="q-empty-line"></div>
+          <div class="q-empty-text">这堵墙正在等第一句话。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- #06–#09 锁定 -->
+  <div class="issue-group" style="border-top: 1px solid var(--rule); padding-top: 32px;">
+    <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.3em;color:var(--ink-faint);text-transform:uppercase;margin-bottom:20px;">即将开放</div>
+    <div class="issue-locked"><div class="issue-locked-num">#06</div><div class="issue-locked-text">信用分让监狱"消失"了 · 问题尚未开放</div></div>
+    <div class="issue-locked"><div class="issue-locked-num">#07</div><div class="issue-locked-text">算法不是工具，是新的看守 · 问题尚未开放</div></div>
+    <div class="issue-locked"><div class="issue-locked-num">#08</div><div class="issue-locked-text">催婚与三胎：卧室里的人口政治 · 问题尚未开放</div></div>
+    <div class="issue-locked"><div class="issue-locked-num">#09</div><div class="issue-locked-text">那然后呢——看清形状之后 · 问题尚未开放</div></div>
+  </div>
+
+</div>
+
+<!-- 关于这堵墙 -->
+<div class="about-wall fade-in">
+  <div class="about-wall-inner">
+    <div>
+      <div class="about-wall-title">关于这堵墙</div>
+      <p>福柯的工具箱<strong>在"诊断"上极其有力，在"治疗"上几乎沉默</strong>。这不是偶然——他本人主动选择的姿态：只提供工具，让读者自己用。</p>
+      <p>这听起来很谦逊，但其实也很方便——把"那然后呢"的负担永远转交给读者。</p>
+      <p>所以这堵墙想做的事是：<strong>把所有人的"那然后呢"汇聚起来</strong>。看清形状之后，我们一起，试着长出新的语言。</p>
+      <p>不是答案。只是起点。</p>
+    </div>
+    <div class="about-faq">
+      <div class="faq-item">
+        <div class="faq-q">匿名是真正的匿名吗？</div>
+        <div class="faq-a">留言系统上线后，匿名提交不记录任何可识别信息。只保留留言内容本身。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">"墙的回声"是什么？</div>
+        <div class="faq-a">每期问题开放约一个月后，我们会把最有代表性的几条留言（征得同意后）整合成一篇短札，发布在公众号。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">我可以回答任何一期的问题吗？</div>
+        <div class="faq-a">可以。所有已开放问题随时可以回答，不限于当期。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">留言功能什么时候上线？</div>
+        <div class="faq-a">正在开发中，感谢等待。在此之前，可以把你的回答发送到公众号后台，我们会人工汇整进墙。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 展开/收起
+  function toggleIssue(id) {
+    const panel = document.getElementById(id);
+    const toggle = document.getElementById('t' + id.slice(1));
+    if (panel.classList.contains('expanded')) {
+      panel.classList.remove('expanded');
+      panel.classList.add('collapsed');
+      toggle.textContent = '展开 ↓';
+    } else {
+      panel.classList.remove('collapsed');
+      panel.classList.add('expanded');
+      toggle.textContent = '收起 ↑';
+    }
+  }
+
+  // fade-in
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

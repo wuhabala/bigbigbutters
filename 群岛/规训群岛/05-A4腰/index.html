@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>规训群岛｜#05 A4腰是温柔的酷刑</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #f5f1ea;
+    --paper: #ede7dc;
+    --paper-deep: #e4ddd0;
+    --ink: #1a1614;
+    --ink-soft: #4a4239;
+    --ink-faint: #8b8074;
+    --accent: #a8331e;
+    --accent-soft: #c97560;
+    --rule: #d3c9b8;
+    --serif: 'Noto Serif SC', Georgia, serif;
+    --sans: 'Noto Sans SC', -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ======= Masthead ======= */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .masthead .brand { color: var(--ink); font-weight: 500; letter-spacing: 0.3em; }
+  .masthead .brand em { font-style: normal; color: var(--accent); }
+  .masthead .right { display: flex; gap: 24px; }
+  .masthead a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .masthead a:hover { color: var(--accent); }
+
+  /* ======= Breadcrumb ======= */
+  .breadcrumb {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 20px 32px 0;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+  }
+  .breadcrumb a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { margin: 0 10px; }
+  .breadcrumb .here { color: var(--ink); }
+
+  /* ======= Hero ======= */
+  .hero {
+    min-height: 88vh;
+    padding: 80px 32px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero::before {
+    content: "#05";
+    position: absolute;
+    top: 60px; right: 32px;
+    font-family: var(--serif);
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--ink-faint);
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 36px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(34px, 5.5vw, 58px);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 600; }
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: 20px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 36px;
+    font-style: italic;
+  }
+  .hero-lead {
+    font-size: 16.5px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    max-width: 600px;
+    margin-bottom: 48px;
+  }
+  .hero-meta {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--rule);
+    padding-top: 24px;
+  }
+  .hero-meta span { display: flex; align-items: baseline; gap: 8px; }
+  .hero-meta strong { color: var(--ink); font-weight: 500; }
+
+  /* ======= 通用正文 section ======= */
+  section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 32px;
+    position: relative;
+  }
+  .sect-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .sect-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(26px, 4vw, 38px);
+    line-height: 1.25;
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+  }
+  .sect-title em { font-style: italic; color: var(--accent); }
+  p { margin-bottom: 22px; color: var(--ink-soft); }
+  p strong { color: var(--ink); font-weight: 600; }
+  p em { font-style: italic; }
+  h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 21px;
+    color: var(--ink);
+    margin: 44px 0 16px;
+    line-height: 1.35;
+  }
+
+  /* ======= 引文块 ======= */
+  .quote {
+    background: var(--paper);
+    border-left: 3px solid var(--accent);
+    padding: 28px 32px;
+    margin: 36px 0;
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--ink);
+  }
+  .quote p { color: var(--ink); margin-bottom: 14px; }
+  .quote p:last-child { margin-bottom: 0; }
+  .quote-source {
+    display: block;
+    margin-top: 16px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  /* ======= 注脚 ======= */
+  .footnote {
+    background: var(--paper);
+    border-left: 2px solid var(--rule);
+    padding: 20px 28px;
+    margin: 28px 0;
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+  .footnote strong { color: var(--ink); }
+
+  /* ======= Pull quote ======= */
+  .pull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 21px;
+    line-height: 1.55;
+    color: var(--ink);
+    border-left: 2px solid var(--accent);
+    padding: 8px 0 8px 24px;
+    margin: 32px 0;
+  }
+
+  .divider { text-align: center; color: var(--rule); font-size: 18px; letter-spacing: 1em; padding: 24px 0; }
+  .divider::before { content: "·   ·   ·"; }
+
+  /* ======= 三种配方手风琴 ======= */
+  .configs { margin: 36px 0; }
+  .config {
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    padding: 24px 28px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .config:hover { border-color: var(--accent-soft); }
+  .config.open { border-color: var(--accent); background: var(--bg); }
+  .config-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .config-title {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .config-tag {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-faint);
+  }
+  .config.open .config-tag { color: var(--accent); }
+  .config-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, margin-top 0.4s ease;
+    font-size: 15.5px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+  .config.open .config-body {
+    max-height: 600px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+  }
+  .config-body p { margin-bottom: 8px; color: var(--ink-soft); }
+  .config-body strong { color: var(--ink); }
+
+  /* ======= 规训四技术 ======= */
+  .techniques { margin: 36px 0; }
+  .technique {
+    border-top: 1px solid var(--rule);
+    padding: 24px 0;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  .technique:last-child { border-bottom: 1px solid var(--rule); }
+  .tech-num {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1.2;
+  }
+  .tech-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .tech-text { font-size: 15.5px; line-height: 1.8; color: var(--ink-soft); }
+  .tech-text strong { color: var(--ink); }
+  .tech-text p { margin-bottom: 8px; color: var(--ink-soft); }
+
+  /* ======= 理论家卡片 ======= */
+  .theorists { margin: 36px 0; }
+  .theorist {
+    background: var(--paper);
+    border-left: 3px solid var(--accent);
+    padding: 22px 26px;
+    margin-bottom: 10px;
+  }
+  .theorist-name {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+    line-height: 1.3;
+  }
+  .theorist-book {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-faint);
+    margin-bottom: 12px;
+  }
+  .theorist-body { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .theorist-body strong { color: var(--ink); }
+
+  /* ======= versus ======= */
+  .versus {
+    margin: 36px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+  .versus-col { padding: 28px 26px; border-right: 1px solid var(--rule); }
+  .versus-col:last-child { border-right: none; }
+  .versus-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .versus-label.active { color: var(--accent); }
+  .versus-head { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 14px; line-height: 1.35; }
+  .versus-body { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .versus-body strong { color: var(--ink); }
+  .versus-body em { font-style: italic; color: var(--accent-soft); }
+  .versus-body p { margin-bottom: 10px; color: var(--ink-soft); }
+
+  /* ======= 全球案例 ======= */
+  .global-cases { margin: 36px 0; }
+  .gcase {
+    border-left: 3px solid var(--accent-soft);
+    padding: 18px 22px;
+    margin-bottom: 12px;
+    background: var(--paper);
+  }
+  .gcase-flag {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .gcase-body { font-size: 15.5px; line-height: 1.75; color: var(--ink-soft); }
+  .gcase-body strong { color: var(--ink); }
+
+  /* ======= 深夜叉路 ======= */
+  .fork {
+    margin: 36px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+  .fork-col { padding: 28px 26px; border-right: 1px solid var(--rule); }
+  .fork-col:last-child { border-right: none; }
+  .fork-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .fork-label.a { color: var(--ink-faint); }
+  .fork-label.b { color: var(--accent); }
+  .fork-body { font-size: 15px; line-height: 1.9; color: var(--ink-soft); }
+  .fork-body strong { color: var(--ink); }
+  .fork-body p { margin-bottom: 10px; color: var(--ink-soft); }
+
+  /* ======= 反向引导清单 ======= */
+  .checklist { margin: 36px 0; }
+  .cl-group { margin-bottom: 28px; }
+  .cl-head {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .cl-item {
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--paper-deep);
+    align-items: start;
+  }
+  .cl-item:last-child { border-bottom: none; }
+  .cl-dot { color: var(--accent); margin-top: 3px; font-size: 14px; }
+  .cl-text { font-size: 15.5px; line-height: 1.75; color: var(--ink-soft); }
+  .cl-text strong { color: var(--ink); }
+
+  /* ======= 墙三问 ======= */
+  .questions { margin: 36px 0; }
+  .wall-q {
+    padding: 22px 0;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  .wall-q:last-child { border-bottom: 1px solid var(--rule); }
+  .wq-num {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1.5;
+  }
+  .wq-text { font-size: 16px; line-height: 1.75; color: var(--ink-soft); }
+  .wq-text strong { color: var(--ink); }
+
+  /* ======= 互动模块 ======= */
+  .modules { margin: 36px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .module {
+    border: 1px solid var(--rule);
+    padding: 22px 18px;
+    background: var(--paper);
+    cursor: pointer;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .module:hover { border-color: var(--accent); background: var(--bg); }
+  .module-icon { font-size: 22px; margin-bottom: 10px; }
+  .module-title {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.35;
+  }
+  .module-desc { font-family: var(--sans); font-size: 12px; line-height: 1.6; color: var(--ink-faint); }
+
+  /* ======= 雷达图浮动 ======= */
+  .radar-float {
+    position: fixed;
+    top: 80px; right: 32px;
+    width: 136px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 14px;
+    z-index: 100;
+    opacity: 0;
+    transform: translateX(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+  }
+  .radar-float.visible { opacity: 1; transform: translateX(0); }
+  .radar-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .radar-svg { display: block; width: 100%; }
+  .radar-legend { margin-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+  .radar-item {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+  }
+  .radar-item span:last-child { color: var(--accent); font-weight: 600; }
+
+  /* ======= 尾注区 ======= */
+  .coda {
+    background: var(--paper-deep);
+    border-top: 1px solid var(--rule);
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 60px 32px;
+  }
+  .coda-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  .reading-list { list-style: none; border-top: 1px solid var(--rule); }
+  .reading-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    font-family: var(--serif);
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+  .reading-list li::before { content: "→  "; color: var(--accent); }
+
+  /* ======= 下一期预告 ======= */
+  .next-issue {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 32px;
+  }
+  .ni-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .ni-title { font-family: var(--serif); font-size: 20px; font-weight: 500; color: var(--ink); line-height: 1.35; }
+  .ni-date { font-family: var(--sans); font-size: 12px; color: var(--ink-faint); margin-top: 6px; }
+  .ni-arrow { font-family: var(--serif); font-size: 28px; color: var(--accent-soft); transition: color 0.2s, transform 0.2s; }
+  .ni-arrow:hover { color: var(--accent); transform: translateX(4px); }
+
+  /* ======= fade-in ======= */
+  .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  section + section { border-top: 1px solid var(--rule); }
+
+  /* ======= 移动端 ======= */
+  @media (max-width: 600px) {
+    .masthead { padding: 14px 20px; flex-direction: column; gap: 8px; }
+    .breadcrumb, .hero, section, .coda, .next-issue { padding-left: 20px; padding-right: 20px; }
+    .hero { min-height: 70vh; padding-top: 60px; }
+    .versus, .fork { grid-template-columns: 1fr; }
+    .versus-col, .fork-col { border-right: none; border-bottom: 1px solid var(--rule); }
+    .versus-col:last-child, .fork-col:last-child { border-bottom: none; }
+    .modules { grid-template-columns: 1fr; }
+    .radar-float { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 浮动雷达 -->
+<div class="radar-float" id="radarFloat">
+  <div class="radar-label">权力图谱</div>
+  <svg class="radar-svg" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#d3c9b8" stroke-width="0.5" fill="none">
+      <polygon points="80,44 106,59 106,89 80,104 54,89 54,59" opacity="0.4"/>
+      <polygon points="80,32 114,51 114,93 80,112 46,93 46,51" opacity="0.3"/>
+      <polygon points="80,20 122,43 122,97 80,120 38,97 38,43" opacity="0.25"/>
+      <polygon points="80,56 98,67 98,85 80,96 62,85 62,67" opacity="0.45"/>
+      <polygon points="80,68 90,75 90,81 80,88 70,81 70,75" opacity="0.5"/>
+    </g>
+    <line x1="80" y1="80" x2="80" y2="20" stroke="#d3c9b8" stroke-width="0.6"/>
+    <line x1="80" y1="80" x2="132" y2="110" stroke="#d3c9b8" stroke-width="0.6"/>
+    <line x1="80" y1="80" x2="28" y2="110" stroke="#d3c9b8" stroke-width="0.6"/>
+    <!-- 君主0: (80,80), 规训10: (131.96,110), 生命5: (54.02,95) -->
+    <polygon points="80,80 131.96,110 54.02,95"
+      fill="#a8331e" fill-opacity="0.15" stroke="#a8331e" stroke-width="1.2"/>
+    <text x="80" y="14" text-anchor="middle" font-family="'Noto Sans SC',sans-serif" font-size="9" fill="#8b8074" letter-spacing="1">君主</text>
+    <text x="142" y="115" text-anchor="start" font-family="'Noto Sans SC',sans-serif" font-size="9" fill="#8b8074" letter-spacing="1">规训</text>
+    <text x="18" y="115" text-anchor="end" font-family="'Noto Sans SC',sans-serif" font-size="9" fill="#8b8074" letter-spacing="1">生命</text>
+  </svg>
+  <div class="radar-legend">
+    <div class="radar-item"><span>君主权力</span><span>0</span></div>
+    <div class="radar-item"><span>规训权力</span><span>10</span></div>
+    <div class="radar-item"><span>生命权力</span><span>5</span></div>
+  </div>
+</div>
+
+<!-- Masthead -->
+<header>
+  <div class="masthead">
+    <div class="brand">大大<em>黄</em>油</div>
+    <nav class="right">
+      <a href="../../index.html">群岛首页</a>
+      <a href="../index.html">规训群岛</a>
+      <a href="#">关于</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb">
+  <a href="../../index.html">群岛</a>
+  <span class="sep">/</span>
+  <a href="../index.html">规训群岛</a>
+  <span class="sep">/</span>
+  <span class="here">#05 A4腰是温柔的酷刑</span>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-eyebrow">规训群岛 · 第五期</div>
+  <h1>A4腰是<em>温柔的酷刑</em></h1>
+  <p class="hero-sub">锚定原书：第三编《驯顺的肉体》《活动控制》《发生组织》<br>主轴：规训权力——所有期里"规训"最纯粹的形态</p>
+  <p class="hero-lead">家和身体被殖民为 24 小时的自我优化工坊。没有女仆——每个人主动把那根束腰系在自己的腰上。而且系完之后，对着镜子说一句："这是<strong>自律</strong>。"</p>
+
+  <div class="hero-meta">
+    <span><strong>发布日期</strong> 2026.07.21</span>
+    <span><strong>原书</strong> 《规训与惩罚》第三编</span>
+    <span><strong>主轴</strong> 规训权力</span>
+    <span><strong>案例</strong> A4腰 · 健身App · 束腰</span>
+  </div>
+</div>
+
+<!-- SECTION I：两根束腰 -->
+<section id="s1" class="fade-in">
+  <div class="sect-num">一 · 两根束腰</div>
+  <h2 class="sect-title">19世纪的束腰与<em>21世纪的自律</em></h2>
+
+  <p>19世纪的伦敦、巴黎、维也纳。</p>
+  <p>每一个有点身份的女人，每天起床后做的第一件事，是让女仆把她绑进一根<strong>束腰</strong>（corset）里。</p>
+  <p>鲸须、钢条、绷带、系带。腰围被生生勒到 18 英寸——大约 45 厘米。</p>
+  <p>代价是真实的——肋骨变形、肝脏移位、肺活量减半、晕倒、流产。19 世纪的医学期刊里有大量"束腰致死"的病例报告。</p>
+  <p>但她们<strong>继续穿</strong>。不是因为有人拿枪逼着——<strong>是因为不穿的女人，会被认为"放荡"、"懒惰"、"不体面"</strong>。</p>
+
+  <h3>束腰作为规训装置</h3>
+  <p>束腰不是一件衣服。它是 19 世纪资产阶级女性身体的<strong>规训装置</strong>——把"什么样的腰算腰"的判决，<strong>字面</strong>勒进了她们的身体里。它具备现代规训权力的所有要素——</p>
+
+  <div class="quote">
+    <p><strong>持续性</strong>：不是一次性的惩罚，是每天从起床到睡觉的 16 小时连续作用。</p>
+    <p><strong>自我施加</strong>：不需要警察在场，女人<em>自己</em>要求女仆勒得更紧。</p>
+    <p><strong>内化</strong>：许多维多利亚女性脱下束腰后<em>感到不适</em>——她们的身体已经"记住"了被勒的状态。</p>
+    <p><strong>可被测量</strong>：腰围的英寸数变成了一个<em>公开可报告</em>的指标。</p>
+    <p><strong>道德化</strong>：细腰被等同于自律、体面、美德；粗腰被等同于放纵、懒惰、失败。</p>
+  </div>
+
+  <p>读到这里你会开始觉得熟悉。因为 150 年后，上面这五条，<strong>每一条都回来了</strong>——只是换了一种更聪明的实装。</p>
+
+  <h3>一个历史节点：1893 年，第一家商业健身房</h3>
+  <p>1893 年，纽约开了世界上第一家大众商业健身房。在那之前，"锻炼身体"是一件只有两种人才做的事——军人（为了战争）、马戏团演员（为了表演）。1893 年以后——<strong>"锻炼身体"变成了一个中产阶级市民自愿花钱去做的事。</strong></p>
+  <p>这一转变在身体史上的意义，比它看起来大——它标志着<strong>"身体管理"从国家强制（军队），滑到了市场服务（商业健身房）</strong>。从此以后，规训不再需要暴力——它只需要<strong>让你自己花钱，去纠正自己</strong>。</p>
+
+  <h3>腾出的那 150 年</h3>
+  <p>19 世纪的束腰躺了大约 150 年。中间出过几次"解放"——</p>
+  <div class="footnote">
+    1910 年代，一战期间束腰因金属短缺而被迫松绑；1920 年代，弗兰西斯·盖洛普式的"女孩"形象兴起；1960 年代，嬉皮士运动短暂地让"自然的身体"成为理想；1970 年代末期，第二波女性主义批判了"美的迷思"（Naomi Wolf 后来在 1991 年命名了它）。
+  </div>
+  <p>但每一次"解放"之后，规训机制<strong>都以更细密的方式</strong>重新安装——只是钢条换成了节食（1930s–）、束腰换成了塑身衣（1950s–）、塑身衣换成了健身（1980s–）、健身换成了医美（2000s–）、医美换成了<strong>身体数据化</strong>（2015s–）。</p>
+
+  <h3>21 世纪的字面实装</h3>
+  <p>直到 21 世纪初——它不再是鲸须和钢条。是 Keep 打卡、薄荷健康的卡路里、Apple Watch 上的圆环、体脂秤每天的数字、A4 纸前的对照、马甲线打卡话题、"瘦了 30 斤逆袭人生"的短视频。</p>
+  <p>而这一次最聪明的地方在于——<strong>没有女仆</strong>。<strong>每个人主动把那根束腰系在自己的腰上</strong>。而且系完之后，对着镜子说一句——"这是<strong>自律</strong>。"</p>
+
+  <h3>福柯的关键判断</h3>
+  <div class="quote">
+    <p>17 世纪末到 18 世纪中叶，西方发明了一种新的看待身体的方式。</p>
+    <p>身体不再首先被当作"灵魂的居所"或"有机的整体"——它被当作一个<strong>可被分解、可被训练、可被改造的客体</strong>。</p>
+    <p>士兵的身体被分解成姿势；学生的身体被分解成坐姿；工人的身体被分解成手部动作。</p>
+    <p>这不是一种暴力——它是一种<strong>工艺学</strong>。它把"身体"从一个整体，变成一组<strong>可被测量、可被纠正、可被排名</strong>的部件。</p>
+    <span class="quote-source">福柯《规训与惩罚》第三编第一章《驯顺的肉体》</span>
+  </div>
+
+  <p>这一套微观工艺学，今天有一个新名字。它叫——<strong>自我管理</strong>。只是军营里的节拍，换成了你手机里 Keep 的倒计时。</p>
+</section>
+
+<!-- SECTION II：三种配方 -->
+<section id="s2" class="fade-in">
+  <div class="sect-num">二 · 三种配方</div>
+  <h2 class="sect-title">身体管理的<em>权力配方</em></h2>
+
+  <p>我们日常笼统说的"身体管理"，其实是<strong>几种权力配方非常不同</strong>的事——</p>
+
+  <div class="configs">
+    <div class="config open" onclick="toggleConfig(this)">
+      <div class="config-label">配方 (a)</div>
+      <div class="config-title">显性身体改造</div>
+      <div class="config-tag">减肥 · 健身 · 打卡 · 前vs后</div>
+      <div class="config-body">
+        <p>减肥、健身、Keep 打卡、跑步 App、卡路里计算、16+8 轻断食、生酮、断糖、私教课、撸铁打卡、肌肉博主、蛋白粉、HIIT、瑜伽、普拉提、体态矫正。</p>
+        <p><strong>特征</strong>：戏剧性高、可见性高、有"前 vs 后"的对照修辞。</p>
+        <p><strong>权力主轴</strong>：规训权力（主轴）+ 治理术（健康化话语）——这是福柯《驯顺的肉体》的最纯粹当代形态。</p>
+      </div>
+    </div>
+    <div class="config" onclick="toggleConfig(this)">
+      <div class="config-label">配方 (b)</div>
+      <div class="config-title">医美管理</div>
+      <div class="config-tag">医疗话语 × 审美话语</div>
+      <div class="config-body">
+        <p>水光针、玻尿酸、肉毒、热玛吉、双眼皮、牙齿矫正、植发、轻医美套餐、男士护肤、颌面手术、脂肪填充、线雕。</p>
+        <p><strong>特征</strong>：以"自我投资"为名，行"按医学价格购买可量化的可见性"之实——它把<strong>医疗话语和审美话语焊在了一起</strong>。</p>
+        <p><strong>权力主轴</strong>：规训 + 生命权力（医学化）+ 治理术（自我经营）——医美最聪明的地方是它让<strong>审美选择</strong>戴上了<strong>医疗决定</strong>的面具。</p>
+      </div>
+    </div>
+    <div class="config" onclick="toggleConfig(this)">
+      <div class="config-label">配方 (c)</div>
+      <div class="config-title">自愿性身体量化</div>
+      <div class="config-tag">你不是在生活，你是在读取自己的身体</div>
+      <div class="config-body">
+        <p>体脂秤、智能手表、Apple Watch、Keep、薄荷健康、睡眠追踪、心率/血氧/HRV 监测、生理期记录、连续 7 天没运动的红色提醒、基础代谢率、静息心率、深睡时长。</p>
+        <p><strong>特征</strong>：身体被翻译成一组<strong>永远在更新的数字</strong>——你不是在生活在身体里，你是在<strong>读取</strong>你的身体。</p>
+        <p><strong>权力主轴</strong>：规训 + 控制社会（持续调制）+ 监视资本主义——这是"身份的连续可读化"在<strong>身体层面</strong>的完整实装。</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>为什么命名这些配方</h3>
+  <p>这三类配方在日常生活中常常<strong>互相伪装</strong>——一个健身博主看上去在做 (a)，但他每天称体重、记数据、晒 App 截图——他其实主要在做 (c)。一个买水光针的人看上去在做 (b)，但她第二天会在朋友圈晒"状态好了很多"——她其实在做 (a) 的剧场化展演。</p>
+  <p>一个只是戴 Apple Watch 的人看上去什么都没做——但 Apple Watch 每天提醒她"今天还没站够 12 小时"，她因此会<strong>焦虑到起身去喝水</strong>——她其实已经完全进入了 (c)。</p>
+
+  <div class="pull">身体作为一项 24 小时被测量、被优化、被展示的工艺品。或者更锋利地说——<strong>身体被驯成了一份永远不能下班的简历</strong>。</div>
+
+  <p>这三类配方不是"不同的人选择不同的方式"——而是<strong>同一套规训逻辑</strong>的三种实装路径。每个人身上至少有其中两种在同时运行。下面拆三层来看。</p>
+</section>
+
+<!-- SECTION III：君主性 -->
+<section id="s3" class="fade-in">
+  <div class="sect-num">三 · 第一层</div>
+  <h2 class="sect-title"><em>君主性</em>：胖丑作为现代仪式</h2>
+
+  <p>如果福柯今天回到我们当中，他会立刻认出一件事——<strong>"胖丑羞辱"是君主权力的现代仪式的低强度版</strong>。它具备所有要素——</p>
+
+  <div class="quote">
+    <p><strong>可见</strong>——胖人在公共空间的隐形示众。地铁座位上邻座的微表情。飞机座位上挤到旁人的歉意。综艺镜头给的"反差镜头"。朋友圈里"瘦了 20 斤的她"和"三年前的我"的并置。</p>
+    <p><strong>剧场化</strong>——减肥博主的"100 天瘦身记"。明星瘦身上热搜。"逆袭"短视频的固定脚本：眼泪、镜子、磅秤、马甲线。</p>
+    <p><strong>不对称</strong>——什么叫"胖"、什么叫"美"、什么叫"健康"——这套标准<em>从来不是你定的</em>。是时尚工业、医学话语、算法审美<strong>联合给你的一张答卷</strong>——而你以为是自己想要的。</p>
+    <p><strong>警告效应</strong>——你看到朋友圈"自律的人生有多爽"时，<em>心里咯噔一下</em>的那一秒——那就是警告效应在你身上起作用。它告诉你——<strong>别人都在改造自己。你不改造，就是输了。</strong></p>
+  </div>
+
+  <h3>胖丑羞辱的不对称</h3>
+  <p>很多人会说："我只是<strong>自己</strong>想瘦一点，不是因为谁在看我。"这部分是真的。但它<strong>也</strong>忽略了一件事——</p>
+
+  <div class="quote">
+    <p>"我自己想瘦一点"这个想法<strong>是从哪里长出来的</strong>？你 5 岁的时候想瘦吗？你 15 岁的时候想瘦到 A4 腰吗？你的祖母在你这个年纪会每天测体脂率吗？</p>
+  </div>
+
+  <p>这种"自己想"的感觉不是从虚空里升起来的。它是一个<strong>被这套审美机器反复植入</strong>的感觉——广告告诉你"瘦的人更快乐"；偶像剧告诉你"瘦的女主更值得被爱"；朋友告诉你"你最近好像胖了一点"；同事告诉你"你瘦了真好看"；妈妈告诉你"再瘦一点就嫁出去了"。</p>
+
+  <div class="pull">当这个感觉变成了"我自己的想法"时，这套规训才<strong>最有效</strong>——因为你不再觉得自己在被规训。你觉得自己在<strong>追求自己</strong>。</div>
+
+  <p>这是君主仪式最聪明的功能：<strong>它不只是羞辱，它生产主体</strong>——它让你感到"我想成为某种样子"<strong>本身</strong>是自由的表达。如果说断头台是 18 世纪君主权力的剧场，朋友圈瘦身对比就是 21 世纪规训社会的剧场——只是这一次，<strong>没有刽子手</strong>。每个人<strong>自愿</strong>把自己摆上展台。并且<strong>自愿</strong>为那张展台<strong>支付门票</strong>。</p>
+</section>
+
+<!-- SECTION IV：规训性 -->
+<section id="s4" class="fade-in">
+  <div class="sect-num">四 · 第二层</div>
+  <h2 class="sect-title"><em>规训性</em>：身体作为持续工程</h2>
+
+  <p>挂人那一期我们说过：规训权力最完美的胜利，是让你自己承担起监视自己的工作。身体管理这一套，是这一原则在<strong>身体层级</strong>的精确实装。而且——这一层最深的、几乎从来没被命名的事是——<strong>没有人在你身边强迫你打卡</strong>。</p>
+
+  <div class="quote">
+    <p>你<em>自己</em>称体重（自我层级监视）。你<em>自己</em>记卡路里（自我活动控制）。你<em>自己</em>拍打卡照（自我规范化裁决）。你<em>自己</em>和"昨天的自己"比较（自我考试）。你<em>自己</em>定计划（自我时间表）。你<em>自己</em>做"先有氧再无氧"（自我动作分解）。</p>
+  </div>
+
+  <p>没有人在你身边督促。但没有这些动作，你会觉得<strong>自己</strong>在"犯罪"——犯了"对自己不负责任"的罪。这才是规训权力最深的一层：<strong>它甚至不需要强制谁。它只需要让"不这么做"变得不可想象</strong>。</p>
+
+  <h3>福柯的"驯顺的肉体"原来在说这个</h3>
+  <div class="quote">
+    <p>规训的历史时刻，是<strong>身体</strong>成为权力客体和目标<strong>的那一刻</strong>——身体被操纵、塑造、训练，身体服从、响应、变得灵巧或增加力量。</p>
+    <p>规训产生了我们可以称为"驯顺的肉体"的东西。驯顺的肉体可以被使用、可以被改造、可以被完善。这些方法让对身体活动的精细控制成为可能，并且让身体与<strong>顺从—效用</strong>关系结合起来——这就是可以称之为"规训"的东西。</p>
+    <span class="quote-source">福柯《规训与惩罚》第三编第一章《驯顺的肉体》</span>
+  </div>
+
+  <p>读完这一段，再去看 Keep 的训练课——"保持核心收紧。""膝盖不要超过脚尖。""感受臀大肌发力。""今日完成度：85%。"<strong>这就是 1791 年的士兵训练手册。</strong>只是 1791 年印在军官的操典上，2024 年播在你手机屏幕上。而且 1791 年的士兵知道自己在被训练——2024 年的你管它叫"<strong>自我提升</strong>"。</p>
+
+  <h3>规训四技术在 Keep 上的字面实装</h3>
+  <p>福柯在《规训与惩罚》第三编里总结了规训权力的<strong>四项核心技术</strong>。2020 年代的任何一个运动 App 都<strong>字面实装</strong>了这四项——</p>
+
+  <div class="techniques">
+    <div class="technique">
+      <div class="tech-num">①</div>
+      <div>
+        <div class="tech-title">空间的分配（la répartition de l'espace）</div>
+        <div class="tech-text">
+          <p>福柯说：规训最基本的操作是给每个个体<strong>分配一个独立的位置</strong>——修道院的单间、学校的座位、医院的病床。</p>
+          <p>Keep 里的对应物：<strong>你的个人主页</strong>——那个只有你一个人能完全看见的"数据黑箱"；你的训练"自留地"；你的"课程专属时间"。</p>
+        </div>
+      </div>
+    </div>
+    <div class="technique">
+      <div class="tech-num">②</div>
+      <div>
+        <div class="tech-title">活动的控制（le contrôle de l'activité）</div>
+        <div class="tech-text">
+          <p>福柯说：规训把时间切割成最小单位，每一段都有指定的动作。</p>
+          <p>Keep 里的对应物：<strong>每一节课的秒表</strong>——"30 秒平板支撑"、"12 次下蹲"——动作被分解到最小颗粒度，时间被切成 15 秒一个节拍。</p>
+        </div>
+      </div>
+    </div>
+    <div class="technique">
+      <div class="tech-num">③</div>
+      <div>
+        <div class="tech-title">发生的组织（l'organisation des genèses）</div>
+        <div class="tech-text">
+          <p>福柯说：规训把学习过程拆分成<strong>由易到难</strong>的阶段，每一段都有对应的评估。</p>
+          <p>Keep 里的对应物：<strong>训练难度分级</strong>——"初级 / 中级 / 高级"；"达成率"；"你已经连续训练 12 天"——你的身体被安排在一条<strong>可被追踪的进步曲线</strong>上。</p>
+        </div>
+      </div>
+    </div>
+    <div class="technique">
+      <div class="tech-num">④</div>
+      <div>
+        <div class="tech-title">力量的组合（la composition des forces）</div>
+        <div class="tech-text">
+          <p>福柯说：规训把不同的个体编排进一个<strong>整体系统</strong>里，让每个个体的力量都服务于系统的总效能。</p>
+          <p>Keep 里的对应物：<strong>排行榜</strong>——"本周训练时长击败了 85% 的人"；"朋友圈打卡接龙"；"训练营"——你不是一个人在练，你是<strong>"自律群体"</strong>的一员。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p>这四项技术不是 2010 年代才被发明的——它们是 1791 年的东西，被 2020 年代的 App 工程师<strong>重新包装</strong>了一遍。</p>
+
+  <h3>你发现没有？——你从来不"达标"</h3>
+  <div class="quote">
+    <p>BMI 达标了，还有体脂率。体脂率达标了，还有马甲线。马甲线达标了，还有"紧致"、"提拉"、"气色"、"状态"。"状态"达标了，还有"少女感"、"冻龄"、"逆生长"、"初恋感"。</p>
+    <p>你不再"考完"。你只是从一个指标，<strong>滑到下一个指标</strong>。</p>
+  </div>
+
+  <p>这是钉钉那一期讲过的德勒兹"控制社会"——身体版。<strong>你不再"出院"。你只是从一种"待优化"的身体状态，调制到下一种"待优化"的身体状态。</strong>健身房不会让你"毕业"。体脂秤不会显示"恭喜，你完成了"。这不是你太挑剔。这是这套机器的<strong>本来设计</strong>。</p>
+
+  <h3>考试的永久化</h3>
+  <div class="quote">
+    <p>考试不是中性的测量工具。它是一种<strong>生产</strong>——它生产关于这个身体的<strong>真理</strong>。考试把"层级监视"和"规范化裁决"组合在一起——让权力既能<strong>看见</strong>个体，又能<strong>判定</strong>个体。</p>
+    <span class="quote-source">福柯《规训与惩罚》</span>
+  </div>
+
+  <div class="footnote">
+    A4 腰版本的永久化——你的身体每一天都在被考试。每天的体重、每天的步数、每天的运动时长、每天的睡眠质量。你没有"考完"的那一刻。你只有"今天这一次的成绩比昨天好还是坏"。<br><br>以前的考试是<strong>事件</strong>——它发生、然后结束、然后你过日子。现在的考试是<strong>背景</strong>——它从来不结束。它就是日子本身。
+  </div>
+</section>
+
+<!-- SECTION V：生命权力 -->
+<section id="s5" class="fade-in">
+  <div class="sect-num">五 · 第三层</div>
+  <h2 class="sect-title"><em>生命权力 + 治理术</em>：你的身体不是你的</h2>
+
+  <p>接下来要说一件容易被忽略的事。减肥、健身、医美、卡路里——它们的真正逻辑，<strong>不是"为了我自己"</strong>。是<strong>新自由主义对身体的经营化</strong>。</p>
+
+  <h3>福柯：从"肉体"到"人口"</h3>
+  <div class="quote">
+    <p>18 世纪以前的君主权力，是"<strong>让人死，放人活</strong>"的权力（<em>faire mourir et laisser vivre</em>）——它通过处死、流放、监禁来运作。</p>
+    <p>18 世纪以后出现了一种新权力——它的座右铭是"<strong>让人活，放人死</strong>"（<em>faire vivre et laisser mourir</em>）。这种权力不让你死，反过来要让你"活得更好"。它的对象不再是"个体的肉体"，是"<strong>人口</strong>"（la population）——它关心出生率、死亡率、平均寿命、健康水平、慢病分布、肥胖率、精神卫生。它的语言是<strong>统计学</strong>。它的工具是<strong>指标</strong>。它的目的是<strong>让人口可被治理</strong>。</p>
+    <span class="quote-source">福柯《必须保卫社会》法兰西学院讲座 1975–1976</span>
+  </div>
+
+  <h3>从国家卫生局到手腕上的手表</h3>
+  <p>但这里要加一个福柯本人没有看到的转折——19 世纪的生命权力通过<strong>国家机构</strong>采集人口数据——卫生局、统计局、征兵处、学校体检。21 世纪的<strong>平台资本主义</strong>让这一权力<strong>私有化</strong>了——Apple、Google、Fitbit、Keep、薄荷健康通过你手腕上的手表和脚下的体脂秤，让你<strong>自己</strong>把数据上传。</p>
+  <p>人口治理变成了<strong>自我治理</strong>。而成本——硬件费、订阅费、会员费——<strong>由你自己承担</strong>。这是福柯身后发生的一次<strong>规训权力的大迁徙</strong>——从国家转到平台，从征兵到订阅，从抽样到全量。<strong>你不再被采集。你付钱购买了让自己被采集的权利。</strong></p>
+  <p>而你脚下的那台体脂秤——每一次踩上去——你都在向这套统计学<strong>主动报到</strong>。"你的 BMI 是 23.8。""你的体脂率比同龄人偏高 15%。""你处于亚健康状态。"——听上去是医学。但仔细想——<strong>"亚健康"这个词</strong>，在 19 世纪的医学里<strong>根本不存在</strong>。它把治理的触手，伸进了"<strong>没病</strong>"的人里。</p>
+
+  <h3>把几位放在一起看</h3>
+  <div class="theorists">
+    <div class="theorist">
+      <div class="theorist-name">米歇尔·福柯</div>
+      <div class="theorist-book">《规训与惩罚》第三编 · 《必须保卫社会》</div>
+      <div class="theorist-body">身体被重新定义为"驯顺的客体"是规训权力的核心——它不再依赖暴力，它依赖你<strong>自己</strong>对自己的持续纠正。规训四技术（空间分配 / 活动控制 / 发生组织 / 力量组合）在 2020 年代的运动 App 上字面实装。</div>
+    </div>
+    <div class="theorist">
+      <div class="theorist-name">Sandra Bartky</div>
+      <div class="theorist-book">《女性气质与支配：现代性父权权力的现象学》（1990）</div>
+      <div class="theorist-body">这套规训在<strong>性别上</strong>有不对称的展开——女性身体承受了更细密的规训网，而这张网的特别之处是<strong>没有执行者</strong>。没有一个具体的"父权警察"在监视你是否节食——有的只是你自己对着镜子的那一秒。正是这种"没有执行者"——让它成为权力最深的一种形式。</div>
+    </div>
+    <div class="theorist">
+      <div class="theorist-name">Susan Bordo</div>
+      <div class="theorist-book">《无法承受之重：女性主义、西方文化与身体》（1993）</div>
+      <div class="theorist-body">这套规训最深的一层是<strong>身体作为控制论对象</strong>（the body as cybernetic object）这一本体论转变——"我"和"我的身体"之间变成了管理关系。身体不再是"我所是"（what I am），而是"我管理的对象"（what I manage）。一旦进入管理关系，所有管理语言——KPI、指标、优化、绩效——就都可以被调用。你的身体从你<strong>生活在其中的家</strong>，变成了<strong>你经营的一家公司</strong>。</div>
+    </div>
+    <div class="theorist">
+      <div class="theorist-name">韩炳哲（Byung-Chul Han）</div>
+      <div class="theorist-book">《倦怠社会》（2010）</div>
+      <div class="theorist-body">当代社会最深的一层暴政，是把"自我剥削"包装成"自我实现"。工人不再被工头压迫——工人<strong>自己</strong>是自己的工头。健身的人不再被任何人强迫——TA<strong>自己</strong>是自己的私教、自己的监工、自己的评委。这种自我剥削比外部剥削更深——因为你不能"罢工"反抗自己。</div>
+    </div>
+    <div class="theorist">
+      <div class="theorist-name">Shoshana Zuboff</div>
+      <div class="theorist-book">《监视资本主义时代》（2019）</div>
+      <div class="theorist-body">你每一步路、每一次心跳、每一克体重——在今天不只是"你的私人数据"。它是一种叫做<strong>行为剩余</strong>（behavioral surplus）的原料——被 Apple、Google、Fitbit、Keep 收集；被加工成行为预测产品；被卖给保险公司、广告商、医疗机构。Panopticon 不再是一座塔楼。它是你手腕上那块表。而你<strong>付钱购买</strong>了让自己成为原料的权利。</div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    <strong>关于 Bartky 与 Bordo 调用的限度</strong>——这两位的工作是 1990 年代美国学界的产物。后续有关"女性能动性"的辩论已经走得很远（化妆是否可以作为颠覆性实践？高跟鞋能否被重新夺回作为赋权装置？跨性别语境下的"女性身体"该如何重新定义？）本节调用 Bartky 和 Bordo，是用她们<strong>命名规训机制</strong>的那一面。专题的角度是<strong>规训技术分析</strong>，不是女性主义内部流派的选边。
+  </div>
+
+  <h3>两种"主动"</h3>
+  <p>但这里要做一个<strong>重要的区分</strong>，否则这段批判会滑向"一切运动都是规训"的虚无主义——</p>
+
+  <div class="versus">
+    <div class="versus-col">
+      <div class="versus-label">健康的热爱</div>
+      <div class="versus-head">真的爱跑步、撸铁、瑜伽</div>
+      <div class="versus-body">
+        <p>TA 今天累了就放下，明天继续。</p>
+        <p>TA 跑完会笑着告诉你今天看见了什么花、什么云。</p>
+        <p>TA 在被打断时会有点失落，但<strong>不会感到自我崩塌</strong>。</p>
+        <p><em>这种"主动"是一种关系——TA 和身体之间有真实的联系。</em></p>
+      </div>
+    </div>
+    <div class="versus-col">
+      <div class="versus-label active">规训的内化</div>
+      <div class="versus-head">韩炳哲讨论的那种"主动"</div>
+      <div class="versus-body">
+        <p>TA <strong>停不下来</strong>。</p>
+        <p>TA 在被允许休息时<strong>反而焦虑</strong>。</p>
+        <p>TA 量完体重发现轻了 0.3kg 立刻<strong>害怕</strong>——不是开心，是害怕"明天会不会反弹"。</p>
+        <p><em>区分不在于练了多少——在于能不能允许自己今天不练。</em></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pull">从外部看，<strong>两种"主动"几乎一模一样</strong>。都是 TA 自己打开健身课。都是 TA 自己拒绝"算了今天别练了"的内心声音。区分它们的，是那个看不见的内部维度——TA 内心是否还允许自己<strong>不是"自律"的自己</strong>。</div>
+
+  <p>后一种状态，是规训权力最深的胜利：它甚至不需要外部的工头。它把工头<strong>装进了你自己的肌肉记忆里</strong>。让你以为那是"<strong>你想要</strong>的身体"。</p>
+</section>
+
+<!-- SECTION VI：不舒服的问题 -->
+<section id="s6" class="fade-in">
+  <div class="sect-num">六 · 一个不舒服的问题</div>
+  <h2 class="sect-title">你"对身体好"，<em>是在对谁好</em>？</h2>
+
+  <p>这一节不问"该不该健身"。它问的是——<strong>你说"我要对身体好一点"的时候，"身体"和"好"这两个词，是谁定义的</strong>。</p>
+  <p>如果这套机制看上去这么深，为什么我们接受了？因为<strong>它常常确实"管用"</strong>——减肥确实让一些人感觉更好；健身确实改善了一些人的腰椎、睡眠、情绪；某些指标确实关联寿命和慢病预防；智能手表提醒心率异常真的救过命。对一些人而言，减肥是 TA 在结构性匮乏中，少数几件能获得掌控感的事——这种掌控感是真实的。</p>
+
+  <div class="footnote"><strong>这些都不是阴谋。否认这一点，是另一种意识形态。</strong></div>
+
+  <h3>几个绕不开的问题</h3>
+  <div class="quote">
+    <p>你说"我想瘦一点"——是因为你的身体真的让你不舒服？还是因为你的身体在<strong>别人的眼睛里</strong>让你不舒服？</p>
+    <p>当"<strong>健康</strong>"本身已经被商品化（付费的 Keep 课程、付费的健康 App、付费的私教、付费的营养师），"关爱自己"和"消费自己"还分得清吗？</p>
+    <p>当<strong>医学话语和审美话语合流</strong>（BMI、体脂率、"亚健康"、"轻医美"），你如何知道你在做的是<strong>医疗</strong>还是<strong>美容</strong>？</p>
+    <p>当你<strong>主动</strong>说"我要继续健身"时——你在选择，还是已经被<strong>预先选择了</strong>？</p>
+    <p>如果你现在停下来——同龄人会<strong>继续</strong>往前跑——那你能承担"让自己落后"这个感觉吗？</p>
+  </div>
+
+  <h3>全球框架</h3>
+  <p>这套规训不是中国独有——它是<strong>全球现代性的共同语法</strong>。</p>
+
+  <div class="global-cases">
+    <div class="gcase">
+      <div class="gcase-flag">法国 · 2017</div>
+      <div class="gcase-body">立法禁止 BMI 过低（&lt;18）的模特走秀。这是一个"<strong>国家介入审美</strong>"的历史时刻——当审美工业的规训效应已经严重到国家要出手干预时，它本身就是这套机制走得多深的证据。</div>
+    </div>
+    <div class="gcase">
+      <div class="gcase-flag">日本 · Metabo 法 · 2008</div>
+      <div class="gcase-body">企业必须测量 40 岁以上员工的腰围（男 85cm、女 90cm 为红线），超标单位会被罚款。<strong>这是生命权力做到字面的典型案例</strong>——人口健康不再是口号，是可罚款的指标。</div>
+    </div>
+    <div class="gcase">
+      <div class="gcase-flag">韩国 · 东亚审美上游</div>
+      <div class="gcase-body">整容经济的工业化、整容贷款、"九头身"与"A4 腰"的东亚共振。韩国是<strong>东亚审美标准的上游工厂</strong>——今天中国年轻人感到的很多身体焦虑，很多是韩国 2000 年代标准化之后的下游辐射。</div>
+    </div>
+  </div>
+
+  <div class="pull">这是一个真正的开放问题。它指向的不是"绝食抗议"，也不是"暴食躺平"，而是——<strong>一种我们仍在共同摸索的身体想象</strong>：身体作为我所是的那个家，而不是一份永远不能下班的简历。</div>
+
+  <p>这种想象需要的不是更多的福柯，是另一种思想资源——也许是 Iris Marion Young 关于"生活身体"（lived body）的现象学、是梅洛-庞蒂关于身体作为"世界的锚"的哲学、是东亚身体观里"养生"而非"管理"的另一套语法、是残障研究（disability studies）对"什么样的身体算合格"这一整个问题的根本性翻转。到 #09 终刊我们会再正面碰它一次。</p>
+</section>
+
+<!-- SECTION VII：那然后呢 -->
+<section id="s7" class="fade-in">
+  <div class="sect-num">七 · 那然后呢</div>
+  <h2 class="sect-title">关于我们能做什么的<em>最低限度</em></h2>
+
+  <p>关于"我们能做什么"，整个专题留到 #09 终刊正面处理。但这一期可以先说一点。</p>
+
+  <h3>一个深夜</h3>
+  <p>想象这样一个深夜——你洗完澡，站在浴室的镜子前。手机屏幕亮了一下——Keep 的提醒——</p>
+  <div class="quote"><p>"你已经 3 天没有训练了。你的自律形象有点危险。"</p></div>
+  <p>你拿起手机，犹豫了几秒。这一刻，有两条岔路。</p>
+
+  <div class="fork">
+    <div class="fork-col">
+      <div class="fork-label a">熟悉的那条路</div>
+      <div class="fork-body">
+        <p>你叹了口气。把手机放到地板上。脱了睡衣。打开 Keep，选"10 分钟快速燃脂"。</p>
+        <p>11 点半，你在卫生间里跳着开合跳。你没有流泪，你没有抱怨。</p>
+        <p>你只是<strong>不能忍受</strong>那句"3 天没训练"的愧疚感。</p>
+      </div>
+    </div>
+    <div class="fork-col">
+      <div class="fork-label b">另一条路你已经很久没走过了</div>
+      <div class="fork-body">
+        <p>你拿起手机。打开 Keep。<strong>关掉"训练提醒"推送</strong>。把手机扣在台面上。</p>
+        <p>你抬起头，看了一眼镜子里的自己——</p>
+        <p>这是你自己的身体。不是 KPI 的前置条件。不是 Instagram 的视觉素材。不是你够不够格的简历。就是——你的身体。</p>
+      </div>
+    </div>
+  </div>
+
+  <p>这一个深夜，是这一节剩下所有清单的<strong>全部意义</strong>。它是一次极其微小的、几乎没有外部效果的<strong>微观抵抗</strong>——让"规训机器"停转那几分钟。给你自己留下一个镜子前的片刻——在这个片刻里，你的身体<strong>不需要证明任何东西</strong>。</p>
+
+  <div class="footnote">
+    下面的反向引导清单都是<strong>个体层面</strong>的最低限度操作。它们不解决结构问题——审美工业的垄断、医美行业的扩张、数据资本主义对身体的采集——这些<strong>不是单个人选择能改变</strong>的。事实上，这套机器最深的一刀，<strong>恰恰</strong>是把结构问题翻译成"个人选择题"——让你以为"不自律"是你自己的问题，而不是一整套工业、媒体、算法、医学话语共同作用的结果。更大的对话留到 #09。
+  </div>
+
+  <h3>A4 腰时代的反向引导清单</h3>
+  <p>福柯生命的最后几年提出的"<strong>反向引导</strong>"（contre-conduite）概念，到了 A4 腰时代有它具体的形态——</p>
+
+  <div class="checklist">
+    <div class="cl-group">
+      <div class="cl-head">关于测量</div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">不在早上第一件事<strong>称体重</strong>。不让体脂秤的数字决定今天的心情。</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">摘下智能手表<strong>一整天</strong>。不看步数、不看心率、不看站立时长。</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">把 Keep / 薄荷健康 的训练提醒<strong>关掉</strong>。选你要练的时候主动打开，而不是被"你 3 天没训练了"推着打开。</div>
+      </div>
+    </div>
+    <div class="cl-group">
+      <div class="cl-head">关于镜子</div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">不把镜子当考官。看镜子的时候，先找<strong>一处你喜欢的地方</strong>——不是"需要改进的地方"。</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">不在穿衣服前说"我今天看起来好胖"。很多时候，TA 就是你的身体。</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">不在孩子面前说"妈妈太胖了"——你对自己身体的语言，会变成 TA 的内部独白。</div>
+      </div>
+    </div>
+    <div class="cl-group">
+      <div class="cl-head">关于"自律"的话术</div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">在每一次脱口而出"我要再自律一点"之前，停一秒钟，问自己一次——<strong>"我要自律的是身体，还是我对身体的焦虑？"</strong></div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">不把"我需要坚持"包装成"我爱自己"——直接说"我在焦虑"反而更诚实。</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">区分<strong>"对身体的关照"</strong>和<strong>"对自己够不够格的焦虑"</strong>——很多时候你在健身，是因为你在补偿你在生活的另一端感到的失控。</div>
+      </div>
+    </div>
+    <div class="cl-group">
+      <div class="cl-head">关于社交分享</div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">不晒健身打卡。<strong>至少一个月</strong>。看看你是否还需要练。</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">不在朋友圈下面评论"你最近瘦了好看"。尽管这是善意的——它在<strong>帮那台机器运转</strong>。</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">看到"瘦 30 斤逆袭"时，<strong>不点赞</strong>。你的点赞是这种剧场的燃料。</div>
+      </div>
+    </div>
+    <div class="cl-group">
+      <div class="cl-head">关于吃饭</div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">至少每周<strong>一顿饭</strong>不记卡路里。至少每周<strong>一顿饭</strong>是<strong>没有"健康"考虑</strong>的——想吃什么就吃什么。</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">和家人一起吃饭的时候，不<strong>偷偷</strong>计算。这种偷偷，对在场其他人也是一种规训。</div>
+      </div>
+    </div>
+    <div class="cl-group">
+      <div class="cl-head">关于"对比"的姿态</div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">允许自己至少<strong>一件</strong>身体上"不达标"的事——小肚子、婴儿肥、眼角纹、白头发。<strong>护住它</strong>，不要试图"解决"它。</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">当某一种"新型身体焦虑"出现时——"耳朵形状"、"体态"、"锁骨"、"肩峰"——<strong>认出它</strong>：这是规训工业在扩展新战场。认出它<strong>本身就是反抗</strong>。</div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-dot">—</div>
+        <div class="cl-text">在每一次"这个医美我也去做一下吧"涌上心头时，停一秒钟，问自己一次："这是<strong>我的身体</strong>在要求这件事，还是<strong>我对 TA 的焦虑</strong>在要求这件事？"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pull">数字时代的反向引导，不是"绝食抗议"或"暴食躺平"。它是——<strong>在每一次踩上体脂秤之前，停一秒，问自己一次："我今天是要'测量'，还是要'存在'？"</strong></div>
+
+  <h3>本期【那然后呢墙】三问</h3>
+  <div class="questions">
+    <div class="wall-q">
+      <div class="wq-num">1</div>
+      <div class="wq-text">你最近一次"对自己的身体不满意"——是因为它<strong>出问题了</strong>，还是它<strong>没"达标"</strong>？这两件事你分得清吗？</div>
+    </div>
+    <div class="wall-q">
+      <div class="wq-num">2</div>
+      <div class="wq-text">如果全世界都不看你、不评价你、不给你打分——你还会做<strong>今天这套身体管理</strong>吗？</div>
+    </div>
+    <div class="wall-q">
+      <div class="wq-num">3</div>
+      <div class="wq-text">你妈妈/姥姥的身体从来没被 Apple Watch 量化过。她的<strong>身体快乐</strong>是什么样的？你还有机会问问她吗？</div>
+    </div>
+  </div>
+  <p style="font-family:var(--sans);font-size:13px;color:var(--ink-faint);margin-top:8px;">留言可匿名。月底我们会做一次"墙的回声"——把本期墙上最有代表性的几条留言（征得同意后）整合进一篇短札。</p>
+
+  <h3>本期互动模块</h3>
+  <div class="modules">
+    <div class="module">
+      <div class="module-icon">⚙</div>
+      <div class="module-title">驯顺技术 mapping</div>
+      <div class="module-desc">把你的 Keep / 薄荷健康截图，逐项对应到福柯规训四技术——让你看见"打卡""课程分级""排行榜"原来长什么样。</div>
+    </div>
+    <div class="module">
+      <div class="module-icon">⏱</div>
+      <div class="module-title">身体时间机器</div>
+      <div class="module-desc">输入你妈妈/姥姥 20 岁时的一天，和你 20 岁时的一天——做并列对照，看看"身体的快乐"在两代人之间分布有多不一样。</div>
+    </div>
+    <div class="module">
+      <div class="module-icon">墙</div>
+      <div class="module-title">那然后呢墙</div>
+      <div class="module-desc">本期三问留言聚合。</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION VIII：最后一句 -->
+<section id="s8" class="fade-in">
+  <div class="sect-num">八 · 最后一句</div>
+  <div class="quote" style="font-size:19px;line-height:2.1;">
+    <p>19 世纪的女人，腰上勒着一根束腰。</p>
+    <p>她能感觉到那根束腰。</p>
+    <p>21 世纪的我们，<strong>每一寸皮肤上都勒着一根束腰</strong>——</p>
+    <p>只是这一次，束腰是我们自己系上的。</p>
+    <p>而且我们管它叫"<em>自律</em>"。</p>
+  </div>
+</section>
+
+<!-- 延伸阅读 -->
+<div class="coda fade-in">
+  <div class="coda-title">延伸阅读</div>
+  <ul class="reading-list">
+    <li>福柯《规训与惩罚》第三编 I《驯顺的肉体》、II《规训的手段》（刘北成、杨远婴译，三联书店）</li>
+    <li>福柯《必须保卫社会》（法兰西学院讲座 1975–1976，钱翰译，上海人民出版社）——特别是最后一讲关于生命权力</li>
+    <li>福柯《生命政治的诞生》（法兰西学院讲座 1978–1979，莫伟民译，上海人民出版社）</li>
+    <li>Sandra Bartky, <em>Femininity and Domination: Studies in the Phenomenology of Oppression</em> (1990)</li>
+    <li>Susan Bordo, <em>Unbearable Weight: Feminism, Western Culture, and the Body</em> (1993)</li>
+    <li>Naomi Wolf, <em>The Beauty Myth</em> (1991，中译《美貌的神话》)</li>
+    <li>韩炳哲《倦怠社会》（王一力译，中信出版社）；《精神政治学》（关玉红译，中信出版社）</li>
+    <li>Shoshana Zuboff, <em>The Age of Surveillance Capitalism</em> (2019，中译《监控资本主义时代》)</li>
+    <li>Iris Marion Young, <em>Throwing Like a Girl and Other Essays</em> (1990)——关于"生活身体"的现象学</li>
+    <li>Esther Rothblum &amp; Sondra Solovay (eds.), <em>The Fat Studies Reader</em> (2009)</li>
+    <li>本站【导读：福柯〈规训与惩罚〉】第三编第一章《驯顺的肉体》详注</li>
+  </ul>
+  <p style="font-family:var(--sans);font-size:12px;color:var(--ink-faint);margin-top:20px;">本站所有原书引文以"刘北成、杨远婴译，三联书店 2019 年版"为准。本专栏文字遵循 CC BY-NC 4.0 协议，转载请注明出处。</p>
+</div>
+
+<!-- 下一期 -->
+<div class="next-issue fade-in">
+  <div>
+    <div class="ni-label">下一期</div>
+    <div class="ni-title">#06《信用分让监狱"消失"了》</div>
+    <div class="ni-date">预告问题：<em>失信被执行人公示——这是"示众"的数字版本，还是已经是别的什么？</em></div>
+  </div>
+  <div class="ni-arrow">→</div>
+</div>
+
+<script>
+  function toggleConfig(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.config').forEach(c => c.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+
+  const radarFloat = document.getElementById('radarFloat');
+  const hero = document.querySelector('.hero');
+  window.addEventListener('scroll', () => {
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    if (heroBottom < 0) {
+      radarFloat.classList.add('visible');
+    } else {
+      radarFloat.classList.remove('visible');
+    }
+  });
+
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

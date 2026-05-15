@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>规训群岛｜#01 微博挂人是 21 世纪的断头台</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #f5f1ea;
+    --paper: #ede7dc;
+    --paper-deep: #e4ddd0;
+    --ink: #1a1614;
+    --ink-soft: #4a4239;
+    --ink-faint: #8b8074;
+    --accent: #a8331e;
+    --accent-soft: #c97560;
+    --rule: #d3c9b8;
+    --serif: 'Noto Serif SC', Georgia, serif;
+    --sans: 'Noto Sans SC', -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ======= masthead ======= */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .masthead .brand { color: var(--ink); font-weight: 500; letter-spacing: 0.3em; }
+  .masthead .brand em { font-style: normal; color: var(--accent); }
+  .masthead .right { display: flex; gap: 24px; }
+  .masthead a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .masthead a:hover { color: var(--accent); }
+
+  /* ======= breadcrumb ======= */
+  .breadcrumb {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 20px 32px 0;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+  }
+  .breadcrumb a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { margin: 0 10px; }
+  .breadcrumb .here { color: var(--ink); }
+
+  /* ======= hero ======= */
+  .hero {
+    min-height: 85vh;
+    padding: 72px 32px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero::before {
+    content: "#01";
+    position: absolute;
+    top: 56px;
+    right: 32px;
+    font-family: var(--serif);
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--ink-faint);
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 32px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(36px, 6vw, 60px);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 600; }
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: 21px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+  .hero-lead {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    max-width: 580px;
+    margin-bottom: 48px;
+  }
+  .hero-meta {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--rule);
+    padding-top: 24px;
+  }
+  .hero-meta span { display: flex; align-items: baseline; gap: 8px; }
+  .hero-meta strong { color: var(--ink); font-weight: 500; }
+
+  /* ======= 三权力雷达图 浮动 ======= */
+  .radar-float {
+    position: fixed;
+    top: 80px;
+    right: 32px;
+    width: 136px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 14px;
+    z-index: 100;
+    opacity: 0;
+    transform: translateX(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+  }
+  .radar-float.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .radar-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .radar-svg { display: block; width: 100%; }
+  .radar-legend {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .radar-item {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+  }
+  .radar-item span:last-child { color: var(--accent); font-weight: 600; }
+
+  /* ======= section base ======= */
+  section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 32px;
+    position: relative;
+  }
+  .sect-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .sect-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(26px, 4vw, 38px);
+    line-height: 1.25;
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+  }
+  .sect-title em { font-style: italic; color: var(--accent); }
+  .sect-sub {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 48px 0 20px;
+  }
+  p { margin-bottom: 22px; color: var(--ink-soft); }
+  p strong { color: var(--ink); font-weight: 600; }
+  p em { font-style: italic; }
+
+  /* ======= quote ======= */
+  .quote {
+    background: var(--paper);
+    border-left: 3px solid var(--accent);
+    padding: 26px 30px;
+    margin: 32px 0;
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+  .quote p { color: var(--ink); margin-bottom: 0; }
+  .quote-source {
+    display: block;
+    margin-top: 14px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  .pull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 21px;
+    line-height: 1.55;
+    color: var(--ink);
+    border-left: 2px solid var(--accent);
+    padding: 6px 0 6px 22px;
+    margin: 32px 0;
+  }
+  .pull em { color: var(--accent); }
+
+  .divider { text-align: center; color: var(--rule); font-size: 18px; letter-spacing: 1em; padding: 20px 0; }
+  .divider::before { content: "·   ·   ·"; }
+
+  /* ======= 挂人时间线 ======= */
+  .timeline {
+    margin: 32px 0 40px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-time {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    line-height: 1.6;
+  }
+  .tl-body { color: var(--ink-soft); font-size: 16px; line-height: 1.7; }
+
+  /* ======= 挂人三种配方 ======= */
+  .recipes { margin: 36px 0; }
+  .recipe {
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    padding: 26px 28px;
+    margin-bottom: 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  .recipe:hover { border-color: var(--accent-soft); }
+  .recipe-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .recipe-title {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .recipe-tag {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-faint);
+  }
+  .recipe-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, margin-top 0.4s ease;
+    font-size: 15.5px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+  }
+  .recipe.open { border-color: var(--accent); background: var(--bg); }
+  .recipe.open .recipe-body {
+    max-height: 300px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+  }
+  .recipe.open .recipe-tag { color: var(--accent); }
+
+  /* ======= 权力层分析 ======= */
+  .layer {
+    background: var(--paper);
+    border-left: 3px solid var(--accent);
+    padding: 28px 32px;
+    margin: 36px 0;
+    border-radius: 2px;
+  }
+  .layer-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .layer-name .fr {
+    font-family: var(--serif);
+    font-size: 14px;
+    font-style: italic;
+    color: var(--ink-faint);
+    font-weight: 400;
+    margin-left: 8px;
+  }
+  .layer-tag {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .layer-body { font-size: 16px; line-height: 1.8; color: var(--ink-soft); }
+  .layer-body p { margin-bottom: 10px; color: var(--ink-soft); }
+  .layer-body strong { color: var(--ink); }
+  .layer-body em { font-style: italic; color: var(--accent-soft); }
+
+  /* ======= 算法三机制 ======= */
+  .mechanisms { margin: 32px 0; }
+  .mech {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 28px;
+    align-items: baseline;
+  }
+  .mech:first-child { border-top: 1px solid var(--rule); }
+  .mech-name {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .mech-body { font-size: 15.5px; line-height: 1.75; color: var(--ink-soft); }
+  .mech-body strong { color: var(--ink); }
+
+  /* ======= 程序 vs 舆论 对比表 ======= */
+  .compare-wrap { margin: 36px 0; overflow-x: auto; }
+  .compare {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--serif);
+    font-size: 15.5px;
+    line-height: 1.65;
+  }
+  .compare th {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 14px 20px;
+    text-align: left;
+    border-bottom: 2px solid var(--ink);
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .compare th:first-child { border-right: 1px solid var(--rule); color: var(--ink-faint); font-weight: 400; }
+  .compare th.col-procedure { color: var(--ink); }
+  .compare th.col-opinion { color: var(--accent); }
+  .compare td {
+    padding: 13px 20px;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-soft);
+    vertical-align: top;
+  }
+  .compare td:first-child {
+    border-right: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+  .compare tr:last-child td { border-bottom: none; }
+
+  /* ======= 那然后呢 ======= */
+  .ranr {
+    background: var(--paper);
+    margin: 0;
+    max-width: none;
+    padding: 96px 32px;
+  }
+  .ranr-inner { max-width: 760px; margin: 0 auto; }
+  .ranr-inner p { color: var(--ink-soft); }
+  .ranr-inner p strong { color: var(--ink); }
+
+  /* 那然后呢三问 */
+  .questions { margin: 40px 0 36px; }
+  .question {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .question:first-child { border-top: 1px solid var(--rule); }
+  .q-num {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .q-text {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* 留言框占位 */
+  .submit-area {
+    margin-top: 36px;
+    border: 1px dashed var(--rule);
+    background: var(--bg);
+    padding: 28px 32px;
+    text-align: center;
+    border-radius: 2px;
+  }
+  .submit-area .s-hint {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+  }
+  .submit-area .s-empty {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-faint);
+    margin-bottom: 16px;
+  }
+  .submit-area .s-note {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--ink-faint);
+  }
+  .submit-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 28px;
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  /* ======= 反向引导列表 ======= */
+  .counterlist {
+    margin: 28px 0;
+    padding: 0;
+    list-style: none;
+  }
+  .counterlist li {
+    padding: 12px 0 12px 22px;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-soft);
+    font-size: 16.5px;
+    line-height: 1.7;
+    position: relative;
+  }
+  .counterlist li:first-child { border-top: 1px solid var(--rule); }
+  .counterlist li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  .counterlist li strong { color: var(--ink); }
+
+  /* ======= 延伸阅读 ======= */
+  .reading {
+    background: var(--paper-deep);
+    margin: 0;
+    max-width: none;
+    padding: 80px 32px;
+  }
+  .reading-inner { max-width: 760px; margin: 0 auto; }
+  .reading-inner .sect-num { color: var(--accent); }
+  .reading-list { margin: 28px 0 0; }
+  .reading-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 16px;
+  }
+  .reading-item:first-child { border-top: 1px solid var(--rule); }
+  .reading-dot { color: var(--accent); font-size: 14px; padding-top: 4px; }
+  .reading-content { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .reading-content strong { color: var(--ink); font-weight: 600; }
+  .reading-content em { font-style: italic; color: var(--ink-faint); }
+
+  /* ======= 结语 ending ======= */
+  .ending {
+    background: var(--ink);
+    color: var(--bg);
+    margin: 0;
+    max-width: none;
+    padding: 96px 32px;
+    text-align: center;
+  }
+  .ending-inner { max-width: 640px; margin: 0 auto; }
+  .ending .sect-num { color: var(--accent-soft); }
+  .ending-quote {
+    font-family: var(--serif);
+    font-size: clamp(18px, 3vw, 24px);
+    line-height: 1.75;
+    color: rgba(245,241,234,0.9);
+    margin: 36px 0;
+  }
+  .ending-quote em { font-style: italic; color: var(--accent-soft); }
+  .ending-quote strong { color: var(--bg); font-style: normal; }
+
+  /* ======= 上一期/下一期 ======= */
+  .nav-episodes {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    border-top: 1px solid var(--rule);
+  }
+  .nav-ep {
+    padding: 24px 26px;
+    border: 1px solid var(--rule);
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+    background: var(--paper);
+  }
+  .nav-ep:hover { border-color: var(--accent-soft); background: var(--bg); }
+  .nav-ep-dir {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .nav-ep-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--accent-soft);
+    margin-bottom: 6px;
+  }
+  .nav-ep-title {
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .nav-ep.next { text-align: right; }
+
+  /* ======= footer ======= */
+  footer {
+    text-align: center;
+    padding: 48px 32px;
+    color: var(--ink-faint);
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    border-top: 1px solid var(--rule);
+    line-height: 2;
+  }
+  footer a { color: var(--ink-faint); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  /* ======= 响应式 ======= */
+  @media (max-width: 768px) {
+    .radar-float { display: none; }
+  }
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    .masthead { padding: 14px 22px; flex-direction: column; gap: 10px; align-items: flex-start; }
+    .masthead .right { gap: 16px; }
+    .breadcrumb { padding: 16px 22px 0; }
+    .hero { padding: 56px 22px 36px; min-height: auto; }
+    .hero h1 { font-size: 32px; }
+    .hero-sub { font-size: 18px; }
+    .hero::before { display: none; }
+    section { padding: 60px 22px; }
+    .ranr, .ending, .reading { padding: 64px 22px; }
+    .tl-row { grid-template-columns: 80px 1fr; gap: 14px; }
+    .mech { grid-template-columns: 90px 1fr; gap: 16px; }
+    .nav-episodes { grid-template-columns: 1fr; gap: 16px; padding: 48px 22px; }
+    .nav-ep.next { text-align: left; }
+  }
+
+  /* ======= 淡入动画 ======= */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- 雷达图浮动窗 -->
+<div class="radar-float" id="radarFloat">
+  <div class="radar-label">#01 三种权力</div>
+  <svg class="radar-svg" viewBox="0 0 160 145" xmlns="http://www.w3.org/2000/svg">
+    <!-- 网格三角形 -->
+    <polygon points="80,68 90,86 70,86" fill="none" stroke="#d3c9b8" stroke-width="0.8"/>
+    <polygon points="80,56 100,92 60,92" fill="none" stroke="#d3c9b8" stroke-width="0.8"/>
+    <polygon points="80,44 110,98 50,98" fill="none" stroke="#d3c9b8" stroke-width="0.8"/>
+    <polygon points="80,32 120,104 40,104" fill="none" stroke="#d3c9b8" stroke-width="0.8"/>
+    <polygon points="80,20 130,110 30,110" fill="none" stroke="#d3c9b8" stroke-width="1"/>
+    <!-- 轴线 -->
+    <line x1="80" y1="80" x2="80" y2="20" stroke="#d3c9b8" stroke-width="0.8"/>
+    <line x1="80" y1="80" x2="130" y2="110" stroke="#d3c9b8" stroke-width="0.8"/>
+    <line x1="80" y1="80" x2="30" y2="110" stroke="#d3c9b8" stroke-width="0.8"/>
+    <!-- 数据多边形：君主9 规训4 生命1 -->
+    <!-- 君主(top,9): (80, 80-60*0.9)=(80,26) -->
+    <!-- 规训(bottom-right,4): (80+60*0.4*0.866, 80+60*0.4*0.5)=(100.8,92) -->
+    <!-- 生命(bottom-left,1): (80-60*0.1*0.866, 80+60*0.1*0.5)=(74.8,83) -->
+    <polygon
+      points="80,26 100.8,92 74.8,83"
+      fill="rgba(168,51,30,0.18)"
+      stroke="#a8331e"
+      stroke-width="1.5"
+      stroke-linejoin="round"
+    />
+    <circle cx="80" cy="26" r="3" fill="#a8331e"/>
+    <circle cx="100.8" cy="92" r="3" fill="#a8331e"/>
+    <circle cx="74.8" cy="83" r="3" fill="#a8331e"/>
+    <!-- 轴标签 -->
+    <text x="80" y="13" text-anchor="middle" font-family="'Noto Sans SC', sans-serif" font-size="10" fill="#1a1614" letter-spacing="1">君主</text>
+    <text x="138" y="122" text-anchor="start" font-family="'Noto Sans SC', sans-serif" font-size="10" fill="#4a4239" letter-spacing="1">规训</text>
+    <text x="22" y="122" text-anchor="end" font-family="'Noto Sans SC', sans-serif" font-size="10" fill="#4a4239" letter-spacing="1">生命</text>
+  </svg>
+  <div class="radar-legend">
+    <div class="radar-item"><span>君主</span><span>9 / 10</span></div>
+    <div class="radar-item"><span>规训</span><span>4 / 10</span></div>
+    <div class="radar-item"><span>生命</span><span>1 / 10</span></div>
+  </div>
+</div>
+
+<!-- masthead -->
+<div class="masthead">
+  <div class="brand"><a href="../../../" style="color:inherit;text-decoration:none">大大<em>黄油</em></a> · 规训群岛</div>
+  <div class="right">
+    <a href="../">文章库</a>
+    <a href="../../../map.html">概念图谱</a>
+    <a href="../案例库/">案例库</a>
+    <a href="../那然后呢墙/">那然后呢墙</a>
+    <a href="../../../about.html">关于</a>
+  </div>
+</div>
+
+<!-- breadcrumb -->
+<div class="breadcrumb">
+  <a href="../../../">大大黄油</a>
+  <span class="sep">/</span>
+  <a href="../">规训群岛</a>
+  <span class="sep">/</span>
+  <span class="here">#01 微博挂人</span>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">规训群岛 · 第 #01 期 · 锚定原书：第一编《酷刑》</div>
+  <h1>微博挂人<br>是 21 世纪的<em>断头台</em></h1>
+  <p class="hero-sub">"惩罚不被看见,就等于没有发生。"</p>
+  <p class="hero-lead">被废除的"示众"，以"瓜""塌房""曝光"的语言在数字广场上复辟——而且这次连法律程序都没有了。本期从福柯《规训与惩罚》第一编《酷刑》出发,拆解挂人的三层权力结构。</p>
+  <div class="hero-meta">
+    <span>出刊 · <strong>2026.05.26</strong></span>
+    <span>阅读 · <strong>约 22 分钟</strong></span>
+    <span>主轴 · <strong>君主权力的数字复辟</strong></span>
+    <span>锚定 · <strong>第一编《酷刑》</strong></span>
+  </div>
+</header>
+
+<!-- I 断头台没有退场 -->
+<section>
+  <div class="sect-num">I 断头台没有退场</div>
+  <h2 class="sect-title">这是《规训与惩罚》的<br>第一句话</h2>
+  <div class="quote">
+    "1757 年 3 月 2 日,达米安因犯弑君罪被判处'在巴黎教堂的大门前公开认罪……',然后,'用囚车押送到格列夫广场,那里将搭起行刑台,用烧红的铁钳撕开他的胸膛和四肢上的肉,用硫磺烧焦他持着弑君凶器的右手,再将熔化的铅汁、沸滚的松香、蜡和硫磺浇入撕裂的伤口,然后四马分肢……'"
+    <span class="quote-source">福柯《规训与惩罚》开篇 · 刘北成、杨远婴译，三联书店</span>
+  </div>
+
+  <p>1757 年达米安被处决。1789 年路易十六的脑袋掉进同一个广场上的篮子。1939 年纳粹废除断头台。1981 年法国废除死刑。</p>
+  <p>按"进步叙事"的版本,那一刻起,公开处决从人类文明里彻底退场了。</p>
+  <p>然后我们都知道后来发生了什么——挂人、塌房、社死、人肉、曝光、开盒。被废除的"示众",以另一种语言、在另一个广场上回来了。而且这一次,连法律程序都没有了。</p>
+
+  <h3 class="sect-sub">福柯的提问</h3>
+
+  <p>如果一本书的开场是一段刑罚记录,读者最容易问的是:"为什么写这么残忍的事?"</p>
+  <p>但福柯想要的提问其实是:</p>
+
+  <div class="quote">
+    <p>为什么 1757 年的巴黎人愿意花一整个下午围观这件事——甚至把它当作家庭活动？而 269 年之后的我们,光是读到都觉得不适？</p>
+  </div>
+
+  <p>这个"距离感"本身需要解释。它不是因为我们更"文明"了,而是因为我们之间隔了一次——<strong>权力形态的彻底重组</strong>。</p>
+  <p>福柯把君主权力的运作机制拆得极细:</p>
+
+  <div class="mechanisms">
+    <div class="mech">
+      <div class="mech-name">公开</div>
+      <div class="mech-body"><strong>公开处决不是惩罚的副产品,而是惩罚本身。</strong>"惩罚不被看见,就等于没有发生。"</div>
+    </div>
+    <div class="mech">
+      <div class="mech-name">剧场化</div>
+      <div class="mech-body">酷刑是仪式。认罪、游街、上刑台、行刑、示众——每个步骤都对观众有所交代。</div>
+    </div>
+    <div class="mech">
+      <div class="mech-name">不对称</div>
+      <div class="mech-body">被处决的人没有发言权。他的肉体被翻译成主权的符号；他的疼痛是这套符号的语法。</div>
+    </div>
+    <div class="mech">
+      <div class="mech-name">宣告主权</div>
+      <div class="mech-body"><strong>"惩罚是君主在所有臣民面前签下的一道警告书。"</strong>目的不是消除罪犯,而是宣告主权。</div>
+    </div>
+  </div>
+
+  <p>福柯在第一编最后引出了一个关键判断:</p>
+
+  <div class="quote">
+    "这种权力是脆弱的。观众可能同情罪犯,刑场可能变成造反的场所——失手就让整场仪式变成笑话。"
+  </div>
+
+  <p>正因为这种脆弱,18 世纪末的改革者开始寻找替代方案。监狱、规训、规范化——本书后续三编追溯的,是这场替代如何展开。</p>
+
+  <p class="pull">但有一句话福柯反复强调,被许多读者忽略:<br>
+  君主权力不是被"消除"了。它被"驱赶到后台"。<em>在危机时刻,它会重新走到前台。</em></p>
+
+  <p>这是本期文章的全部出发点。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- II 深夜剧场 -->
+<section>
+  <div class="sect-num">II 深夜剧场</div>
+  <h2 class="sect-title">挂人的<em>三种配方</em></h2>
+
+  <p>让我们做一次同构观察。下面的描述故意模糊掉具体身份——本文关心的不是"谁",而是"结构"。</p>
+
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-time">0 H</div>
+      <div class="tl-body">一条爆料贴出。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">3 H</div>
+      <div class="tl-body">当事人的过去被翻出。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">6 H</div>
+      <div class="tl-body">住址、电话、家人的工作单位、孩子的学校被一一对外公开。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">24 H</div>
+      <div class="tl-body">所在单位发出"切割声明",朋友圈消息被截图、二次传播、配上嘲讽语。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">3 天</div>
+      <div class="tl-body">当事人不再是一个完整的人,而是一组关键词的合集。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">7 天</div>
+      <div class="tl-body">他从公共视野中消失——但围观人群正在等待下一个"瓜"。</div>
+    </div>
+  </div>
+
+  <p>这个流程,<strong>和 1757 年那个下午共享同一种结构</strong>——公开、剧场化、不对称、警告效应。它不是"残忍程度"接近 18 世纪,是"权力的形式"接近 18 世纪。</p>
+
+  <p>不过在开始拆解之前,先做一个分析性的区分。我们日常笼统说的"挂人",其实是<strong>几种权力配方非常不同</strong>的现象的合称——</p>
+
+  <div class="recipes" id="recipes">
+    <div class="recipe" data-r>
+      <div class="recipe-label">(a) 公共人物的道德塌房</div>
+      <div class="recipe-title">明星人设崩塌、企业家言论、网红被翻旧帖</div>
+      <div class="recipe-tag">规训权力为主</div>
+      <div class="recipe-body">
+        围观者把一个"应该是某种样子的人"放回"正常分布"里检视,挂人是<strong>规范化裁决</strong>（sanction normalisatrice）的高强度版。
+      </div>
+    </div>
+    <div class="recipe" data-r>
+      <div class="recipe-label">(b) 商业与私人纠纷的小作文</div>
+      <div class="recipe-title">被前合伙人、前任、前同事写长文挂出</div>
+      <div class="recipe-tag">君主权力为主</div>
+      <div class="recipe-body">
+        一次个体对个体的、临时的、戏剧化的暴力展演；没有规范化的位置感,纯粹是<strong>"我要让所有人看见你"</strong>的剧场逻辑。
+      </div>
+    </div>
+    <div class="recipe" data-r>
+      <div class="recipe-label">(c) 组织内部的曝光与切割</div>
+      <div class="recipe-title">员工挂老板、徒弟挂师父、学生挂导师</div>
+      <div class="recipe-tag">君主 × 规训混合</div>
+      <div class="recipe-body">
+        一方面诉诸某种"应有的师德/职业伦理"（规训），另一方面靠戏剧化的展演获得效果（君主）。两种逻辑在这一类里同时运作。
+      </div>
+    </div>
+  </div>
+
+  <p>下面的三层分析以共享的<strong>深层结构</strong>为对象,但你在阅读时可以同时问自己:我正在看的这一桩"挂人",三种成分各占多少?</p>
+  <p>→ 站点的 <a href="../案例库/" style="color:var(--accent);text-decoration:underline;">【案例库】</a>把每一个真实事件标注成一张<strong>三种权力雷达图</strong>,让这个区分变成可视化的工具。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- III 君主性 -->
+<section>
+  <div class="sect-num">III 第一层</div>
+  <h2 class="sect-title">君主性:<br>广场换了,<em>但铡刀还在</em></h2>
+
+  <div class="layer">
+    <div class="layer-name">君主权力 <span class="fr">pouvoir souverain</span></div>
+    <div class="layer-tag">可见 · 剧场化 · 不对称 · 通过展演宣告主权</div>
+    <div class="layer-body">
+      <p>挂人里的君主性最显眼——但它的"君主"不是某个具体的"上位者"。</p>
+      <p>任何人都可以发起。任何人都可以围观。所有围观的目光合起来,形成了一种<strong>没有主体的主权</strong>。</p>
+      <p>剧场逻辑没变。施刑者和被刑者的不对称没变。<em>"看见即惩罚"</em>的机制没变。</p>
+    </div>
+  </div>
+
+  <h3 class="sect-sub">算法:剧场的隐形导演</h3>
+
+  <p>但这里有一个 18 世纪不存在的东西——<strong>算法</strong>。</p>
+  <p>达米安那场刑罚是路易十五的官员安排的,剧本写在判决书里。今天的挂人,没有任何一个具体的"导演"——但每一场都被精确策划。</p>
+
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-time">凌晨 2 点</div>
+      <div class="tl-body">一条挂某位行业人士的帖子发出,只有 3 个转发。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">早高峰</div>
+      <div class="tl-body">帖子带着高反差关键词,被算法推入"潜在爆款"池。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">上午 10 点</div>
+      <div class="tl-body">进入热搜前 20。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">此后</div>
+      <div class="tl-body">原帖作者删除内容——但截图早已脱离原语境,在 17 个微信群完成了二次传播。</div>
+    </div>
+  </div>
+
+  <p>整个过程没有"决策者"。只有 KPI、点击率、停留时长。这是一种<strong>没有主权者的主权</strong>,由代码、KPI 与点击经济学三者合谋驱动。</p>
+
+  <div class="mechanisms">
+    <div class="mech">
+      <div class="mech-name">热度加权</div>
+      <div class="mech-body">推荐算法按"互动率"做指数级放大。<strong>挂人能不能成为挂人,取决于它能不能跨过算法的关注度阈值。</strong></div>
+    </div>
+    <div class="mech">
+      <div class="mech-name">情绪偏好</div>
+      <div class="mech-body">所有情绪里停留时长最高的不是喜悦,是愤怒。算法不是出于恶意——<strong>它出于工程师可计算的指标——天然偏爱挂人</strong>。这是结构性偏好,不是道德选择。</div>
+    </div>
+    <div class="mech">
+      <div class="mech-name">热搜可见性</div>
+      <div class="mech-body">热搜榜把一个话题从"许多人在讨论"变成"所有人必须看到"。<strong>热搜的看见即强制</strong>——正是福柯说的"公开处决"在数字时代的精确等价物。</div>
+    </div>
+  </div>
+
+  <p class="pull">挂人不能被读成"用户的暴力"。<br>它是<em>用户的暴力 × 平台的工业化基础设施</em>。</p>
+
+  <p>如果福柯今天写这一章,他几乎肯定会把"<strong>热搜榜的工程师</strong>"放在和"边沁"同等的位置。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- IV 规训性 -->
+<section>
+  <div class="sect-num">IV 第二层</div>
+  <h2 class="sect-title">规训性:<br>被训练的是<em>旁观者</em></h2>
+
+  <div class="layer">
+    <div class="layer-name">规训权力 <span class="fr">pouvoir disciplinaire</span></div>
+    <div class="layer-tag">不可见 · 连续 · 规范化 · 通过塑造行为运作</div>
+    <div class="layer-body">
+      <p>如果挂人只伤害"被挂者",它的政治效果其实有限。</p>
+      <p><strong>它的真正成本,发生在所有还没被挂的人身上。</strong></p>
+    </div>
+  </div>
+
+  <p>下面这些行为,几乎可以认为是这一代社交媒体使用者的"默认设置"——</p>
+
+  <ul class="counterlist">
+    <li>发朋友圈之前预演:"这话会不会被截图?"</li>
+    <li>在群里说话之前观察:"这群里会不会有'截屏者'?"</li>
+    <li>公开场合每次表态先脑内推演:"如果这段被传出去会怎样?"</li>
+    <li>删除微博 / 朋友圈 / 微信记录的频率提高。</li>
+    <li><strong>"三天可见 / 半年可见 / 仅自己可见"</strong> 的开关从功能变成了<strong>生存策略</strong>。</li>
+  </ul>
+
+  <div class="quote">
+    "不知何时被看,所以必须时刻假定自己正被看。监视的效果<strong>自动化、非个人化</strong>——权力从'具体的监视者'中分离出来,变成一种结构性效应。最终,被监视者<strong>自己承担起监视自己的工作</strong>。"
+    <span class="quote-source">福柯《规训与惩罚》· 第三编《全景敞视主义》</span>
+  </div>
+
+  <p>挂别人的每一条帖子,都在帮这个系统<strong>训练剩下的所有人</strong>。</p>
+  <p>被挂者付出的,是他的生活。旁观者付出的,是一点点慢慢消失的、随口说话的轻松。</p>
+
+  <h3 class="sect-sub">反转:剧场的二阶规训</h3>
+
+  <p>很多人会安慰自己:舆论会反转,"洗白""翻案""挂错了"的剧情每隔几个月就上演一次——这说明这套机制有自我修正的能力。</p>
+  <p>但福柯的提醒是双重的。他在第一编结尾留了一句被许多读者跳过的话——</p>
+
+  <div class="quote">
+    "罪犯的肉体上演的悲剧有时会被观众阻止——人群可能要求宽恕,可能殴打刽子手,可能让被处决者从绞架下逃走。在某些情况下,刑场会变成造反的场所。"
+  </div>
+
+  <p>把这段话翻译到今天:</p>
+
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-time">第 1 天</div>
+      <div class="tl-body">全网声讨 A。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">第 2 天</div>
+      <div class="tl-body">A 放出聊天记录,反转。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">第 3 天</div>
+      <div class="tl-body">网友开始扒当初带头转发的人。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">第 4 天</div>
+      <div class="tl-body">带头转发的人注销账号。</div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">第 5 天</div>
+      <div class="tl-body">已经没有人在乎最初那件事到底是什么——但所有人都会记住:<strong>下次转发前,先等 24 小时。</strong></div>
+    </div>
+  </div>
+
+  <p class="pull">那 24 小时的等待,<em>就是规训生效的时刻</em>。</p>
+
+  <p>更微妙的是中间地带的观众。原本只是吃瓜的人,被迫站队——</p>
+  <p>在 A 阵营时不发声,会被挂"沉默就是帮凶"；站到 B 阵营,又会被挂"墙头草"；试图说"双方都有错",会被两边一起挂"和稀泥""装理中客"。</p>
+
+  <div class="quote">
+    <p>第一阶:让你不敢成为被挂者。</p>
+    <p>第二阶:让你不敢成为挂人者,也不敢成为不挂人者,更不敢成为试图调和的人。</p>
+    <p>净效应:<strong>全员沉默。</strong></p>
+  </div>
+
+  <p>这是规训权力最完美的胜利——它甚至不需要规训谁去做某件事,只需要让所有人停止去做<strong>任何事</strong>。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- V 生命权力 -->
+<section>
+  <div class="sect-num">V 第三层</div>
+  <h2 class="sect-title">生命权力:<br>从"人"到<em>"赤裸生命"</em></h2>
+
+  <div class="layer">
+    <div class="layer-name">生命权力 <span class="fr">bio-pouvoir</span></div>
+    <div class="layer-tag">以人口为对象 · 以"正常"为标准 · 通过排除运作</div>
+    <div class="layer-body">
+      <p>被挂之后的轨迹大致是这样的:失业（公司"为保护品牌"切割）、失婚/失友（"我不能再和你来往了"）、失家（家人因被骚扰反过来开始责怪他）、抑郁、社交隔绝。</p>
+      <p><strong>这个人还活着。</strong>但他被排除在正常社会循环之外。</p>
+    </div>
+  </div>
+
+  <h3 class="sect-sub">从福柯到阿甘本</h3>
+
+  <p>福柯描述了一个人如何被塑造为"正常人"。但他没有充分追问:当一个人被这套塑造机制判定为"<strong>不再属于我们</strong>"时,他会滑向哪里？</p>
+  <p>意大利哲学家阿甘本（Giorgio Agamben）在《神圣人》（<em>Homo Sacer</em>）系列把福柯往这个方向推进了一步。他借用古希腊的两个词:</p>
+
+  <div class="quote">
+    <p><em>bios</em> —— "有质量的生活",被纳入政治共同体、被法律保护、被社会承认的存在；</p>
+    <p><em>zoē</em> —— "赤裸的生命",仅作为生物意义上活着,被法律与共同体共同弃置在外。</p>
+    <p>现代权力最深刻的一招,不是把一个人从生物意义上消灭,而是把他从前者推到后者——把他从"完整的人"降级为"<strong>还在呼吸的生物</strong>"。</p>
+    <span class="quote-source">Giorgio Agamben · Homo Sacer · 1995</span>
+  </div>
+
+  <p>阿甘本主要用这个概念分析集中营、关塔那摩、难民——这些"例外状态"的范式空间。但<strong>网络挂人也是一种迷你版的"例外状态"</strong>——</p>
+
+  <ul class="counterlist">
+    <li>法律没有正式判他罪,但社会已经判了他刑；</li>
+    <li>他没有失去任何法定权利,但他实际上失去了所有社会权利；</li>
+    <li>他还能上街、还能呼吸、还能消费,但他不再能"出现"在任何正常的社会关系里。</li>
+  </ul>
+
+  <p class="pull">挂人的最终效果,不是让一个人"被骂"。<br>是让一个人<em>悄悄地从"正常人"这个类别里被删除</em>。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- VI 程序与舆论 -->
+<section>
+  <div class="sect-num">VI 一个不舒服的问题</div>
+  <h2 class="sect-title">程序与<em>舆论</em>之间</h2>
+
+  <p>如果这套机制看上去这么糟,为什么我们还在用？</p>
+  <p>因为它常常确实"主持了正义"。有些被挂的人确实做了让人不齿的事——而正常渠道反应迟缓、无力,或者根本不知道这件事存在。挂人成了某种"替代性正义"。这里埋着一种很真实的张力——</p>
+
+  <div class="compare-wrap">
+    <table class="compare">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="col-procedure">程序</th>
+          <th class="col-opinion">舆论</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>速度</td><td>缓慢</td><td>即时</td></tr>
+        <tr><td>触达范围</td><td>有限管辖范围</td><td>触达无穷</td></tr>
+        <tr><td>可救济性</td><td>可救济、可上诉</td><td>不可挽回、无终审</td></tr>
+        <tr><td>证据规则</td><td>严格证据规则</td><td>截图即证据</td></tr>
+        <tr><td>对被告保护</td><td>有制度保护</td><td>无防御场域</td></tr>
+        <tr><td>结果预期</td><td>结果可计算</td><td>结果取决于流量</td></tr>
+        <tr><td>缺陷</td><td>经常让不齿者逍遥</td><td>经常让无辜者社死</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>两边都有它可贵的东西,也都有它的代价。舆论正义不是凭空崛起的——它是程序在某些领域<strong>长期失灵</strong>的副产品。</p>
+  <p>但用舆论替代程序,意味着用一种<strong>没有救济通道</strong>的东西,去取代一种<strong>有救济通道</strong>的东西。被舆论错杀的人,几乎无处可去。被程序错判的人,至少理论上还能上诉、平反、申诉。</p>
+
+  <p class="pull">两者不是替代关系,而是各有功能且<em>不可互换</em>。</p>
+
+  <h3 class="sect-sub">福柯式的更深一问</h3>
+
+  <p>但福柯式分析想问的不是"挂人对不对"。它想问的是:</p>
+
+  <div class="quote">
+    <p>当一个 18 世纪的工具被用来主持 21 世纪的正义,那是这套工具足够好,还是 21 世纪还有别的东西不够好？</p>
+  </div>
+
+  <p>这个问题指向的不是"更高效的挂人",也不是"取消挂人",而是<strong>让挂人不再被需要的那一套制度安排</strong>。而那一套安排,这一篇文章给不出。它需要的不是更多的福柯,是另一种思想资源。</p>
+</section>
+
+<!-- VII 那然后呢 -->
+<section class="ranr">
+  <div class="ranr-inner">
+    <div class="sect-num">VII 那然后呢</div>
+    <h2 class="sect-title">反向引导:<br>让脚本<em>暂停一两秒</em></h2>
+
+    <p>福柯生命的最后几年提出过一个词:<strong>反向引导</strong>（contre-conduite）。它不是"反抗",不是"革命",不是"运动"——它是更小、更日常、更不引人注目的东西:</p>
+
+    <div class="quote">
+      在权力运作的局部位置上,以微小的方式偏离它的脚本。
+    </div>
+
+    <p>挂人剧场里的"反向引导"长什么样？</p>
+
+    <ul class="counterlist">
+      <li>在围观最热的时候<strong>选择不点开</strong>热搜。</li>
+      <li>转发到一半,<strong>收回手指</strong>。</li>
+      <li>朋友被挂时,公开打一句"先别下结论"再发出去。</li>
+      <li>公司群里大家忙着切割时,<strong>不附和</strong>——哪怕只是不接话。</li>
+      <li>收到截图时,<strong>不传给下一个人</strong>。</li>
+      <li>写小作文之前停一秒,问自己:"我是想要正义,还是想要那个人毁灭?"</li>
+    </ul>
+
+    <p>这些动作小到几乎看不见。它们不会"反抗系统",也不会"终结剧场"。但它们是这个剧场里唯一能让脚本暂停一两秒钟的力量。</p>
+    <p>不要因为它们小,就轻视它们。也不要因为它们小,就把它们当作"足够了"的替代品。</p>
+
+    <h3 class="sect-sub" style="margin-top:56px;">本期【那然后呢墙】三问</h3>
+
+    <div class="questions">
+      <div class="question">
+        <div class="q-num">问题一</div>
+        <div class="q-text">你最近一次"参与挂人"是什么时候？哪怕只是一次转发、一次点赞、一次截图保存？</div>
+      </div>
+      <div class="question">
+        <div class="q-num">问题二</div>
+        <div class="q-text">如果被挂的人确实做了让你愤怒的事,你对自己的"参与"感受会不一样吗？为什么？</div>
+      </div>
+      <div class="question">
+        <div class="q-num">问题三</div>
+        <div class="q-text">你有没有过这样一种时刻——一句话打到一半,又删掉了——只因为脑子里闪过一个念头:"这会不会被传出去"？</div>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <div class="s-hint">留言区 · 可匿名 · 不打分 · 不评判</div>
+      <div class="s-empty">这堵墙正在等第一句话。</div>
+      <div class="s-note">留言功能即将上线 · 月底整合进【那然后呢墙】</div>
+      <div class="submit-btn">提交留言（即将开放）</div>
+    </div>
+
+    <p style="margin-top:36px;font-family:var(--sans);font-size:12px;letter-spacing:0.1em;color:var(--ink-faint);">
+      → 前往 <a href="../那然后呢墙/" style="color:var(--accent);text-decoration:underline;">【那然后呢墙】</a> 查看其他期的开放问题与留言汇聚
+    </p>
+  </div>
+</section>
+
+<!-- 延伸阅读 -->
+<section class="reading">
+  <div class="reading-inner">
+    <div class="sect-num">延伸阅读</div>
+    <h2 class="sect-title" style="font-size:clamp(22px,3.5vw,30px);margin-bottom:8px;">原典与二手文献</h2>
+    <div class="reading-list">
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>福柯《规训与惩罚》第一编"酷刑"</strong> <em>刘北成、杨远婴译，三联书店 2019 年版</em> — 本期主要原书锚点。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>Giorgio Agamben · Homo Sacer</strong> <em>吴冠军译，中文版</em> — "赤裸生命"概念的原始出处。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>David Garland · The Culture of Control</strong> <em>2001</em> — 刑罚情感回归的社会学诊断。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>Bernard Harcourt · Exposed</strong> <em>2015</em> — Panopticon 在数字时代的反转:主体"渴望被看见"。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>Shoshana Zuboff · The Age of Surveillance Capitalism</strong> <em>2019</em> — 为算法天然偏爱愤怒提供宏观解释。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content">本站 <a href="../../../map.html" style="color:var(--accent);text-decoration:underline;">【概念图谱】</a> → "君主权力""全景敞视""规范化""驯顺的肉体""反向引导"</div>
+      </div>
+    </div>
+    <p style="margin-top:28px;font-family:var(--sans);font-size:12px;letter-spacing:0.1em;color:var(--ink-faint);">
+      本文所有《规训与惩罚》引文以"刘北成、杨远婴译，三联书店 2019 年版"为准。本专栏文字遵循 CC BY-NC 4.0 协议，转载请注明出处。
+    </p>
+  </div>
+</section>
+
+<!-- VIII 结语 -->
+<section class="ending">
+  <div class="ending-inner">
+    <div class="sect-num">VIII 最后一句</div>
+    <div class="ending-quote">
+      我们曾以为现代社会废除了酷刑。<br><br>
+      福柯说,现代社会只是学会了——<br>
+      <em>让酷刑不再需要刽子手,</em><br>
+      <em>因为它学会了让我们彼此动手。</em>
+    </div>
+  </div>
+</section>
+
+<!-- 上一期 / 下一期 -->
+<nav class="nav-episodes">
+  <a href="../00-发刊词/" class="nav-ep prev">
+    <div class="nav-ep-dir">← 上一期</div>
+    <div class="nav-ep-num">#00 · 发刊词</div>
+    <div class="nav-ep-title">从达米安到健康码:一份福柯式专栏的开场</div>
+  </a>
+  <a href="../02-健康码/" class="nav-ep next">
+    <div class="nav-ep-dir">下一期 →</div>
+    <div class="nav-ep-num">#02 · 2026.06.09</div>
+    <div class="nav-ep-title">健康码:18 世纪的图纸,21 世纪的实装</div>
+  </a>
+</nav>
+
+<footer>
+  规训群岛 · 第 #01 期 · 2026.05.26 · 大大黄油<br>
+  <a href="../../../">大大黄油母站</a> · <a href="../">规训群岛文章库</a> · <a href="../../../map.html">概念图谱</a> · <a href="../案例库/">案例库</a><br>
+  本专栏文字遵循 CC BY-NC 4.0 协议
+</footer>
+
+<script>
+  // 挂人三种配方展开
+  document.querySelectorAll('.recipe').forEach(r => {
+    r.addEventListener('click', () => r.classList.toggle('open'));
+  });
+
+  // 雷达图浮动：滚过 hero 后出现
+  const hero = document.querySelector('.hero');
+  const radar = document.getElementById('radarFloat');
+  const radarObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) {
+        radar.classList.add('visible');
+      } else {
+        radar.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0 });
+  radarObserver.observe(hero);
+
+  // 滚动入场动画
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('section, header.hero, .ranr, .ending, .reading, nav.nav-episodes').forEach(el => {
+    el.classList.add('fade-in');
+    fadeObserver.observe(el);
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>概念图谱 · 大大黄油</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #f5f1ea;
+    --paper: #ede7dc;
+    --paper-deep: #e4ddd0;
+    --ink: #1a1614;
+    --ink-soft: #4a4239;
+    --ink-faint: #8b8074;
+    --accent: #a8331e;
+    --accent-soft: #c97560;
+    --rule: #d3c9b8;
+    --serif: 'Noto Serif SC', Georgia, serif;
+    --sans: 'Noto Sans SC', -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ============ Masthead ============ */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .brand {
+    font-family: var(--serif);
+    font-size: 15px;
+    letter-spacing: 0.25em;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .brand a { color: var(--ink); }
+  .brand .sep { margin: 0 12px; color: var(--ink-faint); font-weight: 300; }
+  .brand .now { color: var(--accent); }
+  .nav-main { display: flex; gap: 28px; }
+  .nav-main a { transition: color 0.2s; }
+  .nav-main a:hover { color: var(--accent); }
+  .nav-main a.current { color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 4px; }
+
+  /* ============ 面包屑 ============ */
+  .breadcrumb {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 22px 32px 0;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  .breadcrumb a { color: var(--ink-faint); transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { margin: 0 12px; }
+  .breadcrumb .here { color: var(--ink); }
+
+  /* ============ Hero ============ */
+  .hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 32px 32px;
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    margin-bottom: 28px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(40px, 6vw, 64px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    color: var(--ink);
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 600; }
+  .hero-lead {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    max-width: 720px;
+    margin-bottom: 16px;
+  }
+  .hero-lead strong { color: var(--ink); }
+  .hero-hint {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    margin-top: 18px;
+    text-transform: uppercase;
+  }
+
+  /* ============ Toolbar ============ */
+  .toolbar {
+    max-width: 1400px;
+    margin: 32px auto 0;
+    padding: 0 32px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  .tb-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .tb-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .view-toggle {
+    display: flex;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .view-toggle button {
+    background: var(--bg);
+    border: none;
+    padding: 8px 16px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    border-right: 1px solid var(--rule);
+  }
+  .view-toggle button:last-child { border-right: none; }
+  .view-toggle button:hover { color: var(--ink); }
+  .view-toggle button.active { background: var(--ink); color: var(--bg); }
+
+  .chip-set { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip {
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    padding: 6px 14px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-soft);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  .chip:hover { border-color: var(--ink-soft); color: var(--ink); }
+  .chip.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .chip .dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .chip[data-cat="core"] .dot { background: var(--accent); }
+  .chip[data-cat="device"] .dot { background: var(--ink); }
+  .chip[data-cat="history"] .dot { background: var(--ink-faint); }
+  .chip[data-cat="case"] .dot { background: var(--accent-soft); border: 1px solid var(--accent-soft); }
+
+  .search-box {
+    flex: 1;
+    min-width: 220px;
+    max-width: 320px;
+    position: relative;
+  }
+  .search-box input {
+    width: 100%;
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    padding: 10px 14px 10px 36px;
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--ink);
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-box input:focus { border-color: var(--accent); }
+  .search-box::before {
+    content: "";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px; height: 12px;
+    border: 1.5px solid var(--ink-faint);
+    border-radius: 50%;
+  }
+  .search-box::after {
+    content: "";
+    position: absolute;
+    left: 22px;
+    top: calc(50% + 6px);
+    width: 6px;
+    height: 1.5px;
+    background: var(--ink-faint);
+    transform: rotate(45deg);
+  }
+
+  /* ============ Graph container ============ */
+  .graph-stage {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 32px 64px;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 32px;
+  }
+  .graph-stage.list-mode { grid-template-columns: 1fr; }
+  .graph-stage.list-mode .panel,
+  .graph-stage.list-mode .graph-viewport { display: none; }
+
+  .graph-viewport {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    position: relative;
+    height: 700px;
+    overflow: hidden;
+  }
+  .graph-viewport svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: grab;
+  }
+  .graph-viewport svg:active { cursor: grabbing; }
+  .graph-bg-grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.18;
+    background-image:
+      linear-gradient(to right, var(--ink-faint) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--ink-faint) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* nodes */
+  .node {
+    cursor: pointer;
+    transition: opacity 0.3s;
+  }
+  .node circle {
+    transition: r 0.25s, fill 0.25s, stroke 0.25s;
+  }
+  .node text {
+    font-family: var(--serif);
+    font-weight: 500;
+    pointer-events: none;
+    user-select: none;
+    text-anchor: middle;
+    dominant-baseline: middle;
+  }
+  .node-core circle { fill: var(--accent); stroke: var(--accent); stroke-width: 0; }
+  .node-core text { fill: var(--bg); font-size: 15px; font-weight: 600; }
+  .node-device circle { fill: var(--ink); stroke: var(--ink); }
+  .node-device text { fill: var(--bg); font-size: 12px; }
+  .node-history circle { fill: var(--paper-deep); stroke: var(--ink-faint); stroke-width: 1.5; }
+  .node-history text { fill: var(--ink); font-size: 12px; }
+  .node-case circle { fill: var(--bg); stroke: var(--accent-soft); stroke-width: 1.5; }
+  .node-case text { fill: var(--accent); font-size: 11px; font-style: italic; }
+  .node.dimmed { opacity: 0.15; }
+  .node.selected circle { stroke: var(--accent); stroke-width: 3; }
+  .node-core.selected circle { stroke: var(--ink); stroke-width: 3; }
+  .node:hover circle { filter: brightness(1.05); }
+
+  /* edges */
+  .edge {
+    fill: none;
+    transition: opacity 0.3s, stroke-width 0.25s;
+  }
+  .edge-derive { stroke: var(--ink); stroke-width: 1.2; opacity: 0.35; }
+  .edge-cooccur { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 5 4; opacity: 0.5; }
+  .edge-contrast { stroke: var(--ink-faint); stroke-width: 1; stroke-dasharray: 1 4; opacity: 0.55; }
+  .edge.dimmed { opacity: 0.05; }
+  .edge.highlighted { opacity: 1; stroke-width: 2; }
+
+  /* legend */
+  .legend {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: rgba(245, 241, 234, 0.92);
+    border: 1px solid var(--rule);
+    padding: 12px 14px;
+    border-radius: 2px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    backdrop-filter: blur(4px);
+    max-width: 240px;
+  }
+  .legend-title {
+    color: var(--ink);
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: 0.25em;
+  }
+  .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .legend-row:last-child { margin-bottom: 0; }
+  .legend-line {
+    width: 30px;
+    height: 1px;
+    flex-shrink: 0;
+  }
+  .legend-derive { background: var(--ink); }
+  .legend-cooccur {
+    background-image: linear-gradient(to right, var(--accent) 50%, transparent 50%);
+    background-size: 8px 1px;
+    height: 1.5px;
+  }
+  .legend-contrast {
+    background-image: linear-gradient(to right, var(--ink-faint) 30%, transparent 30%);
+    background-size: 5px 1px;
+    height: 1.5px;
+  }
+
+  /* ============ Side panel ============ */
+  .panel {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 32px 28px;
+    height: 700px;
+    overflow-y: auto;
+  }
+  .panel-empty {
+    text-align: center;
+    color: var(--ink-faint);
+    padding: 60px 16px;
+  }
+  .panel-empty-mark {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-style: italic;
+    color: var(--rule);
+    margin-bottom: 18px;
+    line-height: 1;
+  }
+  .panel-empty-msg {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink-faint);
+  }
+  .panel-empty-hint {
+    margin-top: 24px;
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  .panel-cat {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .panel-cat-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+  }
+  .panel-cat[data-cat="core"] { color: var(--accent); }
+  .panel-cat[data-cat="core"] .panel-cat-dot { background: var(--accent); }
+  .panel-cat[data-cat="device"] { color: var(--ink); }
+  .panel-cat[data-cat="device"] .panel-cat-dot { background: var(--ink); }
+  .panel-cat[data-cat="history"] { color: var(--ink-faint); }
+  .panel-cat[data-cat="history"] .panel-cat-dot { background: var(--ink-faint); }
+  .panel-cat[data-cat="case"] { color: var(--accent-soft); }
+  .panel-cat[data-cat="case"] .panel-cat-dot { background: var(--accent-soft); border: 1px solid var(--accent-soft); }
+
+  .panel-name {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .panel-fr {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink-faint);
+    margin-bottom: 20px;
+  }
+  .panel-def {
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .panel-def strong { color: var(--ink); }
+
+  .panel-block { margin-bottom: 22px; }
+  .panel-block:last-child { margin-bottom: 0; }
+  .panel-block-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .panel-block-value {
+    font-family: var(--serif);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .panel-block-value em { font-style: italic; color: var(--accent); }
+  .panel-block-value strong { color: var(--ink); font-weight: 600; }
+
+  .pill-set { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pill {
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    padding: 5px 12px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 2px;
+  }
+  .pill:hover { border-color: var(--accent); color: var(--accent); }
+  .pill.ep {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+    font-style: italic;
+  }
+  .pill.ep:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+
+  /* ============ List view ============ */
+  .list-view {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 32px 64px;
+    display: none;
+  }
+  .graph-stage.list-mode + .list-view { display: block; }
+  .list-table {
+    width: 100%;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    border-collapse: collapse;
+  }
+  .list-table th, .list-table td {
+    text-align: left;
+    padding: 18px 16px;
+    vertical-align: top;
+    border-bottom: 1px solid var(--rule);
+  }
+  .list-table th {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    font-weight: 500;
+    background: var(--paper);
+  }
+  .list-table tr.row-core td:first-child { color: var(--accent); font-weight: 600; }
+  .list-table tr.row-device td:first-child { color: var(--ink); }
+  .list-table tr.row-history td:first-child { color: var(--ink-faint); }
+  .list-table tr.row-case td:first-child { color: var(--accent-soft); font-style: italic; }
+  .list-table td.col-name {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .list-table td.col-def {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+  .list-table td.col-src {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  .list-table td.col-eps {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--accent);
+    font-size: 14px;
+  }
+  .list-table tr { transition: background 0.2s; cursor: pointer; }
+  .list-table tr:hover td { background: var(--paper); }
+
+  /* ============ Footer ============ */
+  footer {
+    background: var(--ink);
+    color: rgba(245, 241, 234, 0.5);
+    padding: 64px 32px 48px;
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+  }
+  footer .footer-brand {
+    font-family: var(--serif);
+    font-size: 17px;
+    letter-spacing: 0.3em;
+    color: var(--bg);
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+  footer .footer-brand em { font-style: normal; color: var(--accent-soft); }
+  footer .footer-line { margin-bottom: 10px; }
+  footer a { color: rgba(245, 241, 234, 0.7); border-bottom: 1px dotted rgba(245, 241, 234, 0.3); }
+  footer .footer-rights { margin-top: 28px; padding-top: 28px; border-top: 1px solid rgba(245, 241, 234, 0.12); color: rgba(245, 241, 234, 0.3); }
+
+  /* ============ Responsive ============ */
+  @media (max-width: 960px) {
+    .graph-stage { grid-template-columns: 1fr; }
+    .panel { height: auto; max-height: 500px; }
+    .graph-viewport { height: 500px; }
+  }
+  @media (max-width: 760px) {
+    body { font-size: 16px; }
+    .masthead { padding: 14px 22px; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .nav-main { gap: 16px; flex-wrap: wrap; }
+    .breadcrumb { padding: 18px 22px 0; }
+    .hero { padding: 48px 22px 24px; }
+    .hero h1 { font-size: 36px; }
+    .toolbar { padding: 14px 22px; gap: 14px; }
+    .graph-stage, .list-view { padding: 24px 22px 56px; }
+    .list-table th, .list-table td { padding: 14px 10px; }
+    .list-table .col-src, .list-table .col-eps { display: none; }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ============ Masthead ============ -->
+<div class="masthead">
+  <div class="brand">
+    <a href="./">大大黄油</a>
+    <span class="sep">/</span>
+    <span class="now">概念图谱</span>
+  </div>
+  <div class="nav-main">
+    <a href="群岛/规训群岛/00-发刊词/">本期</a>
+    <a href="群岛/规训群岛/">文章库</a>
+    <a href="map.html" class="current">概念图谱</a>
+    <a href="群岛/规训群岛/案例库/">案例库</a>
+    <a href="群岛/规训群岛/那然后呢墙/">那然后呢墙</a>
+    <a href="about.html">关于</a>
+  </div>
+</div>
+
+<!-- ============ 面包屑 ============ -->
+<div class="breadcrumb">
+  <a href="./">大大黄油</a>
+  <span class="sep">/</span>
+  <span class="here">概念图谱</span>
+</div>
+
+<!-- ============ Hero ============ -->
+<header class="hero">
+  <div class="hero-eyebrow">大大黄油 · 思想地图 · 规训群岛预筛</div>
+  <h1>概念<em>图谱</em></h1>
+  <p class="hero-lead">这不是一张知识图。<strong>这是一张让你看清"自己在哪里被规训"的地图</strong>。中心是规训权力,它的兄弟是君主权力与生命权力。围绕它们的,是福柯思想里塑造你日常的具体装置——全景敞视、驯顺的肉体、考试、规范化裁决……再外一圈,是这些装置在今天落地的当代案例(微博挂人、健康码、钉钉、A4 腰等)。</p>
+  <p class="hero-lead">点击任一节点,看简明释义、原书出处、当代案例、对应期号。点击概念之间的连线,看它们是<em>派生</em>、<em>共生</em>还是<em>反例</em>关系。</p>
+  <div class="hero-hint">↓ 点击节点查看详情 · 鼠标悬停高亮邻居</div>
+</header>
+
+<!-- ============ Toolbar ============ -->
+<div class="toolbar">
+  <div class="tb-group">
+    <span class="tb-label">视图</span>
+    <div class="view-toggle">
+      <button class="active" data-view="graph">图谱</button>
+      <button data-view="list">列表</button>
+    </div>
+  </div>
+  <div class="tb-group">
+    <span class="tb-label">类别</span>
+    <div class="chip-set" id="chips">
+      <button class="chip active" data-cat="core"><span class="dot"></span>核心</button>
+      <button class="chip active" data-cat="device"><span class="dot"></span>装置</button>
+      <button class="chip active" data-cat="history"><span class="dot"></span>历史</button>
+      <button class="chip" data-cat="case"><span class="dot"></span>当代案例</button>
+    </div>
+  </div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="搜索概念或现象…">
+  </div>
+</div>
+
+<!-- ============ Graph stage ============ -->
+<div class="graph-stage" id="stage">
+
+  <div class="graph-viewport">
+    <div class="graph-bg-grid"></div>
+    <svg id="graph" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <!-- edges and nodes will be rendered by JS -->
+    </svg>
+    <div class="legend">
+      <div class="legend-title">连线含义</div>
+      <div class="legend-row"><span class="legend-line legend-derive"></span>派生 · A 是 B 的具体技术</div>
+      <div class="legend-row"><span class="legend-line legend-cooccur"></span>共生 · 同一场景中同时在场</div>
+      <div class="legend-row"><span class="legend-line legend-contrast"></span>反例 · 形态相反</div>
+    </div>
+  </div>
+
+  <aside class="panel" id="panel">
+    <div class="panel-empty">
+      <div class="panel-empty-mark">·</div>
+      <div class="panel-empty-msg">点击图中的任一节点,<br>看它的释义、出处、案例与对应期号。</div>
+      <div class="panel-empty-hint">提示 · 点击空白处取消选择</div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- ============ List view ============ -->
+<div class="list-view" id="listView">
+  <table class="list-table" id="listTable">
+    <thead>
+      <tr>
+        <th style="width: 90px;">类别</th>
+        <th style="width: 180px;">名称</th>
+        <th>释义</th>
+        <th style="width: 200px;">原书出处</th>
+        <th style="width: 140px;">出现期号</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- rendered by JS -->
+    </tbody>
+  </table>
+</div>
+
+<!-- ============ Footer ============ -->
+<footer>
+  <div class="footer-brand">大大<em>黄油</em></div>
+  <div class="footer-line">概念图谱 · 当前预筛 · 规训群岛</div>
+  <div class="footer-line">未来会按"群岛"染色,显示跨专栏的概念连接</div>
+  <div class="footer-line"><a href="./">← 回到大大黄油首页</a></div>
+  <div class="footer-rights">© 2026 大大黄油 · CC BY-NC 4.0</div>
+</footer>
+
+<script>
+/* ==================== 数据 ==================== */
+
+const NODES = [
+  // ---- 核心三种权力 ----
+  { id: 'sovereign', name: '君主权力', fr: 'pouvoir souverain', cat: 'core', x: 230, y: 200, r: 38,
+    def: '可见的、强制的、戏剧化的权力形态。通过<strong>展演</strong>运作——刑罚、断头台、宣判,都是为了让所有人看见君主的力量。',
+    src: '《规训与惩罚》第一编',
+    cases: ['damiens', 'weibo'],
+    related: ['discipline', 'biopower', 'damiens'],
+    eps: ['#01'] },
+
+  { id: 'discipline', name: '规训权力', fr: 'pouvoir disciplinaire', cat: 'core', x: 600, y: 420, r: 50,
+    def: '不可见的、连续的、规范化的权力形态。通过<strong>塑造肉体</strong>运作——它不压迫你,它<em>让你成为某种人</em>。这是整套思想的中心。',
+    src: '《规训与惩罚》第三编',
+    cases: ['dingtalk', 'a4'],
+    related: ['sovereign', 'biopower', 'panopticon', 'docile', 'exam', 'normalization', 'knowpower', 'time'],
+    eps: ['#00','#03','#04','#05','#06'] },
+
+  { id: 'biopower', name: '生命权力', fr: 'bio-pouvoir', cat: 'core', x: 980, y: 200, r: 40,
+    def: '以<strong>人口</strong>为对象、以统计为语言、以健康为旗帜的权力。它不管理"个人",它管理<em>生死的概率分布</em>。',
+    src: '《必须保卫社会》《性史》',
+    cases: ['hcode', 'marriage'],
+    related: ['discipline', 'governmentality', 'hcode', 'marriage'],
+    eps: ['#02','#08'] },
+
+  // ---- 装置(规训权力的具体技术) ----
+  { id: 'panopticon', name: '全景敞视主义', fr: 'panoptisme', cat: 'device', x: 600, y: 620, r: 28,
+    def: '少数监视多数的几何学结构。被看者不需要每时每刻被看,只要他<em>不知道何时被看</em>,他就会一直按被看时的样子行动。',
+    src: '《规训与惩罚》第三编 第三章',
+    cases: ['hcode', 'algo'],
+    related: ['discipline', 'knowpower', 'hcode', 'algo'],
+    eps: ['#02','#07'] },
+
+  { id: 'docile', name: '驯顺的肉体', fr: 'corps dociles', cat: 'device', x: 830, y: 470, r: 26,
+    def: '通过细微纪律可以被塑造、被使用的身体。<em>不需要镣铐——纪律已经长进了身体本身</em>。',
+    src: '《规训与惩罚》第三编 第一章',
+    cases: ['a4'],
+    related: ['discipline', 'anatomy', 'a4'],
+    eps: ['#05'] },
+
+  { id: 'exam', name: '考试', fr: 'examen', cat: 'device', x: 750, y: 580, r: 24,
+    def: '把权力关系内化为知识关系的核心仪式。考试既<strong>检验</strong>你,也<strong>制造</strong>你——分数让你变成可计算的个体。',
+    src: '《规训与惩罚》第三编 第三章',
+    cases: ['dingtalk', 'kidedu'],
+    related: ['discipline', 'normalization', 'dingtalk', 'kidedu'],
+    eps: ['#03','#04'] },
+
+  { id: 'normalization', name: '规范化裁决', fr: 'sanction normalisatrice', cat: 'device', x: 440, y: 580, r: 24,
+    def: '用"标准"取代"是非"的判定方式。不再问"你做错了什么",而问"你<em>偏离</em>标准多少"。',
+    src: '《规训与惩罚》第三编 第二章',
+    cases: ['kidedu', 'credit'],
+    related: ['discipline', 'exam', 'kidedu', 'credit'],
+    eps: ['#04','#06'] },
+
+  { id: 'knowpower', name: '知识—权力', fr: 'savoir-pouvoir', cat: 'device', x: 300, y: 480, r: 26,
+    def: '知识不在权力之外,知识就是权力本身。<em>知道你的人,就掌握了你</em>。',
+    src: '全书 + 后期讲座',
+    cases: ['algo'],
+    related: ['discipline', 'panopticon', 'algo'],
+    eps: ['#07'] },
+
+  { id: 'micro', name: '微观物理学', fr: 'microphysique', cat: 'device', x: 510, y: 320, r: 20,
+    def: '权力在最细节处的运作机制——一个动作、一个姿势、一个时间表。福柯反对"宏观权力"的想象,坚持<strong>权力在毛细血管里</strong>。',
+    src: '《规训与惩罚》第一编 第一章',
+    cases: [],
+    related: ['discipline', 'anatomy'],
+    eps: [] },
+
+  { id: 'anatomy', name: '解剖政治学', fr: 'anatomo-politique', cat: 'device', x: 720, y: 360, r: 20,
+    def: '针对个体的权力技术——把身体当作可以拆解、训练、组装的机器。和"生命权力"(对人口)成对出现。',
+    src: '《规训与惩罚》第三编 总论',
+    cases: [],
+    related: ['discipline', 'docile', 'micro'],
+    eps: ['#03','#05'] },
+
+  { id: 'time', name: '时间表', fr: 'emploi du temps', cat: 'device', x: 500, y: 680, r: 20,
+    def: '规训对时间的精细切割。<em>一天被切成不可逆的格子,每一格规定一种动作</em>。从修道院到工厂到打卡软件,一脉相承。',
+    src: '《规训与惩罚》第三编 第一章',
+    cases: ['dingtalk'],
+    related: ['discipline', 'exam', 'dingtalk'],
+    eps: ['#03'] },
+
+  // ---- 历史/类比节点 ----
+  { id: 'damiens', name: '酷刑(达米安)', fr: '1757', cat: 'history', x: 100, y: 90, r: 22,
+    def: '《规训与惩罚》的开篇案例。1757 年弑君犯达米安被四马分肢——君主权力的极端展演。福柯用它做<strong>距离感</strong>:让你看见今天的"文明刑罚"也只是另一种形态的权力。',
+    src: '《规训与惩罚》开篇',
+    cases: [],
+    related: ['sovereign', 'prison'],
+    eps: ['#00','#01'] },
+
+  { id: 'governmentality', name: '治理术', fr: 'gouvernementalité', cat: 'history', x: 1060, y: 320, r: 22,
+    def: '把人口当作管理对象的治理理性。<em>它不直接命令你,它配置情境,让你"自己"做出它需要的选择</em>。',
+    src: '《安全、领土与人口》',
+    cases: ['hcode', 'marriage'],
+    related: ['biopower', 'hcode', 'marriage'],
+    eps: ['#02','#04','#08'] },
+
+  { id: 'prison', name: '监狱', fr: 'prison', cat: 'history', x: 180, y: 700, r: 22,
+    def: '现代规训装置的最终形态——但福柯的真意是:<strong>当所有地方(学校、工厂、医院、家庭)都已经是监狱时,监狱就不需要墙了</strong>。',
+    src: '《规训与惩罚》第四编',
+    cases: ['credit'],
+    related: ['discipline', 'damiens', 'credit'],
+    eps: ['#06'] },
+
+  // ---- 当代案例(默认隐藏) ----
+  { id: 'weibo', name: '微博挂人', cat: 'case', x: 120, y: 290, r: 14,
+    def: '将一个人的隐私、行踪、人际关系一次性公开,在数小时内完成"社会处决"。形式像君主权力的复辟,但通过<strong>平台+人群</strong>实现。',
+    src: '当代现象 · #01',
+    cases: [],
+    related: ['sovereign'],
+    eps: ['#01'] },
+
+  { id: 'hcode', name: '健康码', cat: 'case', x: 900, y: 120, r: 14,
+    def: '一个二维码同时是君主令(强制)、规训装置(连续监测)、生命权力的入口(以"健康"为旗帜)。<em>三种权力共振的极端案例</em>。',
+    src: '当代现象 · #02',
+    cases: [],
+    related: ['biopower', 'panopticon', 'governmentality'],
+    eps: ['#02'] },
+
+  { id: 'dingtalk', name: '钉钉打卡', cat: 'case', x: 700, y: 720, r: 14,
+    def: '时间表 + 考试 + 微观物理学的合体——把"下班"这个私有边界从员工身体里抹除。',
+    src: '当代现象 · #03',
+    cases: [],
+    related: ['exam', 'time', 'discipline'],
+    eps: ['#03'] },
+
+  { id: 'kidedu', name: '鸡娃', cat: 'case', x: 350, y: 690, r: 14,
+    def: '父母不是在"逼孩子",是在替系统计算资产。考试 + 规范化裁决 + 治理术的家庭版。',
+    src: '当代现象 · #04',
+    cases: [],
+    related: ['exam', 'normalization', 'governmentality'],
+    eps: ['#04'] },
+
+  { id: 'a4', name: 'A4 腰', cat: 'case', x: 950, y: 540, r: 14,
+    def: '规训技术在身体上的最纯粹形态——<em>不需要任何人下令,身体自己已经在服从一把虚构的尺子</em>。',
+    src: '当代现象 · #05',
+    cases: [],
+    related: ['docile', 'discipline'],
+    eps: ['#05'] },
+
+  { id: 'credit', name: '信用分', cat: 'case', x: 230, y: 600, r: 14,
+    def: '惩罚的毛细化——你不会被关进"那个监狱",但一个分数会跟着你的每一次乘车、贷款、租房。',
+    src: '当代现象 · #06',
+    cases: [],
+    related: ['normalization', 'prison'],
+    eps: ['#06'] },
+
+  { id: 'algo', name: '算法推荐', cat: 'case', x: 200, y: 380, r: 14,
+    def: 'Panopticon 的反转——不再是少数监视多数,而是<strong>多数主动暴露给少数</strong>。你以为是你在选,其实是它在让你选。',
+    src: '当代现象 · #07',
+    cases: [],
+    related: ['panopticon', 'knowpower'],
+    eps: ['#07'] },
+
+  { id: 'marriage', name: '催婚与三胎', cat: 'case', x: 1100, y: 100, r: 14,
+    def: '最私密的事(性、生育)是怎么变成最公共的政策的。生命权力 + 治理术,在卧室里。',
+    src: '当代现象 · #08',
+    cases: [],
+    related: ['biopower', 'governmentality'],
+    eps: ['#08'] },
+];
+
+const EDGES = [
+  // 三核心权力之间
+  { from: 'sovereign', to: 'discipline', type: 'contrast' },
+  { from: 'discipline', to: 'biopower', type: 'cooccur' },
+  { from: 'sovereign', to: 'damiens', type: 'derive' },
+  // 规训权力派生
+  { from: 'discipline', to: 'panopticon', type: 'derive' },
+  { from: 'discipline', to: 'docile', type: 'derive' },
+  { from: 'discipline', to: 'exam', type: 'derive' },
+  { from: 'discipline', to: 'normalization', type: 'derive' },
+  { from: 'discipline', to: 'time', type: 'derive' },
+  { from: 'discipline', to: 'micro', type: 'derive' },
+  { from: 'discipline', to: 'anatomy', type: 'derive' },
+  { from: 'discipline', to: 'knowpower', type: 'cooccur' },
+  { from: 'discipline', to: 'prison', type: 'derive' },
+  // 装置之间
+  { from: 'exam', to: 'normalization', type: 'cooccur' },
+  { from: 'panopticon', to: 'knowpower', type: 'cooccur' },
+  { from: 'anatomy', to: 'docile', type: 'derive' },
+  { from: 'micro', to: 'anatomy', type: 'cooccur' },
+  // 生命权力派生
+  { from: 'biopower', to: 'governmentality', type: 'derive' },
+  // 历史
+  { from: 'damiens', to: 'prison', type: 'contrast' },
+  // 当代案例 → 概念
+  { from: 'weibo', to: 'sovereign', type: 'cooccur' },
+  { from: 'hcode', to: 'panopticon', type: 'cooccur' },
+  { from: 'hcode', to: 'biopower', type: 'cooccur' },
+  { from: 'hcode', to: 'governmentality', type: 'cooccur' },
+  { from: 'dingtalk', to: 'time', type: 'cooccur' },
+  { from: 'dingtalk', to: 'exam', type: 'cooccur' },
+  { from: 'kidedu', to: 'exam', type: 'cooccur' },
+  { from: 'kidedu', to: 'normalization', type: 'cooccur' },
+  { from: 'kidedu', to: 'governmentality', type: 'cooccur' },
+  { from: 'a4', to: 'docile', type: 'cooccur' },
+  { from: 'credit', to: 'normalization', type: 'cooccur' },
+  { from: 'credit', to: 'prison', type: 'cooccur' },
+  { from: 'algo', to: 'panopticon', type: 'cooccur' },
+  { from: 'algo', to: 'knowpower', type: 'cooccur' },
+  { from: 'marriage', to: 'biopower', type: 'cooccur' },
+  { from: 'marriage', to: 'governmentality', type: 'cooccur' },
+];
+
+const CAT_LABEL = {
+  core: '核心 · 权力形态',
+  device: '装置 · 具体技术',
+  history: '历史 · 类比/源头',
+  case: '当代案例'
+};
+
+const EP_URL = {
+  '#00': '群岛/规训群岛/00-发刊词/',
+  '#01': '群岛/规训群岛/01-微博挂人/',
+  '#02': '群岛/规训群岛/02-健康码/',
+  '#03': '群岛/规训群岛/03-钉钉打卡/',
+  '#04': '群岛/规训群岛/04-鸡娃父母/',
+  '#05': '群岛/规训群岛/05-A4腰/',
+  '#06': '群岛/规训群岛/06-信用分/',
+  '#07': '群岛/规训群岛/07-算法不是工具/',
+  '#08': '群岛/规训群岛/08-催婚与三胎/',
+  '#09': '群岛/规训群岛/09-那然后呢/',
+};
+
+/* ==================== 渲染 ==================== */
+
+const svg = document.getElementById('graph');
+const panel = document.getElementById('panel');
+const stage = document.getElementById('stage');
+const NS = 'http://www.w3.org/2000/svg';
+
+let activeCategories = new Set(['core', 'device', 'history']); // 默认隐藏 case
+let selectedId = null;
+let searchQuery = '';
+
+function nodeById(id) { return NODES.find(n => n.id === id); }
+
+function render() {
+  svg.innerHTML = '';
+
+  // edges
+  EDGES.forEach(edge => {
+    const a = nodeById(edge.from);
+    const b = nodeById(edge.to);
+    if (!a || !b) return;
+    if (!activeCategories.has(a.cat) || !activeCategories.has(b.cat)) return;
+
+    const line = document.createElementNS(NS, 'line');
+    line.setAttribute('x1', a.x);
+    line.setAttribute('y1', a.y);
+    line.setAttribute('x2', b.x);
+    line.setAttribute('y2', b.y);
+    line.setAttribute('class', `edge edge-${edge.type}`);
+    line.dataset.from = a.id;
+    line.dataset.to = b.id;
+    svg.appendChild(line);
+  });
+
+  // nodes
+  NODES.forEach(n => {
+    if (!activeCategories.has(n.cat)) return;
+    const g = document.createElementNS(NS, 'g');
+    g.setAttribute('class', `node node-${n.cat}`);
+    g.setAttribute('transform', `translate(${n.x},${n.y})`);
+    g.dataset.id = n.id;
+
+    const c = document.createElementNS(NS, 'circle');
+    c.setAttribute('r', n.r);
+    g.appendChild(c);
+
+    const t = document.createElementNS(NS, 'text');
+    t.textContent = n.name;
+    g.appendChild(t);
+
+    g.addEventListener('click', (e) => { e.stopPropagation(); selectNode(n.id); });
+    g.addEventListener('mouseenter', () => highlightNeighbors(n.id));
+    g.addEventListener('mouseleave', () => clearHighlight());
+    svg.appendChild(g);
+  });
+
+  applySearch();
+  applySelection();
+}
+
+function highlightNeighbors(id) {
+  if (selectedId) return; // when locked-in, don't preview hover
+  const neighbors = new Set([id]);
+  EDGES.forEach(e => {
+    if (e.from === id) neighbors.add(e.to);
+    if (e.to === id) neighbors.add(e.from);
+  });
+  svg.querySelectorAll('.node').forEach(g => {
+    g.classList.toggle('dimmed', !neighbors.has(g.dataset.id));
+  });
+  svg.querySelectorAll('.edge').forEach(line => {
+    const involved = line.dataset.from === id || line.dataset.to === id;
+    line.classList.toggle('dimmed', !involved);
+    line.classList.toggle('highlighted', involved);
+  });
+}
+
+function clearHighlight() {
+  if (selectedId) return;
+  svg.querySelectorAll('.node').forEach(g => g.classList.remove('dimmed'));
+  svg.querySelectorAll('.edge').forEach(line => { line.classList.remove('dimmed','highlighted'); });
+}
+
+function selectNode(id) {
+  selectedId = id;
+  applySelection();
+  const node = nodeById(id);
+  renderPanel(node);
+}
+
+function clearSelection() {
+  selectedId = null;
+  applySelection();
+  panel.innerHTML = `<div class="panel-empty">
+    <div class="panel-empty-mark">·</div>
+    <div class="panel-empty-msg">点击图中的任一节点,<br>看它的释义、出处、案例与对应期号。</div>
+    <div class="panel-empty-hint">提示 · 点击空白处取消选择</div>
+  </div>`;
+  clearHighlight();
+}
+
+function applySelection() {
+  svg.querySelectorAll('.node').forEach(g => g.classList.remove('selected', 'dimmed'));
+  svg.querySelectorAll('.edge').forEach(line => line.classList.remove('dimmed','highlighted'));
+  if (selectedId) {
+    const sel = svg.querySelector(`.node[data-id="${selectedId}"]`);
+    if (sel) sel.classList.add('selected');
+    const neighbors = new Set([selectedId]);
+    EDGES.forEach(e => {
+      if (e.from === selectedId) neighbors.add(e.to);
+      if (e.to === selectedId) neighbors.add(e.from);
+    });
+    svg.querySelectorAll('.node').forEach(g => {
+      if (!neighbors.has(g.dataset.id)) g.classList.add('dimmed');
+    });
+    svg.querySelectorAll('.edge').forEach(line => {
+      const involved = line.dataset.from === selectedId || line.dataset.to === selectedId;
+      if (involved) line.classList.add('highlighted');
+      else line.classList.add('dimmed');
+    });
+  }
+}
+
+function renderPanel(n) {
+  const relatedHtml = n.related && n.related.length
+    ? `<div class="pill-set">${n.related.map(rid => {
+        const r = nodeById(rid);
+        return r ? `<button class="pill" data-id="${r.id}">${r.name}</button>` : '';
+      }).join('')}</div>`
+    : '<div class="panel-block-value" style="color: var(--ink-faint); font-style: italic;">尚未连接到其他节点</div>';
+
+  const epsHtml = n.eps && n.eps.length
+    ? `<div class="pill-set">${n.eps.map(ep => `<a class="pill ep" href="${EP_URL[ep] || '#'}">${ep}</a>`).join('')}</div>`
+    : '<div class="panel-block-value" style="color: var(--ink-faint); font-style: italic;">本专栏暂未涉及</div>';
+
+  panel.innerHTML = `
+    <div class="panel-cat" data-cat="${n.cat}"><span class="panel-cat-dot"></span>${CAT_LABEL[n.cat]}</div>
+    <div class="panel-name">${n.name}</div>
+    ${n.fr ? `<div class="panel-fr">${n.fr}</div>` : ''}
+    <div class="panel-def">${n.def}</div>
+    <div class="panel-block">
+      <div class="panel-block-label">原书出处</div>
+      <div class="panel-block-value">${n.src}</div>
+    </div>
+    <div class="panel-block">
+      <div class="panel-block-label">相关概念</div>
+      ${relatedHtml}
+    </div>
+    <div class="panel-block">
+      <div class="panel-block-label">出现期号</div>
+      ${epsHtml}
+    </div>
+  `;
+  // 相关概念点击跳转
+  panel.querySelectorAll('.pill[data-id]').forEach(btn => {
+    btn.addEventListener('click', () => selectNode(btn.dataset.id));
+  });
+}
+
+function applySearch() {
+  if (!searchQuery) {
+    svg.querySelectorAll('.node').forEach(g => g.style.opacity = '');
+    return;
+  }
+  const q = searchQuery.toLowerCase();
+  svg.querySelectorAll('.node').forEach(g => {
+    const node = nodeById(g.dataset.id);
+    const match = node.name.toLowerCase().includes(q)
+      || (node.fr || '').toLowerCase().includes(q)
+      || (node.def || '').toLowerCase().includes(q);
+    g.style.opacity = match ? '' : '0.18';
+  });
+}
+
+/* ==================== List view ==================== */
+function renderList() {
+  const tbody = document.querySelector('#listTable tbody');
+  tbody.innerHTML = NODES
+    .filter(n => activeCategories.has(n.cat))
+    .filter(n => {
+      if (!searchQuery) return true;
+      const q = searchQuery.toLowerCase();
+      return n.name.toLowerCase().includes(q)
+        || (n.fr || '').toLowerCase().includes(q)
+        || (n.def || '').toLowerCase().includes(q);
+    })
+    .map(n => `
+      <tr class="row-${n.cat}" data-id="${n.id}">
+        <td>${CAT_LABEL[n.cat].split(' · ')[0]}</td>
+        <td class="col-name">${n.name}${n.fr ? `<br><span style="font-family:var(--serif);font-style:italic;font-size:12px;color:var(--ink-faint)">${n.fr}</span>` : ''}</td>
+        <td class="col-def">${n.def.replace(/<[^>]+>/g,'')}</td>
+        <td class="col-src">${n.src}</td>
+        <td class="col-eps">${(n.eps || []).join(' · ') || '—'}</td>
+      </tr>
+    `).join('');
+  tbody.querySelectorAll('tr').forEach(tr => {
+    tr.addEventListener('click', () => {
+      // 切回图谱视图并选中
+      document.querySelector('.view-toggle button[data-view="graph"]').click();
+      selectNode(tr.dataset.id);
+    });
+  });
+}
+
+/* ==================== Events ==================== */
+
+// 类别 chips
+document.querySelectorAll('#chips .chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const cat = chip.dataset.cat;
+    if (activeCategories.has(cat)) activeCategories.delete(cat);
+    else activeCategories.add(cat);
+    chip.classList.toggle('active');
+    if (selectedId && !activeCategories.has(nodeById(selectedId).cat)) clearSelection();
+    render();
+    renderList();
+  });
+});
+
+// 搜索
+document.getElementById('search').addEventListener('input', (e) => {
+  searchQuery = e.target.value;
+  applySearch();
+  renderList();
+});
+
+// 视图切换
+document.querySelectorAll('.view-toggle button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if (btn.dataset.view === 'list') {
+      stage.classList.add('list-mode');
+      renderList();
+    } else {
+      stage.classList.remove('list-mode');
+    }
+  });
+});
+
+// 点击 svg 空白处取消选择
+svg.addEventListener('click', () => clearSelection());
+
+// 初次渲染
+render();
+renderList();
+
+// 入场动画
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('section, header.hero').forEach(s => {
+  s.classList.add('fade-in');
+  observer.observe(s);
+});
+</script>
+
+</body>
+</html>

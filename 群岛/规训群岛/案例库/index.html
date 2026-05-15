@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>案例库｜规训群岛</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #f5f1ea;
+    --paper: #ede7dc;
+    --paper-deep: #e4ddd0;
+    --ink: #1a1614;
+    --ink-soft: #4a4239;
+    --ink-faint: #8b8074;
+    --accent: #a8331e;
+    --accent-soft: #c97560;
+    --rule: #d3c9b8;
+    --serif: 'Noto Serif SC', Georgia, serif;
+    --sans: 'Noto Sans SC', -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ======= Masthead ======= */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .masthead .brand { color: var(--ink); font-weight: 500; letter-spacing: 0.3em; }
+  .masthead .brand em { font-style: normal; color: var(--accent); }
+  .masthead .right { display: flex; gap: 24px; }
+  .masthead a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .masthead a:hover { color: var(--accent); }
+
+  /* ======= Breadcrumb ======= */
+  .breadcrumb {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 32px 0;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+  }
+  .breadcrumb a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { margin: 0 10px; }
+  .breadcrumb .here { color: var(--ink); }
+
+  /* ======= Hero ======= */
+  .hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 72px 32px 48px;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 64px;
+    align-items: start;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    max-width: 560px;
+    margin-bottom: 28px;
+  }
+  .hero-note {
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-faint);
+    line-height: 1.65;
+    border-left: 2px solid var(--rule);
+    padding-left: 16px;
+  }
+
+  /* ======= 三轴说明 ======= */
+  .axis-legend {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 24px;
+  }
+  .axis-legend-title {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  .axis-item { margin-bottom: 14px; }
+  .axis-item:last-child { margin-bottom: 0; }
+  .axis-name {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  .axis-def { font-size: 13px; line-height: 1.6; color: var(--ink-soft); }
+
+  /* ======= 工具栏 ======= */
+  .toolbar {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--rule);
+  }
+  .toolbar-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+  .filter-btn {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    padding: 6px 14px;
+    border: 1px solid var(--rule);
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 1px;
+  }
+  .filter-btn:hover { border-color: var(--accent-soft); color: var(--accent); }
+  .filter-btn.active { border-color: var(--accent); background: var(--accent); color: var(--bg); }
+  .toolbar-spacer { flex: 1; }
+  .compare-toggle {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    padding: 6px 16px;
+    border: 1px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .compare-toggle:hover, .compare-toggle.active {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .compare-count {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.1em;
+  }
+
+  /* ======= 案例卡网格 ======= */
+  .case-grid-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 32px 80px;
+  }
+  .case-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .case-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 22px 20px 18px;
+    cursor: pointer;
+    transition: border-color 0.25s, background 0.25s, transform 0.2s;
+    position: relative;
+    user-select: none;
+  }
+  .case-card:hover { border-color: var(--accent-soft); transform: translateY(-2px); }
+  .case-card.selected { border-color: var(--accent); background: var(--bg); }
+  .case-card.compare-selected { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+  .case-card.dimmed { opacity: 0.45; pointer-events: none; }
+  .case-card.upcoming { cursor: default; }
+  .case-card.upcoming:hover { transform: none; border-color: var(--rule); }
+
+  .card-issue {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card-badge {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    padding: 2px 8px;
+    border: 1px solid var(--rule);
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  .card-badge.published { border-color: var(--accent-soft); color: var(--accent); }
+
+  .card-name {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .card-desc {
+    font-family: var(--serif);
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink-faint);
+    margin-bottom: 18px;
+    min-height: 44px;
+  }
+
+  /* 小雷达图 */
+  .card-radar {
+    display: block;
+    margin: 0 auto 14px;
+  }
+
+  /* 数值条 */
+  .card-values {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .cv-row {
+    display: grid;
+    grid-template-columns: 28px 1fr 20px;
+    gap: 6px;
+    align-items: center;
+  }
+  .cv-label {
+    font-family: var(--sans);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--ink-faint);
+    text-align: right;
+  }
+  .cv-bar-wrap {
+    height: 3px;
+    background: var(--paper-deep);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+  .cv-bar {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 1px;
+    transition: width 0.5s ease;
+  }
+  .cv-num {
+    font-family: var(--sans);
+    font-size: 9px;
+    color: var(--accent);
+    font-weight: 600;
+    text-align: right;
+  }
+
+  /* 选中复选框（比较模式） */
+  .compare-check {
+    position: absolute;
+    top: 12px; right: 12px;
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--rule);
+    background: var(--bg);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .compare-mode .compare-check { display: flex; }
+  .compare-mode .case-card.upcoming .compare-check { display: none; }
+  .compare-check.checked { background: var(--accent); border-color: var(--accent); }
+  .compare-check.checked::after {
+    content: '✓';
+    font-size: 11px;
+    color: white;
+    font-family: var(--sans);
+  }
+
+  /* ======= 详情面板 ======= */
+  .detail-panel {
+    max-width: 1100px;
+    margin: 0 auto 0;
+    padding: 0 32px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease, padding 0.3s ease;
+  }
+  .detail-panel.open {
+    max-height: 600px;
+    padding: 0 32px 32px;
+  }
+  .detail-inner {
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  .detail-radar-wrap { text-align: center; }
+  .detail-radar-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .detail-values { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .detail-cv-row {
+    display: grid;
+    grid-template-columns: 36px 1fr 24px;
+    gap: 8px;
+    align-items: center;
+  }
+  .detail-cv-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    text-align: right;
+  }
+  .detail-cv-bar-wrap {
+    height: 4px;
+    background: var(--paper);
+    border-radius: 1px;
+    overflow: hidden;
+  }
+  .detail-cv-bar {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 1px;
+  }
+  .detail-cv-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 600;
+    text-align: right;
+  }
+  .detail-content {}
+  .detail-issue {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .detail-name {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .detail-desc {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .detail-analysis { margin-bottom: 20px; }
+  .detail-analysis-title {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .detail-axis-rows { display: flex; flex-direction: column; gap: 10px; }
+  .detail-axis-row {}
+  .detail-axis-name {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  .detail-axis-text { font-size: 14px; line-height: 1.65; color: var(--ink-soft); }
+  .detail-link {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid var(--accent-soft);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+    text-transform: uppercase;
+  }
+  .detail-link:hover { border-color: var(--accent); }
+  .detail-link-locked {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  /* ======= 比较面板 ======= */
+  .compare-panel {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease;
+  }
+  .compare-panel.open { max-height: 700px; }
+  .compare-inner {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 32px;
+    margin-bottom: 24px;
+  }
+  .compare-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 28px;
+  }
+  .compare-title {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .compare-clear {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    cursor: pointer;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+  .compare-chart-area {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+  }
+  .compare-svg-wrap { flex-shrink: 0; }
+  .compare-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 8px;
+  }
+  .compare-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+  }
+  .compare-legend-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .compare-empty {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink-faint);
+    font-size: 14px;
+    text-align: center;
+    padding: 24px 0;
+  }
+
+  /* ======= fade-in ======= */
+  .fade-in { opacity: 0; transform: translateY(12px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ======= 移动端 ======= */
+  @media (max-width: 900px) {
+    .case-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero { grid-template-columns: 1fr; gap: 32px; }
+    .detail-inner { grid-template-columns: 1fr; gap: 24px; }
+    .compare-chart-area { flex-direction: column; }
+  }
+  @media (max-width: 600px) {
+    .masthead { padding: 14px 20px; flex-direction: column; gap: 8px; }
+    .breadcrumb, .toolbar, .case-grid-wrap, .detail-panel, .compare-panel { padding-left: 20px; padding-right: 20px; }
+    .hero { padding: 48px 20px 32px; }
+    .case-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Masthead -->
+<header>
+  <div class="masthead">
+    <div class="brand">大大<em>黄</em>油</div>
+    <nav class="right">
+      <a href="../../../index.html">群岛首页</a>
+      <a href="../index.html">规训群岛</a>
+      <a href="#">关于</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb">
+  <a href="../../../index.html">群岛</a>
+  <span class="sep">/</span>
+  <a href="../index.html">规训群岛</a>
+  <span class="sep">/</span>
+  <span class="here">案例库</span>
+</div>
+
+<!-- Hero -->
+<div class="hero fade-in">
+  <div>
+    <div class="hero-eyebrow">规训群岛 · 案例库</div>
+    <h1>八个现象，<em>三种权力</em></h1>
+    <p class="hero-desc">每一个当代现象背后，都有不同的权力配方在运作。这个工具把每期分析过的现象拆开，用福柯的三种权力（君主权力 · 规训权力 · 生命权力）做雷达图标注——让那些平时混在一起的力量变得可见、可比较。</p>
+    <p class="hero-note">雷达图数值是分析工具，不是绝对判断。同一现象在不同场景、不同人身上的权力构成会有差异。把它当作"开始提问的起点"，而非最终答案。</p>
+  </div>
+  <div>
+    <div class="axis-legend">
+      <div class="axis-legend-title">三轴定义</div>
+      <div class="axis-item">
+        <div class="axis-name">君主权力</div>
+        <div class="axis-def">通过展示、惩罚、示众来运作的权力——让人看见权力的存在，并因此服从。</div>
+      </div>
+      <div class="axis-item">
+        <div class="axis-name">规训权力</div>
+        <div class="axis-def">通过持续监视、规范化裁决、考试来生产"驯顺的肉体"——内化监视，让你自己管自己。</div>
+      </div>
+      <div class="axis-item">
+        <div class="axis-name">生命权力</div>
+        <div class="axis-def">以"人口"为对象，通过统计学、健康话语、生育管理来治理整体生命——"让人活，放人死"。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 工具栏 -->
+<div class="toolbar fade-in">
+  <span class="toolbar-label">筛选</span>
+  <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">全部</button>
+  <button class="filter-btn" data-filter="king" onclick="setFilter('king', this)">君主权力为主</button>
+  <button class="filter-btn" data-filter="disc" onclick="setFilter('disc', this)">规训权力为主</button>
+  <button class="filter-btn" data-filter="bio" onclick="setFilter('bio', this)">生命权力为主</button>
+  <div class="toolbar-spacer"></div>
+  <span class="compare-count" id="compareCount" style="display:none"></span>
+  <button class="compare-toggle" id="compareToggle" onclick="toggleCompareMode()">叠加比较</button>
+</div>
+
+<!-- 比较面板 -->
+<div class="compare-panel" id="comparePanel">
+  <div class="compare-inner">
+    <div class="compare-header">
+      <div class="compare-title">叠加比较</div>
+      <button class="compare-clear" onclick="clearCompare()">清空</button>
+    </div>
+    <div class="compare-chart-area">
+      <div class="compare-svg-wrap">
+        <svg id="compareSvg" viewBox="0 0 240 240" width="240" height="240" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="compare-legend" id="compareLegend">
+        <div class="compare-empty">在下方选择最多四个案例进行比较</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 详情面板 -->
+<div class="detail-panel" id="detailPanel">
+  <div class="detail-inner" id="detailInner"></div>
+</div>
+
+<!-- 案例卡网格 -->
+<div class="case-grid-wrap">
+  <div class="case-grid" id="caseGrid"></div>
+</div>
+
+<script>
+// ======= 数据 =======
+const CASES = [
+  {
+    id: '01',
+    name: '微博挂人',
+    subtitle: '示众',
+    desc: '公开羞辱作为君主权力的数字仪式——断头台移植到时间线上',
+    king: 9, disc: 4, bio: 1,
+    published: true,
+    url: '../01-微博挂人/index.html',
+    analysis: {
+      king: '挂人是最纯粹的展示性惩罚——它不追求改造被挂人，它追求让围观者看见"惩罚的发生"。这是断头台在 140 字里的数字复刻。',
+      disc: '规训元素较弱——挂人通常是事件性的，而非日常持续的监视机制，也不依赖对被挂人行为的内化改造。',
+      bio: '生命权力极弱——挂人针对的是个体，而非以人口为单位的治理。',
+    }
+  },
+  {
+    id: '02',
+    name: '健康码',
+    subtitle: '圆形监狱',
+    desc: '全景敞视主义的完美实装——每一次扫码都是一次向权力的主动报到',
+    king: 7, disc: 8, bio: 9,
+    published: true,
+    url: '../02-健康码/index.html',
+    analysis: {
+      king: '健康码的颜色是一种现代示众——红码持有者被公开排斥在商场、交通工具之外，相当于低强度的社会流放。',
+      disc: '持续性、实时可见性、内化的主动出示行为——扫码本身就是自我汇报。个体主动承担了让自己可被读取的工作。',
+      bio: '健康码最典型的生命权力特征：以"人口健康"为名，用统计学和风险模型将整体人口划分为可治理的等级单元。',
+    }
+  },
+  {
+    id: '03',
+    name: '钉钉打卡',
+    subtitle: '控制社会',
+    desc: '让监狱消失的装置——规训不再需要物理空间，它住进了你的手机',
+    king: 2, disc: 9, bio: 3,
+    published: true,
+    url: '../03-钉钉打卡/index.html',
+    analysis: {
+      king: '君主性很弱——钉钉不靠示众或惩罚运作，它靠持续的小摩擦和数据积累。',
+      disc: '这是规训权力的教科书案例：空间分配（工位 ID）、活动控制（打卡节点）、规范化裁决（考勤报表）、持续监视（全员可见）四项技术同时在线。',
+      bio: '有轻微的生命权力成分——考勤数据构成员工"健康状态"的代理指标，被用于绩效管理和人员决策。',
+    }
+  },
+  {
+    id: '04',
+    name: '鸡娃父母',
+    subtitle: '新自由主义',
+    desc: '理性投资人的温情面目——把孩子当作可优化的人力资本',
+    king: 1, disc: 8, bio: 6,
+    published: true,
+    url: '../04-鸡娃父母/index.html',
+    analysis: {
+      king: '君主性极弱——鸡娃父母不靠惩罚示众，他们靠对"失败后果"的想象来驱动行动。',
+      disc: '高度规训性：孩子的时间被细分（奥数/英语/钢琴），每项都有考核，每天都在被评估——修道院的时间表搬进了家庭。',
+      bio: '生命权力体现在"人力资本"话语中——父母将孩子的成长视为可投资、可量化、可最优化的生命周期管理项目。',
+    }
+  },
+  {
+    id: '05',
+    name: 'A4腰',
+    subtitle: '驯顺的肉体',
+    desc: '21世纪的束腰——没有女仆，每个人主动把束腰系在自己身上',
+    king: 0, disc: 10, bio: 5,
+    published: true,
+    url: '../05-A4腰/index.html',
+    analysis: {
+      king: '君主性为零——没有任何外部强制力量，不存在惩罚失败者的仪式。这正是它最深的地方。',
+      disc: '这是本专题所有案例中规训权力最纯粹的形态：持续性、自我施加、内化、可测量、道德化——福柯《驯顺的肉体》的每一项要素都完整实装。',
+      bio: '生命权力体现在"健康"话语中——BMI、体脂率、亚健康把审美标准包装成医学指标，将人口纳入可被治理的健康等级。',
+    }
+  },
+  {
+    id: '06',
+    name: '信用分',
+    subtitle: '数字示众',
+    desc: '失信被执行人公示——这是"示众"的数字版本，还是已经是别的什么？',
+    king: 5, disc: 8, bio: 4,
+    published: false,
+    url: null,
+    analysis: {
+      king: '公示名单本身是一种展示性惩罚——让失信者在公共空间里变得可见，但它同时也是一种持续性的，而非一次性的仪式。',
+      disc: '信用分的核心是规训机制：持续监视行为记录、规范化裁决（达标/失信）、内化（守信成为自我管理目标）。',
+      bio: '以人口为单位的信用治理——"社会诚信体系"是对整体人口行为的统计化管理，属于生命权力的行政形态。',
+    }
+  },
+  {
+    id: '07',
+    name: '算法推荐',
+    subtitle: '欲望工厂',
+    desc: '你以为你在选择——其实算法在用你昨天的行为决定你今天能看见什么',
+    king: 2, disc: 7, bio: 6,
+    published: false,
+    url: null,
+    analysis: {
+      king: '君主性弱——算法不依赖示众或惩罚，它通过不可见的筛选来运作，是一种"无脸"的权力。',
+      disc: '规训性较高：算法追踪你的每一次点击（持续监视），向你展示符合你"画像"的内容（规范化），并让你的行为越来越可预测（驯顺化）。',
+      bio: '生命权力体现在以人口为单位的行为数据挖掘——你不是一个个体，你是"25-34岁女性·一线城市·焦虑指数高"这个人口细分的成员。',
+    }
+  },
+  {
+    id: '08',
+    name: '催婚三胎',
+    subtitle: '人口政治',
+    desc: '从"你该结婚了"到国家生育补贴——个人生命被编入人口再生产的国家议程',
+    king: 4, disc: 5, bio: 10,
+    published: false,
+    url: null,
+    analysis: {
+      king: '君主性中等——催婚的羞辱仪式（相亲局、逢年过节的追问）有示众性质，但国家层面主要靠激励而非惩罚。',
+      disc: '规训性中等——生育率管理需要对个体进行持续动员，但它更多依赖话语和激励，而非精细的时间-动作控制。',
+      bio: '这是本专题生命权力最纯粹的案例：生育率、婚育年龄、人口结构——这是以人口为对象的治理术的完整呈现。',
+    }
+  },
+];
+
+// 比较模式颜色
+const COMPARE_COLORS = ['#a8331e', '#4a7c4e', '#2a5ba8', '#8b4513'];
+
+// ======= 状态 =======
+let selectedCase = null;
+let compareMode = false;
+let compareSelected = [];
+let currentFilter = 'all';
+
+// ======= 雷达 SVG 生成 =======
+function radarPoints(cx, cy, r, king, disc, bio) {
+  const kr = king / 10;
+  const dr = disc / 10;
+  const br = bio / 10;
+  const px = cx;            const py = cy - r * kr;
+  const qx = cx + r * dr * 0.866; const qy = cy + r * dr * 0.5;
+  const sx = cx - r * br * 0.866; const sy = cy + r * br * 0.5;
+  return `${px},${py} ${qx},${qy} ${sx},${sy}`;
+}
+
+function buildMiniRadar(king, disc, bio, size) {
+  const cx = size / 2, cy = size / 2;
+  const r = size * 0.38;
+  const rings = [0.2, 0.4, 0.6, 0.8, 1.0];
+  let svg = `<svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg" class="card-radar">`;
+  // 背景环
+  rings.forEach(s => {
+    const p1 = `${cx},${cy - r*s}`;
+    const p2 = `${cx + r*s*0.866},${cy + r*s*0.5}`;
+    const p3 = `${cx - r*s*0.866},${cy + r*s*0.5}`;
+    svg += `<polygon points="${p1} ${p2} ${p3}" fill="none" stroke="#d3c9b8" stroke-width="0.5" opacity="${0.3 + s*0.2}"/>`;
+  });
+  // 轴线
+  svg += `<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy-r}" stroke="#d3c9b8" stroke-width="0.5"/>`;
+  svg += `<line x1="${cx}" y1="${cy}" x2="${cx+r*0.866}" y2="${cy+r*0.5}" stroke="#d3c9b8" stroke-width="0.5"/>`;
+  svg += `<line x1="${cx}" y1="${cy}" x2="${cx-r*0.866}" y2="${cy+r*0.5}" stroke="#d3c9b8" stroke-width="0.5"/>`;
+  // 数据三角
+  const pts = radarPoints(cx, cy, r, king, disc, bio);
+  svg += `<polygon points="${pts}" fill="#a8331e" fill-opacity="0.18" stroke="#a8331e" stroke-width="1.2"/>`;
+  // 轴标签
+  svg += `<text x="${cx}" y="${cy-r-5}" text-anchor="middle" font-family="'Noto Sans SC',sans-serif" font-size="${size*0.07}" fill="#8b8074">君</text>`;
+  svg += `<text x="${cx+r*0.866+4}" y="${cy+r*0.5+2}" text-anchor="start" font-family="'Noto Sans SC',sans-serif" font-size="${size*0.07}" fill="#8b8074">训</text>`;
+  svg += `<text x="${cx-r*0.866-4}" y="${cy+r*0.5+2}" text-anchor="end" font-family="'Noto Sans SC',sans-serif" font-size="${size*0.07}" fill="#8b8074">命</text>`;
+  svg += `</svg>`;
+  return svg;
+}
+
+function buildDetailRadar(king, disc, bio, size) {
+  const cx = size / 2, cy = size / 2;
+  const r = size * 0.38;
+  const rings = [0.2, 0.4, 0.6, 0.8, 1.0];
+  let svg = `<svg viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">`;
+  rings.forEach(s => {
+    const p1 = `${cx},${cy - r*s}`;
+    const p2 = `${cx + r*s*0.866},${cy + r*s*0.5}`;
+    const p3 = `${cx - r*s*0.866},${cy + r*s*0.5}`;
+    svg += `<polygon points="${p1} ${p2} ${p3}" fill="none" stroke="#d3c9b8" stroke-width="0.7"/>`;
+    if (s < 1) {
+      const val = s * 10;
+      svg += `<text x="${cx+2}" y="${cy - r*s - 2}" text-anchor="start" font-family="'Noto Sans SC',sans-serif" font-size="7" fill="#c4b9a8">${val}</text>`;
+    }
+  });
+  svg += `<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy-r}" stroke="#c4b9a8" stroke-width="0.7"/>`;
+  svg += `<line x1="${cx}" y1="${cy}" x2="${cx+r*0.866}" y2="${cy+r*0.5}" stroke="#c4b9a8" stroke-width="0.7"/>`;
+  svg += `<line x1="${cx}" y1="${cy}" x2="${cx-r*0.866}" y2="${cy+r*0.5}" stroke="#c4b9a8" stroke-width="0.7"/>`;
+  const pts = radarPoints(cx, cy, r, king, disc, bio);
+  svg += `<polygon points="${pts}" fill="#a8331e" fill-opacity="0.15" stroke="#a8331e" stroke-width="1.5"/>`;
+  // 顶点圆点
+  const kr=king/10, dr=disc/10, br=bio/10;
+  svg += `<circle cx="${cx}" cy="${cy-r*kr}" r="3" fill="#a8331e"/>`;
+  svg += `<circle cx="${cx+r*dr*0.866}" cy="${cy+r*dr*0.5}" r="3" fill="#a8331e"/>`;
+  svg += `<circle cx="${cx-r*br*0.866}" cy="${cy+r*br*0.5}" r="3" fill="#a8331e"/>`;
+  // 轴标签
+  svg += `<text x="${cx}" y="${cy-r-10}" text-anchor="middle" font-family="'Noto Sans SC',sans-serif" font-size="10" fill="#8b8074" letter-spacing="1">君主</text>`;
+  svg += `<text x="${cx+r*0.866+8}" y="${cy+r*0.5+4}" text-anchor="start" font-family="'Noto Sans SC',sans-serif" font-size="10" fill="#8b8074" letter-spacing="1">规训</text>`;
+  svg += `<text x="${cx-r*0.866-8}" y="${cy+r*0.5+4}" text-anchor="end" font-family="'Noto Sans SC',sans-serif" font-size="10" fill="#8b8074" letter-spacing="1">生命</text>`;
+  svg += `</svg>`;
+  return svg;
+}
+
+function buildCompareRadar(cases, size) {
+  const cx = size / 2, cy = size / 2;
+  const r = size * 0.38;
+  const rings = [0.2, 0.4, 0.6, 0.8, 1.0];
+  let svg = `<svg id="compareSvg" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">`;
+  // 背景
+  rings.forEach(s => {
+    const p1 = `${cx},${cy - r*s}`;
+    const p2 = `${cx + r*s*0.866},${cy + r*s*0.5}`;
+    const p3 = `${cx - r*s*0.866},${cy + r*s*0.5}`;
+    svg += `<polygon points="${p1} ${p2} ${p3}" fill="none" stroke="#d3c9b8" stroke-width="0.7"/>`;
+    if (s < 1) {
+      svg += `<text x="${cx+2}" y="${cy - r*s - 2}" text-anchor="start" font-family="'Noto Sans SC',sans-serif" font-size="7" fill="#c4b9a8">${s*10}</text>`;
+    }
+  });
+  svg += `<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy-r}" stroke="#c4b9a8" stroke-width="0.7"/>`;
+  svg += `<line x1="${cx}" y1="${cy}" x2="${cx+r*0.866}" y2="${cy+r*0.5}" stroke="#c4b9a8" stroke-width="0.7"/>`;
+  svg += `<line x1="${cx}" y1="${cy}" x2="${cx-r*0.866}" y2="${cy+r*0.5}" stroke="#c4b9a8" stroke-width="0.7"/>`;
+  // 每个案例的数据三角
+  cases.forEach((c, i) => {
+    const color = COMPARE_COLORS[i % COMPARE_COLORS.length];
+    const pts = radarPoints(cx, cy, r, c.king, c.disc, c.bio);
+    svg += `<polygon points="${pts}" fill="${color}" fill-opacity="0.12" stroke="${color}" stroke-width="1.5"/>`;
+  });
+  // 轴标签
+  svg += `<text x="${cx}" y="${cy-r-10}" text-anchor="middle" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#8b8074" letter-spacing="1">君主</text>`;
+  svg += `<text x="${cx+r*0.866+8}" y="${cy+r*0.5+4}" text-anchor="start" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#8b8074" letter-spacing="1">规训</text>`;
+  svg += `<text x="${cx-r*0.866-8}" y="${cy+r*0.5+4}" text-anchor="end" font-family="'Noto Sans SC',sans-serif" font-size="11" fill="#8b8074" letter-spacing="1">生命</text>`;
+  svg += `</svg>`;
+  return svg;
+}
+
+// ======= 渲染卡片 =======
+function renderCards() {
+  const grid = document.getElementById('caseGrid');
+  grid.innerHTML = '';
+  const filtered = CASES.filter(c => {
+    if (currentFilter === 'all') return true;
+    const maxVal = Math.max(c.king, c.disc, c.bio);
+    if (currentFilter === 'king') return c.king === maxVal;
+    if (currentFilter === 'disc') return c.disc === maxVal;
+    if (currentFilter === 'bio') return c.bio === maxVal;
+    return true;
+  });
+  filtered.forEach(c => {
+    const isSelected = selectedCase === c.id;
+    const isCompare = compareSelected.includes(c.id);
+    const card = document.createElement('div');
+    card.className = 'case-card fade-in' +
+      (isSelected ? ' selected' : '') +
+      (isCompare ? ' compare-selected' : '') +
+      (!c.published ? ' upcoming' : '');
+    card.dataset.id = c.id;
+    card.innerHTML = `
+      <div class="compare-check ${isCompare ? 'checked' : ''}" onclick="toggleCompare(event,'${c.id}')"></div>
+      <div class="card-issue">
+        <span>#${c.id}</span>
+        <span class="card-badge ${c.published ? 'published' : ''}">${c.published ? '已上线' : '即将上线'}</span>
+      </div>
+      <div class="card-name">${c.name}</div>
+      <div class="card-desc">${c.desc}</div>
+      ${buildMiniRadar(c.king, c.disc, c.bio, 96)}
+      <div class="card-values">
+        <div class="cv-row">
+          <div class="cv-label">君主</div>
+          <div class="cv-bar-wrap"><div class="cv-bar" style="width:${c.king*10}%"></div></div>
+          <div class="cv-num">${c.king}</div>
+        </div>
+        <div class="cv-row">
+          <div class="cv-label">规训</div>
+          <div class="cv-bar-wrap"><div class="cv-bar" style="width:${c.disc*10}%"></div></div>
+          <div class="cv-num">${c.disc}</div>
+        </div>
+        <div class="cv-row">
+          <div class="cv-label">生命</div>
+          <div class="cv-bar-wrap"><div class="cv-bar" style="width:${c.bio*10}%"></div></div>
+          <div class="cv-num">${c.bio}</div>
+        </div>
+      </div>
+    `;
+    if (!compareMode) {
+      card.addEventListener('click', () => selectCase(c.id));
+    }
+    grid.appendChild(card);
+  });
+  // 重新触发 fade-in
+  requestAnimationFrame(() => {
+    grid.querySelectorAll('.fade-in').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 60);
+    });
+  });
+}
+
+// ======= 选中案例（详情面板）=======
+function selectCase(id) {
+  if (compareMode) return;
+  const panel = document.getElementById('detailPanel');
+  if (selectedCase === id) {
+    selectedCase = null;
+    panel.classList.remove('open');
+    renderCards();
+    return;
+  }
+  selectedCase = id;
+  const c = CASES.find(x => x.id === id);
+  const inner = document.getElementById('detailInner');
+  const linkHtml = c.published
+    ? `<a class="detail-link" href="${c.url}">阅读本期全文 →</a>`
+    : `<span class="detail-link-locked">即将上线</span>`;
+  inner.innerHTML = `
+    <div class="detail-radar-wrap">
+      <div class="detail-radar-label">#${c.id} · ${c.name}</div>
+      ${buildDetailRadar(c.king, c.disc, c.bio, 200)}
+      <div class="detail-values">
+        <div class="detail-cv-row">
+          <div class="detail-cv-label">君主</div>
+          <div class="detail-cv-bar-wrap"><div class="detail-cv-bar" style="width:${c.king*10}%"></div></div>
+          <div class="detail-cv-num">${c.king}</div>
+        </div>
+        <div class="detail-cv-row">
+          <div class="detail-cv-label">规训</div>
+          <div class="detail-cv-bar-wrap"><div class="detail-cv-bar" style="width:${c.disc*10}%"></div></div>
+          <div class="detail-cv-num">${c.disc}</div>
+        </div>
+        <div class="detail-cv-row">
+          <div class="detail-cv-label">生命</div>
+          <div class="detail-cv-bar-wrap"><div class="detail-cv-bar" style="width:${c.bio*10}%"></div></div>
+          <div class="detail-cv-num">${c.bio}</div>
+        </div>
+      </div>
+    </div>
+    <div class="detail-content">
+      <div class="detail-issue">规训群岛 · #${c.id}</div>
+      <div class="detail-name">${c.name}</div>
+      <div class="detail-desc">${c.desc}</div>
+      <div class="detail-analysis">
+        <div class="detail-analysis-title">权力构成分析</div>
+        <div class="detail-axis-rows">
+          <div class="detail-axis-row">
+            <div class="detail-axis-name">君主权力 · ${c.king}</div>
+            <div class="detail-axis-text">${c.analysis.king}</div>
+          </div>
+          <div class="detail-axis-row">
+            <div class="detail-axis-name">规训权力 · ${c.disc}</div>
+            <div class="detail-axis-text">${c.analysis.disc}</div>
+          </div>
+          <div class="detail-axis-row">
+            <div class="detail-axis-name">生命权力 · ${c.bio}</div>
+            <div class="detail-axis-text">${c.analysis.bio}</div>
+          </div>
+        </div>
+      </div>
+      ${linkHtml}
+    </div>
+  `;
+  panel.classList.add('open');
+  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  renderCards();
+}
+
+// ======= 筛选 =======
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  selectedCase = null;
+  document.getElementById('detailPanel').classList.remove('open');
+  renderCards();
+}
+
+// ======= 比较模式 =======
+function toggleCompareMode() {
+  compareMode = !compareMode;
+  const btn = document.getElementById('compareToggle');
+  const panel = document.getElementById('comparePanel');
+  if (compareMode) {
+    btn.classList.add('active');
+    btn.textContent = '退出比较';
+    document.getElementById('caseGrid').classList.add('compare-mode');
+    panel.classList.add('open');
+    selectedCase = null;
+    document.getElementById('detailPanel').classList.remove('open');
+  } else {
+    btn.classList.remove('active');
+    btn.textContent = '叠加比较';
+    document.getElementById('caseGrid').classList.remove('compare-mode');
+    panel.classList.remove('open');
+    compareSelected = [];
+  }
+  renderCards();
+  updateComparePanel();
+}
+
+function toggleCompare(evt, id) {
+  evt.stopPropagation();
+  const c = CASES.find(x => x.id === id);
+  if (!c.published) return;
+  const idx = compareSelected.indexOf(id);
+  if (idx >= 0) {
+    compareSelected.splice(idx, 1);
+  } else {
+    if (compareSelected.length >= 4) return;
+    compareSelected.push(id);
+  }
+  renderCards();
+  updateComparePanel();
+  const count = document.getElementById('compareCount');
+  if (compareSelected.length > 0) {
+    count.style.display = 'inline';
+    count.textContent = `已选 ${compareSelected.length}/4`;
+  } else {
+    count.style.display = 'none';
+  }
+}
+
+function clearCompare() {
+  compareSelected = [];
+  renderCards();
+  updateComparePanel();
+  document.getElementById('compareCount').style.display = 'none';
+}
+
+function updateComparePanel() {
+  const legendEl = document.getElementById('compareLegend');
+  const svgWrap = document.querySelector('.compare-svg-wrap');
+  if (compareSelected.length === 0) {
+    legendEl.innerHTML = '<div class="compare-empty">在下方选择最多四个案例进行比较</div>';
+    svgWrap.innerHTML = buildCompareRadar([], 240);
+    return;
+  }
+  const selectedCases = compareSelected.map(id => CASES.find(c => c.id === id));
+  svgWrap.innerHTML = buildCompareRadar(selectedCases, 240);
+  legendEl.innerHTML = selectedCases.map((c, i) => {
+    const color = COMPARE_COLORS[i % COMPARE_COLORS.length];
+    return `<div class="compare-legend-item">
+      <div class="compare-legend-dot" style="background:${color}"></div>
+      <div><strong>#${c.id}</strong> ${c.name} <span style="color:#8b8074;font-size:11px;">君${c.king}·训${c.disc}·命${c.bio}</span></div>
+    </div>`;
+  }).join('');
+}
+
+// ======= fade-in 观察器 =======
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// ======= 初始化 =======
+renderCards();
+</script>
+</body>
+</html>

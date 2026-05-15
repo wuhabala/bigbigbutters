@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>规训群岛｜#03 钉钉打卡：下班这件事是怎么死的</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #f5f1ea;
+    --paper: #ede7dc;
+    --paper-deep: #e4ddd0;
+    --ink: #1a1614;
+    --ink-soft: #4a4239;
+    --ink-faint: #8b8074;
+    --accent: #a8331e;
+    --accent-soft: #c97560;
+    --rule: #d3c9b8;
+    --serif: 'Noto Serif SC', Georgia, serif;
+    --sans: 'Noto Sans SC', -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ======= masthead ======= */
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .masthead .brand { color: var(--ink); font-weight: 500; letter-spacing: 0.3em; }
+  .masthead .brand em { font-style: normal; color: var(--accent); }
+  .masthead .right { display: flex; gap: 24px; }
+  .masthead a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .masthead a:hover { color: var(--accent); }
+
+  /* ======= breadcrumb ======= */
+  .breadcrumb {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 20px 32px 0;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+  }
+  .breadcrumb a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { margin: 0 10px; }
+  .breadcrumb .here { color: var(--ink); }
+
+  /* ======= hero ======= */
+  .hero {
+    min-height: 85vh;
+    padding: 72px 32px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero::before {
+    content: "#03";
+    position: absolute;
+    top: 56px;
+    right: 32px;
+    font-family: var(--serif);
+    font-size: 14px;
+    letter-spacing: 0.4em;
+    color: var(--ink-faint);
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 32px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(34px, 5.5vw, 58px);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 600; }
+  .hero-sub {
+    font-family: var(--serif);
+    font-size: 21px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    font-style: italic;
+  }
+  .hero-lead {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--ink-soft);
+    max-width: 580px;
+    margin-bottom: 48px;
+  }
+  .hero-meta {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--rule);
+    padding-top: 24px;
+  }
+  .hero-meta span { display: flex; align-items: baseline; gap: 8px; }
+  .hero-meta strong { color: var(--ink); font-weight: 500; }
+
+  /* ======= 雷达图浮动 ======= */
+  .radar-float {
+    position: fixed;
+    top: 80px;
+    right: 32px;
+    width: 136px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 14px;
+    z-index: 100;
+    opacity: 0;
+    transform: translateX(12px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+  }
+  .radar-float.visible { opacity: 1; transform: translateX(0); }
+  .radar-label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; text-align: center; }
+  .radar-svg { display: block; width: 100%; }
+  .radar-legend { margin-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+  .radar-item { display: flex; justify-content: space-between; font-family: var(--sans); font-size: 9px; letter-spacing: 0.1em; color: var(--ink-faint); }
+  .radar-item span:last-child { color: var(--accent); font-weight: 600; }
+
+  /* ======= section base ======= */
+  section { max-width: 760px; margin: 0 auto; padding: 80px 32px; position: relative; }
+  .sect-num { font-family: var(--sans); font-size: 11px; letter-spacing: 0.4em; color: var(--accent); text-transform: uppercase; margin-bottom: 16px; font-weight: 500; }
+  .sect-title { font-family: var(--serif); font-weight: 500; font-size: clamp(26px, 4vw, 38px); line-height: 1.25; margin-bottom: 32px; letter-spacing: -0.01em; }
+  .sect-title em { font-style: italic; color: var(--accent); }
+  .sect-sub { font-family: var(--serif); font-weight: 500; font-size: 21px; line-height: 1.35; color: var(--ink); margin: 48px 0 18px; }
+  p { margin-bottom: 22px; color: var(--ink-soft); }
+  p strong { color: var(--ink); font-weight: 600; }
+  p em { font-style: italic; }
+
+  /* ======= quote ======= */
+  .quote {
+    background: var(--paper);
+    border-left: 3px solid var(--accent);
+    padding: 26px 30px;
+    margin: 32px 0;
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--ink);
+  }
+  .quote p { color: var(--ink); margin-bottom: 12px; }
+  .quote p:last-child { margin-bottom: 0; }
+  .quote-source { display: block; margin-top: 14px; font-family: var(--sans); font-size: 11px; letter-spacing: 0.15em; color: var(--ink-faint); text-transform: uppercase; }
+
+  .pull { font-family: var(--serif); font-style: italic; font-size: 21px; line-height: 1.55; color: var(--ink); border-left: 2px solid var(--accent); padding: 6px 0 6px 22px; margin: 32px 0; }
+  .pull em { color: var(--accent); }
+  .pull strong { font-style: normal; color: var(--ink); }
+
+  .divider { text-align: center; color: var(--rule); font-size: 18px; letter-spacing: 1em; padding: 20px 0; }
+  .divider::before { content: "·   ·   ·"; }
+
+  /* ======= 两座钟 对比 ======= */
+  .two-clocks {
+    margin: 36px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+  }
+  .clock-col { padding: 28px 26px; }
+  .clock-col:first-child { border-right: 1px solid var(--rule); background: var(--paper); }
+  .clock-era { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 12px; }
+  .clock-era.now { color: var(--accent); }
+  .clock-head { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 14px; line-height: 1.3; }
+  .clock-body { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .clock-body strong { color: var(--ink); }
+  .clock-body em { color: var(--accent-soft); font-style: italic; }
+
+  /* ======= 三种配方卡片 ======= */
+  .recipes { margin: 36px 0; }
+  .recipe { border: 1px solid var(--rule); background: var(--paper); padding: 24px 28px; margin-bottom: 12px; border-radius: 2px; cursor: pointer; transition: border-color 0.25s; }
+  .recipe:hover { border-color: var(--accent-soft); }
+  .recipe-label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; font-weight: 500; }
+  .recipe-title { font-family: var(--serif); font-size: 19px; font-weight: 500; color: var(--ink); line-height: 1.4; margin-bottom: 4px; }
+  .recipe-tag { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--ink-faint); }
+  .recipe-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, margin-top 0.4s ease; font-size: 15.5px; line-height: 1.8; color: var(--ink-soft); }
+  .recipe.open { border-color: var(--accent); background: var(--bg); }
+  .recipe.open .recipe-body { max-height: 320px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--rule); }
+  .recipe.open .recipe-tag { color: var(--accent); }
+  .recipe-body strong { color: var(--ink); }
+
+  /* ======= 四种规训技术 ======= */
+  .techniques { margin: 36px 0; }
+  .technique {
+    margin-bottom: 28px;
+    border-left: 3px solid var(--rule);
+    padding-left: 24px;
+    transition: border-color 0.2s;
+  }
+  .technique:hover { border-color: var(--accent-soft); }
+  .tech-num { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 6px; }
+  .tech-name { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--ink); margin-bottom: 4px; line-height: 1.3; }
+  .tech-name .fr { font-size: 13px; font-weight: 400; font-style: italic; color: var(--ink-faint); margin-left: 6px; }
+  .tech-original { font-family: var(--serif); font-size: 15px; line-height: 1.7; color: var(--ink-soft); margin-bottom: 12px; padding: 10px 14px; background: var(--paper); border-radius: 2px; }
+  .tech-original em { font-style: italic; color: var(--ink-faint); }
+  .tech-today { font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
+  .tech-today ul { list-style: none; padding: 0; margin: 8px 0 0; }
+  .tech-today ul li { padding: 5px 0 5px 16px; position: relative; border-bottom: 1px solid var(--rule); }
+  .tech-today ul li:last-child { border-bottom: none; }
+  .tech-today ul li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-size: 12px; line-height: 1.8; }
+  .tech-today-label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+
+  /* ======= 规训 vs 控制 ======= */
+  .versus { margin: 36px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--rule); }
+  .versus-col { padding: 28px 26px; border-right: 1px solid var(--rule); }
+  .versus-col:last-child { border-right: none; }
+  .versus-label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 10px; font-weight: 600; }
+  .versus-label.active { color: var(--accent); }
+  .versus-head { font-family: var(--serif); font-size: 19px; font-weight: 600; color: var(--ink); margin-bottom: 14px; line-height: 1.3; }
+  .versus-body { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .versus-body strong { color: var(--ink); }
+  .versus-body em { font-style: italic; color: var(--accent-soft); }
+
+  /* ======= 三位思想者 ======= */
+  .thinkers { margin: 36px 0; display: flex; flex-direction: column; gap: 16px; }
+  .thinker { background: var(--paper); border-left: 3px solid var(--accent); padding: 26px 28px; }
+  .thinker-name { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 4px; line-height: 1.3; }
+  .thinker-book { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--ink-faint); margin-bottom: 14px; }
+  .thinker-body { font-size: 15.5px; line-height: 1.8; color: var(--ink-soft); }
+  .thinker-body strong { color: var(--ink); }
+  .thinker-body em { font-style: italic; }
+  .thinker-body p { margin-bottom: 10px; color: var(--ink-soft); }
+  .thinker-body p:last-child { margin-bottom: 0; }
+
+  /* ======= 合力一览 ======= */
+  .synthesis {
+    margin: 36px 0;
+    border: 1px solid var(--rule);
+  }
+  .syn-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .syn-row:last-child { border-bottom: none; }
+  .syn-who { padding: 16px 20px; background: var(--paper); border-right: 1px solid var(--rule); font-family: var(--serif); font-size: 15px; font-weight: 600; color: var(--ink); line-height: 1.45; }
+  .syn-what { padding: 16px 20px; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
+  .syn-what strong { color: var(--ink); }
+
+  /* ======= 边界问题清单 ======= */
+  .open-qs { margin: 32px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .oq { padding: 18px 0; border-bottom: 1px solid var(--rule); color: var(--ink-soft); font-size: 16.5px; line-height: 1.75; display: grid; grid-template-columns: 18px 1fr; gap: 16px; }
+  .oq:last-child { border-bottom: none; }
+  .oq-dot { color: var(--accent); font-size: 20px; line-height: 1.5; }
+  .oq strong { color: var(--ink); }
+
+  /* ======= 那然后呢 ======= */
+  .ranr { background: var(--paper); margin: 0; max-width: none; padding: 96px 32px; }
+  .ranr-inner { max-width: 760px; margin: 0 auto; }
+  .ranr-inner p { color: var(--ink-soft); }
+  .ranr-inner p strong { color: var(--ink); }
+
+  /* 反向引导分类 */
+  .countercat { margin: 36px 0 0; }
+  .cc-head { font-family: var(--sans); font-size: 11px; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; margin: 32px 0 12px; font-weight: 600; }
+  .cc-head:first-child { margin-top: 0; }
+  .counterlist { margin: 0; padding: 0; list-style: none; }
+  .counterlist li { padding: 12px 0 12px 20px; border-bottom: 1px solid var(--rule); color: var(--ink-soft); font-size: 16px; line-height: 1.7; position: relative; }
+  .counterlist li:first-child { border-top: 1px solid var(--rule); }
+  .counterlist li::before { content: "·"; position: absolute; left: 0; color: var(--accent); font-size: 20px; line-height: 1.5; }
+  .counterlist li strong { color: var(--ink); }
+
+  /* 三问 */
+  .questions { margin: 40px 0 36px; }
+  .question { padding: 24px 0; border-bottom: 1px solid var(--rule); }
+  .question:first-child { border-top: 1px solid var(--rule); }
+  .q-num { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; }
+  .q-text { font-family: var(--serif); font-size: 18px; line-height: 1.6; color: var(--ink); font-weight: 500; }
+
+  /* 留言框 */
+  .submit-area { margin-top: 36px; border: 1px dashed var(--rule); background: var(--bg); padding: 28px 32px; text-align: center; border-radius: 2px; }
+  .submit-area .s-hint { font-family: var(--sans); font-size: 12px; letter-spacing: 0.1em; color: var(--ink-faint); margin-bottom: 10px; }
+  .submit-area .s-empty { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--ink-faint); margin-bottom: 16px; }
+  .submit-area .s-note { font-family: var(--sans); font-size: 11px; letter-spacing: 0.05em; color: var(--ink-faint); }
+  .submit-btn { display: inline-block; margin-top: 10px; padding: 10px 28px; border: 1px solid var(--rule); background: var(--bg); font-family: var(--sans); font-size: 12px; letter-spacing: 0.2em; color: var(--ink-faint); cursor: not-allowed; opacity: 0.6; }
+
+  /* ======= 延伸阅读 ======= */
+  .reading { background: var(--paper-deep); margin: 0; max-width: none; padding: 80px 32px; }
+  .reading-inner { max-width: 760px; margin: 0 auto; }
+  .reading-list { margin: 28px 0 0; }
+  .reading-item { padding: 16px 0; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 20px 1fr; gap: 14px; }
+  .reading-item:first-child { border-top: 1px solid var(--rule); }
+  .reading-dot { color: var(--accent); font-size: 14px; padding-top: 4px; }
+  .reading-content { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .reading-content strong { color: var(--ink); font-weight: 600; }
+  .reading-content em { font-style: italic; color: var(--ink-faint); }
+
+  /* ======= 结语 ======= */
+  .ending { background: var(--ink); color: var(--bg); margin: 0; max-width: none; padding: 96px 32px; text-align: center; }
+  .ending-inner { max-width: 640px; margin: 0 auto; }
+  .ending .sect-num { color: var(--accent-soft); }
+  .ending-quote { font-family: var(--serif); font-size: clamp(17px, 2.8vw, 22px); line-height: 1.85; color: rgba(245,241,234,0.9); margin: 36px 0; }
+  .ending-quote em { font-style: italic; color: var(--accent-soft); }
+  .ending-quote strong { color: var(--bg); font-style: normal; }
+
+  /* ======= 上一期/下一期 ======= */
+  .nav-episodes { max-width: 760px; margin: 0 auto; padding: 64px 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; border-top: 1px solid var(--rule); }
+  .nav-ep { padding: 24px 26px; border: 1px solid var(--rule); text-decoration: none; transition: border-color 0.2s, background 0.2s; background: var(--paper); }
+  .nav-ep:hover { border-color: var(--accent-soft); background: var(--bg); }
+  .nav-ep-dir { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 8px; }
+  .nav-ep-num { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--accent-soft); margin-bottom: 6px; }
+  .nav-ep-title { font-family: var(--serif); font-size: 16px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+  .nav-ep.next { text-align: right; }
+
+  /* ======= footer ======= */
+  footer { text-align: center; padding: 48px 32px; color: var(--ink-faint); font-family: var(--sans); font-size: 12px; letter-spacing: 0.15em; border-top: 1px solid var(--rule); line-height: 2; }
+  footer a { color: var(--ink-faint); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  /* ======= 响应式 ======= */
+  @media (max-width: 768px) {
+    .radar-float { display: none; }
+    .two-clocks { grid-template-columns: 1fr; }
+    .clock-col:first-child { border-right: none; border-bottom: 1px solid var(--rule); }
+    .versus { grid-template-columns: 1fr; }
+    .versus-col { border-right: none; border-bottom: 1px solid var(--rule); }
+    .versus-col:last-child { border-bottom: none; }
+    .syn-row { grid-template-columns: 1fr; }
+    .syn-who { border-right: none; border-bottom: 1px solid var(--rule); }
+  }
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    .masthead { padding: 14px 22px; flex-direction: column; gap: 10px; align-items: flex-start; }
+    .masthead .right { gap: 14px; font-size: 11px; }
+    .breadcrumb { padding: 16px 22px 0; }
+    .hero { padding: 56px 22px 36px; min-height: auto; }
+    .hero h1 { font-size: 30px; }
+    .hero-sub { font-size: 18px; }
+    .hero::before { display: none; }
+    section { padding: 60px 22px; }
+    .ranr, .ending, .reading { padding: 64px 22px; }
+    .nav-episodes { grid-template-columns: 1fr; gap: 14px; padding: 48px 22px; }
+    .nav-ep.next { text-align: left; }
+  }
+
+  /* ======= 淡入动画 ======= */
+  .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- 雷达图浮动窗：君主2 规训9 生命3 -->
+<div class="radar-float" id="radarFloat">
+  <div class="radar-label">#03 三种权力</div>
+  <svg class="radar-svg" viewBox="0 0 160 145" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="80,68 90,86 70,86" fill="none" stroke="#d3c9b8" stroke-width="0.8"/>
+    <polygon points="80,56 100,92 60,92" fill="none" stroke="#d3c9b8" stroke-width="0.8"/>
+    <polygon points="80,44 110,98 50,98" fill="none" stroke="#d3c9b8" stroke-width="0.8"/>
+    <polygon points="80,32 120,104 40,104" fill="none" stroke="#d3c9b8" stroke-width="0.8"/>
+    <polygon points="80,20 130,110 30,110" fill="none" stroke="#d3c9b8" stroke-width="1"/>
+    <line x1="80" y1="80" x2="80" y2="20" stroke="#d3c9b8" stroke-width="0.8"/>
+    <line x1="80" y1="80" x2="130" y2="110" stroke="#d3c9b8" stroke-width="0.8"/>
+    <line x1="80" y1="80" x2="30" y2="110" stroke="#d3c9b8" stroke-width="0.8"/>
+    <!-- 君主(2): (80,68) 规训(9):(126.8,107) 生命(3):(64.4,89) -->
+    <polygon
+      points="80,68 126.8,107 64.4,89"
+      fill="rgba(168,51,30,0.18)"
+      stroke="#a8331e"
+      stroke-width="1.5"
+      stroke-linejoin="round"
+    />
+    <circle cx="80" cy="68" r="3" fill="#a8331e"/>
+    <circle cx="126.8" cy="107" r="3" fill="#a8331e"/>
+    <circle cx="64.4" cy="89" r="3" fill="#a8331e"/>
+    <text x="80" y="13" text-anchor="middle" font-family="'Noto Sans SC', sans-serif" font-size="10" fill="#1a1614" letter-spacing="1">君主</text>
+    <text x="138" y="122" text-anchor="start" font-family="'Noto Sans SC', sans-serif" font-size="10" fill="#4a4239" letter-spacing="1">规训</text>
+    <text x="22" y="122" text-anchor="end" font-family="'Noto Sans SC', sans-serif" font-size="10" fill="#4a4239" letter-spacing="1">生命</text>
+  </svg>
+  <div class="radar-legend">
+    <div class="radar-item"><span>君主</span><span>2 / 10</span></div>
+    <div class="radar-item"><span>规训</span><span>9 / 10</span></div>
+    <div class="radar-item"><span>生命</span><span>3 / 10</span></div>
+  </div>
+</div>
+
+<!-- masthead -->
+<div class="masthead">
+  <div class="brand"><a href="../../../" style="color:inherit;text-decoration:none">大大<em>黄油</em></a> · 规训群岛</div>
+  <div class="right">
+    <a href="../">文章库</a>
+    <a href="../../../map.html">概念图谱</a>
+    <a href="../案例库/">案例库</a>
+    <a href="../那然后呢墙/">那然后呢墙</a>
+    <a href="../../../about.html">关于</a>
+  </div>
+</div>
+
+<!-- breadcrumb -->
+<div class="breadcrumb">
+  <a href="../../../">大大黄油</a>
+  <span class="sep">/</span>
+  <a href="../">规训群岛</a>
+  <span class="sep">/</span>
+  <span class="here">#03 钉钉打卡</span>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">规训群岛 · 第 #03 期 · 锚定原书：第三编《规训技术》《考试》</div>
+  <h1>钉钉打卡:<br>下班这件事<br>是怎么<em>死</em>的</h1>
+  <p class="hero-sub">"时间不是被消耗的，而是被花费的。"</p>
+  <p class="hero-lead">18 世纪的工厂大钟，2015 年装进了每个员工的口袋。钉钉没有位置——它在地铁上、在马桶上、在床上、在朋友的婚礼现场。工厂大门消失的那一刻，"下班"这个词就成了一具历史名词。本期用福柯第三编拆解职场规训的四种技术，再借德勒兹、韩炳哲、Brown 和 Graeber 拼出当代完整的图景。</p>
+  <div class="hero-meta">
+    <span>出刊 · <strong>2026.06.23</strong></span>
+    <span>阅读 · <strong>约 26 分钟</strong></span>
+    <span>主轴 · <strong>规训 → 控制社会</strong></span>
+    <span>锚定 · <strong>第三编《规训技术》《考试》</strong></span>
+  </div>
+</header>
+
+<!-- I 两座钟 -->
+<section>
+  <div class="sect-num">I 两座钟</div>
+  <h2 class="sect-title">工厂大钟,<br>到口袋里的<em>钉钉</em></h2>
+
+  <p>18 世纪末，英国曼彻斯特的纺织厂主们做了一件改变工业文明的事——他们在车间门口挂上了一座钟。</p>
+  <p>在那之前，工人的工资按"件"算：你纺出多少线，拿多少钱。每个工人按自己的节奏工作。</p>
+  <p>钟挂上去之后，工资被换成了按"时"算——你必须 6 点到岗，9 点才能走。</p>
+
+  <h3 class="sect-sub">汤普森：时间纪律的诞生</h3>
+
+  <div class="quote">
+    <p>"成年工人必须学会，'时间不是被消耗的，而是被花费的'。"</p>
+    <p>"你不再'完成一项工作'。你'卖出八小时'。"</p>
+    <p>"<strong>时间本身</strong>——而不是'技艺'、'产品'或'人'——成为雇主购买的对象。"</p>
+    <span class="quote-source">E. P. Thompson · 《时间、工作纪律与工业资本主义》· 1967</span>
+  </div>
+
+  <p>时间从一种和任务绑定的、有节律的经验，变成一种线性的、可被计量的、可被买卖的资源。时间被外化、被资本化、被纳入工资单。这套体制躺了 200 多年。</p>
+
+  <div class="two-clocks">
+    <div class="clock-col">
+      <div class="clock-era">18 世纪 · 工厂大钟</div>
+      <div class="clock-head">挂在车间门口</div>
+      <div class="clock-body">
+        在物理空间里有一个明确的位置——你只有靠近它，它才能管你。<br><br>
+        出了厂门，就算下班了。<em>边界是物理的。</em>
+      </div>
+    </div>
+    <div class="clock-col">
+      <div class="clock-era now">2015+ · 钉钉</div>
+      <div class="clock-head">装在每个员工口袋里</div>
+      <div class="clock-body">
+        没有位置。在地铁上、在马桶上、在床上、在朋友的婚礼现场、在你父母的葬礼上——只要你打开手机，它就在那里。<br><br>
+        <strong>边界，没有了。</strong>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sect-sub">福柯的关键判断</h3>
+
+  <div class="quote">
+    这些技术不是某一个独裁者发明的恶意工具。它们是 17—19 世纪在军队、修道院、学校、医院、工厂之间相互借鉴、共同演化出来的一整套<strong>关于"如何让人变得有用"的微观工程学</strong>。<br><br>
+    它最终的目标，是制造一种"<strong>驯顺的肉体</strong>"——服从、可被预测、可被组合、可被替换。
+    <span class="quote-source">福柯《规训与惩罚》· 第三编《规训技术》</span>
+  </div>
+
+  <p>这一套微观工程学，今天有一个新名字——<strong>职场效率管理</strong>。只是工厂大门和工厂大钟换成了 APP，修道院的钟楼换成了你口袋里的震动提醒。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- II 三种配方 -->
+<section>
+  <div class="sect-num">II 打卡生活</div>
+  <h2 class="sect-title">三种<em>配方</em></h2>
+
+  <p>我们日常笼统说的"上班"，其实是<strong>几种权力配方非常不同</strong>的事——</p>
+
+  <div class="recipes">
+    <div class="recipe" data-r>
+      <div class="recipe-label">(a) 强制性出勤核验</div>
+      <div class="recipe-title">钉钉打卡、人脸识别考勤、屏幕录屏、鼠标活动监测</div>
+      <div class="recipe-tag">规训权力 + 偶发君主性</div>
+      <div class="recipe-body">
+        强制性强、规则明确，有"到岗"和"离岗"的边界（哪怕这条边界正在退化）。是连续的、规范化的考勤纪律，但当违规累积，会触发戏剧化的"开除仪式"。
+      </div>
+    </div>
+    <div class="recipe" data-r>
+      <div class="recipe-label">(b) 持续性绩效评估</div>
+      <div class="recipe-title">KPI、OKR、季度面谈、强制末位淘汰、360 度评审</div>
+      <div class="recipe-tag">规训权力的纯粹形态</div>
+      <div class="recipe-body">
+        日常、连续、不引人注目，<strong>没有"考完试"的那一刻</strong>——考试永远在进行中。这是福柯所说的"考试"在 21 世纪的<strong>永久化</strong>版本。
+      </div>
+    </div>
+    <div class="recipe" data-r>
+      <div class="recipe-label">(c) 自愿性效率管理</div>
+      <div class="recipe-title">番茄钟、个人 OKR、晨型人计划、效率博主推荐套件</div>
+      <div class="recipe-tag">自我规训 + 治理术</div>
+      <div class="recipe-body">
+        完全主动、看起来"为自己的效率好"、不需要任何外部强制。这是规训的最高形态：<strong>你自己成为自己的工头，并把这种工头化感受为"自由"和"自我提升"</strong>。
+      </div>
+    </div>
+  </div>
+
+  <p>三类配方权力机制不同，但共享同一个深层核心——<strong>劳动力的连续可被调度化</strong>：让你"在岗"这件事，从一个"地点 + 时间"问题，变成一种 <strong>24 小时都可以被触发的状态</strong>。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- III 君主性 -->
+<section>
+  <div class="sect-num">III 第一层</div>
+  <h2 class="sect-title">君主性:<br>"开除"<em>作为现代仪式</em></h2>
+
+  <p class="pull"><em>"开除"</em>是君主权力的现代仪式。<br>不是普通的"辞退"——是那种戏剧化的、有脚本的、被刻意公开的开除。</p>
+
+  <div class="quote">
+    <p>一封"全员邮件"。</p>
+    <p>年会上 PPT 末页写着"再见，X 同学"。</p>
+    <p>离职面谈结束后，工卡被当场注销，HR 陪你回工位，10 分钟收完东西，电梯送下楼。</p>
+  </div>
+
+  <p>它具备所有要素：<strong>公开</strong>（所有同事都得看见）、<strong>剧场化</strong>（通知→谈话→工位清理→工卡注销→退出工作群，每一步都有脚本）、<strong>不对称</strong>（你不知道谁拍板的、按什么标准）、<strong>警告效应</strong>（一次开除的可见，本身就是对所有其他人的隐性提醒）。</p>
+
+  <h3 class="sect-sub">警告才是主菜</h3>
+
+  <p>它的真正目的不是惩罚那一个被开除的人——是<strong>警告所有还没被开除的人</strong>。</p>
+
+  <div class="quote">
+    你看，TA 也曾是和你一样的"优秀员工"。<br>
+    你看，TA 一个月前还在朋友圈说"热爱这家公司"。<br>
+    你看，TA 现在被退到了那扇玻璃门外。
+  </div>
+
+  <p>21 世纪的公司不需要断头台——它们有"组织优化"、"业务结构调整"、"业务线收缩"这套话术。但剧场逻辑没变。</p>
+  <p>这种君主性在公司里只在偶发时刻显眼。但它仍然像一个<strong>幽灵</strong>一样飘在所有人头上——"你今年的绩效会不会被打 C？""你的项目会不会被砍？"这些"可能性"不需要每天发生。它们只需要<strong>存在</strong>就够了。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- IV 规训性 -->
+<section>
+  <div class="sect-num">IV 第二层</div>
+  <h2 class="sect-title">规训性:<br>福柯第三编的<em>四种技术</em></h2>
+
+  <p>你早上自己定闹钟，自己卡打卡时间，自己更新周报，自己向 leader 证明"我的产出对得起这份工资"。没有人在你身边强迫。但没有这些动作，你"在这份工作里"就不成立。</p>
+  <p>福柯在《规训与惩罚》第三编里详细描述了规训权力的<strong>四种核心技术</strong>——</p>
+
+  <div class="techniques">
+    <div class="technique">
+      <div class="tech-num">第一种</div>
+      <div class="tech-name">时间安排 <span class="fr">l'emploi du temps</span></div>
+      <div class="tech-original"><em>原典：</em>把时间"切片"——切成秒、切成分钟、切成小时——然后给每一片时间分配一个特定的动作或任务。17—18 世纪修道院和军营是这套技术的早期实验场。</div>
+      <div class="tech-today">
+        <div class="tech-today-label">当代对应</div>
+        <ul>
+          <li>钉钉打卡精确到秒</li>
+          <li>工时系统按 15 分钟切片</li>
+          <li>飞书日历"每个空格都不能浪费"</li>
+          <li>弹性工作变成"核心工作时段 + 灵活补足时段"</li>
+          <li>远程办公时代"鼠标无活动 5 分钟自动登出"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="technique">
+      <div class="tech-num">第二种</div>
+      <div class="tech-name">动作分解 <span class="fr">décomposition des gestes</span></div>
+      <div class="tech-original"><em>原典：</em>把一个复杂任务拆解成若干个标准化、可被复制、可被监督的微动作。18 世纪军队把"举枪"分解成 17 个动作，每个动作有标准时长和标准姿势。</div>
+      <div class="tech-today">
+        <div class="tech-today-label">当代对应</div>
+        <ul>
+          <li>SOP（标准操作程序）</li>
+          <li>流程图、行动项、checkbox</li>
+          <li>飞书"任务"功能里的子任务结构</li>
+          <li>客服话术手册——"第一句必须说'您好'"</li>
+          <li>麦肯锡式的"MECE 拆解"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="technique">
+      <div class="tech-num">第三种</div>
+      <div class="tech-name">活动控制 <span class="fr">contrôle de l'activité</span></div>
+      <div class="tech-original"><em>原典：</em>规定每一个时段该做什么、不该做什么；规定每一个动作的标准姿势、节奏、配合方式。</div>
+      <div class="tech-today">
+        <div class="tech-today-label">当代对应</div>
+        <ul>
+          <li>KPI、OKR、季度路线图、双月任务对齐</li>
+          <li>工作时间不能登微信 / 不能开淘宝</li>
+          <li>屏幕监控软件后台记录每一个访问网页</li>
+          <li>"不允许的活动"清单越来越长</li>
+        </ul>
+      </div>
+    </div>
+    <div class="technique">
+      <div class="tech-num">第四种</div>
+      <div class="tech-name">力量组合 <span class="fr">composition des forces</span></div>
+      <div class="tech-original"><em>原典：</em>把多个个体组合成一个有机的、可被调度的协作单元——团队、班组、部队、车间。</div>
+      <div class="tech-today">
+        <div class="tech-today-label">当代对应</div>
+        <ul>
+          <li>矩阵管理：你不只属于一个 leader</li>
+          <li>项目制：从不同部门抽调人</li>
+          <li>中台架构：把"通用能力"剥离出来，让所有业务线共享调用</li>
+          <li>360 度评审：你被上司、同级、下属同时打分</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sect-sub">福柯的"考试"</h3>
+
+  <div class="quote">
+    考试是一种独特的权力技术。它把"层级监视"和"规范化裁决"组合在一起，让权力既能<strong>看见</strong>个体（监视），又能<strong>判定</strong>个体（规范化）。<br><br>
+    考试不是中性的"测量"。它是一种<strong>生产</strong>——它生产关于这个个体的真理：他是好的还是差的、是有用的还是应该淘汰。
+    <span class="quote-source">福柯《规训与惩罚》· 第三编"考试" · l'examen</span>
+  </div>
+
+  <p>修道院里的考试每年一次。学校里的考试每学期一次。现代公司里的考试——<strong>每时每刻</strong>：季度绩效面谈、双月 OKR 复盘、周报、日报、每日站会、飞书"工作动态"流……你已经不再"考完"一次试——你只是从一个被评估的状态，调制到下一个被评估的状态。</p>
+
+  <h3 class="sect-sub">德勒兹：从规训到控制</h3>
+
+  <div class="versus">
+    <div class="versus-col">
+      <div class="versus-label">规训社会 · Foucault</div>
+      <div class="versus-head">封闭空间运作</div>
+      <div class="versus-body">
+        你"上班"、"在岗"、"下班"——每个阶段有明确边界。<br><br>
+        出了工厂大门，工作就结束了。<br><br>
+        <strong>边界是物理的，可见的，可被穿越的。</strong>
+      </div>
+    </div>
+    <div class="versus-col">
+      <div class="versus-label active">控制社会 · Deleuze</div>
+      <div class="versus-head">连续调制运作</div>
+      <div class="versus-body">
+        你不再"出工厂大门"。你只是从一种被允许的状态，调制到下一种被允许的状态。<br><br>
+        你的"在岗状态"是绿点还是灰点；OKR 完成度是 0.7 还是 0.9；晋升通道是 P5 还是 P6——<em>这些都是连续变化的允许阈值。</em><br><br>
+        "你不再'完成学业'然后'入职'——你只是<strong>永远在受训</strong>（en formation permanente）。"
+      </div>
+    </div>
+  </div>
+
+  <p class="pull">工作和生活的边界，在这种逻辑里<em>不需要被突破</em>——它们只需要<strong>消失</strong>。</p>
+
+  <p>消失的方式是最聪明的：不是粗暴地宣布"24 小时随时待命"，而是让"工作"的定义本身<strong>变得无形</strong>。你不再"在工作"，你只是"在和工作相关的某种状态里"。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- V 生命权力 -->
+<section>
+  <div class="sect-num">V 第三层</div>
+  <h2 class="sect-title">生命权力:<br>HR 给你的<em>"关心"</em></h2>
+
+  <p>钉钉、绩效系统、健身补贴、年度体检——它们的真正对象<strong>不是"你这个人"</strong>，是"人力资本"。</p>
+  <p>公司里这一层往往以<strong>最温柔的面孔</strong>出现——</p>
+
+  <div class="quote">
+    <p>员工心理咨询服务（EAP）。</p>
+    <p>健身房补贴 / 团操课报销。</p>
+    <p>季度"幸福感问卷"。"心理健康月"团建活动。</p>
+    <p>公司食堂的"低 GI 健康餐"窗口。公司内部的"冥想室"。</p>
+  </div>
+
+  <p>这一切看起来都"为你好"。而你确实从中得到了一些被关心的感觉。但你同时也接受了一件事——<strong>你的身心健康不再是你的，是 KPI 的前置条件</strong>。</p>
+
+  <h3 class="sect-sub">四位思想者的合力拼图</h3>
+
+  <div class="thinkers">
+    <div class="thinker">
+      <div class="thinker-name">韩炳哲 · 倦怠社会 + 精神政治学</div>
+      <div class="thinker-book">Byung-Chul Han · Müdigkeitsgesellschaft (2010) · Psychopolitik (2014)</div>
+      <div class="thinker-body">
+        <p>旧时代的暴政是"<strong>你不能</strong>"——你不能离开工厂，不能违反纪律。</p>
+        <p>当代的暴政是"<strong>你应该</strong>"——你应该更高效，你应该更积极，你应该 grow，你应该 grind，你应该 hustle。</p>
+        <p>旧时代你被工头压迫。当代你<strong>自己是自己的工头</strong>——而且是个更严厉的工头。</p>
+        <p>最后你倒下了，公司说："我们给你提供心理咨询。"但<strong>让你倒下的原因，从来没有被允许讨论</strong>。</p>
+      </div>
+    </div>
+    <div class="thinker">
+      <div class="thinker-name">Wendy Brown · 撤销民主</div>
+      <div class="thinker-book">Undoing the Demos · 2015</div>
+      <div class="thinker-body">
+        <p>新自由主义不只是经济政策，它是一种<strong>关于人是什么的新本体论</strong>——</p>
+        <p>人不再首先是"公民"，而是"人力资本"。人不再首先是"目的本身"，而是"持续提升市场价值的项目"。人不再首先是"政治共同体的成员"，而是"自己人生的 CEO"。</p>
+        <p>婚姻成了"伴侣选择优化"。友谊成了"social capital"。心理咨询成了"产能修复"。你在公司里被这样对待——然后<strong>你自己也开始用这种语言看自己</strong>。</p>
+      </div>
+    </div>
+    <div class="thinker">
+      <div class="thinker-name">David Graeber · 狗屁工作</div>
+      <div class="thinker-book">Bullshit Jobs · 2018</div>
+      <div class="thinker-body">
+        <p>当代很大一部分白领工作，从工作的人自己的视角看，是<strong>毫无意义</strong>的。不是"工作太累"，是"工作根本不知道自己存在的理由"。</p>
+        <p>但你必须<strong>表演</strong>这份工作的存在。表演本身——比工作本身——耗光了你的精力。</p>
+        <p>你被 KPI 评估的"产出"，可能在你的部门外没有任何意义。但你必须<strong>活在这个表演里</strong>——因为这个表演本身，就是你的工作。</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sect-sub">合力一览</h3>
+
+  <div class="synthesis">
+    <div class="syn-row">
+      <div class="syn-who">福柯</div>
+      <div class="syn-what"><strong>规训技术</strong>让你高效——时间切片、动作分解、活动控制、力量组合。</div>
+    </div>
+    <div class="syn-row">
+      <div class="syn-who">德勒兹</div>
+      <div class="syn-what"><strong>控制社会</strong>让你 24/7 在线——没有大门，只有连续的调制状态。</div>
+    </div>
+    <div class="syn-row">
+      <div class="syn-who">韩炳哲</div>
+      <div class="syn-what"><strong>绩效社会</strong>让你自己鞭打自己——从"不能"到"应该"，外部暴政内化。</div>
+    </div>
+    <div class="syn-row">
+      <div class="syn-who">Wendy Brown</div>
+      <div class="syn-what"><strong>人力资本</strong>让你把自己当资产经营——人本身被翻译为持续可被市值化的项目。</div>
+    </div>
+    <div class="syn-row">
+      <div class="syn-who">Graeber</div>
+      <div class="syn-what"><strong>狗屁工作</strong>让你怀疑这一切有没有意义——但你不被允许讨论这个怀疑。</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VI 一个不舒服的问题 -->
+<section>
+  <div class="sect-num">VI 一个不舒服的问题</div>
+  <h2 class="sect-title">什么时候<em>算下班</em>？</h2>
+
+  <p>如果这套机制看上去这么深，为什么我们接受了？因为它常常确实"管用"：OKR 帮你看清优先级，钉钉提醒帮你不忘任务，EAP 在某些时刻确实救过人。这些都不是阴谋。否认这一点，是另一种意识形态。</p>
+
+  <p>但这里有一种<strong>真实的张力</strong>——</p>
+
+  <div class="quote">19 世纪的劳工运动用流血赢来了"8 小时工作制"。21 世纪的"灵活办公"用一句"为你的自由"，把这 8 小时悄悄退还回去了。</div>
+
+  <p>"下班"如今不再是"离开工作场所"，而是"<strong>暂时没被 @ 到</strong>"。</p>
+
+  <h3 class="sect-sub">"灵活"的语义陷阱</h3>
+
+  <p>值得专门挑出来的是"<strong>灵活</strong>"这个词：</p>
+
+  <div class="quote">
+    <p>当资本主义需要让员工接受"24/7 待命"和"项目制流动"时，它<strong>没有</strong>用强制的语言。它用了 60—70 年代反主流文化的语言——"灵活"、"创意"、"自我实现"、"打破科层"、"扁平管理"、"不被规则束缚"。</p>
+    <p>它把那一代人<strong>追求自由的语言</strong>，回收成了<strong>让人接受不稳定</strong>的话术。</p>
+    <span class="quote-source">Luc Boltanski & Ève Chiapello · 《资本主义的新精神》· 1999</span>
+  </div>
+
+  <h3 class="sect-sub">几个绕不开的边界问题</h3>
+
+  <div class="open-qs">
+    <div class="oq">
+      <div class="oq-dot">·</div>
+      <div>"灵活"如果意味着"全天候待命"，它和"<strong>被剥夺休息</strong>"的差别在哪里？</div>
+    </div>
+    <div class="oq">
+      <div class="oq-dot">·</div>
+      <div>当一个公司同时提供"高强度工作"和"心理咨询"时，<strong>前者制造的问题如何不被后者消音</strong>？</div>
+    </div>
+    <div class="oq">
+      <div class="oq-dot">·</div>
+      <div>"下班"如果只是"暂时没被 @ 到"，那它和"在线但很无聊"有什么本质区别？</div>
+    </div>
+    <div class="oq">
+      <div class="oq-dot">·</div>
+      <div>在"<strong>产出</strong>"和"<strong>活着</strong>"之间，那条线究竟该画在哪里？</div>
+    </div>
+  </div>
+
+  <p>这些问题不止在中国相关。它们也是欧盟"断联权"（Right to Disconnect）立法的核心、是法国 2017 年劳动法第 L. 2242-17 条的来源、是德国"工作 4.0 白皮书"持续辩论的焦点。<strong>这是一个全球性的问题，不是某一处的特殊处境。</strong></p>
+</section>
+
+<!-- VII 那然后呢 -->
+<section class="ranr">
+  <div class="ranr-inner">
+    <div class="sect-num">VII 那然后呢</div>
+    <h2 class="sect-title">职场<em>反向引导</em></h2>
+
+    <p>福柯的"<strong>反向引导</strong>"（contre-conduite）到了职场时代有它具体的形态。这些动作不会让你"摆脱工作"——这个时代没人能完全摆脱。但它们能让你在系统中保留一小块"<strong>不被调度</strong>"的空间。</p>
+    <p>数字时代的反向引导，是——<strong>在每一次"非要现在不可"的紧迫感袭来时，停一秒，问自己一次："真的吗？"</strong></p>
+
+    <div class="countercat">
+      <div class="cc-head">关于打卡</div>
+      <ul class="counterlist">
+        <li><strong>准时下班</strong>。每一次都准时。把"准时"塑造成你的同事对你的预期。</li>
+        <li>按合同写的时间到岗，按合同写的时间离开。</li>
+        <li>不把"加班"当荣誉勋章在朋友圈晒。</li>
+        <li>如果加班是真的必要，把它<strong>计入工时</strong>，而不是"为热爱的事业奉献"。</li>
+      </ul>
+
+      <div class="cc-head">关于工作群</div>
+      <ul class="counterlist">
+        <li>把工作群消息提醒<strong>关闭</strong>——不是静音，是关闭。每三小时主动查看一次就够。</li>
+        <li>把工作 IM <strong>只装在一台设备</strong>上——不要让它进你的私人手机。</li>
+        <li>周末<strong>不打开</strong>邮件 / 工作 IM。</li>
+      </ul>
+
+      <div class="cc-head">关于"为你好"的话术</div>
+      <ul class="counterlist">
+        <li>当 HR 说"我们想了解你的真实想法"时，停一秒。它通常不是想了解你。</li>
+        <li>当公司说"我们是个 family"时，提醒自己：family 不发工资、不签 NDA、不强制末位。</li>
+        <li>当 leader 说"我们是为了你的成长"时，问一句"那加薪有匹配上吗？"</li>
+        <li>不把"福利"当"宠爱"——它是<strong>工资的一种支付形式</strong>，不是恩典。</li>
+      </ul>
+
+      <div class="cc-head">关于离职</div>
+      <ul class="counterlist">
+        <li>离职那天就是离职那天。不要"再帮忙交接一周"。</li>
+        <li>离职面谈不需要真情流露。"个人原因，谢谢公司培养。"</li>
+        <li>不发"感谢领导栽培"的离职信。</li>
+        <li>离职后<strong>真的</strong>断联——不要"前同事饭局"密集到比在职时还多。</li>
+      </ul>
+    </div>
+
+    <h3 class="sect-sub" style="margin-top:56px;">本期【那然后呢墙】三问</h3>
+
+    <div class="questions">
+      <div class="question">
+        <div class="q-num">问题一</div>
+        <div class="q-text">你上一次"真正下班"是什么时候？那一刻你做了什么？</div>
+      </div>
+      <div class="question">
+        <div class="q-num">问题二</div>
+        <div class="q-text">如果取消所有打卡、所有 KPI、所有周报——你今天会做什么？你能想得起来吗？</div>
+      </div>
+      <div class="question">
+        <div class="q-num">问题三</div>
+        <div class="q-text">当你在朋友圈说"今天好累"时——你是在抱怨，还是在为这种"累"提供一种合法性证明？</div>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <div class="s-hint">留言区 · 可匿名 · 不打分 · 不评判</div>
+      <div class="s-empty">这堵墙正在等第一句话。</div>
+      <div class="s-note">留言功能即将上线 · 月底整合进【那然后呢墙】</div>
+      <div class="submit-btn">提交留言（即将开放）</div>
+    </div>
+
+    <p style="margin-top:36px;font-family:var(--sans);font-size:12px;letter-spacing:0.1em;color:var(--ink-faint);">
+      → 前往 <a href="../那然后呢墙/" style="color:var(--accent);text-decoration:underline;">【那然后呢墙】</a> 查看其他期的开放问题与留言汇聚
+    </p>
+  </div>
+</section>
+
+<!-- 延伸阅读 -->
+<section class="reading">
+  <div class="reading-inner">
+    <div class="sect-num">延伸阅读</div>
+    <h2 class="sect-title" style="font-size:clamp(22px,3.5vw,30px);margin-bottom:8px;">原典与二手文献</h2>
+    <div class="reading-list">
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>福柯《规训与惩罚》第三编 II"规训的手段"、III"考试"</strong> <em>刘北成、杨远婴译，三联书店 2019 年版</em> — 本期主要原书锚点。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>E. P. Thompson · Time, Work-Discipline, and Industrial Capitalism</strong> <em>Past & Present, 1967</em> — 时间纪律如何在工业革命中被强制内化。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>Gilles Deleuze · Postscript on the Societies of Control</strong> <em>1990，仅 5 页，值得原文阅读</em> — 规训到控制的核心短文。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>韩炳哲《倦怠社会》《精神政治学》</strong> <em>中信出版社中译本</em> — 从"不能"到"应该"的现代暴政。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>Wendy Brown · Undoing the Demos</strong> <em>2015</em> — 新自由主义如何把"人"翻译成"人力资本"。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>David Graeber · Bullshit Jobs</strong> <em>2018</em> — 为什么你不知道自己在做什么，但还是得继续表演。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content"><strong>Luc Boltanski & Ève Chiapello · The New Spirit of Capitalism</strong> <em>1999</em> — "灵活"语言如何被资本主义回收。</div>
+      </div>
+      <div class="reading-item">
+        <div class="reading-dot">·</div>
+        <div class="reading-content">本站 <a href="../../../map.html" style="color:var(--accent);text-decoration:underline;">【概念图谱】</a> → "规训权力""考试""控制社会""驯顺的肉体""规范化裁决"</div>
+      </div>
+    </div>
+    <p style="margin-top:28px;font-family:var(--sans);font-size:12px;letter-spacing:0.1em;color:var(--ink-faint);">
+      本文所有《规训与惩罚》引文以"刘北成、杨远婴译，三联书店 2019 年版"为准。本专栏文字遵循 CC BY-NC 4.0 协议，转载请注明出处。
+    </p>
+  </div>
+</section>
+
+<!-- VIII 结语 -->
+<section class="ending">
+  <div class="ending-inner">
+    <div class="sect-num">VIII 最后一句</div>
+    <div class="ending-quote">
+      19 世纪的工人用流血赢来了"下班"。<br><br>
+      21 世纪的我们用"灵活"亲手把它交了回去——<br><br>
+      <em>而且，是在一个 APP 上点了"同意"。</em>
+    </div>
+  </div>
+</section>
+
+<!-- 上一期 / 下一期 -->
+<nav class="nav-episodes">
+  <a href="../02-健康码/" class="nav-ep prev">
+    <div class="nav-ep-dir">← 上一期</div>
+    <div class="nav-ep-num">#02 · 2026.06.09</div>
+    <div class="nav-ep-title">健康码:18 世纪的图纸,21 世纪的实装</div>
+  </a>
+  <a href="../04-鸡娃父母/" class="nav-ep next">
+    <div class="nav-ep-dir">下一期 →</div>
+    <div class="nav-ep-num">#04 · 2026.07.07</div>
+    <div class="nav-ep-title">鸡娃父母是新自由主义的理性投资人</div>
+  </a>
+</nav>
+
+<footer>
+  规训群岛 · 第 #03 期 · 2026.06.23 · 大大黄油<br>
+  <a href="../../../">大大黄油母站</a> · <a href="../">规训群岛文章库</a> · <a href="../../../map.html">概念图谱</a> · <a href="../案例库/">案例库</a><br>
+  本专栏文字遵循 CC BY-NC 4.0 协议
+</footer>
+
+<script>
+  // 三种配方展开
+  document.querySelectorAll('.recipe').forEach(r => {
+    r.addEventListener('click', () => r.classList.toggle('open'));
+  });
+
+  // 雷达图浮动
+  const hero = document.querySelector('.hero');
+  const radar = document.getElementById('radarFloat');
+  const radarObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      radar.classList.toggle('visible', !entry.isIntersecting);
+    });
+  }, { threshold: 0 });
+  radarObserver.observe(hero);
+
+  // 滚动入场动画
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('section, header.hero, .ranr, .ending, .reading, nav.nav-episodes').forEach(el => {
+    el.classList.add('fade-in');
+    fadeObserver.observe(el);
+  });
+</script>
+</body>
+</html>

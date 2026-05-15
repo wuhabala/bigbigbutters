@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>内卷:一个被误用的词,与它真正指向的处境</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #f5f1ea;
+    --paper: #ede7dc;
+    --ink: #1a1614;
+    --ink-soft: #4a4239;
+    --ink-faint: #8b8074;
+    --accent: #a8331e;
+    --accent-soft: #c97560;
+    --rule: #d3c9b8;
+    --serif: 'Noto Serif SC', Georgia, serif;
+    --sans: 'Noto Sans SC', -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* 顶部 hero */
+  .hero {
+    min-height: 95vh;
+    padding: 80px 32px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 760px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero::before {
+    content: "I";
+    position: absolute;
+    top: 60px;
+    right: 32px;
+    font-family: var(--serif);
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    color: var(--ink-faint);
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 36px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(40px, 7vw, 72px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .hero-lead {
+    font-size: 19px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    max-width: 580px;
+    margin-bottom: 64px;
+  }
+  .hero-meta {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .hero-meta span { display: flex; align-items: baseline; gap: 8px; }
+  .hero-meta strong { color: var(--ink); font-weight: 500; }
+
+  /* 节标题通用 */
+  section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 32px;
+    position: relative;
+  }
+  .sect-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .sect-title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(28px, 4.5vw, 40px);
+    line-height: 1.25;
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+  }
+  .sect-title em { font-style: italic; color: var(--accent); }
+  p { margin-bottom: 22px; color: var(--ink-soft); }
+  p strong { color: var(--ink); font-weight: 600; }
+  .pull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.55;
+    color: var(--ink);
+    border-left: 2px solid var(--accent);
+    padding: 8px 0 8px 24px;
+    margin: 32px 0;
+  }
+
+  /* 分隔符 */
+  .divider {
+    text-align: center;
+    color: var(--rule);
+    font-size: 18px;
+    letter-spacing: 1em;
+    padding: 24px 0;
+  }
+  .divider::before { content: "·   ·   ·"; }
+
+  /* 起源故事(II) */
+  .origin {
+    background: var(--paper);
+    margin: 0;
+    max-width: none;
+    padding: 80px 32px;
+  }
+  .origin-inner { max-width: 760px; margin: 0 auto; }
+  .scene {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.9;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    padding-left: 28px;
+    border-left: 1px solid var(--rule);
+  }
+
+  /* 三词对照表(III) */
+  .word-table {
+    margin: 36px 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .word-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 110px;
+    gap: 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .word-row:last-child { border-bottom: none; }
+  .word-row .term {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--ink);
+  }
+  .word-row .desc { color: var(--ink-soft); font-size: 16px; line-height: 1.6; }
+  .word-row .tag {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    text-align: right;
+  }
+
+  /* 核心交互:三条件勾选器(IV) */
+  .checker {
+    background: var(--ink);
+    color: var(--bg);
+    margin: 0;
+    max-width: none;
+    padding: 96px 32px;
+  }
+  .checker-inner { max-width: 760px; margin: 0 auto; }
+  .checker .sect-num { color: var(--accent-soft); }
+  .checker .sect-title { color: var(--bg); }
+  .checker p { color: rgba(245, 241, 234, 0.7); }
+  .checker p strong { color: var(--bg); }
+  .conditions {
+    margin: 48px 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .cond {
+    background: rgba(245, 241, 234, 0.06);
+    border: 1px solid rgba(245, 241, 234, 0.12);
+    border-radius: 2px;
+    padding: 24px 28px;
+    cursor: pointer;
+    transition: all 0.35s ease;
+    user-select: none;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  .cond:hover {
+    border-color: rgba(245, 241, 234, 0.3);
+    background: rgba(245, 241, 234, 0.09);
+  }
+  .cond.active {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .cond-box {
+    flex: 0 0 22px;
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid rgba(245, 241, 234, 0.4);
+    border-radius: 2px;
+    margin-top: 4px;
+    position: relative;
+    transition: all 0.35s ease;
+  }
+  .cond.active .cond-box { border-color: var(--bg); background: var(--bg); }
+  .cond.active .cond-box::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 12px;
+    border: solid var(--accent);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .cond-body { flex: 1; }
+  .cond-num {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: rgba(245, 241, 234, 0.5);
+    margin-bottom: 6px;
+  }
+  .cond.active .cond-num { color: rgba(245, 241, 234, 0.8); }
+  .cond-name {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--bg);
+    margin-bottom: 8px;
+    line-height: 1.35;
+  }
+  .cond-desc {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: rgba(245, 241, 234, 0.7);
+    line-height: 1.6;
+  }
+  .cond.active .cond-desc { color: rgba(245, 241, 234, 0.9); }
+  .verdict {
+    margin-top: 24px;
+    padding: 32px;
+    background: rgba(245, 241, 234, 0.06);
+    border: 1px solid rgba(245, 241, 234, 0.15);
+    border-radius: 2px;
+    text-align: center;
+    transition: all 0.4s ease;
+    min-height: 130px;
+  }
+  .verdict-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--accent-soft);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .verdict-text {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--bg);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+  .verdict-text em { font-style: italic; color: var(--accent-soft); }
+  .verdict-note {
+    font-family: var(--serif);
+    font-style: italic;
+    color: rgba(245, 241, 234, 0.6);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .checker-hint {
+    margin-top: 32px;
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: rgba(245, 241, 234, 0.4);
+    text-align: center;
+  }
+
+  /* 土壤三层(V) */
+  .soil-layers { margin: 40px 0; }
+  .layer {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 32px;
+    align-items: baseline;
+  }
+  .layer:last-child { border-bottom: none; }
+  .layer-mark {
+    font-family: var(--serif);
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    font-style: italic;
+  }
+  .layer-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.35;
+  }
+  .layer-aspect {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .layer-body { color: var(--ink-soft); font-size: 16px; line-height: 1.7; }
+
+  /* 传导链(VI):stepper */
+  .chain {
+    background: var(--paper);
+    margin: 0;
+    max-width: none;
+    padding: 96px 32px;
+  }
+  .chain-inner { max-width: 760px; margin: 0 auto; }
+  .stepper {
+    margin: 56px 0 40px;
+    position: relative;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 32px;
+    padding: 28px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+  .step:hover { background: rgba(168, 51, 30, 0.03); }
+  .step-num {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    padding-top: 4px;
+    font-style: italic;
+  }
+  .step-name {
+    font-family: var(--serif);
+    font-size: 21px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+    line-height: 1.35;
+  }
+  .step-tag {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    margin-bottom: 0;
+    text-transform: uppercase;
+  }
+  .step-detail {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, margin-top 0.4s ease;
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.75;
+  }
+  .step.expanded .step-detail {
+    max-height: 400px;
+    margin-top: 16px;
+  }
+  .step-detail p { margin-bottom: 12px; }
+  .step-arrow {
+    font-family: var(--sans);
+    color: var(--ink-faint);
+    transition: transform 0.3s ease;
+    font-size: 14px;
+    margin-left: 8px;
+  }
+  .step.expanded .step-arrow { transform: rotate(180deg); color: var(--accent); }
+
+  /* 对照诊断(VII):卡片翻转 */
+  .diagnoses {
+    margin: 40px 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .diag-card {
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    padding: 26px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .diag-card:hover { border-color: var(--accent-soft); background: rgba(201, 117, 96, 0.05); }
+  .diag-claim {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.45;
+    margin-bottom: 6px;
+  }
+  .diag-claim::before {
+    content: '"';
+    color: var(--accent);
+    font-size: 28px;
+    margin-right: 4px;
+    vertical-align: -4px;
+  }
+  .diag-claim::after { content: '"'; color: var(--accent); margin-left: 4px; }
+  .diag-hint {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 0;
+  }
+  .diag-verdict {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.45s ease, margin-top 0.45s ease;
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .diag-card.flipped { background: var(--bg); border-color: var(--accent); }
+  .diag-card.flipped .diag-verdict {
+    max-height: 280px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+  .diag-card.flipped .diag-hint { color: var(--accent); }
+
+  /* 四层应对(VIII):accordion */
+  .responses { margin: 40px 0; }
+  .response {
+    border-bottom: 1px solid var(--rule);
+    padding: 24px 0;
+    cursor: pointer;
+  }
+  .response:first-child { border-top: 1px solid var(--rule); }
+  .response-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+  }
+  .response-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .response-title .lv {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    margin-right: 12px;
+    font-weight: 500;
+  }
+  .response-toggle {
+    font-family: var(--serif);
+    font-size: 24px;
+    color: var(--ink-faint);
+    transition: transform 0.3s ease;
+    line-height: 1;
+  }
+  .response.open .response-toggle { transform: rotate(45deg); color: var(--accent); }
+  .response-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, margin-top 0.4s ease;
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.75;
+  }
+  .response.open .response-body { max-height: 500px; margin-top: 18px; }
+  .response-body p { margin-bottom: 12px; color: var(--ink-soft); }
+  .response-body strong { color: var(--ink); }
+
+  /* 留下张力(IX) */
+  .tensions { margin: 36px 0; }
+  .tension {
+    padding: 28px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .tension:last-child { border-bottom: 1px solid var(--rule); }
+  .tension-q {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.55;
+  }
+  .tension-a { color: var(--ink-soft); font-size: 15px; line-height: 1.7; }
+
+  /* 结语(X) */
+  .ending {
+    background: var(--ink);
+    color: var(--bg);
+    margin: 0;
+    max-width: none;
+    padding: 96px 32px;
+    text-align: center;
+  }
+  .ending-inner { max-width: 640px; margin: 0 auto; }
+  .ending .sect-num { color: var(--accent-soft); }
+  .ending p {
+    color: rgba(245, 241, 234, 0.85);
+    font-family: var(--serif);
+    font-size: 20px;
+    line-height: 1.85;
+    margin-bottom: 20px;
+  }
+  .ending p strong { color: var(--bg); font-weight: 600; }
+  .ending p em { font-style: italic; color: var(--accent-soft); }
+
+  /* footer */
+  footer {
+    text-align: center;
+    padding: 48px 32px;
+    color: var(--ink-faint);
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    border-top: 1px solid var(--rule);
+  }
+
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    .hero { padding: 60px 24px 40px; }
+    .hero h1 { font-size: 38px; }
+    .hero-lead { font-size: 17px; }
+    section { padding: 60px 24px; }
+    .word-row { grid-template-columns: 90px 1fr; }
+    .word-row .tag { display: none; }
+    .layer { grid-template-columns: 56px 1fr; gap: 20px; }
+    .layer-mark { font-size: 36px; }
+    .step { grid-template-columns: 44px 1fr; gap: 20px; }
+    .cond { padding: 20px; gap: 18px; }
+    .verdict-text { font-size: 21px; }
+    .pull { font-size: 19px; padding-left: 18px; }
+  }
+
+  /* 入场动画 */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">哲学命题研究 · 第一辑</div>
+  <h1>内卷,<br>一个被误用的词,<br>与它真正指向的<em>处境</em></h1>
+  <p class="hero-lead">"内卷"看起来是"个人太卷"。但其实可能是个体理性叠加出的结构性陷阱——每个人都聪明,加起来却是集体灾难。</p>
+  <div class="hero-meta">
+    <span>研究 · <strong>2026.05</strong></span>
+    <span>阅读 · <strong>约 12 分钟</strong></span>
+    <span>互动 · <strong>滚动 / 点击</strong></span>
+  </div>
+</header>
+
+<!-- II 起源 -->
+<section class="origin">
+  <div class="origin-inner">
+    <div class="sect-num">II 起源</div>
+    <h2 class="sect-title">问题从一个家长群开始</h2>
+    <p class="scene">家长们讨论补习班排课。</p>
+    <p class="scene">大家都说,"不上孩子就完了"。</p>
+    <p class="scene">回头采访,没有一个家长觉得"补完就好了"。</p>
+    <p class="scene">补的不是孩子,是焦虑本身。</p>
+    <p style="margin-top: 32px;">这种"明知没用却停不下来"的处境,无法用"个人努力""社会病了"这类标签理解。<strong>真正的问题在中间——个体如何被结构卷入</strong>。</p>
+  </div>
+</section>
+
+<!-- III 澄清 -->
+<section>
+  <div class="sect-num">III 澄清</div>
+  <h2 class="sect-title">三个被混用的词</h2>
+  <p>80% 的讨论卡死,卡在大家说同一个词时指的不是一回事。</p>
+  <div class="word-table">
+    <div class="word-row">
+      <div class="term">内卷</div>
+      <div class="desc">投入越多越累但产出不增的结构</div>
+      <div class="tag">结构性</div>
+    </div>
+    <div class="word-row">
+      <div class="term">精神内耗</div>
+      <div class="desc">个体在脑内能量循环不出去</div>
+      <div class="tag">机制性</div>
+    </div>
+    <div class="word-row">
+      <div class="term">焦虑</div>
+      <div class="desc">前两者的情绪底色</div>
+      <div class="tag">情绪性</div>
+    </div>
+  </div>
+  <p>一个加班的打工人是"内卷",一个失业在家反复自我审判的人是"内耗",二者的感受都是"焦虑"。<strong>机制完全不同——三者必须分开讨论</strong>。</p>
+  <p class="pull">"内卷"最早是人类学概念,指爪哇农业"精细化但无质变"。这个意涵保留至今——做得更多更累更精,但什么都没改变。</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- IV 核心交互:三条件勾选器 -->
+<section class="checker">
+  <div class="checker-inner">
+    <div class="sect-num">IV 本质</div>
+    <h2 class="sect-title">三个条件同时成立,<br>才是内卷</h2>
+    <p>下面三个条件,逐个勾选,看每个组合对应什么现象。<strong>只有三个全部成立,才是真正意义上的内卷</strong>。</p>
+    <div class="conditions">
+      <div class="cond" data-cond="1">
+        <div class="cond-box"></div>
+        <div class="cond-body">
+          <div class="cond-num">条件 一</div>
+          <div class="cond-name">零和或负和</div>
+          <div class="cond-desc">投入增加,总产出不变(只是改变分配)。蛋糕没变大,只是更费劲地切。</div>
+        </div>
+      </div>
+      <div class="cond" data-cond="2">
+        <div class="cond-box"></div>
+        <div class="cond-body">
+          <div class="cond-num">条件 二</div>
+          <div class="cond-name">个体理性 ↔ 集体非理性</div>
+          <div class="cond-desc">每个人的选择都聪明,加总却是集体灾难。不是大家犯傻,恰恰是大家都聪明的结果。</div>
+        </div>
+      </div>
+      <div class="cond" data-cond="3">
+        <div class="cond-box"></div>
+        <div class="cond-body">
+          <div class="cond-num">条件 三</div>
+          <div class="cond-name">退出成本极高且可见</div>
+          <div class="cond-desc">不仅难退,周围所有人的选择都在持续提醒你不能退。</div>
+        </div>
+      </div>
+    </div>
+    <div class="verdict" id="verdict">
+      <div class="verdict-label">当前判断</div>
+      <div class="verdict-text" id="verdict-text">勾选条件,看是什么</div>
+      <div class="verdict-note" id="verdict-note">三个条件同时成立才是内卷。少一个,就是另一种东西。</div>
+    </div>
+    <div class="checker-hint">↑ 点击任一条件切换状态</div>
+  </div>
+</section>
+
+<!-- V 土壤 -->
+<section>
+  <div class="sect-num">V 土壤</div>
+  <h2 class="sect-title">三层土壤,由表及里</h2>
+  <p>当三层条件同时成立,内卷就是必然结果——<strong>不需要任何人是坏人或傻子</strong>。</p>
+  <div class="soil-layers">
+    <div class="layer">
+      <div class="layer-mark">一</div>
+      <div>
+        <div class="layer-aspect">经济结构层</div>
+        <div class="layer-name">总量见顶</div>
+        <div class="layer-body">总盘子停止扩张——录取名额、就业岗位、城市配额、晋升机会——竞争必然从"扩张"转向"挤压"。中国过去二十年的内卷感,直接对应了房地产、互联网、考公考研等领域的总量见顶。</div>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-mark">二</div>
+      <div>
+        <div class="layer-aspect">结构层</div>
+        <div class="layer-name">替代赛道稀缺</div>
+        <div class="layer-body">即使 A 见顶,如果 B 有空间,人会流向 B。内卷之所以滞固,是因为所有可见赛道看起来类似。985 毕业生的"选择"——卷大厂、卷国企、卷考公、卷读博——它们之间的差异远小于它们与"做点别的"之间的差异。</div>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-mark">三</div>
+      <div>
+        <div class="layer-aspect">文化层 · 最深</div>
+        <div class="layer-name">评价体系单一化</div>
+        <div class="layer-body">"好"的定义太窄(只用一两个尺子衡量),所有人就被迫挤同一坐标轴。多元评价会自动分流人群——但单一评价让所有人挤在同一个轴上。</div>
+      </div>
+    </div>
+  </div>
+  <p class="pull">这不是"中国特殊"。日本平成一代、韩国"地狱朝鲜"、美国精英大学预科生,都有类似结构。差别只在程度。</p>
+</section>
+
+<!-- VI 传导链 -->
+<section class="chain">
+  <div class="chain-inner">
+    <div class="sect-num">VI 机制</div>
+    <h2 class="sect-title">从外部结构,到精神内耗:四层传导</h2>
+    <p>内卷是结构,精神内耗是这个结构在个体身体里的产物。下面是它的传导链。</p>
+    <p style="font-family: var(--sans); font-size: 13px; color: var(--ink-faint); letter-spacing: 0.05em;">↓ 点击展开每一层</p>
+    <div class="stepper">
+      <div class="step" data-step="1">
+        <div class="step-num">i</div>
+        <div>
+          <div class="step-name">外部信号密集化 <span class="step-arrow">▾</span></div>
+          <div class="step-tag">信息层</div>
+          <div class="step-detail">
+            <p>同辈动态、朋友圈、小红书、招聘信息、家族群比较——信号过去也存在,但现在密度提高了几个数量级。</p>
+            <p><strong>信号密度本身就是压力源</strong>,不需要信号是负面的。</p>
+          </div>
+        </div>
+      </div>
+      <div class="step" data-step="2">
+        <div class="step-num">ii</div>
+        <div>
+          <div class="step-name">内化为自我标准 <span class="step-arrow">▾</span></div>
+          <div class="step-tag">规范层</div>
+          <div class="step-detail">
+            <p>重复接触的外部标准会被内化(社会化的正常过程)。但当外部标准本身是"卷"的产物时,内化的就是一套永远不可能满足的标准。</p>
+            <p><strong>这里发生偷换</strong>:你以为是"你"在要求自己,其实是被植入的标准在借你的口说话。</p>
+          </div>
+        </div>
+      </div>
+      <div class="step" data-step="3">
+        <div class="step-num">iii</div>
+        <div>
+          <div class="step-name">自我监控成为常态 <span class="step-arrow">▾</span></div>
+          <div class="step-tag">意识层</div>
+          <div class="step-detail">
+            <p>持续监控自己——"今天有没有进步""是不是落后了""别人是不是在做更重要的事"。</p>
+            <p>这种监控<strong>连续、没有关机键</strong>。这就是为什么很多人"明明没做什么却好累"——做事的能量被监控本身消耗光。</p>
+          </div>
+        </div>
+      </div>
+      <div class="step" data-step="4">
+        <div class="step-num">iv</div>
+        <div>
+          <div class="step-name">行动与思考脱钩 <span class="step-arrow">▾</span></div>
+          <div class="step-tag">行为层 · 内耗的极致</div>
+          <div class="step-detail">
+            <p>每个行动都要先通过内部审查:值不值得做、做了会不会后悔、别人会怎么看、有没有更优选项。</p>
+            <p>审查永远做不完,行动就永远启动不了。<strong>所有能量被锁在内部循环里——既不能向外做事,也不能向内安静</strong>。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="pull">这条链解释了一个常见困惑:"道理我都懂,但还是焦虑。" 因为认知层面的理解,改变不了已经在层三、层四运转的机制——这套机制不是用想的就能停的,它本身就是想出来的。</p>
+  </div>
+</section>
+
+<!-- VII 对照诊断 -->
+<section>
+  <div class="sect-num">VII 诊断</div>
+  <h2 class="sect-title">几种流行说法,<br>它们抓住和错过了什么</h2>
+  <p style="font-family: var(--sans); font-size: 13px; color: var(--ink-faint); letter-spacing: 0.05em;">↓ 点击每一句,看诊断</p>
+  <div class="diagnoses">
+    <div class="diag-card" data-diag="1">
+      <div class="diag-claim">是你太卷了,放松点就好</div>
+      <div class="diag-hint">点击查看诊断 →</div>
+      <div class="diag-verdict">抓住了一点(个体确实有调整空间),但<strong>完全错失结构</strong>。把结构性问题压给个人,变相加重内耗——"我做不到放松"会被识别为又一项个人失败。</div>
+    </div>
+    <div class="diag-card" data-diag="2">
+      <div class="diag-claim">社会病了,谁都没办法</div>
+      <div class="diag-hint">点击查看诊断 →</div>
+      <div class="diag-verdict">看到了结构,但<strong>滑向无力感</strong>。它把"个体有限的空间"也一并取消,变成另一种放弃。事实上,结构再硬,层次二("认知重置")和层次三("局部退出")依然是有效的。</div>
+    </div>
+    <div class="diag-card" data-diag="3">
+      <div class="diag-claim">躺平就是最好的反抗</div>
+      <div class="diag-hint">点击查看诊断 →</div>
+      <div class="diag-verdict">作为姿态有意义,但<strong>作为生活策略是另一种表演</strong>。"我宣告我不卷了"本身仍在用外部坐标定义自己——真正的退出不需要宣告。</div>
+    </div>
+    <div class="diag-card" data-diag="4">
+      <div class="diag-claim">内卷就是奋斗,自古如此</div>
+      <div class="diag-hint">点击查看诊断 →</div>
+      <div class="diag-verdict">这是最常见的反对意见,但它<strong>混淆了"勤奋"和"内卷"</strong>。勤奋是条件一不成立(勤奋能带来真实增长),内卷是条件一、二、三都成立。两者表面像,本质不同。</div>
+    </div>
+  </div>
+</section>
+
+<!-- VIII 四层应对 -->
+<section style="background: var(--paper); max-width: none; padding: 96px 32px;">
+  <div style="max-width: 760px; margin: 0 auto;">
+    <div class="sect-num">VIII 回应</div>
+    <h2 class="sect-title">四层应对,<em>不是阶梯</em></h2>
+    <p><strong>重要前提:结构性问题没有纯粹的个人解。</strong></p>
+    <p>任何"我教你三招走出内卷"的建议,都是把结构性问题伪装成个人成长问题在卖。但这不意味着个体什么都做不了。四个层次,按情况组合使用,<strong>不必按顺序</strong>。</p>
+    <div class="responses">
+      <div class="response" data-resp="1">
+        <div class="response-head">
+          <div class="response-title"><span class="lv">LV.1</span>技术性缓解</div>
+          <div class="response-toggle">+</div>
+        </div>
+        <div class="response-body">
+          <p>睡眠、运动、冥想、限制信息摄入、固定离线时间。</p>
+          <p><strong>作用</strong>:处理症状(层一信号密集化、层三自我监控)。</p>
+          <p><strong>局限</strong>:不触及结构本身。<strong>适合短期续命,不适合长期依赖</strong>。</p>
+        </div>
+      </div>
+      <div class="response" data-resp="2">
+        <div class="response-head">
+          <div class="response-title"><span class="lv">LV.2</span>认知重置</div>
+          <div class="response-toggle">+</div>
+        </div>
+        <div class="response-body">
+          <p>看清那条传导链,把"我的焦虑"重新识别为"被植入的标准在我身体里运转的感受"。</p>
+          <p><strong>关键</strong>:不是消除焦虑,而是改变焦虑和你的关系——它不再是"我有问题"的证据,而是<strong>"系统在通过我说话"的信号</strong>。</p>
+        </div>
+      </div>
+      <div class="response" data-resp="3">
+        <div class="response-head">
+          <div class="response-title"><span class="lv">LV.3</span>局部退出</div>
+          <div class="response-toggle">+</div>
+        </div>
+        <div class="response-body">
+          <p>在某些具体维度上真的退出竞争。</p>
+          <p><strong>不是</strong>宣告"我躺平了"(那是另一种姿态表演)。<strong>是</strong>悄悄地、不需要别人理解地,在某些事情上放弃比较。</p>
+          <p>关键是<strong>具体</strong>:选定一两个战场不打,保留能量在你真正在意的事上。</p>
+        </div>
+      </div>
+      <div class="response" data-resp="4">
+        <div class="response-head">
+          <div class="response-title"><span class="lv">LV.4</span>重建意义参照系</div>
+          <div class="response-toggle">+</div>
+        </div>
+        <div class="response-body">
+          <p>不依赖外部坐标,找到自己的"什么是好"。</p>
+          <p><strong>不是</strong>"做自己想做的事"(很多人不知道自己想做什么,而且"想做什么"本身也常被植入)。</p>
+          <p>而是长期、缓慢、试错的自我探索——你在什么时候感到活着,什么时候感到死气沉沉。<strong>答案不能从外部得到</strong>。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IX 留下张力 -->
+<section>
+  <div class="sect-num">IX 留白</div>
+  <h2 class="sect-title">没有解决的张力</h2>
+  <p>诚实是,几个问题这份研究没回答。</p>
+  <div class="tensions">
+    <div class="tension">
+      <div class="tension-q">看清之后,然后呢?</div>
+      <div class="tension-a">四层应对都做了,结构不会消失。它能改变你和结构的关系,但改变不了结构。</div>
+    </div>
+    <div class="tension">
+      <div class="tension-q">为什么有的人不会陷入这条链?</div>
+      <div class="tension-a">传导链解释了大多数人,但不解释例外——同样环境里,有些人就是不会被卷入。这可能涉及童年经历、个性、特定的"退出能力"。值得后续展开。</div>
+    </div>
+    <div class="tension">
+      <div class="tension-q">写出来给人看,是不是另一种"卷内容"?</div>
+      <div class="tension-a">有这个风险。但说出来仍然比沉默有价值——至少在被流通的过程中,有人接住这份理解,看清了一点点自己的处境。</div>
+    </div>
+  </div>
+</section>
+
+<!-- X 结语 -->
+<section class="ending">
+  <div class="ending-inner">
+    <div class="sect-num">X 结</div>
+    <p>回到开头那个家长群。</p>
+    <p>家长们没人觉得报班有用,但停不下来。</p>
+    <p>读完这份报告,他们大概率仍然会继续报班——<strong>因为结构没变</strong>。</p>
+    <p style="margin-top: 36px; margin-bottom: 36px; font-size: 17px; color: var(--accent-soft); letter-spacing: 0.2em; text-align: center;">·   ·   ·</p>
+    <p>但他们可能多了一件事:<br><strong>知道这不是自己的失败,是大家共同被卷入的处境。</strong></p>
+    <p style="font-style: italic; color: rgba(245, 241, 234, 0.7); font-size: 18px; margin-top: 36px;">这件事不大,也不小。<br>它不能让人逃出去,但能让人在里面,<em>不那么孤单地受困</em>。</p>
+  </div>
+</section>
+
+<footer>
+  哲学命题研究 · 第一辑 · 内卷 · 2026
+</footer>
+
+<script>
+  // 三条件勾选器
+  const conds = document.querySelectorAll('.cond');
+  const verdictText = document.getElementById('verdict-text');
+  const verdictNote = document.getElementById('verdict-note');
+
+  const verdictMap = {
+    '000': { t: '勾选条件,看是什么', n: '三个条件同时成立才是内卷。少一个,就是另一种东西。' },
+    '100': { t: '稀缺竞争', n: '只有"零和"。这是任何稀缺资源场景都会出现的——例如奥运奖牌争夺。不是内卷。' },
+    '010': { t: '合作困境', n: '只有"个体理性 vs 集体非理性"。博弈论里的经典囚徒困境。不一定累人。' },
+    '001': { t: '结构性绑定', n: '只有"退出成本高"。比如户籍制度、阶层固化。困住人,但不必然让人加码。' },
+    '110': { t: '激烈竞争', n: '两个条件成立。已经很难受,但只要还能退出,人会流向其他赛道。' },
+    '101': { t: '困局', n: '退不出且零和。但如果不必加码,人会被困但不会持续加压。' },
+    '011': { t: '锁定的合作困境', n: '集体加码且无法退出,但如果增加投入能带来增长,这是"高压发展"而非内卷。' },
+    '111': { t: '这就是<em>内卷</em>', n: '三个条件同时成立。这是它最绝望的地方:不是大家犯傻,恰恰是大家都聪明的结果。' }
+  };
+
+  function updateVerdict() {
+    const key = Array.from(conds).map(c => c.classList.contains('active') ? '1' : '0').join('');
+    const v = verdictMap[key];
+    verdictText.innerHTML = v.t;
+    verdictNote.innerHTML = v.n;
+    if (key === '111') {
+      document.getElementById('verdict').style.background = 'rgba(168, 51, 30, 0.18)';
+      document.getElementById('verdict').style.borderColor = 'var(--accent)';
+    } else {
+      document.getElementById('verdict').style.background = 'rgba(245, 241, 234, 0.06)';
+      document.getElementById('verdict').style.borderColor = 'rgba(245, 241, 234, 0.15)';
+    }
+  }
+
+  conds.forEach(c => c.addEventListener('click', () => {
+    c.classList.toggle('active');
+    updateVerdict();
+  }));
+
+  // 传导链 stepper
+  document.querySelectorAll('.step').forEach(s => {
+    s.addEventListener('click', () => s.classList.toggle('expanded'));
+  });
+
+  // 对照诊断
+  document.querySelectorAll('.diag-card').forEach(d => {
+    d.addEventListener('click', () => d.classList.toggle('flipped'));
+  });
+
+  // 四层应对 accordion
+  document.querySelectorAll('.response').forEach(r => {
+    r.addEventListener('click', () => r.classList.toggle('open'));
+  });
+
+  // 滚动入场动画
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('section').forEach(s => {
+    s.classList.add('fade-in');
+    observer.observe(s);
+  });
+</script>
+
+</body>
+</html>
