@@ -674,6 +674,136 @@
 </style>
 </head>
 <body>
+<!-- tocx --><div id="tocx">
+<style>
+  #tocx { position: fixed; top: 12px; right: 16px; z-index: 9999; font-family: var(--sans, sans-serif); }
+  #tocx * { box-sizing: border-box; }
+  #tocx .tocx-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--paper, #ede7dc); color: var(--ink, #1a1614);
+    border: 1px solid var(--rule, #d3c9b8); border-radius: 2px;
+    font-family: var(--sans, sans-serif); font-size: 12px; letter-spacing: 0.18em;
+    padding: 8px 14px; cursor: pointer; transition: border-color .2s, color .2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #tocx .tocx-btn:hover { border-color: var(--accent, #a8331e); color: var(--accent, #a8331e); }
+  #tocx .tocx-btn .tocx-ico { font-size: 13px; line-height: 1; color: var(--accent, #a8331e); }
+  #tocx .tocx-panel {
+    position: absolute; top: 44px; right: 0; width: min(320px, 86vw);
+    max-height: 72vh; overflow-y: auto;
+    background: var(--bg, #f5f1ea); border: 1px solid var(--rule, #d3c9b8);
+    box-shadow: 0 14px 40px rgba(26,22,20,0.16);
+    padding: 8px 0; display: none;
+  }
+  #tocx.open .tocx-panel { display: block; }
+  #tocx .tocx-grp-label {
+    font-family: var(--sans, sans-serif); font-size: 10px; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--accent, #a8331e); font-weight: 700;
+    padding: 12px 18px 8px; border-bottom: 1px solid var(--rule, #d3c9b8); margin-bottom: 4px;
+  }
+  #tocx a {
+    display: block; text-decoration: none; color: var(--ink-soft, #4a4239);
+    font-family: var(--serif, Georgia, serif); font-size: 14px; line-height: 1.5;
+    padding: 9px 18px; border-left: 2px solid transparent; transition: background .15s, color .15s, border-color .15s;
+  }
+  #tocx a:hover { background: var(--paper, #ede7dc); color: var(--accent, #a8331e); border-left-color: var(--accent, #a8331e); }
+  #tocx a .tocx-no { font-family: var(--sans, sans-serif); font-size: 11px; font-weight: 600; color: var(--accent, #a8331e); letter-spacing: .05em; margin-right: 10px; }
+  #tocx a.tocx-here { background: var(--paper, #ede7dc); color: var(--ink, #1a1614); font-weight: 600; border-left-color: var(--accent, #a8331e); }
+  #tocx a.tocx-here .tocx-tag { font-family: var(--sans, sans-serif); font-size: 10px; letter-spacing: .15em; color: var(--accent, #a8331e); margin-left: 8px; }
+  #tocx .tocx-sec { font-size: 13.5px; color: var(--ink-soft, #4a4239); }
+  #tocx .tocx-divider { height: 1px; background: var(--rule, #d3c9b8); margin: 6px 0; }
+  @media (max-width: 600px) { #tocx { top: 8px; right: 10px; } #tocx .tocx-btn { padding: 7px 11px; font-size: 11px; } }
+</style>
+<button class="tocx-btn" id="tocxBtn" aria-expanded="false" aria-label="文章目录">
+  <span class="tocx-ico" id="tocxIco">☰</span><span>目录</span>
+</button>
+<div class="tocx-panel" id="tocxPanel"></div>
+<script>
+(function () {
+  var EPS = [
+    ['#00','发刊词 · 从达米安到健康码','00-发刊词'],
+    ['#01','微博挂人是 21 世纪的断头台','01-微博挂人'],
+    ['#02','健康码：18 世纪的图纸，21 世纪的实装','02-健康码'],
+    ['#03','钉钉打卡：下班这件事是怎么死的','03-钉钉打卡'],
+    ['#04','鸡娃父母是新自由主义的理性投资人','04-鸡娃父母'],
+    ['#05','A4 腰是温柔的酷刑','05-A4腰'],
+    ['#06','信用分让监狱"消失"了','06-信用分'],
+    ['#07','算法不是工具，是新的看守','07-算法是新的看守'],
+    ['#08','催婚与三胎：卧室里的人口政治','08-催婚三胎'],
+    ['#09','终刊：那然后呢——看清形状之后','09-终刊那然后呢'],
+  ];
+  var root = document.getElementById('tocx');
+  var btn = document.getElementById('tocxBtn');
+  var ico = document.getElementById('tocxIco');
+  var panel = document.getElementById('tocxPanel');
+
+  // 依页面所在深度计算到「群岛/规训群岛/」的相对前缀
+  var P = decodeURIComponent(location.pathname);
+  var key = '规训群岛/';
+  var base, curDir = '';
+  var mi = P.indexOf(key);
+  if (mi === -1) {
+    base = '群岛/规训群岛/';
+  } else {
+    var rest = P.slice(mi + key.length);
+    var segs = rest.split('/').filter(function (s) { return s && s.indexOf('.html') === -1; });
+    base = segs.length ? '../' : './';
+    if (segs.length) curDir = segs[0];
+  }
+
+  var html = '';
+
+  // —— 本期章节（仅当页面有带标题的 section[id]）——
+  var secs = [];
+  document.querySelectorAll('section[id]').forEach(function (s) {
+    var t = s.querySelector('.sect-num, .sect-title, h2');
+    if (t && s.id && s.id !== 'tocx') {
+      var label = (s.querySelector('.sect-num') || s.querySelector('.sect-title') || t).textContent.trim();
+      if (label) secs.push([s.id, label]);
+    }
+  });
+  if (secs.length >= 2) {
+    html += '<div class="tocx-grp-label">本期章节</div>';
+    secs.forEach(function (x) {
+      html += '<a class="tocx-sec" href="#' + x[0] + '" data-jump="' + x[0] + '">' + esc(x[1]) + '</a>';
+    });
+    html += '<div class="tocx-divider"></div>';
+  }
+
+  // —— 全十期目录 ——
+  html += '<div class="tocx-grp-label">规训群岛 · 全十期</div>';
+  EPS.forEach(function (e) {
+    var here = curDir && curDir === e[2];
+    html += '<a class="' + (here ? 'tocx-here' : '') + '" href="' + base + encodeURI(e[2]) + '/index.html">'
+      + '<span class="tocx-no">' + e[0] + '</span>' + esc(e[1])
+      + (here ? '<span class="tocx-tag">你在这里</span>' : '') + '</a>';
+  });
+
+  panel.innerHTML = html;
+
+  function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]; }); }
+  function setOpen(o) {
+    root.classList.toggle('open', o);
+    btn.setAttribute('aria-expanded', o ? 'true' : 'false');
+    ico.textContent = o ? '✕' : '☰';
+  }
+  btn.addEventListener('click', function (e) { e.stopPropagation(); setOpen(!root.classList.contains('open')); });
+  panel.addEventListener('click', function (e) {
+    var a = e.target.closest('a'); if (!a) return;
+    var jid = a.getAttribute('data-jump');
+    if (jid) {
+      e.preventDefault();
+      var el = document.getElementById(jid);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setOpen(false);
+    }
+  });
+  document.addEventListener('click', function (e) { if (!root.contains(e.target)) setOpen(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+})();
+</script>
+</div>
+
 
 <!-- ============ Masthead ============ -->
 <div class="masthead">
