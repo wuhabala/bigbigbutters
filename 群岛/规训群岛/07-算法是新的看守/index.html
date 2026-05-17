@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>规训群岛｜#07 算法不是工具，是新的看守</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+  :root {
+    --bg: #f5f1ea; --paper: #ede7dc; --paper-deep: #e4ddd0;
+    --ink: #1a1614; --ink-soft: #4a4239; --ink-faint: #8b8074;
+    --accent: #a8331e; --accent-soft: #c97560; --rule: #d3c9b8;
+    --serif: 'Noto Serif SC', Georgia, serif;
+    --sans: 'Noto Sans SC', -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 17px; line-height: 1.85; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+  .masthead { border-bottom: 1px solid var(--rule); padding: 18px 32px; display: flex; justify-content: space-between; align-items: baseline; font-family: var(--sans); font-size: 12px; letter-spacing: 0.2em; color: var(--ink-faint); max-width: 1100px; margin: 0 auto; }
+  .masthead .brand { color: var(--ink); font-weight: 500; letter-spacing: 0.3em; }
+  .masthead .brand em { font-style: normal; color: var(--accent); }
+  .masthead .right { display: flex; gap: 24px; }
+  .masthead a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .masthead a:hover { color: var(--accent); }
+
+  .breadcrumb { max-width: 760px; margin: 0 auto; padding: 20px 32px 0; font-family: var(--sans); font-size: 11px; letter-spacing: 0.15em; color: var(--ink-faint); }
+  .breadcrumb a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { margin: 0 10px; }
+  .breadcrumb .here { color: var(--ink); }
+
+  .hero { min-height: 88vh; padding: 80px 32px 48px; display: flex; flex-direction: column; justify-content: center; max-width: 760px; margin: 0 auto; position: relative; }
+  .hero::before { content: "#07"; position: absolute; top: 60px; right: 32px; font-family: var(--serif); font-size: 14px; letter-spacing: 0.4em; color: var(--ink-faint); }
+  .hero-eyebrow { font-family: var(--sans); font-size: 12px; letter-spacing: 0.3em; color: var(--accent); margin-bottom: 36px; text-transform: uppercase; font-weight: 500; }
+  .hero h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(34px, 5.5vw, 58px); line-height: 1.18; letter-spacing: -0.02em; margin-bottom: 28px; }
+  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 600; }
+  .hero-sub { font-family: var(--serif); font-size: 20px; line-height: 1.65; color: var(--ink-soft); margin-bottom: 36px; font-style: italic; }
+  .hero-lead { font-size: 16.5px; line-height: 1.8; color: var(--ink-soft); max-width: 600px; margin-bottom: 48px; }
+  .hero-meta { font-family: var(--sans); font-size: 12px; letter-spacing: 0.15em; color: var(--ink-faint); display: flex; gap: 32px; flex-wrap: wrap; border-top: 1px solid var(--rule); padding-top: 24px; }
+  .hero-meta span { display: flex; align-items: baseline; gap: 8px; }
+  .hero-meta strong { color: var(--ink); font-weight: 500; }
+
+  section { max-width: 760px; margin: 0 auto; padding: 80px 32px; position: relative; }
+  .sect-num { font-family: var(--sans); font-size: 11px; letter-spacing: 0.4em; color: var(--accent); text-transform: uppercase; margin-bottom: 16px; font-weight: 500; }
+  .sect-title { font-family: var(--serif); font-weight: 500; font-size: clamp(26px, 4vw, 38px); line-height: 1.25; margin-bottom: 32px; letter-spacing: -0.01em; }
+  .sect-title em { font-style: italic; color: var(--accent); }
+  p { margin-bottom: 22px; color: var(--ink-soft); }
+  p strong { color: var(--ink); font-weight: 600; }
+  p em { font-style: italic; }
+  h3 { font-family: var(--serif); font-weight: 600; font-size: 21px; color: var(--ink); margin: 44px 0 16px; line-height: 1.35; }
+
+  .quote { background: var(--paper); border-left: 3px solid var(--accent); padding: 28px 32px; margin: 36px 0; font-family: var(--serif); font-size: 17px; line-height: 1.8; color: var(--ink); }
+  .quote p { color: var(--ink); margin-bottom: 14px; }
+  .quote p:last-child { margin-bottom: 0; }
+  .quote-source { display: block; margin-top: 16px; font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em; color: var(--ink-faint); text-transform: uppercase; }
+
+  .footnote { background: var(--paper); border-left: 2px solid var(--rule); padding: 20px 28px; margin: 28px 0; font-family: var(--serif); font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .footnote strong { color: var(--ink); }
+
+  .pull { font-family: var(--serif); font-style: italic; font-size: 21px; line-height: 1.55; color: var(--ink); border-left: 2px solid var(--accent); padding: 8px 0 8px 24px; margin: 32px 0; }
+
+  .divider { text-align: center; color: var(--rule); font-size: 18px; letter-spacing: 1em; padding: 24px 0; }
+  .divider::before { content: "·   ·   ·"; }
+
+  .configs { margin: 36px 0; }
+  .config { border: 1px solid var(--rule); background: var(--paper); padding: 24px 28px; margin-bottom: 10px; border-radius: 2px; cursor: pointer; transition: border-color 0.25s, background 0.25s; }
+  .config:hover { border-color: var(--accent-soft); }
+  .config.open { border-color: var(--accent); background: var(--bg); }
+  .config-label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; font-weight: 600; }
+  .config-title { font-family: var(--serif); font-size: 19px; font-weight: 500; color: var(--ink); line-height: 1.4; margin-bottom: 4px; }
+  .config-tag { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--ink-faint); }
+  .config.open .config-tag { color: var(--accent); }
+  .config-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, margin-top 0.4s ease; font-size: 15.5px; line-height: 1.8; color: var(--ink-soft); }
+  .config.open .config-body { max-height: 600px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--rule); }
+  .config-body p { margin-bottom: 8px; color: var(--ink-soft); }
+  .config-body strong { color: var(--ink); }
+
+  .theorists { margin: 36px 0; }
+  .theorist { background: var(--paper); border-left: 3px solid var(--accent); padding: 22px 26px; margin-bottom: 10px; }
+  .theorist-name { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 2px; line-height: 1.3; }
+  .theorist-book { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--ink-faint); margin-bottom: 12px; }
+  .theorist-body { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .theorist-body strong { color: var(--ink); }
+
+  .versus { margin: 36px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--rule); }
+  .versus-col { padding: 28px 26px; border-right: 1px solid var(--rule); }
+  .versus-col:last-child { border-right: none; }
+  .versus-label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 10px; font-weight: 600; }
+  .versus-label.active { color: var(--accent); }
+  .versus-head { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 14px; line-height: 1.35; }
+  .versus-body { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .versus-body strong { color: var(--ink); }
+  .versus-body em { font-style: italic; color: var(--accent-soft); }
+  .versus-body p { margin-bottom: 10px; color: var(--ink-soft); }
+
+  .global-cases { margin: 36px 0; }
+  .gcase { border-left: 3px solid var(--accent-soft); padding: 18px 22px; margin-bottom: 12px; background: var(--paper); }
+  .gcase-flag { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; font-weight: 600; margin-bottom: 6px; }
+  .gcase-body { font-size: 15.5px; line-height: 1.75; color: var(--ink-soft); }
+  .gcase-body strong { color: var(--ink); }
+
+  .checklist { margin: 36px 0; }
+  .cl-group { margin-bottom: 28px; }
+  .cl-head { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+  .cl-item { display: grid; grid-template-columns: 16px 1fr; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--paper-deep); align-items: start; }
+  .cl-item:last-child { border-bottom: none; }
+  .cl-dot { color: var(--accent); margin-top: 3px; font-size: 14px; }
+  .cl-text { font-size: 15.5px; line-height: 1.75; color: var(--ink-soft); }
+  .cl-text strong { color: var(--ink); }
+
+  .questions { margin: 36px 0; }
+  .wall-q { padding: 22px 0; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 22px 1fr; gap: 16px; align-items: start; }
+  .wall-q:last-child { border-bottom: 1px solid var(--rule); }
+  .wq-num { font-family: var(--serif); font-size: 22px; font-weight: 300; color: var(--accent); line-height: 1.5; }
+  .wq-text { font-size: 16px; line-height: 1.75; color: var(--ink-soft); }
+  .wq-text strong { color: var(--ink); }
+
+  .modules { margin: 36px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .modules-wide { grid-template-columns: repeat(2, 1fr); }
+  .module { border: 1px solid var(--rule); padding: 22px 18px; background: var(--paper); cursor: pointer; transition: border-color 0.25s, background 0.25s; }
+  .module:hover { border-color: var(--accent); background: var(--bg); }
+  .module-icon { font-size: 22px; margin-bottom: 10px; }
+  .module-title { font-family: var(--serif); font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px; line-height: 1.35; }
+  .module-desc { font-family: var(--sans); font-size: 12px; line-height: 1.6; color: var(--ink-faint); }
+
+  .radar-float { position: fixed; top: 80px; right: 32px; width: 136px; background: var(--paper); border: 1px solid var(--rule); padding: 14px; z-index: 100; opacity: 0; transform: translateX(12px); transition: opacity 0.5s ease, transform 0.5s ease; pointer-events: none; }
+  .radar-float.visible { opacity: 1; transform: translateX(0); }
+  .radar-label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; text-align: center; }
+  .radar-svg { display: block; width: 100%; }
+  .radar-legend { margin-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+  .radar-item { display: flex; justify-content: space-between; font-family: var(--sans); font-size: 9px; letter-spacing: 0.1em; color: var(--ink-faint); }
+  .radar-item span:last-child { color: var(--accent); font-weight: 600; }
+
+  .coda { background: var(--paper-deep); border-top: 1px solid var(--rule); max-width: 760px; margin: 0 auto; padding: 60px 32px; }
+  .coda-title { font-family: var(--sans); font-size: 11px; letter-spacing: 0.3em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 20px; font-weight: 600; }
+  .reading-list { list-style: none; border-top: 1px solid var(--rule); }
+  .reading-list li { padding: 12px 0; border-bottom: 1px solid var(--rule); font-family: var(--serif); font-size: 14.5px; line-height: 1.65; color: var(--ink-soft); }
+  .reading-list li::before { content: "→  "; color: var(--accent); }
+
+  .next-issue { max-width: 760px; margin: 0 auto; padding: 48px 32px 80px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 32px; }
+  .ni-label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 8px; }
+  .ni-title { font-family: var(--serif); font-size: 20px; font-weight: 500; color: var(--ink); line-height: 1.35; }
+  .ni-date { font-family: var(--sans); font-size: 12px; color: var(--ink-faint); margin-top: 6px; }
+  .ni-arrow { font-family: var(--serif); font-size: 28px; color: var(--accent-soft); transition: color 0.2s, transform 0.2s; }
+  .ni-arrow:hover { color: var(--accent); transform: translateX(4px); }
+
+  .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  section + section { border-top: 1px solid var(--rule); }
+
+  @media (max-width: 600px) {
+    .masthead { padding: 14px 20px; flex-direction: column; gap: 8px; }
+    .breadcrumb, .hero, section, .coda, .next-issue { padding-left: 20px; padding-right: 20px; }
+    .hero { min-height: 70vh; padding-top: 60px; }
+    .versus { grid-template-columns: 1fr; }
+    .versus-col { border-right: none; border-bottom: 1px solid var(--rule); }
+    .versus-col:last-child { border-bottom: none; }
+    .modules, .modules-wide { grid-template-columns: 1fr; }
+    .radar-float { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 浮动雷达 君主3 / 规训9 / 生命7 -->
+<div class="radar-float" id="radarFloat">
+  <div class="radar-label">权力图谱</div>
+  <svg class="radar-svg" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#d3c9b8" stroke-width="0.5" fill="none">
+      <polygon points="80,44 106,59 106,89 80,104 54,89 54,59" opacity="0.4"/>
+      <polygon points="80,32 114,51 114,93 80,112 46,93 46,51" opacity="0.3"/>
+      <polygon points="80,20 122,43 122,97 80,120 38,97 38,43" opacity="0.25"/>
+      <polygon points="80,56 98,67 98,85 80,96 62,85 62,67" opacity="0.45"/>
+      <polygon points="80,68 90,75 90,81 80,88 70,81 70,75" opacity="0.5"/>
+    </g>
+    <line x1="80" y1="80" x2="80" y2="20" stroke="#d3c9b8" stroke-width="0.6"/>
+    <line x1="80" y1="80" x2="132" y2="110" stroke="#d3c9b8" stroke-width="0.6"/>
+    <line x1="80" y1="80" x2="28" y2="110" stroke="#d3c9b8" stroke-width="0.6"/>
+    <!-- 君主3: (80,62), 规训9: (126.8,107), 生命7: (43.6,101) -->
+    <polygon points="80,62 126.8,107 43.6,101" fill="#a8331e" fill-opacity="0.15" stroke="#a8331e" stroke-width="1.2"/>
+    <circle cx="80" cy="62" r="2.5" fill="#a8331e"/>
+    <circle cx="126.8" cy="107" r="2.5" fill="#a8331e"/>
+    <circle cx="43.6" cy="101" r="2.5" fill="#a8331e"/>
+    <text x="80" y="14" text-anchor="middle" font-family="'Noto Sans SC',sans-serif" font-size="9" fill="#8b8074" letter-spacing="1">君主</text>
+    <text x="142" y="115" text-anchor="start" font-family="'Noto Sans SC',sans-serif" font-size="9" fill="#8b8074" letter-spacing="1">规训</text>
+    <text x="18" y="115" text-anchor="end" font-family="'Noto Sans SC',sans-serif" font-size="9" fill="#8b8074" letter-spacing="1">生命</text>
+  </svg>
+  <div class="radar-legend">
+    <div class="radar-item"><span>君主权力</span><span>3</span></div>
+    <div class="radar-item"><span>规训权力</span><span>9</span></div>
+    <div class="radar-item"><span>生命权力</span><span>7</span></div>
+  </div>
+</div>
+
+<header>
+  <div class="masthead">
+    <div class="brand">大大<em>黄</em>油</div>
+    <nav class="right">
+      <a href="../../index.html">群岛首页</a>
+      <a href="../index.html">规训群岛</a>
+      <a href="#">关于</a>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">群岛</a>
+  <span class="sep">/</span>
+  <a href="../index.html">规训群岛</a>
+  <span class="sep">/</span>
+  <span class="here">#07 算法不是工具，是新的看守</span>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">规训群岛 · 第七期</div>
+  <h1>算法不是工具，<em>是新的看守</em></h1>
+  <p class="hero-sub">锚定原书：第三编《全景敞视主义》《知识—权力》<br>主轴：Panopticon 的反转——从"被强迫的可见"到"渴望被看见"</p>
+  <p class="hero-lead">边沁1791年画了那张图：少数人看多数人，多数人被迫可见。230年后，那张图最完美的实装不是健康码——是抖音。不是强迫你可见，是<strong>你渴望被那个算法看见</strong>，还会在没人点赞的时候，担心自己已经从世界上消失。</p>
+  <div class="hero-meta">
+    <span><strong>发布日期</strong> 2026.09.01</span>
+    <span><strong>原书</strong> 《规训与惩罚》第三编</span>
+    <span><strong>主轴</strong> Panopticon 的反转</span>
+    <span><strong>案例</strong> 推送算法 · 限流封号 · 行为剩余</span>
+  </div>
+</div>
+
+<!-- SECTION I：边沁画错了一半 -->
+<section id="s1" class="fade-in">
+  <div class="sect-num">一 · 边沁画错了一半</div>
+  <h2 class="sect-title">那张图躺了230年，<em>被反着实装了</em></h2>
+
+  <p>1791年，英国哲学家杰里米·边沁（Jeremy Bentham）画了一张图。他叫它 <em>Panopticon</em>——希腊语 "<em>pan</em>"（全部）+ "<em>opticon</em>"（看见），合起来是"全见"。</p>
+
+  <div class="quote">
+    <p>中心一座瞭望塔，四周一圈环形囚室。每间囚室都对着塔。塔里的看守可以看到任何一间囚室，但囚室里的人看不到塔内的情况。</p>
+    <p>囚徒不知道自己什么时候被看；他必须时刻假定自己正在被看。</p>
+  </div>
+
+  <p>边沁觉得这是一个伟大的发明。他写了一本书向英国政府推销，反复强调它有多经济、多高效、多人道。没人买账。这张图躺了230年。</p>
+
+  <h3>一次错误的"复刻"</h3>
+  <p>健康码那一期我们说过：那张图最完美的实装，是2020年的健康码——少数人在瞭望塔里看多数人，多数人在不知何时被看的恐惧里学会自我审查。</p>
+  <p>但今天回头看，那一期只说对了一半。那张图最完美的实装，<strong>不是健康码</strong>。是抖音。是小红书。是B站，是Instagram，是TikTok，是你每天醒来第一件事打开、睡前最后一件事放下的那个APP。</p>
+  <p>健康码是Panopticon的<strong>字面复刻</strong>——少数人看多数人，多数人被迫可见。而算法社会做的事，是Panopticon的<strong>反转</strong>——</p>
+
+  <div class="versus">
+    <div class="versus-col">
+      <div class="versus-label">边沁的原设计</div>
+      <div class="versus-head">被强迫的可见</div>
+      <div class="versus-body">
+        <p>少数人看多数人。</p>
+        <p>多数人被迫可见。</p>
+        <p>囚徒<em>不知何时被看</em>，被强制可见，<strong>害怕</strong>被看。</p>
+        <p>学会——自我审查。</p>
+      </div>
+    </div>
+    <div class="versus-col">
+      <div class="versus-label active">算法社会的实装</div>
+      <div class="versus-head">渴望被看见</div>
+      <div class="versus-body">
+        <p>多数人渴望被少数人（算法）看见。</p>
+        <p>主动生产可见性。</p>
+        <p>用户<em>被允许"隐身"</em>，<strong>害怕</strong>不被看。</p>
+        <p>学会——<strong>自我推销</strong>。</p>
+      </div>
+    </div>
+  </div>
+
+  <p>Panopticon没有被复刻。它被<strong>翻转</strong>了。那张图躺了230年，最终在2010年代被实装——但是<strong>反着实装</strong>的。</p>
+
+  <h3>福柯的关键判断</h3>
+  <p>福柯在《规训与惩罚》第三编里专门讨论了Panopticon。他说"全景敞视主义"不只是一座监狱——它是<strong>现代社会的一般图式</strong>，学校、医院、工厂、办公室，乃至数字平台，都可以被理解为某种Panopticon的变体。</p>
+  <p>但福柯没有预见的事是：21世纪的数字平台在保留Panopticon底层逻辑（持续可读化、监视的自动化、权力的非个人化）的同时，<strong>反转了它的方向</strong>。边沁的囚徒被强迫可见，所以学会自我审查。21世纪的用户<strong>渴望</strong>被看见，所以学会<strong>自我推销</strong>。</p>
+  <p>他们做的是看上去完全相反的事——一个躲，一个晒。但底层是同一件——<strong>"自我"被外化为可被持续读取、加权、变现的数据</strong>。只是这次，瞭望塔不在监狱中央。它在你口袋里那个APP的某一行代码里。而中心位置上没有看守了——但有一组算法，做着完全相同的工作。</p>
+
+  <div class="pull">边沁那个时代的人无法想象的事是——每个人<strong>主动</strong>把它揣在自己口袋里——还会在没人点赞的时候，担心自己已经从世界上消失。</div>
+</section>
+
+<!-- SECTION II：三种配方 -->
+<section id="s2" class="fade-in">
+  <div class="sect-num">二 · 三种配方</div>
+  <h2 class="sect-title">算法生活的<em>权力配方</em></h2>
+
+  <p>我们日常笼统说的"被算法支配"，其实是<strong>几种权力配方非常不同</strong>的事——</p>
+
+  <div class="configs">
+    <div class="config open" onclick="toggleConfig(this)">
+      <div class="config-label">配方 (a)</div>
+      <div class="config-title">推送算法</div>
+      <div class="config-tag">规训权力主轴 · 你越用越像它预测的样子</div>
+      <div class="config-body">
+        <p>抖音首页推荐、小红书发现页、B站首页、今日头条信息流、知乎首页、YouTube推荐、Netflix首页、Spotify Discover Weekly、Instagram Reels。</p>
+        <p><strong>特征</strong>：你不主动搜，它主动喂；连续滑动让"下一条"永远存在；时间被切成几十秒一段，被算法持续调制。</p>
+        <p><strong>权力主轴</strong>：规训权力（主轴）+ 偶尔的君主性显现——它不强迫你看什么，但你越用越像它预测的样子；偶尔的限流、降权、封号是它戏剧化的"暴力时刻"。</p>
+      </div>
+    </div>
+    <div class="config" onclick="toggleConfig(this)">
+      <div class="config-label">配方 (b)</div>
+      <div class="config-title">评级算法</div>
+      <div class="config-tag">规训 + 治理术 · 连续考核的算法版</div>
+      <div class="config-body">
+        <p>滴滴司机评分、外卖骑手系统派单、淘宝店铺等级、Airbnb房东星级、Uber司机评级、内容创作者的流量权重、招聘平台的"匹配度"、Tinder的"魅力分"。</p>
+        <p><strong>特征</strong>：每个人都是一个被持续计算的"分数"；分数不直接告诉你，但决定你能接什么单、能见什么客户、能被多少人看到、能匹配到什么人。</p>
+        <p><strong>权力主轴</strong>：规训 + 治理术——这是#03钉钉那一期讲过的"连续考核"在劳动力与生活市场的算法版本，也是#06信用分延伸到的"持续分数化"在平台层的早期实装。</p>
+      </div>
+    </div>
+    <div class="config" onclick="toggleConfig(this)">
+      <div class="config-label">配方 (c)</div>
+      <div class="config-title">自愿性数据贡献</div>
+      <div class="config-tag">治理术 + 监视资本主义 · 你在免费生产原料</div>
+      <div class="config-body">
+        <p>发朋友圈、晒小红书、做vlog、写微博、晒LinkedIn履历、给餐厅打5星好评、在淘宝写"已经回购五次了"、给主播刷礼物、为UP主投币三连。</p>
+        <p><strong>特征</strong>：完全自愿、看起来"为自己表达"、有时自带"利他"的色彩。</p>
+        <p><strong>权力主轴</strong>：治理术 + 监视资本主义——你在做的事看上去是"自我表达"，本质上是为平台<strong>免费生产原料</strong>。</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>三种配方共享的深层核心</h3>
+  <p>三类配方权力机制不同，但共享同一个<strong>深层核心</strong>——<strong>自愿可见性作为原料</strong>。让你"想被看见"这件事，每一秒都能被读取、记录、加权、变现。</p>
+
+  <div class="quote">
+    <p>在原Panopticon里，"可见性"是被强加给你的<em>负担</em>。</p>
+    <p>在反转Panopticon里，"可见性"是你<strong>主动追求的资源</strong>——但它的真正受益人，不是你。</p>
+  </div>
+
+  <div class="pull">三种配方不是"不同的人选择不同的方式"——而是同一套逻辑的三种实装路径。每个人身上至少有其中两种在同时运行。下面拆三层来看。</div>
+</section>
+
+
+<!-- SECTION III：君主性 -->
+<section id="s3" class="fade-in">
+  <div class="sect-num">三 · 第一层｜君主性</div>
+  <h2 class="sect-title">限流是21世纪<em>悄无声息的酷刑</em></h2>
+
+  <p>如果福柯今天回到我们当中，他会立刻认出一件事——</p>
+  <p><strong>限流、降权、封号——是算法的君主权力时刻。</strong></p>
+  <p>它具备所有要素，只是被"无声化"——</p>
+
+  <div class="configs">
+    <div class="config open" onclick="toggleConfig(this)">
+      <div class="config-label">君主性要素 ①</div>
+      <div class="config-title">公开</div>
+      <div class="config-tag">账号被封会被截图、会被传播、会被讨论</div>
+      <div class="config-body">
+        <p>封号事件有时成为公开话题——被截图、被转发、被讨论。但更多时候它是"突然没人看了"，让创作者自己在数据后台里发现。这种"有时公开、有时沉默"的混合，让惩罚的可见性本身成了不确定的变量。</p>
+      </div>
+    </div>
+    <div class="config" onclick="toggleConfig(this)">
+      <div class="config-label">君主性要素 ②</div>
+      <div class="config-title">剧场化</div>
+      <div class="config-tag">封号通知是一个完整的小仪式，每一步都有脚本</div>
+      <div class="config-body">
+        <p>突然的弹窗、引用某一条"社区公约"、申诉入口、二次申诉无效、"账号永久封禁"——每一步都有脚本。它看起来是"程序"，实际上是一种剧场：惩罚的每一步都被设计成可以被观察、被传播、被其他创作者看见的形态。</p>
+      </div>
+    </div>
+    <div class="config" onclick="toggleConfig(this)">
+      <div class="config-label">君主性要素 ③</div>
+      <div class="config-title">不对称</div>
+      <div class="config-tag">你不知道触发了哪一条，判决通常不可上诉</div>
+      <div class="config-body">
+        <p>你不知道你为什么被限流。你不知道触发了哪一条规则。你不知道下一个30天会不会解封。判决一旦下来——通常不可上诉。这种不对称，是边沁Panopticon里"看守可以看你但你看不到看守"的算法版本。</p>
+      </div>
+    </div>
+    <div class="config" onclick="toggleConfig(this)">
+      <div class="config-label">君主性要素 ④</div>
+      <div class="config-title">警告效应</div>
+      <div class="config-tag">一个"突然消失"的UP主，比任何社区公约都管用</div>
+      <div class="config-body">
+        <p>一个被封号的大网红、一个"突然消失"的UP主，比任何"社区公约"都管用。所有还在创作的人，都看见了。这正是君主权力的剧场逻辑：惩罚一个人，给所有人看。</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>仪式的下沉</h3>
+  <p>健康码的"亮码通过"还是一个<strong>可见的</strong>仪式——你举起手机、看到颜色、被门卫点头。但算法的君主权力时刻<strong>没有这种可见性</strong>——</p>
+
+  <div class="quote">
+    <p>限流不发通知。</p>
+    <p>降权不发通知。</p>
+    <p>"推荐池"被悄悄拉低也不发通知。</p>
+    <p>你只是发现：同一种内容，上周播放量50万，这周播放量2000。</p>
+  </div>
+
+  <p>这种"无声的暴力"，比有声的暴力更深——因为它<strong>不留指纹</strong>。被限流的创作者，无法明确控诉<em>谁</em>对自己做了什么；甚至无法<em>确认</em>自己被做了什么。只有那种"是不是我哪里得罪了它"的、近似宗教性的不安。</p>
+  <p>这种不安，是21世纪算法平台对所有内容创作者的<strong>柔性规训</strong>。</p>
+
+  <h3>创作者的自我审查</h3>
+  <p>被算法封号一次的人，会一辈子改变自己的创作姿态——</p>
+
+  <div class="checklist">
+    <div class="cl-group">
+      <div class="cl-head">被限流一次之后，创作者主动内化的边界</div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">不再碰"擦边"。不再碰"敏感"。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">不再说一些自己其实想说、但"不知道会不会被判定为不当"的话。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">把可能被算法误读的形容词改成中性词。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">在标题里加几个"安全词"，让算法"看清楚"自己。</span></div>
+    </div>
+  </div>
+
+  <p>每一次"为了平台喜欢"的微调，都不是被强迫的。但每一次微调累加起来，<strong>就是边沁所谓"被监视者自己承担起监视自己"的字面实装</strong>。只是被监视的不再是"行为"，而是"表达"本身。</p>
+</section>
+
+<!-- SECTION IV：规训性 -->
+<section id="s4" class="fade-in">
+  <div class="sect-num">四 · 第二层｜规训性</div>
+  <h2 class="sect-title">Panopticon反转过来——<em>你渴望被看见</em></h2>
+
+  <div class="pull">挂人那一期我们说过：规训权力最完美的胜利，是让你自己承担起监视自己的工作。</div>
+
+  <p>算法时代有一个新版本——</p>
+  <p><strong>规训权力更完美的胜利，是让你自己承担起"生产可见性"的工作。</strong></p>
+  <p>边沁的囚徒被强迫可见——他没有选择"不在监狱里"。21世纪的你被允许"隐身"——你可以不发、不晒、不上线。但你不会用这种允许。因为<em>不被看见 ≈ 不存在</em>。</p>
+  <p>发了朋友圈没人点赞，会失落。发了视频没人转发，会怀疑自己。关注列表里的某个人突然不再给你点赞——你会一整天惦记着这件事。</p>
+
+  <div class="footnote">
+    <strong>先架一道护栏</strong>：渴望被看见，本身不是病。它是人类最古老的社交本能——被注视、被回应、被一个共同体确认"你在这里"，这是人成为人的方式之一，比算法早几万年。<br><br>
+    被算法捕获的，<strong>不是</strong>"你想被看见"这件事本身——是它把"被看见"的<strong>通道收窄到只剩一条</strong>：只有被算法分发、被点赞计数、被推荐权重承认，才算"被看见"。病灶在那个"只剩一条"里。这是机制对你的窄化，不是你的人格缺陷。
+  </div>
+
+  <p>正是在这条被收窄的通道上，它变成一种<strong>比强迫更深的强迫</strong>——它不需要锁链。它把"被看见"装进了你的自我感里。</p>
+
+  <h3>Harcourt：从Panopticon到镜面玻璃屋</h3>
+
+  <div class="theorists">
+    <div class="theorist">
+      <div class="theorist-name">Bernard Harcourt</div>
+      <div class="theorist-book">Exposed: Desire and Disobedience in the Digital Age (2015)</div>
+      <div class="theorist-body">
+        <p>福柯的Panopticon描述的是"被强迫的可见"——囚徒不知何时被看，所以学会自我审查。21世纪的算法社会有一个不同的图示——人们<strong>渴望</strong>被看见。没有人强迫你晒；强迫你的是<em>不晒会感到自己不存在</em>的那种焦虑。</p>
+        <p>Harcourt给出一个让人坐起来的说法：我们正在生活的，不是Panopticon——是<strong>Mirrored Glass House（镜面玻璃屋）</strong>。你以为你在看；其实你在被看。你以为你在表达；其实你在被读取。你以为你在"做自己"；其实你在被聚合成一组指标。而那块玻璃从你这一边看是镜子——你看到的只是你自己被算法回喂过来的影子。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    <strong>标注</strong>："镜面玻璃屋"是Harcourt这本书核心隐喻的概括性还原，不是Harcourt的原话。他在书里用的是"mirrored glass"的多次延伸，但"Mirrored Glass House"作为一个集中比喻是对他整体框架的压缩。读者要看Harcourt的具体表述，请去原书第2、4、7章。
+  </div>
+
+  <h3>算法不只是看你，它在塑造你</h3>
+  <p>福柯第三编里有一节叫"知识—权力"。他在那一节里说了一句话——</p>
+
+  <div class="quote">
+    <p>我们必须停止把"权力"和"知识"理解为两件不同的事——好像权力是"压制"，而知识是"自由的真理"。</p>
+    <p>现代权力最深的一层是：它<strong>生产</strong>关于你的真理。</p>
+    <p>你是什么样的人——这件事在被它"看"之前并不存在；在它"看"完之后才变成"事实"。</p>
+  </div>
+
+  <p>抖音不只是知道你喜欢什么。它在<strong>塑造</strong>你喜欢什么。它先猜你是哪种人，再用推送强化那种人的特征——然后它"看到"的，是它自己塑造出来的你。</p>
+  <p>最讽刺的是——当你说"算法真的太懂我了"的那一刻，你不是在赞美它的"理解"。你是在确认它的"<strong>生产</strong>"已经成功——你已经<em>就是</em>它预测的那个你。</p>
+
+  <h3>Pariser：过滤气泡的早期警告</h3>
+
+  <div class="theorists">
+    <div class="theorist">
+      <div class="theorist-name">Eli Pariser</div>
+      <div class="theorist-book">The Filter Bubble (2011)</div>
+      <div class="theorist-body">
+        <p>当算法越来越精准地"为你定制"内容时，你看到的世界，就会逐渐<strong>只剩下算法认为你想看的世界</strong>。你不再"接触"和你不同的人；你不再"碰到"你不感兴趣的事；你的世界变成一个由算法精心维护的、舒适的、回声的气泡。</p>
+        <p>但2011年的Pariser还<em>没有</em>预见后来发生的事——过滤气泡不只是减少信息多样性。它在<strong>生产新的主体</strong>——一个只习惯于"和自己一致的回声"、对"不一致"产生生理性不适的主体。这种主体不只是被错误信息塑造——他是被"被理解的快感"塑造的。</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>调制：你不再"刷完"</h3>
+  <p>这是钉钉那一期讲过的德勒兹（Gilles Deleuze）"控制社会"——</p>
+
+  <div class="quote">
+    <p>你不再"毕业"，你只是从一种被允许的状态，调制到另一种被允许的状态。</p>
+  </div>
+
+  <p>抖音首页的下一条永远存在。小红书的发现页永远在加载。B站的"推荐"永远在更新。你从来不会"刷完"——只会从一个被算法允许的关注半径里，<strong>调制</strong>到另一个被允许的关注半径。</p>
+
+  <div class="pull">你发现没有？你已经分不清——是你想看那个视频，还是算法想让你想看那个视频。</div>
+
+  <p>而最深的一层——你已经不再问这个问题了。因为你的"想看"和算法的"让你想看"已经<strong>合并</strong>为同一件事。这才是控制社会最完美的形态：不是它"控制"了你，是它<em>成了</em>你想做的事本身。</p>
+</section>
+
+<!-- SECTION V：生命权力 + 治理术 -->
+<section id="s5" class="fade-in">
+  <div class="sect-num">五 · 第三层｜生命权力 + 治理术</div>
+  <h2 class="sect-title">你不是用户，<em>你是原料</em></h2>
+
+  <p>你以为算法是"为你服务的工具"。不是。你以为算法的对象是"你"。不是。</p>
+
+  <h3>Zuboff：监视资本主义与行为剩余</h3>
+
+  <div class="theorists">
+    <div class="theorist">
+      <div class="theorist-name">Shoshana Zuboff</div>
+      <div class="theorist-book">The Age of Surveillance Capitalism (2019)</div>
+      <div class="theorist-body">
+        <p>平台从你身上提取的不止是"你主动给的数据"——名字、地址、生日、消费记录。它真正想要的是"<strong>行为剩余</strong>"（behavioral surplus）——你停留在哪一条视频多停了0.5秒、你在哪一个广告前手指动了一下、你在凌晨三点搜了什么、你打字打到一半删掉的那句话、你犹豫了1.2秒之后才点的那个赞。</p>
+        <p>这些"溢出"的行为数据，是当代资本最重要的<strong>原料</strong>——它被加工、组合、定价，最终被卖回给那些想预测、引导、塑造你下一个决定的人。</p>
+        <p>19世纪的工业资本主义是从地下开采石油。21世纪的监视资本主义是从<strong>人类经验</strong>里开采"行为剩余"。每一次你滑动屏幕，都是在为这个原料链做免费的初级劳动。</p>
+        <p><strong>你不是消费者。你是矿场。</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Rouvroy：算法治理性</h3>
+
+  <div class="theorists">
+    <div class="theorist">
+      <div class="theorist-name">Antoinette Rouvroy</div>
+      <div class="theorist-book">Gouvernementalité algorithmique et perspectives d'émancipation (Réseaux, 2013)</div>
+      <div class="theorist-body">
+        <p>福柯的治理术描述的是这样一种治理形态：它不直接强制个体，而是通过"风险计算""统计""保险""流行病学"等行政技术，引导<em>主体</em>走向特定的状态——但福柯笔下的治理术<strong>仍然预设主体</strong>。</p>
+        <p>算法治理性做的是更深的事——它<strong>完全绕过主体</strong>。它不再关心"你是什么样的人"。它只关心"你这个数据流，未来会向哪一个方向延伸"。而它的预测，不需要你的同意、不需要你的理解、甚至不需要你的存在感。</p>
+        <p>在Rouvroy看来，21世纪权力的真正新形态，不是"监视"——监视至少还要看到一个"被监视者"。是<strong>预测</strong>——预测不需要"被预测者"的同意、理解、参与。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote">
+    <p>你以为你被算法监视。</p>
+    <p>比这更深的事是——算法根本不在乎"你"。它只在乎你这条数据流。而那条数据流，是不是"你"——这件事，对它来说<strong>无关紧要</strong>。</p>
+  </div>
+
+  <h3>把几位放在一起看</h3>
+  <p>福柯、Harcourt、Pariser、Zuboff、Rouvroy——他们看的是同一件事的不同切面——</p>
+
+  <div class="theorists">
+    <div class="theorist">
+      <div class="theorist-name">福柯</div>
+      <div class="theorist-book">《规训与惩罚》第三编（1975）</div>
+      <div class="theorist-body"><p>Panopticon是现代权力的一般图式，核心是"可见性的不对称"——你被看，但不知道何时被看，所以学会<strong>自我审查</strong>。</p></div>
+    </div>
+    <div class="theorist">
+      <div class="theorist-name">Harcourt</div>
+      <div class="theorist-book">Exposed (2015)</div>
+      <div class="theorist-body"><p>21世纪的图示不是Panopticon，是镜面玻璃屋——你<strong>渴望</strong>被看，主动生产可见性。底层逻辑没变，方向反转。</p></div>
+    </div>
+    <div class="theorist">
+      <div class="theorist-name">Pariser</div>
+      <div class="theorist-book">The Filter Bubble (2011)</div>
+      <div class="theorist-body"><p>被算法"理解"的代价是被算法关进一个回声气泡——你看到的世界，是算法认为你想看的世界。</p></div>
+    </div>
+    <div class="theorist">
+      <div class="theorist-name">Zuboff</div>
+      <div class="theorist-book">The Age of Surveillance Capitalism (2019)</div>
+      <div class="theorist-body"><p>算法不在"为你服务"——你是它的<strong>原料矿场</strong>。每一次滑动都是免费的初级劳动。</p></div>
+    </div>
+    <div class="theorist">
+      <div class="theorist-name">Rouvroy</div>
+      <div class="theorist-book">Gouvernementalité algorithmique (2013)</div>
+      <div class="theorist-body"><p>算法不在"看你"——它在<strong>绕过你</strong>。它不需要"主体"，它只需要数据流。</p></div>
+    </div>
+  </div>
+
+  <p>而那张图——就是你在凌晨两点放下手机的那一秒，发现自己已经刷了三个小时、但回想不起来看过什么的那种空——的来源。</p>
+
+  <div class="pull">你的注意力不再是你的，是数据的。你的"自我"不再是你的，是算法的预测对象。</div>
+
+  <h3>但"你"并没有因此消失</h3>
+  <p>如果这一节停在这里，下一节的"那然后呢"就会变得荒谬——既然"我"对算法已经无关紧要，我做任何小动作还有什么意义？所以这里必须先把一件事接住。</p>
+  <p>算法能预测<strong>行为</strong>。它预测不了、也代替不了一些东西——</p>
+  <p>它没法替你<em>无聊</em>。没法替你在一句话面前突然<em>走神</em>。没法替你对一件毫无用处的事，生出一阵说不清的、不通向任何下一步的<em>好奇</em>。没法替你在一个再普通不过的下午，被一种无缘无故的情绪轻轻按住。</p>
+  <p>这些时刻有一个共同点：<strong>它们不产生任何数据事件。</strong>没有点击，没有停留时长，没有一次搜索，没有一个赞——它们不在算法的嘴边漏出来，所以算法读不到。不是它还没学会，是它<strong>没有入口</strong>。</p>
+
+  <div class="footnote">
+    <strong>这里必须和Zuboff的"行为剩余"划清界限</strong>：行为剩余，是你<em>漏出来、被捡走</em>的那部分——你多停的0.5秒、你犹豫的1.2秒。它恰恰是数据，而且是最值钱的数据。这里说的噪点，是<em>根本没漏出来</em>的那部分——它从未成为任何数据事件。一个是被捡走的剩饭；一个是从来没上过桌的东西。两者必须分开，否则"抵抗"会被"连抵抗也是数据"一句话打死。
+  </div>
+
+  <p>那个从未上桌的部分，是算法<strong>啃不动的、不可化约的你</strong>。所以后面整节"那然后呢"，立脚点只有一个，而且足够：<strong>那个啃不动的你，还在。</strong></p>
+</section>
+
+<!-- SECTION VI：不舒服的问题 -->
+<section id="s6" class="fade-in">
+  <div class="sect-num">六 · 一个不舒服的问题</div>
+  <h2 class="sect-title">算法的<em>不对称</em></h2>
+
+  <p>这一节不问"算法对不对"。它问的是——<strong>当一种力量比你更了解你，但你完全不了解它时，你和它的关系还能叫"用"吗</strong>。</p>
+  <p>如果这套机制看上去这么深，为什么我们接受了？因为它<strong>常常确实管用</strong>。抖音让你看到了那些你确实想看的搞笑视频。小红书让你找到了一支真的好用的口红，省下了30分钟在百货公司纠结的时间。B站让你认识了几位你真心喜欢的UP主——没有算法你不会知道他们存在。YouTube推荐里那部你从来没听过的纪录片，确实改变了你的某个想法。Spotify的每周推荐里，确实有几首你听了之后觉得"被理解了"的歌。</p>
+
+  <div class="pull">这些都不是阴谋。否认这一点，是另一种意识形态。</div>
+
+  <p>而且"信息茧房"不是数字时代的发明——传统媒体时代，你只看你父母订的那份报纸、只看7点档新闻联播，茧房一直都在。把"茧房"完全归罪给算法，是省事，也是不诚实。</p>
+
+  <h3>几个绕不开的问题</h3>
+  <p>但这里有一种<strong>真实的张力</strong>——算法的根本问题不是"它给你推什么"，是<strong>算法的不对称性</strong>。它知道你，你不知道它。具体落到生活里——</p>
+
+  <div class="quote">
+    <p><strong>训练数据的不透明</strong>——你不知道它的训练数据来自哪里、来自多少人、来自哪几年。你不知道它的"偏见"是它继承来的，还是它生产的。</p>
+    <p><strong>优化目标的不透明</strong>——你不知道它的优化目标是什么。是"你的体验"、"平台留存"、"广告收入"，还是这三者的某种你看不见的加权？</p>
+    <p><strong>个体反馈的不透明</strong>——你不知道它为什么这一秒推这个、下一秒不推那个。你不知道你的某一个动作在它的模型里被赋予了什么权重。</p>
+    <p><strong>选择集本身的不透明</strong>——你以为你在"选择"——但你的选择集合本身，已经是它给你的。你能选A或B，但你不知道C到Z被它过滤掉了。</p>
+    <p><strong>持续可见性的代价不透明</strong>——你以为"被看见"是免费的好处。但被看见的每一次，你也在被读取、被预测、被定价。你看不见这笔账。</p>
+  </div>
+
+  <p>边沁的Panopticon里至少有一件事是<strong>清楚</strong>的——<em>你知道有一座瞭望塔</em>。算法的反Panopticon里，连这件事都不清楚——你不知道自己正生活在一座瞭望塔里。或者说，那座塔已经不长得像塔了——它长得像一个推送、一个赞、一个"猜你喜欢"。</p>
+
+  <h3>全球框架</h3>
+  <p>这种张力不止在某一处相关。它是一个全球性的问题，不是某一处的特殊处境。</p>
+
+  <div class="global-cases">
+    <div class="gcase">
+      <div class="gcase-flag">欧盟 · DSA 2022</div>
+      <div class="gcase-body">《数字服务法》（Digital Services Act）要求大型平台对"推荐算法"做透明度披露，让用户能选择"非个性化推送"——即便是DSA，也只是要求"透明度披露"，没有要求"算法可被理解"。</div>
+    </div>
+    <div class="gcase">
+      <div class="gcase-flag">美国 · 平台结构性问题</div>
+      <div class="gcase-body">关于某平台的听证会上反复被问到的算法透明度问题——但同样的问题应该被问给所有主要平台，因为<strong>算法不对称是平台的结构性属性</strong>，不是某一家公司的问题。</div>
+    </div>
+    <div class="gcase">
+      <div class="gcase-flag">剑桥分析丑闻 · 2018</div>
+      <div class="gcase-body">2018年剑桥分析丑闻之后，整个学界讨论的中心是：你的数据在被谁、以什么方式、以什么目的使用。这件事至今没有完全解决的答案。</div>
+    </div>
+    <div class="gcase">
+      <div class="gcase-flag">法国 · Rouvroy & Berns</div>
+      <div class="gcase-body">Antoinette Rouvroy与Thomas Berns持续10年讨论"算法治理性"问题；德国《信息技术法》对算法决策可解释性的法律要求——某些算法决策必须能被解释、能被质疑、能被申诉。</div>
+    </div>
+  </div>
+
+  <h3>一个有意的切片</h3>
+  <p>这一篇聚焦的，是消费端的你——刷短视频、发朋友圈、渴望被点赞。但算法权力的全景还有另一端：骑手被倒计时锁死、司机被评分支配、客服被话术系统逐字监控、仓拣被路径算法掐着秒走。</p>
+  <p>一端是"<strong>渴望被看见</strong>"，一端是"<strong>害怕被降级</strong>"。两端合起来，才是完整的算法群岛。<strong>这是有意的切片，不是没看见另一端。</strong>后一端值得单独一篇，而不是在这里被压缩成一个安慰性的补丁。</p>
+
+  <h3>福柯式的更深一问</h3>
+
+  <div class="quote">
+    <p>当一种力量比你更了解你，但你不能反过来了解它时——你和它之间的关系，还能不能叫"使用"？</p>
+    <p>当18世纪的Panopticon图纸，被以21世纪"为你推荐"的名义全面反转实装——那是这套规训技术足够好，还是21世纪的我们还没想清楚"被理解"和"被预测"、"被服务"和"被开采"之间的边界究竟在哪里？</p>
+  </div>
+
+  <p>这是一个真正的开放问题。它指向的不是"卸载所有APP"，也不是"拥抱算法"，而是——<strong>一种我们仍在共同摸索的注意力主权想象</strong>：你能不能在被算法持续读取的同时，保留一小块"它读不到、读不准、读了也回不来"的空间。到 #09 终刊我们会再正面碰它一次。</p>
+</section>
+
+<!-- SECTION VII：那然后呢 -->
+<section id="s7" class="fade-in">
+  <div class="sect-num">七 · 那然后呢</div>
+  <h2 class="sect-title">一个下午的<em>微观抵抗</em></h2>
+
+  <p>关于"我们能做什么"，这个专题留到 #09 终刊正面处理。但这一期可以先说一点。</p>
+
+  <h3>一个下午的实验</h3>
+  <p>想象一下这样的一个下午——你坐在家里，下午3点，手指自动滑向那个APP。但这一次，在解锁之前，你忽然停了5秒。你问自己一个问题：</p>
+
+  <div class="quote">
+    <p>"我刚才想刷的，是抖音里的某个具体的东西——还是抖音本身？"</p>
+  </div>
+
+  <p>如果你答不上来——那就不打开。去倒一杯水。去窗边站一分钟。或者去搜一件你<strong>昨天突然想过、但今天已经想不起来</strong>的事。</p>
+  <p>你打开浏览器，搜一个你从来没搜过的关键词——比如"19世纪法国农村的面包店"、"墨西哥城下水道结构"、"日本江户时代的渔民"。你不需要看完。你只需要让算法<strong>看到你搜了这个</strong>。让它对你的预测<strong>偏一点点</strong>。让它对"你是谁"的那张画像，<strong>多一笔它画不准的线条</strong>。</p>
+  <p>这一个下午没人会看见。它不会改变算法，不会让你"摆脱推荐"。但它是一次极其微小的、几乎没有外部效果的<strong>微观抵抗</strong>——在你和算法之间，留下一点它读不准的你。</p>
+
+  <h3>一个必要的承认</h3>
+  <p>下面的反向引导清单都是<strong>个体层面的最低限度操作</strong>。它们不解决结构问题——平台资本对人的注意力的全面开采、算法决策对劳动力市场的隐性塑造、推荐系统对社会信息生态的长期影响——这些<strong>不是单个用户选择能改变</strong>的。</p>
+  <p>事实上，监视资本主义对个体最深的一刀，<em>恰恰</em>是这个前提——它让结构性问题被翻译成"用户选择题"。我们仍然需要一种更大的对话：关于算法透明度、关于数据自决、关于平台垄断。这种对话留到 #09。</p>
+  <p>但<strong>在那种对话发生之前</strong>——福柯生命的最后几年提出的"反向引导"（contre-conduite）概念，到了算法时代有它具体的形态——</p>
+
+  <div class="checklist">
+    <div class="cl-group">
+      <div class="cl-head">关于推送</div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">每周<strong>主动清理一次推荐池</strong>：取关那些"看了一眼以后再也不想看"的账号、屏蔽那些让你烦躁的标签。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">在"不感兴趣"按钮上<strong>多花一点心思</strong>——不要只在被冒犯时点，主动用它"教育"算法。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">隔一段时间清掉浏览历史、清掉搜索历史——给算法一个"我和上周不是同一个人"的小信号。</span></div>
+    </div>
+    <div class="cl-group">
+      <div class="cl-head">关于"逗弄"算法——这不是策略，是姿态</div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">偶尔<strong>搜一个完全无关的关键词</strong>——不是为了"骗过算法"，只是在数据流上留一个噪点。它只证明一件事：你的注意力，还有<strong>浪费的权利</strong>。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">每周读一个跟你毫无关系、也不打算"有用"的东西——19世纪的制糖史、一种你永远不会养的鱼。不为开阔视野，不为反算法，纯粹因为它没用。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">在被一条推送带着情绪刷了一小时之后，<strong>关掉它，去发会儿呆</strong>——不是去"搜一个反向视角"（那还是在喂数据），是去做一件不产生任何数据事件的事。</span></div>
+    </div>
+    <div class="cl-group">
+      <div class="cl-head">关于"被看见"的姿态</div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">试试<strong>不发朋友圈一周</strong>——看看自己是否还存在。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">试试<strong>关掉点赞数显示</strong>（部分平台有这个选项）——看看你还会不会发。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">在发任何东西前，<strong>停一秒</strong>，问自己一次"我是想表达，还是想被看见？"——区分这两件事。</span></div>
+    </div>
+    <div class="cl-group">
+      <div class="cl-head">关于"屏幕时间"的姿态</div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">给手机<strong>定一个"不能解锁"的时段</strong>（iOS的"屏幕使用时间" / Android的"数字健康"都有）——哪怕只是30分钟。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">把高频APP<strong>搬出第一屏</strong>——制造一个3秒的摩擦力。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">睡前<strong>把手机放在另一个房间</strong>——让早晨的第一件事不是被算法接管。</span></div>
+    </div>
+    <div class="cl-group">
+      <div class="cl-head">关于"5星"的姿态</div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">在每一次系统问"愿意分享你的体验吗"时，<strong>停一秒</strong>，问自己一次"我想分享，还是它在让我想分享？"</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">不为商品写"已经回购五次了"的好评——除非这件事本身让你<em>真的</em>想说。</span></div>
+    </div>
+  </div>
+
+  <p>这些动作小到几乎看不见。它们不会让你"摆脱算法"——这个时代没人能摆脱。但它们能让你在被算法持续读取的人生里，保留一小块"<strong>读不准</strong>"的空间。而这块空间，是任何更大可能性的前提。</p>
+
+  <div class="pull">算法时代的反向引导——在每一次手指自动滑向那个APP之前，停一秒钟，问自己一次"我是想看，还是它在让我想看？"那一秒不会改变算法。但它会改变你和算法的关系。</div>
+
+  <h3>本期【那然后呢墙】三问</h3>
+  <div class="questions">
+    <div class="wall-q">
+      <div class="wq-num">01</div>
+      <div class="wq-text">你最近一次刷完一小时短视频，抬起头的那一刻——你<strong>记得自己看了什么吗</strong>？你看的那些东西，是你"想看"的，还是它"让你想看"的？</div>
+    </div>
+    <div class="wall-q">
+      <div class="wq-num">02</div>
+      <div class="wq-text">如果明天所有的推荐算法都消失——只剩"按时间排序"或"自己搜索"——你的一天会变成什么样？你能想象吗？</div>
+    </div>
+    <div class="wall-q">
+      <div class="wq-num">03</div>
+      <div class="wq-text">你<strong>一周不发任何朋友圈、不发任何小红书、不发任何微博</strong>——你会觉得自己"消失"了吗？如果会，那个"会消失的你"，是真的你，还是平台预测的你？</div>
+    </div>
+  </div>
+  <p style="font-family:var(--sans);font-size:13px;color:var(--ink-faint);line-height:1.7;">留言可匿名。月底我们会做一次"墙的回声"——把本期墙上最有代表性的几条留言（征得同意后）整合进一篇短札。</p>
+
+  <h3>本期互动模块</h3>
+  <div class="modules modules-wide">
+    <div class="module">
+      <div class="module-icon">🪞</div>
+      <div class="module-title">"算法画像"反推器</div>
+      <div class="module-desc">输入你最近10条点赞过的内容，自动反推算法眼里的你——"24–28岁，焦虑型，对身材有持续不满，关注'轻奢但平价'……"。让你看见算法眼里的你长什么样。</div>
+    </div>
+    <div class="module">
+      <div class="module-icon">⚖️</div>
+      <div class="module-title">今天你为算法生产了多少剩余</div>
+      <div class="module-desc">估算器——输入你今天用过的APP和大约时长，反讽地计算你"今天为平台生产了多少行为剩余、市价大约多少美分"。</div>
+    </div>
+    <div class="module">
+      <div class="module-icon">🐟</div>
+      <div class="module-title">"浪费一下"许可证</div>
+      <div class="module-desc">每周给你一件纯粹没用的小事（读一段制糖史、看十分钟你永远不会养的鱼、对着窗户发会儿呆）——它不追踪效果，因为它的全部意义就是不产生任何可计量的结果。</div>
+    </div>
+    <div class="module">
+      <div class="module-icon">💬</div>
+      <div class="module-title">那然后呢墙</div>
+      <div class="module-desc">本期三问留言聚合。你的回答会与其他读者的一起出现在这里——匿名，按时间排序，不被算法加权。</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION VIII：最后一句 -->
+<section id="s8" class="fade-in">
+  <div class="sect-num">八 · 最后一句</div>
+  <h2 class="sect-title">边沁的<em>最终讽刺</em></h2>
+
+  <div class="quote">
+    <p>边沁画那张图时，他相信他设计的是一座<strong>看守看囚徒</strong>的监狱。</p>
+    <p>230年过去了，他那张图最完美的实装——</p>
+    <p>是每个人渴望被看守，还会担心看守今天忘了看自己。</p>
+  </div>
+
+  <div class="divider"></div>
+</section>
+
+<!-- 延伸阅读 -->
+<div class="coda">
+  <div class="coda-title">本期延伸阅读</div>
+  <ul class="reading-list">
+    <li>福柯《规训与惩罚》第三编 III "全景敞视主义" + 第三编 II 第3节"考试"（刘北成、杨远婴译，三联书店）</li>
+    <li>福柯《知识—权力》相关访谈（收录于 <em>Power/Knowledge</em>, ed. Colin Gordon, 1980）</li>
+    <li>Bernard E. Harcourt, <em>Exposed: Desire and Disobedience in the Digital Age</em> (2015) ——镜面玻璃屋</li>
+    <li>Shoshana Zuboff, <em>The Age of Surveillance Capitalism</em> (2019) ——行为剩余、原料、监视资本主义</li>
+    <li>Antoinette Rouvroy &amp; Thomas Berns, <em>Gouvernementalité algorithmique et perspectives d'émancipation</em> (Réseaux, 2013) ——算法治理性</li>
+    <li>Eli Pariser, <em>The Filter Bubble</em> (2011) ——过滤气泡</li>
+    <li>Cathy O'Neil, <em>Weapons of Math Destruction</em> (2016) ——数学杀伤性武器</li>
+    <li>Frank Pasquale, <em>The Black Box Society</em> (2015) ——黑箱社会</li>
+    <li>Helen Nissenbaum, <em>Privacy in Context</em> (2010) ——语境完整性</li>
+    <li>韩炳哲《精神政治学》（中信出版社中译本）——参考 #02 已展开</li>
+    <li>本站【#02 健康码】——Panopticon的字面实装（与本期反转实装互为镜像）</li>
+    <li>本站【#01 挂人】——流量作为"算法导演"的早期形态</li>
+  </ul>
+  <p style="margin-top:24px;font-family:var(--sans);font-size:12px;line-height:1.7;color:var(--ink-faint);">本站所有原书引文以"刘北成、杨远婴译，三联书店2019年版"为准；Harcourt、Zuboff、Rouvroy、Pariser的引述为对其框架的概括性还原，原文请参考延伸阅读所列书目。本专栏文字遵循 CC BY-NC 4.0 协议，转载请注明出处。</p>
+</div>
+
+<!-- 下期预告 -->
+<div class="next-issue">
+  <div>
+    <div class="ni-label">下期预告</div>
+    <div class="ni-title">#08《催婚与三胎：卧室里的人口政治》</div>
+    <div class="ni-date">双周二上线 · 第一个开放问题已挂在【那然后呢墙】</div>
+  </div>
+  <a href="../08-催婚三胎/index.html" class="ni-arrow">→</a>
+</div>
+
+<script>
+function toggleConfig(el) {
+  const isOpen = el.classList.contains('open');
+  el.closest('.configs').querySelectorAll('.config').forEach(c => c.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+const radarFloat = document.getElementById('radarFloat');
+const hero = document.querySelector('.hero');
+if (hero && radarFloat) {
+  const obs = new IntersectionObserver(entries => {
+    radarFloat.classList.toggle('visible', !entries[0].isIntersecting);
+  }, { threshold: 0.1 });
+  obs.observe(hero);
+}
+
+const fadeEls = document.querySelectorAll('.fade-in');
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+fadeEls.forEach(el => fadeObs.observe(el));
+</script>
+</body>
+</html>

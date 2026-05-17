@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>规训群岛｜#08 催婚与三胎：卧室里的人口政治</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+  :root {
+    --bg: #f5f1ea; --paper: #ede7dc; --paper-deep: #e4ddd0;
+    --ink: #1a1614; --ink-soft: #4a4239; --ink-faint: #8b8074;
+    --accent: #a8331e; --accent-soft: #c97560; --rule: #d3c9b8;
+    --serif: 'Noto Serif SC', Georgia, serif;
+    --sans: 'Noto Sans SC', -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 17px; line-height: 1.85; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+  .masthead { border-bottom: 1px solid var(--rule); padding: 18px 32px; display: flex; justify-content: space-between; align-items: baseline; font-family: var(--sans); font-size: 12px; letter-spacing: 0.2em; color: var(--ink-faint); max-width: 1100px; margin: 0 auto; }
+  .masthead .brand { color: var(--ink); font-weight: 500; letter-spacing: 0.3em; }
+  .masthead .brand em { font-style: normal; color: var(--accent); }
+  .masthead .right { display: flex; gap: 24px; }
+  .masthead a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .masthead a:hover { color: var(--accent); }
+
+  .breadcrumb { max-width: 760px; margin: 0 auto; padding: 20px 32px 0; font-family: var(--sans); font-size: 11px; letter-spacing: 0.15em; color: var(--ink-faint); }
+  .breadcrumb a { color: var(--ink-faint); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { margin: 0 10px; }
+  .breadcrumb .here { color: var(--ink); }
+
+  .hero { min-height: 88vh; padding: 80px 32px 48px; display: flex; flex-direction: column; justify-content: center; max-width: 760px; margin: 0 auto; position: relative; }
+  .hero::before { content: "#08"; position: absolute; top: 60px; right: 32px; font-family: var(--serif); font-size: 14px; letter-spacing: 0.4em; color: var(--ink-faint); }
+  .hero-eyebrow { font-family: var(--sans); font-size: 12px; letter-spacing: 0.3em; color: var(--accent); margin-bottom: 36px; text-transform: uppercase; font-weight: 500; }
+  .hero h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(34px, 5.5vw, 58px); line-height: 1.18; letter-spacing: -0.02em; margin-bottom: 28px; }
+  .hero h1 em { font-style: italic; color: var(--accent); font-weight: 600; }
+  .hero-sub { font-family: var(--serif); font-size: 20px; line-height: 1.65; color: var(--ink-soft); margin-bottom: 36px; font-style: italic; }
+  .hero-lead { font-size: 16.5px; line-height: 1.8; color: var(--ink-soft); max-width: 600px; margin-bottom: 48px; }
+  .hero-meta { font-family: var(--sans); font-size: 12px; letter-spacing: 0.15em; color: var(--ink-faint); display: flex; gap: 32px; flex-wrap: wrap; border-top: 1px solid var(--rule); padding-top: 24px; }
+  .hero-meta span { display: flex; align-items: baseline; gap: 8px; }
+  .hero-meta strong { color: var(--ink); font-weight: 500; }
+
+  section { max-width: 760px; margin: 0 auto; padding: 80px 32px; position: relative; }
+  .sect-num { font-family: var(--sans); font-size: 11px; letter-spacing: 0.4em; color: var(--accent); text-transform: uppercase; margin-bottom: 16px; font-weight: 500; }
+  .sect-title { font-family: var(--serif); font-weight: 500; font-size: clamp(26px, 4vw, 38px); line-height: 1.25; margin-bottom: 32px; letter-spacing: -0.01em; }
+  .sect-title em { font-style: italic; color: var(--accent); }
+  p { margin-bottom: 22px; color: var(--ink-soft); }
+  p strong { color: var(--ink); font-weight: 600; }
+  p em { font-style: italic; }
+  h3 { font-family: var(--serif); font-weight: 600; font-size: 21px; color: var(--ink); margin: 44px 0 16px; line-height: 1.35; }
+
+  .quote { background: var(--paper); border-left: 3px solid var(--accent); padding: 28px 32px; margin: 36px 0; font-family: var(--serif); font-size: 17px; line-height: 1.8; color: var(--ink); }
+  .quote p { color: var(--ink); margin-bottom: 14px; }
+  .quote p:last-child { margin-bottom: 0; }
+  .quote-source { display: block; margin-top: 16px; font-family: var(--sans); font-size: 11px; letter-spacing: 0.18em; color: var(--ink-faint); text-transform: uppercase; }
+
+  .footnote { background: var(--paper); border-left: 2px solid var(--rule); padding: 20px 28px; margin: 28px 0; font-family: var(--serif); font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .footnote strong { color: var(--ink); }
+
+  .pull { font-family: var(--serif); font-style: italic; font-size: 21px; line-height: 1.55; color: var(--ink); border-left: 2px solid var(--accent); padding: 8px 0 8px 24px; margin: 32px 0; }
+
+  .divider { text-align: center; color: var(--rule); font-size: 18px; letter-spacing: 1em; padding: 24px 0; }
+  .divider::before { content: "·   ·   ·"; }
+
+  .configs { margin: 36px 0; }
+  .config { border: 1px solid var(--rule); background: var(--paper); padding: 24px 28px; margin-bottom: 10px; border-radius: 2px; cursor: pointer; transition: border-color 0.25s, background 0.25s; }
+  .config:hover { border-color: var(--accent-soft); }
+  .config.open { border-color: var(--accent); background: var(--bg); }
+  .config-label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; font-weight: 600; }
+  .config-title { font-family: var(--serif); font-size: 19px; font-weight: 500; color: var(--ink); line-height: 1.4; margin-bottom: 4px; }
+  .config-tag { font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--ink-faint); }
+  .config.open .config-tag { color: var(--accent); }
+  .config-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, margin-top 0.4s ease; font-size: 15.5px; line-height: 1.8; color: var(--ink-soft); }
+  .config.open .config-body { max-height: 800px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--rule); }
+  .config-body p { margin-bottom: 8px; color: var(--ink-soft); }
+  .config-body strong { color: var(--ink); }
+
+  .theorists { margin: 36px 0; }
+  .theorist { background: var(--paper); border-left: 3px solid var(--accent); padding: 22px 26px; margin-bottom: 10px; }
+  .theorist-name { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 2px; line-height: 1.3; }
+  .theorist-book { font-family: var(--serif); font-style: italic; font-size: 13px; color: var(--ink-faint); margin-bottom: 12px; }
+  .theorist-body { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .theorist-body strong { color: var(--ink); }
+  .theorist-body p { margin-bottom: 8px; color: var(--ink-soft); }
+
+  .versus { margin: 36px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--rule); }
+  .versus-col { padding: 28px 26px; border-right: 1px solid var(--rule); }
+  .versus-col:last-child { border-right: none; }
+  .versus-label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 10px; font-weight: 600; }
+  .versus-label.active { color: var(--accent); }
+  .versus-head { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 14px; line-height: 1.35; }
+  .versus-body { font-size: 15px; line-height: 1.75; color: var(--ink-soft); }
+  .versus-body strong { color: var(--ink); }
+  .versus-body em { font-style: italic; color: var(--accent-soft); }
+  .versus-body p { margin-bottom: 10px; color: var(--ink-soft); }
+
+  .global-cases { margin: 36px 0; }
+  .gcase { border-left: 3px solid var(--accent-soft); padding: 18px 22px; margin-bottom: 12px; background: var(--paper); }
+  .gcase-flag { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; color: var(--accent); text-transform: uppercase; font-weight: 600; margin-bottom: 6px; }
+  .gcase-body { font-size: 15.5px; line-height: 1.75; color: var(--ink-soft); }
+  .gcase-body strong { color: var(--ink); }
+
+  .checklist { margin: 36px 0; }
+  .cl-group { margin-bottom: 28px; }
+  .cl-head { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+  .cl-item { display: grid; grid-template-columns: 16px 1fr; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--paper-deep); align-items: start; }
+  .cl-item:last-child { border-bottom: none; }
+  .cl-dot { color: var(--accent); margin-top: 3px; font-size: 14px; }
+  .cl-text { font-size: 15.5px; line-height: 1.75; color: var(--ink-soft); }
+  .cl-text strong { color: var(--ink); }
+
+  .questions { margin: 36px 0; }
+  .wall-q { padding: 22px 0; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 22px 1fr; gap: 16px; align-items: start; }
+  .wall-q:last-child { border-bottom: 1px solid var(--rule); }
+  .wq-num { font-family: var(--serif); font-size: 22px; font-weight: 300; color: var(--accent); line-height: 1.5; }
+  .wq-text { font-size: 16px; line-height: 1.75; color: var(--ink-soft); }
+  .wq-text strong { color: var(--ink); }
+
+  .modules { margin: 36px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .modules-wide { grid-template-columns: repeat(2, 1fr); }
+  .module { border: 1px solid var(--rule); padding: 22px 18px; background: var(--paper); cursor: pointer; transition: border-color 0.25s, background 0.25s; }
+  .module:hover { border-color: var(--accent); background: var(--bg); }
+  .module-icon { font-size: 22px; margin-bottom: 10px; }
+  .module-title { font-family: var(--serif); font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px; line-height: 1.35; }
+  .module-desc { font-family: var(--sans); font-size: 12px; line-height: 1.6; color: var(--ink-faint); }
+
+  /* 婚恋简历表格 */
+  .resume-table { width: 100%; border-collapse: collapse; margin: 28px 0; font-family: var(--serif); font-size: 15px; }
+  .resume-table th { background: var(--ink); color: var(--bg); padding: 12px 16px; text-align: left; font-weight: 500; letter-spacing: 0.05em; font-size: 13px; }
+  .resume-table td { padding: 11px 16px; border-bottom: 1px solid var(--rule); color: var(--ink-soft); line-height: 1.65; }
+  .resume-table td:first-child { color: var(--ink); font-weight: 500; white-space: nowrap; }
+  .resume-table tr:last-child td { border-bottom: none; }
+  .resume-table tr:nth-child(even) td { background: var(--paper); }
+
+  /* 人口政策时间轴 */
+  .timeline { margin: 36px 0; }
+  .tl-item { display: grid; grid-template-columns: 80px 1fr; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--paper-deep); align-items: start; }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-year { font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--accent); letter-spacing: 0.05em; padding-top: 2px; }
+  .tl-text { font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
+  .tl-text strong { color: var(--ink); }
+
+  /* 路状态链 */
+  .state-chain { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0; }
+  .state-tag { font-family: var(--sans); font-size: 12px; padding: 5px 12px; border: 1px solid var(--rule); color: var(--ink-soft); background: var(--paper); letter-spacing: 0.05em; }
+  .state-tag.active { border-color: var(--accent); color: var(--accent); background: var(--bg); }
+  .state-arrow { font-family: var(--sans); font-size: 12px; color: var(--ink-faint); align-self: center; }
+
+  .radar-float { position: fixed; top: 80px; right: 32px; width: 136px; background: var(--paper); border: 1px solid var(--rule); padding: 14px; z-index: 100; opacity: 0; transform: translateX(12px); transition: opacity 0.5s ease, transform 0.5s ease; pointer-events: none; }
+  .radar-float.visible { opacity: 1; transform: translateX(0); }
+  .radar-label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; text-align: center; }
+  .radar-svg { display: block; width: 100%; }
+  .radar-legend { margin-top: 10px; display: flex; flex-direction: column; gap: 3px; }
+  .radar-item { display: flex; justify-content: space-between; font-family: var(--sans); font-size: 9px; letter-spacing: 0.1em; color: var(--ink-faint); }
+  .radar-item span:last-child { color: var(--accent); font-weight: 600; }
+
+  .coda { background: var(--paper-deep); border-top: 1px solid var(--rule); max-width: 760px; margin: 0 auto; padding: 60px 32px; }
+  .coda-title { font-family: var(--sans); font-size: 11px; letter-spacing: 0.3em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 20px; font-weight: 600; }
+  .reading-list { list-style: none; border-top: 1px solid var(--rule); }
+  .reading-list li { padding: 12px 0; border-bottom: 1px solid var(--rule); font-family: var(--serif); font-size: 14.5px; line-height: 1.65; color: var(--ink-soft); }
+  .reading-list li::before { content: "→  "; color: var(--accent); }
+
+  .next-issue { max-width: 760px; margin: 0 auto; padding: 48px 32px 80px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 32px; }
+  .ni-label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.3em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 8px; }
+  .ni-title { font-family: var(--serif); font-size: 20px; font-weight: 500; color: var(--ink); line-height: 1.35; }
+  .ni-date { font-family: var(--sans); font-size: 12px; color: var(--ink-faint); margin-top: 6px; }
+  .ni-arrow { font-family: var(--serif); font-size: 28px; color: var(--accent-soft); transition: color 0.2s, transform 0.2s; }
+  .ni-arrow:hover { color: var(--accent); transform: translateX(4px); }
+
+  .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  section + section { border-top: 1px solid var(--rule); }
+
+  @media (max-width: 600px) {
+    .masthead { padding: 14px 20px; flex-direction: column; gap: 8px; }
+    .breadcrumb, .hero, section, .coda, .next-issue { padding-left: 20px; padding-right: 20px; }
+    .hero { min-height: 70vh; padding-top: 60px; }
+    .versus { grid-template-columns: 1fr; }
+    .versus-col { border-right: none; border-bottom: 1px solid var(--rule); }
+    .versus-col:last-child { border-bottom: none; }
+    .modules, .modules-wide { grid-template-columns: 1fr; }
+    .radar-float { display: none; }
+    .resume-table { font-size: 13px; }
+    .resume-table th, .resume-table td { padding: 9px 10px; }
+    .tl-item { grid-template-columns: 60px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 浮动雷达 君主7 / 规训8 / 生命10 -->
+<!-- 计算：君主7: (80, 80-42)=(80,38) 规训8: (80+41.6, 80+24)=(121.6,104) 生命10: (80-52, 80+30)=(28,110) -->
+<div class="radar-float" id="radarFloat">
+  <div class="radar-label">权力图谱</div>
+  <svg class="radar-svg" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="#d3c9b8" stroke-width="0.5" fill="none">
+      <polygon points="80,44 106,59 106,89 80,104 54,89 54,59" opacity="0.4"/>
+      <polygon points="80,32 114,51 114,93 80,112 46,93 46,51" opacity="0.3"/>
+      <polygon points="80,20 122,43 122,97 80,120 38,97 38,43" opacity="0.25"/>
+      <polygon points="80,56 98,67 98,85 80,96 62,85 62,67" opacity="0.45"/>
+      <polygon points="80,68 90,75 90,81 80,88 70,81 70,75" opacity="0.5"/>
+    </g>
+    <line x1="80" y1="80" x2="80" y2="20" stroke="#d3c9b8" stroke-width="0.6"/>
+    <line x1="80" y1="80" x2="132" y2="110" stroke="#d3c9b8" stroke-width="0.6"/>
+    <line x1="80" y1="80" x2="28" y2="110" stroke="#d3c9b8" stroke-width="0.6"/>
+    <!-- 君主7: (80,38), 规训8: (121.6,104), 生命10: (28,110) -->
+    <polygon points="80,38 121.6,104 28,110" fill="#a8331e" fill-opacity="0.15" stroke="#a8331e" stroke-width="1.2"/>
+    <circle cx="80" cy="38" r="2.5" fill="#a8331e"/>
+    <circle cx="121.6" cy="104" r="2.5" fill="#a8331e"/>
+    <circle cx="28" cy="110" r="2.5" fill="#a8331e"/>
+    <text x="80" y="14" text-anchor="middle" font-family="'Noto Sans SC',sans-serif" font-size="9" fill="#8b8074" letter-spacing="1">君主</text>
+    <text x="142" y="115" text-anchor="start" font-family="'Noto Sans SC',sans-serif" font-size="9" fill="#8b8074" letter-spacing="1">规训</text>
+    <text x="18" y="115" text-anchor="end" font-family="'Noto Sans SC',sans-serif" font-size="9" fill="#8b8074" letter-spacing="1">生命</text>
+  </svg>
+  <div class="radar-legend">
+    <div class="radar-item"><span>君主权力</span><span>7</span></div>
+    <div class="radar-item"><span>规训权力</span><span>8</span></div>
+    <div class="radar-item"><span>生命权力</span><span>10</span></div>
+  </div>
+</div>
+
+<header>
+  <div class="masthead">
+    <div class="brand">大大<em>黄</em>油</div>
+    <nav class="right">
+      <a href="../../index.html">群岛首页</a>
+      <a href="../index.html">规训群岛</a>
+      <a href="#">关于</a>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="../../index.html">群岛</a>
+  <span class="sep">/</span>
+  <a href="../index.html">规训群岛</a>
+  <span class="sep">/</span>
+  <span class="here">#08 催婚与三胎：卧室里的人口政治</span>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">规训群岛 · 第八期</div>
+  <h1>催婚与三胎：<em>卧室里的人口政治</em></h1>
+  <p class="hero-sub">锚定原书：第三编《规训》+《性史》第一卷+《必须保卫社会》<br>主轴：生命权力——卧室作为人口治理的最末端工坊</p>
+  <p class="hero-lead">1798年，马尔萨斯的一本小册子第一次把"卧室里发生的事"变成国家治理对象。228年后，那本小册子没有被收回。它只是从国会大厦走进了你家饭桌——走进了你妈妈的微信、你过年回家时所有亲戚的客厅、相亲软件的"是否计划近期生育"那一栏。<strong>每个人主动替它传话，还以为自己说的是"关心"。</strong></p>
+  <div class="hero-meta">
+    <span><strong>发布日期</strong> 2026.10.01</span>
+    <span><strong>原书</strong> 《规训与惩罚》第三编 + 《性史》第一卷</span>
+    <span><strong>主轴</strong> 生命权力 · 卧室作为治理末端</span>
+    <span><strong>案例</strong> 催婚催生 · 相亲市场 · 生育力商品化</span>
+  </div>
+</div>
+
+<!-- 立场声明 -->
+<div style="max-width:760px;margin:0 auto;padding:0 32px;">
+  <div class="footnote">
+    <strong>本期写作立场声明</strong>：本期分析对象是"人口政治"作为一种<strong>全球性的治理技术</strong>。文中所有具体政策——无论哪个国家、哪个时代——都只作为这一全球现象的版本出现。本期不评价任何具体政策的对错，只分析"政策作为治理技术如何运作"。
+  </div>
+</div>
+
+<!-- SECTION I：1798年的那本小册子 -->
+<section id="s1" class="fade-in">
+  <div class="sect-num">一 · 1798年的那本小册子</div>
+  <h2 class="sect-title">那本小册子，<em>228年没有被收回</em></h2>
+
+  <p>1798年，伦敦。一位英国乡村牧师匿名出版了一本小册子，叫《人口论》（<em>An Essay on the Principle of Population</em>）。作者叫<strong>托马斯·罗伯特·马尔萨斯</strong>（Thomas Robert Malthus）。</p>
+
+  <div class="quote">
+    <p>人口的增长是<strong>几何级数</strong>（2, 4, 8, 16, 32…）。食物的增长是<strong>算术级数</strong>（1, 2, 3, 4, 5…）。</p>
+    <p>总有一天，人口会超过食物能养活的极限。到那一刻，等待人类的是——<strong>饥荒、瘟疫、战争</strong>。</p>
+    <p>结论：<strong>国家必须管理人口。</strong></p>
+  </div>
+
+  <p>不是管理某一个家庭、某一个母亲、某一个孩子。是管理"人口"这个<strong>抽象的数学对象</strong>——它的出生率、死亡率、流行病曲线、年龄结构、生育意愿。</p>
+  <p>这是人类历史上第一次，"卧室里发生的事"——什么时候结婚、什么时候生孩子、生几个——被<strong>作为一个国家治理对象</strong>正式提出。</p>
+
+  <h3>马尔萨斯之后：一条没有被收回的线</h3>
+  <p>这本小册子躺了228年。它从来没有被收回过。它只是换了名字——</p>
+
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">19世纪</div><div class="tl-text"><strong>法国</strong>：生育率下降的国家恐慌——法国是欧洲最早出现生育率持续下降的国家，整个19世纪的法国知识界都在讨论"法兰西民族是否在衰退"。</div></div>
+    <div class="tl-item"><div class="tl-year">1883</div><div class="tl-text"><strong>英国</strong>：Francis Galton创造"优生学"（eugenics）一词——这是马尔萨斯式人口学最黑暗的延伸。</div></div>
+    <div class="tl-item"><div class="tl-year">1930s</div><div class="tl-text"><strong>纳粹德国</strong>：叫"种族人口政策"——优生学被推向种族灭绝。</div></div>
+    <div class="tl-item"><div class="tl-year">1934/1955</div><div class="tl-text"><strong>苏联</strong>：1934年"为补充人口禁止堕胎"；1955年又"为缓解女性劳动力压力重新合法化堕胎"——同一个国家，二十年里两次掉头。</div></div>
+    <div class="tl-item"><div class="tl-year">1966</div><div class="tl-text"><strong>罗马尼亚</strong>："770号法令"——禁止避孕和堕胎，强制每个适龄女性"为国家生孩子"。二十多年后留下1989年政权崩溃时震惊世界的孤儿院——十万名被要求生下、却无人抚养的孩子。</div></div>
+    <div class="tl-item"><div class="tl-year">1968</div><div class="tl-text"><strong>美国</strong>：保罗·埃利希的《人口炸弹》引发全球性恐慌——这一次"人口太多"成了问题。</div></div>
+    <div class="tl-item"><div class="tl-year">1970s</div><div class="tl-text"><strong>印度</strong>："强制绝育运动"——当时的政府对穷人和下层种姓的大规模绝育。</div></div>
+    <div class="tl-item"><div class="tl-year">1980s</div><div class="tl-text"><strong>新加坡</strong>："优生婚配项目"——鼓励高学历女性多生、对低学历女性提供绝育补贴，把Stoler那条"分层"逻辑写成了明文。</div></div>
+    <div class="tl-item"><div class="tl-year">2019</div><div class="tl-text"><strong>匈牙利</strong>："四个孩子免税终身"——一种"反移民式鼓励生育"。</div></div>
+    <div class="tl-item"><div class="tl-year">2022–</div><div class="tl-text"><strong>多个东亚经济体</strong>："少子化对策""育儿支援""生育友好型社会"。每一个名字，都温柔过它的上一个。</div></div>
+  </div>
+
+  <p>今天它有几个最温柔的名字——它叫"什么时候结婚啊"，它叫"该要孩子了吧"，它叫"再不生就老了"。</p>
+  <p>228年过去了。那本小册子没有被收回。它只是从国会大厦走进了你家<strong>饭桌</strong>——走进了你妈妈的微信、你婆婆的电话、你过年回家时所有亲戚的客厅、相亲软件的"是否计划近期生育"那一栏。</p>
+
+  <div class="pull">而这一次最聪明的地方在于——没有人口办，没有红头文件，没有上门的专员。每个人主动替它传话——还以为自己说的是"关心"。</div>
+
+  <h3>福柯的关键判断</h3>
+  <p>福柯在1976年的法兰西学院讲座《必须保卫社会》里，给马尔萨斯之后这条线起了一个名字——<strong>生命权力</strong>（bio-pouvoir）。</p>
+
+  <div class="quote">
+    <p>旧的君主权力的标志性能力是"<strong>让人死，或让人活</strong>"（faire mourir ou laisser vivre）——它的核心是"杀"。</p>
+    <p>新的生命权力的标志性能力是"<strong>让人活，或弃人于死</strong>"（faire vivre ou laisser mourir）——它的核心是"管理生命"。</p>
+    <p>而"人口"——不是"人民"，不是"公民"，是"<strong>人口</strong>"（population）这个统计学对象——是这种新权力的<strong>真正发明物</strong>。</p>
+  </div>
+
+  <div class="footnote">
+    "人口"不是一个自然存在的东西。"人口"是被<strong>发明</strong>出来的——它是马尔萨斯、是统计学、是人口普查、是社保精算共同生产出来的一个治理对象。而当"人口"被发明出来的那一刻——你的卧室，就被划进了它的管辖范围。
+  </div>
+</section>
+
+<!-- SECTION II：三种配方 -->
+<section id="s2" class="fade-in">
+  <div class="sect-num">二 · 婚育生活：三种配方</div>
+  <h2 class="sect-title">同一套逻辑的<em>三种实装路径</em></h2>
+
+  <p>我们日常笼统说的"婚育压力"，其实是<strong>几种权力配方非常不同</strong>的事——</p>
+
+  <div class="configs">
+    <div class="config open" onclick="toggleConfig(this)">
+      <div class="config-label">配方 (a)</div>
+      <div class="config-title">政策性人口管理</div>
+      <div class="config-tag">君主权力主轴 · 戏剧化的政策转向</div>
+      <div class="config-body">
+        <p>生育政策（一胎/二胎/三胎/无限制）、生育补贴、住房补贴、生育假、托育补贴、彩礼限价、晚婚晚育规定、辅助生殖纳入医保。</p>
+        <p><strong>全球对应</strong>：罗马尼亚1966年770号法令、印度1970年代强制绝育、新加坡80年代优生婚配、法国1939年《家庭法典》至今的家庭津贴体系、匈牙利2019年"四孩免税"、韩国2006年起少子化对策、日本1990年"1.57冲击"后少子化白皮书。</p>
+        <p><strong>特征</strong>：戏剧性高、强制力强、有明确"开始"和"调整"。</p>
+        <p><strong>权力主轴</strong>：<strong>君主权力（戏剧化的政策转向）+ 生命权力（指向"人口"作为对象）</strong>。</p>
+      </div>
+    </div>
+    <div class="config" onclick="toggleConfig(this)">
+      <div class="config-label">配方 (b)</div>
+      <div class="config-title">家庭性微观治理</div>
+      <div class="config-tag">规训权力主轴 · 执行者是你最亲的人</div>
+      <div class="config-body">
+        <p>催婚、催生、相亲市场标准化、家庭群压力、过年回家话语、亲戚追问、"再不结就完了"、相亲简历、"你看人家"、彩礼谈判、"为你好"。</p>
+        <p><strong>特征</strong>：日常、亲密、几乎所有人都被卷入、看上去是"关心"。</p>
+        <p><strong>权力主轴</strong>：<strong>规训权力</strong>——把人口政策的目标在饭桌上字面执行，而且执行者是你最亲的人。</p>
+      </div>
+    </div>
+    <div class="config" onclick="toggleConfig(this)">
+      <div class="config-label">配方 (c)</div>
+      <div class="config-title">自愿性生育优化</div>
+      <div class="config-tag">治理术 + 监视资本主义 · 你在主动喂数据</div>
+      <div class="config-body">
+        <p>备孕食谱、孕检套餐、试管婴儿、月子中心、儿童营养优化、早教评估、"科学育儿"、生育力检测、卵子冷冻、AMH检测、"年龄焦虑"应用、生理期APP、"易孕体质"话术、产后修复。</p>
+        <p><strong>特征</strong>：完全主动、看起来"为自己好""为孩子好"、不需要任何外部强制。</p>
+        <p><strong>权力主轴</strong>：<strong>治理术 + 监视资本主义</strong>——你<strong>自己</strong>承担起把自己的身体翻译成"生育力指标"的工作，并把这种翻译体验为"对自己负责"。</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>三种配方共享的深层核心</h3>
+  <p>三类配方权力机制不同，但共享同一个<strong>深层核心</strong>——</p>
+  <p><strong>身体的生育力被翻译成可被治理的人口指标。</strong>让你的卵巢、你的精子、你的子宫、你的婚姻状态、你的生育意愿——每一项都能被国家、被市场、被家庭<strong>反复读取、记录、加权、催促</strong>。</p>
+
+  <div class="quote">
+    <p>A4腰那一期我们说过：身体被驯成了一份永远不能下班的简历。</p>
+    <p>到 #08 是更深的一层——那份简历上<strong>最贵的一栏</strong>，不是你的体脂率。是你的<strong>生育力</strong>——一个被国家、市场、家庭同时盯着的指标。</p>
+  </div>
+
+  <div class="pull">三种配方不是"不同的人选择不同的方式"——而是同一套逻辑的三种实装路径。每个人身上至少有其中两种在同时运行。下面拆三层来看。</div>
+</section>
+
+
+<!-- SECTION III：君主性 -->
+<section id="s3" class="fade-in">
+  <div class="sect-num">三 · 第一层｜君主性</div>
+  <h2 class="sect-title">政策转向，是生命权力的<em>可见仪式</em></h2>
+
+  <div class="footnote">
+    <strong>先说清楚一件事</strong>：这一节不评价任何具体国家的具体政策。它只做一件事——把"人口政策的强力转向"作为一种<strong>普遍性的治理现象</strong>来观察。一个政策"对不对"，是政策科学和民主审议的问题；本期问的是另一个问题——当人口可以被"调向"时，这件事本身揭示了什么。
+  </div>
+
+  <p>如果福柯今天回到我们当中，他会立刻认出一件事——<strong>人口政策的每一次戏剧化转向，都是生命权力的现代仪式。</strong></p>
+  <p>它具备所有要素：</p>
+
+  <div class="configs">
+    <div class="config open" onclick="toggleConfig(this)">
+      <div class="config-label">生命权力仪式要素 ①</div>
+      <div class="config-title">公开</div>
+      <div class="config-tag">所有人都看见——新闻头条、文件红字、宣传海报</div>
+      <div class="config-body">
+        <p>政策转向是公开的事件——它是新闻头条、文件红字、宣传海报、相亲软件的更新条款。它被设计为可见的，因为它的效力部分来自于"所有人都知道新规则"这件事本身。</p>
+      </div>
+    </div>
+    <div class="config" onclick="toggleConfig(this)">
+      <div class="config-label">生命权力仪式要素 ②</div>
+      <div class="config-title">剧场化</div>
+      <div class="config-tag">政策转向有完整的脚本：研讨会→文件→配套措施→宣传→监测→总结</div>
+      <div class="config-body">
+        <p>每一次政策转向都有完整的脚本：研讨会 → 文件发布 → 配套措施 → 宣传动员 → 监测指标 → 阶段总结。它看起来是"程序"，实际上是一种剧场：治理的每一步都被设计成可以被观察、被传播、被执行者和被治理者共同看见的形态。</p>
+      </div>
+    </div>
+    <div class="config" onclick="toggleConfig(this)">
+      <div class="config-label">生命权力仪式要素 ③</div>
+      <div class="config-title">不对称</div>
+      <div class="config-tag">政策的制定逻辑不被讨论，你不知道下一次转向是什么方向</div>
+      <div class="config-body">
+        <p>政策的制定逻辑不被讨论。统计依据不被完整公布。"什么时候转、转向哪、转多久"——你不知道。你只知道它转了，并且你需要相应地调整自己的人生计划——包括你的婚姻时间表和你的生育决策。</p>
+      </div>
+    </div>
+    <div class="config" onclick="toggleConfig(this)">
+      <div class="config-label">生命权力仪式要素 ④</div>
+      <div class="config-title">警告效应</div>
+      <div class="config-tag">当曾经"对的"行为被宣布"该改"了，所有人都看见了</div>
+      <div class="config-body">
+        <p>当一个曾经"对的"行为被宣布"该改"了，所有人都看见了。听话的人学会了"再听一次新话"；没听话的人学会了"以后听话也未必对"。这种不确定性本身，就是生命权力对个体最深的一道印记——你学会了"随时准备调整"。</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>二十世纪的人口政策剧场</h3>
+  <p>这种"政策转向作为仪式"，在20世纪有过太多版本。这里只取两个历史距离足够远、后果足够极端的，作为"治理技术能走多深"的坐标——不是用来类比今天任何地方：</p>
+
+  <div class="versus">
+    <div class="versus-col">
+      <div class="versus-label">罗马尼亚 · 1966年</div>
+      <div class="versus-head">770号法令</div>
+      <div class="versus-body">
+        <p>一纸法令把生育变成国家义务，对适龄女性做例行体检。二十多年后它留下的不是人口，是1989年政权崩溃时震惊世界的"罗马尼亚孤儿院"——<em>十万名被要求生下、却无人抚养的孩子</em>。</p>
+        <p>这是"鼓励生育"能抵达的最黑暗的终点之一。</p>
+      </div>
+    </div>
+    <div class="versus-col">
+      <div class="versus-label active">新加坡 · 1980年代</div>
+      <div class="versus-head">优生婚配项目</div>
+      <div class="versus-body">
+        <p>官方公开按学历区分"谁该多生、谁该少生"，一边为高学历者牵线，一边为低学历者的绝育付费。</p>
+        <p>它把Stoler那条"分层"逻辑，<strong>写成了明文</strong>——"哪种人口值得被繁衍"，从来不是一个隐藏的问题。</p>
+      </div>
+    </div>
+  </div>
+
+  <p>这两个例子是<strong>坐标系</strong>，不是影射——它们让你看见，当"人口"成为一个可调控的对象，这套技术在历史上曾经走到过哪里。</p>
+
+  <h3>仪式的下沉</h3>
+  <p>这种君主性，在 (a) 类政策场景中最显眼——戏剧化、强制、有明确节点。但它会<strong>下沉</strong>。</p>
+  <p>当一项政策被配上"补贴""假期""友好型社会""关爱"这些词，它就从"君主性的强制"下沉为"规训性的日常"——</p>
+
+  <div class="quote">
+    <p>它不再被感觉为"国家在管我的生育"。</p>
+    <p>它被感觉为"国家在关心我的生活"。</p>
+  </div>
+
+  <p>福柯曾说权力的最高境界是"变得不像权力"。当一种人口政策被习惯化到不再被感觉为政策——它就完成了向规训的转化。而它下沉到的那个地方，叫<strong>家庭</strong>。</p>
+</section>
+
+<!-- SECTION IV：规训性 -->
+<section id="s4" class="fade-in">
+  <div class="sect-num">四 · 第二层｜规训性</div>
+  <h2 class="sect-title">相亲市场，是人口政策的<em>家庭层级实装</em></h2>
+
+  <div class="pull">挂人那一期我们说过：规训权力最完美的胜利，是让你自己承担起监视自己的工作。</div>
+
+  <p>在 #08，这一原则的实装是——<strong>让每个家庭自己承担起"人口办"的工作。</strong></p>
+  <p>不需要红头文件。不需要专员上门。不需要"任务指标"。只需要——让你妈妈在饭桌上、让你婆婆在电话里、让你三姨在过年时——<strong>主动</strong>问那一句"什么时候要孩子"。而你<strong>主动地、自责地、焦虑地、想办法回答它</strong>。</p>
+
+  <h3>婚恋简历的语法</h3>
+  <p>去任何一个相亲软件、相亲角、相亲群看一眼——</p>
+
+  <div class="quote">
+    <p>男，1992年，身高178，本科，国企，年薪30万，北京户口，房一套（120平，朝南，二环内），无贷，母亲教师退休，父亲工程师退休，无慢病史，独生子，希望对方……</p>
+    <p>读到这里你应该意识到一件事——这不是"自我介绍"。这是一份<strong>人力资本 + 生育力</strong>的合并报表。</p>
+  </div>
+
+  <p>这套翻译有它自己的语法——每一栏都对应一个治理学指标：</p>
+
+  <table class="resume-table">
+    <thead><tr><th>简历栏</th><th>它真正在测量的</th></tr></thead>
+    <tbody>
+      <tr><td>学历</td><td>人力资本基础项</td></tr>
+      <tr><td>房产</td><td>抚养稳定性的硬证明</td></tr>
+      <tr><td>户口</td><td>未来孩子的教育起点</td></tr>
+      <tr><td>年薪</td><td>抚养力的可量化指标</td></tr>
+      <tr><td>身高 / 长相</td><td>基因优势的可见信号</td></tr>
+      <tr><td>无慢病史</td><td>生育健康预筛选</td></tr>
+      <tr><td>独生 / 非独生</td><td>未来养老压力预估</td></tr>
+      <tr><td>是否近期打算生育</td><td>人口政策合规度</td></tr>
+      <tr><td>父母职业 / 退休金</td><td>家庭代际资本（呼应 #04 布尔迪厄三种资本）</td></tr>
+    </tbody>
+  </table>
+
+  <p>你以为这是"个人条件"。它是<strong>生育力 + 抚养力 + 代际资本</strong>的预审表。而最深的一层是——<strong>你自己</strong>也学会了用这套语法看自己。</p>
+  <p>你会因为"我快30了"而焦虑——这是人口学的年龄轴在你身体里说话。你会因为"没房"而不敢谈恋爱——这是抚养稳定性指标在你身体里说话。没有人拿枪逼你。是你<strong>自己</strong>承担起了把自己翻译成指标的工作。</p>
+
+  <h3>那张表的隐藏列：性别</h3>
+  <p>到这里必须显式补一件福柯框架<strong>不会自动显形</strong>的事——婚育权力的性别不对称，不写出来就不在场。</p>
+  <p>同一张表，男女被读成两套词：男性这一栏，主要被量化为<strong>经济资本</strong>——房、车、年薪、户口、父母的退休金。女性这一栏，多出一组<strong>生育资本</strong>——年龄、外貌、"是否近期打算生育"，而且这组词的权重，随年龄逐年贬值。</p>
+  <p>不对称不止在表里，更在<strong>谁在执行这套机制</strong>：催婚催生的"话语劳动"——过年那几句、家庭群里那几条——绝大多数由女性长辈承担。她们既是这套规训的执行者，自己当年也是它的产物。</p>
+
+  <div class="quote">
+    <p>国家需要人口，市场需要劳动力，家庭需要照护者。</p>
+    <p>这三重需求，在当代往往被默认翻译成同一句话：<strong>"这是女性的义务。"</strong></p>
+    <p>谁承担压力、谁支付生育的真实成本（身体的、职业的、时间的）——那张表永远不写这一列。但整套机制的重量，正压在这条没写出来的列上。</p>
+  </div>
+
+  <h3>福柯：性话语的反转</h3>
+  <p>福柯在1976年出版的《性史》第一卷里，反转了那个时代——也包括我们今天的常识——关于"性"的叙事。通常的叙事是：维多利亚时代压抑了性，现代社会要"解放"它。福柯说：<strong>恰恰相反。</strong></p>
+
+  <div class="quote">
+    <p>从17世纪开始，西方不是"压抑"了性——是<strong>史无前例地谈论它、记录它、分类它、统计它、医学化它、行政化它</strong>。</p>
+    <p>教会要你忏悔它。医生要你诊断它。学校要你警惕它。国家要你统计它。人口学要你计算它。</p>
+    <p>性从来没有被简单地"压抑"——它被<strong>生产</strong>了。它从一种私密实践，被生产成了一种"必须不停被谈论、被管理、被优化"的对象。</p>
+  </div>
+
+  <div class="footnote">
+    这段是对《性史》第一卷"压抑假说批判"的概括性还原，不是福柯原文逐句翻译。福柯本人的论证更迂回、更历史化。要看原始论证请读《性史》第一卷第二、三部分。
+  </div>
+
+  <p>这一反转直接命中21世纪婚育话语的核心——你的生育力不被压抑，它被<strong>记录</strong>（AMH检测、生育力评估、孕前体检）。你的婚姻不被禁止，它被<strong>催促</strong>（相亲、家庭群、政策激励）。每一次"什么时候生孩子"的问候——都不是关心。它是一次<strong>话语的生产</strong>——把你的身体重新生产为"人口的一个单位"。</p>
+
+  <h3>控制社会的婚育版本</h3>
+  <p>这是 #03 钉钉那一期讲过的德勒兹"控制社会"——你不再"毕业"，你只是从一种被允许的状态，调制到另一种。</p>
+  <p>在婚育场景里它的形态是——</p>
+
+  <div class="state-chain">
+    <span class="state-tag">单身</span>
+    <span class="state-arrow">→</span>
+    <span class="state-tag active">适龄未婚</span>
+    <span class="state-arrow">→</span>
+    <span class="state-tag">晚婚警告</span>
+    <span class="state-arrow">→</span>
+    <span class="state-tag">已婚未育</span>
+    <span class="state-arrow">→</span>
+    <span class="state-tag active">丁克标签</span>
+    <span class="state-arrow">→</span>
+    <span class="state-tag">应当二孩</span>
+    <span class="state-arrow">→</span>
+    <span class="state-tag">鼓励三孩</span>
+    <span class="state-arrow">→</span>
+    <span class="state-tag active">高龄风险</span>
+    <span class="state-arrow">→</span>
+    <span class="state-tag">完成生育</span>
+    <span class="state-arrow">→</span>
+    <span class="state-tag">更年期</span>
+  </div>
+
+  <p>每一段都是一种<strong>被命名、被标价、被某种话语持续监测的状态</strong>。你从来没有"通过"过婚育这场考试。你只是从一段被命名的状态，<strong>调制</strong>到下一段。而每一次"过年回家"，就是这场连续考试的<strong>周期性现场抽查</strong>。</p>
+</section>
+
+<!-- SECTION V：生命权力 -->
+<section id="s5" class="fade-in">
+  <div class="sect-num">五 · 第三层｜生命权力</div>
+  <h2 class="sect-title">你的卧室，<em>不是你的</em></h2>
+
+  <p>你以为你的婚姻是你的。你以为你的生育是你的。你以为你的卧室是你的。不是。</p>
+
+  <h3>福柯：生命权力的两个极</h3>
+  <p>福柯在《必须保卫社会》和《性史》第一卷里指出，生命权力有<strong>两个极</strong>——</p>
+
+  <div class="versus">
+    <div class="versus-col">
+      <div class="versus-label">极一</div>
+      <div class="versus-head">人体的解剖政治</div>
+      <div class="versus-body">
+        <p>也就是规训：训练个体的肉体。这是 #03 #04 #05 讲过的——钉钉打卡、鸡娃、A4腰。</p>
+        <p>对象是<em>个体的身体</em>：让它变得有纪律、可计量、可利用。</p>
+      </div>
+    </div>
+    <div class="versus-col">
+      <div class="versus-label active">极二</div>
+      <div class="versus-head">人口的生命政治</div>
+      <div class="versus-body">
+        <p>它的对象不是个体的肉体，是"人口"这个集合：出生率、死亡率、健康水平、寿命、生育率、迁徙。</p>
+        <p><strong>婚姻和生育，是这两个极唯一直接交汇的地方。</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote">
+    <p>没有任何一个其他场所，能让"个体的最私密身体"和"国家的最宏观统计"<strong>在同一张床上重叠</strong>。</p>
+    <p>你的卧室不是你的——从生命权力把它划进"人口"那一刻起，它就同时属于你、属于市场、属于228年的人口政治史。</p>
+  </div>
+
+  <h3>那两个极的交汇点，今天在你手机里</h3>
+  <p>福柯说生育是解剖政治与生命政治<strong>唯一交汇</strong>的地方。这个交汇点最纯粹的当代形态，不是政策，是三种配方里的 (c)——你<strong>主动付费</strong>的那一类。</p>
+
+  <div class="checklist">
+    <div class="cl-group">
+      <div class="cl-head">两极在你身体上的实装</div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">你的生理期APP知道你的排卵日，比你先知道。<strong>解剖政治那一极</strong>：你的身体被逐项读数。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">AMH检测把你的卵巢翻译成一个"库存数字"。<strong>生命政治那一极</strong>：这些读数本就是"人口的前置指标"。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">生育力评估把你的子宫翻译成一段"可投资年限"，并配一条随年龄下行的曲线。而把这两极焊在一起的，不是国家，是<strong>你自己</strong>——你为这种读取付费，并把它体验为"对自己负责"。</span></div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    A4腰那一期我们说过：身体被驯成一份永远不能下班的简历。到 #08，这份简历加了它最贵、也最私密的一行——<strong>你的生育力，一个你每天亲手刷新的指标</strong>。它不是被谁夺走的；它是被你，怀着责任感，主动交出去的。这正是 #07 讲过的"自愿可见性"在身体与生育上的同一套语法。
+  </div>
+
+  <h3>Stoler：人口政治从一开始就是分层的</h3>
+
+  <div class="theorists">
+    <div class="theorist">
+      <div class="theorist-name">Ann Laura Stoler</div>
+      <div class="theorist-book">Carnal Knowledge and Imperial Power (2002)</div>
+      <div class="theorist-body">
+        <p>西方"人口学"从诞生那一天起，就不是一门关于"所有人"的科学。它是关于"<strong>哪一类人口应该被鼓励繁衍、哪一类应该被限制繁衍</strong>"的学问。</p>
+        <p>Stoler的研究对象是19–20世纪的殖民地——殖民政府高度焦虑于结合对象，设立细密的规则管理"谁能和谁结婚""混血儿如何登记"。同一时期的欧洲本土，"中产阶级多生"被鼓励，"危险阶级"的生育被监控。20世纪初的美国与北欧，优生学运动公开主张对"不适者"绝育——美国有32个州曾立法允许强制绝育，受害者数万人，延续到1970年代。</p>
+        <p>Stoler的洞察是——<strong>人口政治从来不是均匀的</strong>。它总是隐含一个分层：谁的孩子值得被生下来，谁的不值得；谁的婚姻被祝福，谁的不被。</p>
+        <p>任何一句"我们要鼓励生育"，都隐含一个没说出口的问句：<strong>"鼓励谁生育？"</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <p>那个没说出口的问句，Stoler在殖民档案里看见过；今天它没有消失，只是换了语法——"适龄""优质""素质"，是分层在今天的体面外衣。同一个社会里，富裕地区与贫困地区的母婴医疗投入差距数倍；职场女性与全职主妇被默认的"生育价值"差异——这是分层渗进同一个家庭内部的当代形态。</p>
+
+  <h3>把几位放在一起看</h3>
+
+  <div class="theorists">
+    <div class="theorist">
+      <div class="theorist-name">马尔萨斯</div>
+      <div class="theorist-book">An Essay on the Principle of Population (1798)</div>
+      <div class="theorist-body"><p>发明了"人口"这个治理对象——卧室从此进入国家视野。没有他，就没有"人口"这个可被计算、可被调控、可被优化的概念。</p></div>
+    </div>
+    <div class="theorist">
+      <div class="theorist-name">福柯</div>
+      <div class="theorist-book">《必须保卫社会》（1976）+《性史》第一卷（1976）</div>
+      <div class="theorist-body"><p>指出生命权力如何让"人口"成为现代权力的核心——它不再"杀你"，它"管理你的生死与繁衍"；而性/婚育，是解剖政治与生命政治两个极的<strong>唯一交汇点</strong>。</p></div>
+    </div>
+    <div class="theorist">
+      <div class="theorist-name">Stoler</div>
+      <div class="theorist-book">Carnal Knowledge and Imperial Power (2002)</div>
+      <div class="theorist-body"><p>指出人口政治从诞生起就是<strong>分层</strong>的——它永远在区分"谁该多生、谁该少生"，而每一次"鼓励谁生"的背后，都站着一个没说出口的"那么谁不被鼓励"。</p></div>
+    </div>
+  </div>
+
+  <div class="pull">你的卧室不是你的，是人口的。你的生育意愿不是你的，是228年人口政治史的一个当代读数。</div>
+</section>
+
+<!-- SECTION VI：不舒服的问题 -->
+<section id="s6" class="fade-in">
+  <div class="sect-num">六 · 一个不舒服的问题</div>
+  <h2 class="sect-title">人口真问题，与<em>治理对象之间</em></h2>
+
+  <p>这一节不问"该不该生孩子"。它问的是——<strong>当一种"关心"和一种"治理"完全重叠时，"自由"这个词还剩下什么</strong>。</p>
+  <p>如果这套机制看上去这么深，为什么我们接受了？因为它<strong>有真问题在里面</strong>。老龄化是真实的——养老金精算缺口、医疗系统负担、照护劳动力短缺，这些都不是修辞。低生育率在大多数发达经济体已低于世代更替率——日本、韩国、意大利、西班牙、德国、新加坡，以及许多大城市。这是一个真实的、跨制度、跨文化的人口学现象。</p>
+
+  <div class="pull">这些都不是阴谋。否认这一点，是另一种意识形态。</div>
+
+  <p>把所有人口焦虑都说成"国家在控制你的子宫"，和把所有人口政策都说成"纯粹理性的科学决策"——<strong>是同一种偷懒的两个方向</strong>。</p>
+
+  <h3>几个绕不开的问题</h3>
+  <p>但这里有一种<strong>真实的张力</strong>——当"个体的生育决策"和"集体的人口需求"被翻译成同一种话语时，"你想不想"和"系统需不需要"会变得难以区分。</p>
+
+  <div class="quote">
+    <p>当<strong>所有人都在催</strong>时，"我想早点结婚"是真的"我想"，还是环境压力的内化？</p>
+    <p>当"不生会被认为不正常"时，"我想生"是真的"想"，还是对"不正常"标签的规避？</p>
+    <p>当"不生孩子"在某些圈子里变成一种身份宣言时，"我不想生"是真的"不想"，还是对压力的<strong>反向表演</strong>？（反抗有时也是被规训定义的——它只是把"应该"换成了"偏不"，坐标系没变。）</p>
+    <p>当老龄化是真实的社会挑战时，"个体不必为集体人口负责"这个主张——在多大程度上能成立？这不是一个能轻易回答的问题。</p>
+    <p>当生育成本（住房、教育、照护、女性职业代价）结构性地压在年轻人身上时，"生不生是你自己的选择"这句话，是不是把一个结构问题伪装成了一道选择题？</p>
+  </div>
+
+  <h3>全球框架</h3>
+  <p>这种张力不止在某一处相关。它是一个<strong>全球同步发生</strong>的治理难题。</p>
+
+  <div class="global-cases">
+    <div class="gcase">
+      <div class="gcase-flag">东亚 · 生育率与投入倒挂</div>
+      <div class="gcase-body">东亚多个发达经济体的总和生育率已长期低于世代更替线，其中最低者已跌破0.8；日本设过"少子化"专责内阁职位，相关投入持续三十余年。<strong>投入最大的，生育率反而最低</strong>——这个事实本身说明，把"人口"当作一个可调控对象的思路，可能从根上就有它解不开的地方。</div>
+    </div>
+    <div class="gcase">
+      <div class="gcase-flag">法国 · 家庭津贴的两面</div>
+      <div class="gcase-body">欧洲生育率较高的国家（如法国）依赖庞大的家庭津贴体系——而这套体系本身，也被批评为"用福利温柔地把女性留在生育角色里"。<strong>强制最狠的，以人道灾难收场；福利最厚的，近年也在下滑。</strong></div>
+    </div>
+    <div class="gcase">
+      <div class="gcase-flag">美国 / 北欧 · 优生学的历史遗留</div>
+      <div class="gcase-body">美国有32个州曾立法允许强制绝育，受害者数万人，这一历史一直延续到1970年代。北欧各国在同一时期也有类似运动。今天的"鼓励生育"政策，和当年的"限制生育"政策，使用的是同一套"人口是可调控对象"的底层逻辑。</div>
+    </div>
+    <div class="gcase">
+      <div class="gcase-flag">罗马尼亚 · 强制生育的终点</div>
+      <div class="gcase-body">1966年770号法令的终点是1989年政权崩溃时的孤儿院——十万名被要求生下、却无人抚养的孩子。<strong>没有任何一个国家真正"解决"了它</strong>：这是一个全球性的治理难题，不是某一处的特殊处境。</div>
+    </div>
+  </div>
+
+  <h3>福柯式的更深一问</h3>
+
+  <div class="quote">
+    <p>当18世纪马尔萨斯的图纸，被以21世纪"关心"和"配套支持"的名义全面实装——那是这套治理技术足够好，还是21世纪的我们还没想清楚——</p>
+    <p>在"集体确实需要面对人口未来"和"个体的生命形态不该被化约为人口指标"之间，那条线究竟该画在哪里？</p>
+  </div>
+
+  <p>这是一个真正的开放问题。它指向的不是"生孩子"，也不是"不生孩子"，而是——<strong>一种我们仍在共同摸索的"生命形态自主"想象</strong>：让"生育"这件事，重新成为一个完整的人在完整地权衡之后的决定，而不是"人口指标的一个待填项"。</p>
+  <p>这种想象很难。因为我们已经几乎找不到一种<strong>不被人口政治污染的语言</strong>来谈论它——连"我想要孩子"和"我不想要孩子"这两句话，都已经被双向地政治化了。到 #09 终刊我们会再正面碰它一次。</p>
+</section>
+
+<!-- SECTION VII：那然后呢 -->
+<section id="s7" class="fade-in">
+  <div class="sect-num">七 · 那然后呢</div>
+  <h2 class="sect-title">一个春节的<em>实验</em></h2>
+
+  <p>关于"我们能做什么"，这个专题留到 #09 终刊正面处理。<strong>这一节我想先说清楚一件事</strong>——</p>
+  <p>下面要说的，<strong>不是"不要生孩子"，也不是"不要结婚"</strong>。恰恰相反——如果你想结婚，结。如果你想生孩子，生。如果你想不结婚，不结。如果你想不生孩子，不生。</p>
+  <p>#08 这一期想说的，<strong>不是站到这四个选项的任何一边</strong>。是——在你做这四个判断之前，多留一秒钟，问自己一次："这是我想的，还是它让我想的？"</p>
+
+  <div class="footnote">
+    <strong>把"不生"当成抵抗，和把"生"当成服从，是同一个错误</strong>——它们都还在用人口政治的坐标系定义自己。真正的反向引导不在选项里，在<strong>做选择时那个语言是不是你自己的</strong>。
+  </div>
+
+  <h3>一个春节的实验</h3>
+  <p>想象一下这样一个场景——大年初二，亲戚都在。你刚坐下，茶还没端起来，那句话就来了——</p>
+
+  <div class="quote">
+    <p>"处对象了没？""什么时候要孩子啊？""你看你表妹孩子都两个了。"</p>
+  </div>
+
+  <p>这一刻，有三条岔路：</p>
+
+  <div class="configs">
+    <div class="config open" onclick="toggleConfig(this)">
+      <div class="config-label">第一条路</div>
+      <div class="config-title">熟悉的沉默</div>
+      <div class="config-tag">这一刻在你身上留下一道印，像每年都被重新划开的旧痕</div>
+      <div class="config-body">
+        <p>你脸僵一下，含糊地"嗯嗯啊啊"，心里翻江倒海，回房间生一晚上闷气。这一刻在你身上留下一道印，像每年都会被重新划开一次的旧痕。规训权力最稳定的运作，就靠这道年复一年的痕。</p>
+      </div>
+    </div>
+    <div class="config" onclick="toggleConfig(this)">
+      <div class="config-label">第二条路</div>
+      <div class="config-title">对抗——但坐标系没变</div>
+      <div class="config-tag">你赢了这一回合，但其实还在那个坐标系里</div>
+      <div class="config-body">
+        <p>你梗着脖子顶回去："生不生关你什么事！"桌上空气凝固。你赢了这一回合，但你其实<strong>还在那个坐标系里</strong>——你只是把"应该"换成了"偏不"。"偏不"和"应该"，用的是同一张地图。</p>
+      </div>
+    </div>
+    <div class="config" onclick="toggleConfig(this)">
+      <div class="config-label">第三条路</div>
+      <div class="config-title">翻译——你可能还没试过</div>
+      <div class="config-tag">把"人口指令"和"说话的那个人"拆开</div>
+      <div class="config-body">
+        <p>你在心里做一次<strong>翻译</strong>。你听见的不是"你必须生孩子"。你听见的是一个60岁的人，用她那一代唯一会用的语言，在说一件别的事——可能是"我老了，我怕你将来孤单"，可能是"我不知道还能怎么表达我在乎你"，也可能仅仅是"我不知道吃饭时还能聊什么"。</p>
+        <p>你不需要同意她。你只需要把"人口指令"和"一个具体的、笨拙的、正在老去的人"分开。然后你可以平静地说："我有在认真想自己的人生。今天我们聊点别的好吗？"</p>
+        <p>第三条路不解决任何结构问题——催还会再来，明年还会再来。但它做了一件极小的事：它把"人口政治的传声"和"一个具体的人对你的笨拙的爱"<strong>拆开了</strong>。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    <strong>但第三条路不是对所有人都可行</strong>。"在心里翻译""礼貌但坚定"，前提是你<strong>安全</strong>。如果你的家庭压力不只是唠叨，而是伴随着经济控制、人身威胁、或持续的精神暴力——那么"把催婚翻译成笨拙的爱"不是清醒，是自我欺骗，甚至是危险的自我说服。<br><br>
+    你有权不回家。你有权不解释。你有权把"过年"从你的义务清单上，暂时拿下来。微观抵抗的前提是安全。没有安全，"翻译"只是把伤害重新包装成"我应该更懂事一点"。
+  </div>
+
+  <h3>一个必要的承认</h3>
+  <p>下面的反向引导清单都是<strong>个体层面的最低限度操作</strong>。它们不解决结构问题——生育的经济成本、女性的职业代价与照护负担、住房与教育压力、老龄化的真实精算挑战——这些<strong>不是单个人在饭桌上的态度能改变</strong>的。</p>
+  <p>事实上，人口治理术对个体最深的一刀，<em>恰恰</em>是这个前提——它让一个<strong>结构问题</strong>（生育成本为何如此之高）被翻译成一道<strong>个人选择题</strong>（你到底生不生）。这种对话留到 #09。但在那种对话发生之前——</p>
+
+  <div class="checklist">
+    <div class="cl-group">
+      <div class="cl-head">关于"想"与"被想"</div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">在做任何关于结婚/生育的重大决定前，给自己一段<strong>没有任何外部声音的安静时间</strong>——不刷相关内容、不问长辈、不看政策——只问自己"如果没有任何人会评价我，我想要什么生活"。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">区分<strong>两种"想生孩子"</strong>：一种是"我想和这个人、以这种方式，迎接一个新的生命进入我的生活"；另一种是"我到年纪了/别人都生了/不生显得不正常"。区分它们的标准——你能不能平静地想象"不生"而不感到自我崩塌。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">同样地，区分<strong>两种"不想生孩子"</strong>：一种是认真权衡后的决定；另一种是对压力的反向表演。后者也是被那套坐标系定义的。</span></div>
+    </div>
+    <div class="cl-group">
+      <div class="cl-head">关于家庭话语</div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">在过年家庭群/饭桌上，练习把"催"<strong>翻译</strong>成"一个具体的人用旧语言表达的别的东西"——不必同意，但把"人口指令"和"说话的那个人"拆开。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">礼貌但坚定地拒绝把自己的生育时间表当作公共议程：一句"我有在认真想自己的事，谢谢关心，今天聊点别的"就够了，不必论战。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">不在自己成为长辈后，把这套话语<strong>原样传下去</strong>——这是唯一一个你完全能控制的环节。</span></div>
+    </div>
+    <div class="cl-group">
+      <div class="cl-head">关于相亲市场的语法</div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">警惕自己<strong>用那张表打量别人</strong>，也警惕自己<strong>用那张表打量自己</strong>——当你为"我没房所以不敢谈恋爱"焦虑时，停一秒，问那是你的判断，还是那张表的判断。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">关心"和这个人在一起我是什么样的人"，多过关心"对方能不能通过那张表"。</span></div>
+    </div>
+    <div class="cl-group">
+      <div class="cl-head">关于身体的"生育力指标"</div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">做生育力检测、AMH、孕前评估——如果它来自你自己想知道，做；如果它来自"再不查就晚了"的恐慌话语，先把那一秒的恐慌和那个医学决定分开。</span></div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">不把社交媒体上的"备孕进度""好孕喜报""年龄焦虑"内容当作你的时间表——那是 #07 讲过的算法在喂养你的焦虑。</span></div>
+    </div>
+    <div class="cl-group">
+      <div class="cl-head">关于"幸福"这个词</div>
+      <div class="cl-item"><span class="cl-dot">→</span><span class="cl-text">把"幸福"这个词，<strong>从相亲简历、政策口号、亲戚祝福的语言里抢回来</strong>——重新问自己：在没有任何这些声音时，对你而言"过得好"是什么样子。</span></div>
+    </div>
+  </div>
+
+  <div class="pull">在每一次"什么时候……"涌上心头（无论是别人对你说，还是你对别人说，还是你对自己说）之前，停一秒，问自己一次："这是关心一个具体的人，还是在替人口政治传话？"那一秒不会改变人口数据。但它会改变你和你身边人的关系——也会改变你和你自己的关系。</div>
+
+  <h3>本期【那然后呢墙】三问</h3>
+  <div class="questions">
+    <div class="wall-q">
+      <div class="wq-num">01</div>
+      <div class="wq-text">你最近一次被问"什么时候结婚/什么时候生孩子"——你听到的是<strong>关心</strong>，还是听到的是<strong>别的什么</strong>？你怎么回应的？事后你希望自己怎么回应？</div>
+    </div>
+    <div class="wall-q">
+      <div class="wq-num">02</div>
+      <div class="wq-text">如果所有的催婚催生话语都消失——没有亲戚问、没有政策提、没有相亲软件那一栏、没有同龄人对比——你今天对结婚、对生孩子，会做出什么决定？你能想得起来那个<strong>"没有声音的你"</strong>吗？</div>
+    </div>
+    <div class="wall-q">
+      <div class="wq-num">03</div>
+      <div class="wq-text">你对"成为父母"或"不成为父母"的想象，是从哪里来的？是从你身边某一个真实的人、某一段真实的关系？还是从一个抽象的<strong>"应该"</strong>？</div>
+    </div>
+  </div>
+  <p style="font-family:var(--sans);font-size:13px;color:var(--ink-faint);line-height:1.7;">留言可匿名。月底我们会做一次"墙的回声"——把本期墙上最有代表性的几条留言（征得同意后）整合进一篇短札。</p>
+
+  <h3>本期互动模块</h3>
+  <div class="modules modules-wide">
+    <div class="module">
+      <div class="module-icon">📋</div>
+      <div class="module-title">婚恋简历翻译器</div>
+      <div class="module-desc">粘贴一份相亲简历（你的或别人的），自动把每一栏翻译成它对应的治理学指标——"年薪30万 → 抚养力可量化指标""无慢病史 → 生育健康预筛选"。让你看见那张表真正在测量什么。</div>
+    </div>
+    <div class="module">
+      <div class="module-icon">📅</div>
+      <div class="module-title">人口政策时间轴</div>
+      <div class="module-desc">一条横跨1798–2026的全球人口政策时间轴，与同期"个体生育自由"话语的变化并列——看两条线如何彼此追逐、反转、再反转。</div>
+    </div>
+    <div class="module">
+      <div class="module-icon">🪞</div>
+      <div class="module-title">"两种想"自测</div>
+      <div class="module-desc">一组不给结论的反思问句，帮你区分"我想/它让我想"——它不告诉你该不该生，只帮你听清是谁在替你回答。</div>
+    </div>
+    <div class="module">
+      <div class="module-icon">💬</div>
+      <div class="module-title">那然后呢墙</div>
+      <div class="module-desc">本期三问留言聚合。你的回答会与其他读者的一起出现在这里——匿名，按时间排序，不被算法加权。</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION VIII：最后一句 -->
+<section id="s8" class="fade-in">
+  <div class="sect-num">八 · 最后一句</div>
+  <h2 class="sect-title">那扇门关上的那一刻，<em>整个世界才走进来</em></h2>
+
+  <div class="quote">
+    <p>我们曾以为，关上卧室门，世界就被关在了外面。</p>
+    <p>福柯说——</p>
+    <p>那扇门关上的那一刻，整个世界<strong>才走进来</strong>。</p>
+    <p>走进来的是马尔萨斯、是统计学家、是社保精算师、是优生学的幽灵、是你妈妈、是你婆婆——</p>
+    <p>是228年的人口政治史，坐在你的床边，问你："什么时候啊？"</p>
+  </div>
+
+  <div class="divider"></div>
+</section>
+
+<!-- 延伸阅读 -->
+<div class="coda">
+  <div class="coda-title">本期延伸阅读</div>
+  <ul class="reading-list">
+    <li>福柯《规训与惩罚》第三编（刘北成、杨远婴译，三联书店）</li>
+    <li>福柯《必须保卫社会》（1976年法兰西学院讲座，钱翰译，上海人民出版社）——生命权力、"让人活/弃人于死"</li>
+    <li>福柯《性史》第一卷《认知的意志》（佘碧平译，上海人民出版社）——压抑假说批判、性话语的生产</li>
+    <li>福柯《安全、领土、人口》（1977–78年法兰西学院讲座）——治理术与"人口"作为治理对象</li>
+    <li>Thomas Malthus, <em>An Essay on the Principle of Population</em> (1798)</li>
+    <li>Ann Laura Stoler, <em>Carnal Knowledge and Imperial Power</em> (2002) ——殖民人口政治、人口学的分层性</li>
+    <li>Michelle Murphy, <em>The Economization of Life</em> (2017) ——20世纪如何把"人口"折算成经济指标</li>
+    <li>Sara Ruddick, <em>Maternal Thinking</em> (1989) ——把"母职"作为一种思想实践而非人口功能</li>
+    <li>Hannah Arendt, <em>The Human Condition</em> (1958) ——"出生性"（natality）：每个新生命是一个无法预测的开端，而非人口增量（#09会展开）</li>
+    <li>本站【#04 鸡娃】——人力资本的源头（婚恋简历是它的前一道工序）</li>
+    <li>本站【#05 A4腰】——身体作为生育力指标的前置规训</li>
+    <li>本站【#06 信用分】——"被打分"的逻辑如何渗入相亲市场</li>
+  </ul>
+  <p style="margin-top:24px;font-family:var(--sans);font-size:12px;line-height:1.7;color:var(--ink-faint);">本站所有原书引文以"刘北成、杨远婴译，三联书店2019年版"（《规训与惩罚》）及各讲座/著作通行中译本为准；马尔萨斯、福柯《性史》、Stoler的引述为对其框架的概括性还原，原文请参考延伸阅读所列书目。本期立场：分析"人口政治作为全球治理技术"，不评价任何具体国家的具体政策。本专栏文字遵循 CC BY-NC 4.0 协议，转载请注明出处。</p>
+</div>
+
+<!-- 下期预告 -->
+<div class="next-issue">
+  <div>
+    <div class="ni-label">下期预告 · 终刊</div>
+    <div class="ni-title">#09《终刊：那然后呢——看清形状之后》</div>
+    <div class="ni-date">双周二上线 · 这是【规训群岛】的最后一期</div>
+  </div>
+  <a href="../09-终刊那然后呢/index.html" class="ni-arrow">→</a>
+</div>
+
+<script>
+function toggleConfig(el) {
+  const isOpen = el.classList.contains('open');
+  el.closest('.configs').querySelectorAll('.config').forEach(c => c.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+const radarFloat = document.getElementById('radarFloat');
+const hero = document.querySelector('.hero');
+if (hero && radarFloat) {
+  const obs = new IntersectionObserver(entries => {
+    radarFloat.classList.toggle('visible', !entries[0].isIntersecting);
+  }, { threshold: 0.1 });
+  obs.observe(hero);
+}
+
+const fadeEls = document.querySelectorAll('.fade-in');
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+fadeEls.forEach(el => fadeObs.observe(el));
+</script>
+</body>
+</html>
