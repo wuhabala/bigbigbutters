@@ -195,9 +195,13 @@
     vertical-align: middle;
   }
   .chip[data-cat="core"] .dot { background: var(--accent); }
+  .chip[data-cat="method"] .dot { background: var(--bg); border: 2px solid var(--accent); }
+  .chip[data-cat="ally"] .dot { background: var(--ink); border: 2px solid var(--accent-soft); }
   .chip[data-cat="device"] .dot { background: var(--ink); }
   .chip[data-cat="history"] .dot { background: var(--ink-faint); }
+  .chip[data-cat="theory"] .dot { background: var(--accent-soft); border: 1px solid var(--accent); }
   .chip[data-cat="case"] .dot { background: var(--accent-soft); border: 1px solid var(--accent-soft); }
+  .chip[data-cat="recipe"] .dot { background: var(--paper-deep); border: 1px solid var(--ink-faint); }
 
   .search-box {
     flex: 1;
@@ -286,23 +290,36 @@
   .node circle {
     transition: r 0.25s, fill 0.25s, stroke 0.25s;
   }
+  /* 标签移到节点外·居中锚定·底色描边光晕防压糊 */
   .node text {
-    font-family: var(--serif);
+    font-family: var(--sans);
     font-weight: 500;
     pointer-events: none;
     user-select: none;
     text-anchor: middle;
-    dominant-baseline: middle;
+    dominant-baseline: hanging;
+    paint-order: stroke fill;
+    stroke: var(--bg);
+    stroke-width: 3px;
+    stroke-linejoin: round;
   }
   .node-core circle { fill: var(--accent); stroke: var(--accent); stroke-width: 0; }
-  .node-core text { fill: var(--bg); font-size: 15px; font-weight: 600; }
+  .node-core text { fill: var(--accent); font-size: 14px; font-weight: 700; font-family: var(--serif); }
+  .node-method circle { fill: var(--bg); stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 4 3; }
+  .node-method text { fill: var(--accent); font-size: 13px; font-weight: 700; font-family: var(--serif); }
+  .node-ally circle { fill: var(--ink); stroke: var(--accent-soft); stroke-width: 2.5; }
+  .node-ally text { fill: var(--ink); font-size: 11px; font-weight: 600; }
   .node-device circle { fill: var(--ink); stroke: var(--ink); }
-  .node-device text { fill: var(--bg); font-size: 12px; }
+  .node-device text { fill: var(--ink); font-size: 11px; }
   .node-history circle { fill: var(--paper-deep); stroke: var(--ink-faint); stroke-width: 1.5; }
-  .node-history text { fill: var(--ink); font-size: 12px; }
+  .node-history text { fill: var(--ink-soft); font-size: 11px; }
+  .node-theory circle { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1; }
+  .node-theory text { fill: var(--accent); font-size: 11px; font-style: italic; }
   .node-case circle { fill: var(--bg); stroke: var(--accent-soft); stroke-width: 1.5; }
-  .node-case text { fill: var(--accent); font-size: 11px; font-style: italic; }
-  .node.dimmed { opacity: 0.15; }
+  .node-case text { fill: var(--accent); font-size: 12px; font-weight: 600; }
+  .node-recipe circle { fill: var(--paper-deep); stroke: var(--ink-faint); stroke-width: 1; }
+  .node-recipe text { fill: var(--ink-faint); font-size: 9px; }
+  .node.dimmed { opacity: 0.12; }
   .node.selected circle { stroke: var(--accent); stroke-width: 3; }
   .node-core.selected circle { stroke: var(--ink); stroke-width: 3; }
   .node:hover circle { filter: brightness(1.05); }
@@ -315,8 +332,16 @@
   .edge-derive { stroke: var(--ink); stroke-width: 1.2; opacity: 0.35; }
   .edge-cooccur { stroke: var(--accent); stroke-width: 1; stroke-dasharray: 5 4; opacity: 0.5; }
   .edge-contrast { stroke: var(--ink-faint); stroke-width: 1; stroke-dasharray: 1 4; opacity: 0.55; }
+  /* 动态变形边·动词即论证 */
+  .edge-dyn { stroke: var(--accent); stroke-width: 1.8; opacity: 0.7; }
+  .edge-reverse { stroke-dasharray: 10 3 2 3; }
+  .edge-translate { stroke-dasharray: 8 4; }
+  .edge-sink { stroke-dasharray: 2 5; }
+  .edge-capillarize { stroke-dasharray: 1 3; stroke-width: 1.4; }
+  .edge-actualize { stroke-dasharray: none; }
+  .edge-dyn:hover { opacity: 1; stroke-width: 3; }
   .edge.dimmed { opacity: 0.05; }
-  .edge.highlighted { opacity: 1; stroke-width: 2; }
+  .edge.highlighted { opacity: 1; stroke-width: 2.4; }
 
   /* legend */
   .legend {
@@ -364,6 +389,7 @@
     background-size: 5px 1px;
     height: 1.5px;
   }
+  .legend-dyn { background: var(--accent); height: 2px; }
 
   /* ============ Side panel ============ */
   .panel {
@@ -425,8 +451,44 @@
   .panel-cat[data-cat="device"] .panel-cat-dot { background: var(--ink); }
   .panel-cat[data-cat="history"] { color: var(--ink-faint); }
   .panel-cat[data-cat="history"] .panel-cat-dot { background: var(--ink-faint); }
+  .panel-cat[data-cat="theory"] { color: var(--accent); }
+  .panel-cat[data-cat="theory"] .panel-cat-dot { background: var(--accent-soft); border: 1px solid var(--accent); }
   .panel-cat[data-cat="case"] { color: var(--accent-soft); }
   .panel-cat[data-cat="case"] .panel-cat-dot { background: var(--accent-soft); border: 1px solid var(--accent-soft); }
+  .panel-cat[data-cat="recipe"] { color: var(--ink-faint); }
+  .panel-cat[data-cat="recipe"] .panel-cat-dot { background: var(--paper-deep); border: 1px solid var(--ink-faint); }
+  .panel-cat[data-cat="method"] { color: var(--accent); }
+  .panel-cat[data-cat="method"] .panel-cat-dot { background: var(--bg); border: 2px solid var(--accent); }
+  .panel-cat[data-cat="ally"] { color: var(--accent); }
+  .panel-cat[data-cat="ally"] .panel-cat-dot { background: var(--ink); border: 2px solid var(--accent-soft); }
+  .panel-cat[data-edge="dyn"] { color: var(--accent); }
+  .panel-cat[data-edge="dyn"] .panel-cat-dot { background: var(--accent); }
+  .panel-cat[data-edge="static"] { color: var(--ink-faint); }
+  .panel-cat[data-edge="static"] .panel-cat-dot { background: var(--ink-faint); }
+
+  /* 限度注脚·自我设限的诚实（专栏品牌特征） */
+  .panel-limit {
+    margin: 18px 0;
+    padding: 14px 16px;
+    background: var(--paper);
+    border-left: 3px solid var(--accent);
+  }
+  .panel-limit-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .panel-limit-body {
+    font-family: var(--serif);
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  .panel-limit-body strong { color: var(--ink); }
 
   .panel-name {
     font-family: var(--serif);
@@ -527,9 +589,13 @@
     background: var(--paper);
   }
   .list-table tr.row-core td:first-child { color: var(--accent); font-weight: 600; }
+  .list-table tr.row-method td:first-child { color: var(--accent); font-weight: 700; }
+  .list-table tr.row-ally td:first-child { color: var(--accent); font-weight: 600; }
   .list-table tr.row-device td:first-child { color: var(--ink); }
   .list-table tr.row-history td:first-child { color: var(--ink-faint); }
+  .list-table tr.row-theory td:first-child { color: var(--accent); font-style: italic; }
   .list-table tr.row-case td:first-child { color: var(--accent-soft); font-style: italic; }
+  .list-table tr.row-recipe td:first-child { color: var(--ink-faint); }
   .list-table td.col-name {
     font-family: var(--serif);
     font-size: 16px;
@@ -617,7 +683,7 @@
     <span class="now">概念图谱</span>
   </div>
   <div class="nav-main">
-    <a href="群岛/规训群岛/00-发刊词/">本期</a>
+    <a href="群岛/规训群岛/09-终刊那然后呢/">本期</a>
     <a href="群岛/规训群岛/">文章库</a>
     <a href="map.html" class="current">概念图谱</a>
     <a href="群岛/规训群岛/案例库/">案例库</a>
@@ -635,11 +701,11 @@
 
 <!-- ============ Hero ============ -->
 <header class="hero">
-  <div class="hero-eyebrow">大大黄油 · 思想地图 · 规训群岛预筛</div>
+  <div class="hero-eyebrow">大大黄油 · 思想地图 · 目前只有规训群岛一座</div>
   <h1>概念<em>图谱</em></h1>
-  <p class="hero-lead">这不是一张知识图。<strong>这是一张让你看清"自己在哪里被规训"的地图</strong>。中心是规训权力,它的兄弟是君主权力与生命权力。围绕它们的,是福柯思想里塑造你日常的具体装置——全景敞视、驯顺的肉体、考试、规范化裁决……再外一圈,是这些装置在今天落地的当代案例(微博挂人、健康码、钉钉、A4 腰等)。</p>
+  <p class="hero-lead">这不是一张知识图。<strong>这是一张让你看清"自己在哪里被规训"的地图</strong>。中心是规训权力,它的兄弟是君主权力与生命权力。围绕它们的,是福柯思想里塑造你日常的具体装置——全景敞视、驯顺的肉体、考试、规范化裁决……再外一圈,是这些装置在今天落地的当代案例(微博挂人、健康码、钉钉、A4 腰等)。再往外,是德勒兹、韩炳哲、Zuboff 这些当代思想家的承重概念,以及终刊请进来的几只"外援之眼"。</p>
   <p class="hero-lead">点击任一节点,看简明释义、原书出处、当代案例、对应期号。点击概念之间的连线,看它们是<em>派生</em>、<em>共生</em>还是<em>反例</em>关系。</p>
-  <div class="hero-hint">↓ 点击节点查看详情 · 鼠标悬停高亮邻居</div>
+  <div class="hero-hint">↓ 点击节点查看详情 · 悬停高亮邻居 · 拖拽节点可移动 · 滚轮缩放 · 拖空白处平移</div>
 </header>
 
 <!-- ============ Toolbar ============ -->
@@ -655,9 +721,13 @@
     <span class="tb-label">类别</span>
     <div class="chip-set" id="chips">
       <button class="chip active" data-cat="core"><span class="dot"></span>核心</button>
+      <button class="chip active" data-cat="method"><span class="dot"></span>方法论</button>
       <button class="chip active" data-cat="device"><span class="dot"></span>装置</button>
       <button class="chip active" data-cat="history"><span class="dot"></span>历史</button>
+      <button class="chip active" data-cat="theory"><span class="dot"></span>当代理论</button>
+      <button class="chip active" data-cat="ally"><span class="dot"></span>外援·#09</button>
       <button class="chip" data-cat="case"><span class="dot"></span>当代案例</button>
+      <button class="chip" data-cat="recipe"><span class="dot"></span>配方子节点</button>
     </div>
   </div>
   <div class="search-box">
@@ -674,10 +744,12 @@
       <!-- edges and nodes will be rendered by JS -->
     </svg>
     <div class="legend">
-      <div class="legend-title">连线含义</div>
+      <div class="legend-title">连线含义 · 静态结构</div>
       <div class="legend-row"><span class="legend-line legend-derive"></span>派生 · A 是 B 的具体技术</div>
       <div class="legend-row"><span class="legend-line legend-cooccur"></span>共生 · 同一场景中同时在场</div>
       <div class="legend-row"><span class="legend-line legend-contrast"></span>反例 · 形态相反</div>
+      <div class="legend-title" style="margin-top:12px;">动态变形 · 点击看原文</div>
+      <div class="legend-row"><span class="legend-line legend-dyn"></span>反转/翻译/下沉/毛细化/实装</div>
     </div>
   </div>
 
@@ -712,413 +784,666 @@
 <!-- ============ Footer ============ -->
 <footer>
   <div class="footer-brand">大大<em>黄油</em></div>
-  <div class="footer-line">概念图谱 · 当前预筛 · 规训群岛</div>
+  <div class="footer-line">概念图谱 · 目前只有规训群岛一座</div>
   <div class="footer-line">未来会按"群岛"染色,显示跨专栏的概念连接</div>
   <div class="footer-line"><a href="./">← 回到大大黄油首页</a></div>
-  <div class="footer-rights">© 2026 大大黄油 · CC BY-NC 4.0</div>
+  <div class="footer-rights">© 2026 大大黄油 · CC BY-NC 4.0 · 无商业合作</div>
 </footer>
 
 <script>
-/* ==================== 数据 ==================== */
+/* ==================== 数据（依《概念图谱节点表》全量重建） ==================== */
+
+const CX = 600, CY = 400;
 
 const NODES = [
-  // ---- 核心三种权力 ----
-  { id: 'sovereign', name: '君主权力', fr: 'pouvoir souverain', cat: 'core', x: 230, y: 200, r: 38,
-    def: '可见的、强制的、戏剧化的权力形态。通过<strong>展演</strong>运作——刑罚、断头台、宣判,都是为了让所有人看见君主的力量。',
-    src: '《规训与惩罚》第一编',
-    cases: ['damiens', 'weibo'],
-    related: ['discipline', 'biopower', 'damiens'],
-    eps: ['#01'] },
+  // ---- 核心 · 权力形态 ----
+  { id:'sovereign', name:'君主权力', fr:'pouvoir souverain', cat:'core', r:34,
+    def:'可见的、强制的、戏剧化的权力形态，通过<strong>展演</strong>运作——刑罚、断头台、宣判，都是为了让所有人看见君主的力量。"使人死或任其活"在《性史》一卷被理论化。',
+    src:'《规训与惩罚》第一编 · 《性史》一卷', related:['discipline','biopower','damiens','guillotine'], eps:['#00','#01'] },
+  { id:'discipline', name:'规训权力', fr:'pouvoir disciplinaire', cat:'core', r:46,
+    def:'不可见的、连续的、规范化的权力形态，通过<strong>塑造肉体</strong>运作——它不压迫你，它<em>让你成为某种人</em>。这是整套思想的中心。',
+    src:'《规训与惩罚》第三编', related:['sovereign','biopower','panopticon','docile','exam','normalization','knowpower','hierobs','discfour','counter'], eps:['#00','#03','#05'] },
+  { id:'biopower', name:'生命权力', fr:'bio-pouvoir', cat:'core', r:36,
+    def:'以<strong>人口</strong>为对象、以统计为语言、以健康为旗帜的权力。它不管理"个人"，它管理<em>生死的概率分布</em>。',
+    src:'《必须保卫社会》《性史》一卷', related:['discipline','governmentality','anatomy','population','marriage'], eps:['#00','#02','#08'] },
+  { id:'archipelago', name:'规训群岛', fr:'archipel carcéral', cat:'core', r:30,
+    def:'监狱不必有围墙——它化成无数小岛（学校·工厂·医院·办公室·信用分），铺满整个社会海域，彼此呼应，没有边界。<strong>本专栏命名来源</strong>。',
+    src:'《规训与惩罚》第四编', related:['discipline','prison','credit','selftech'], eps:['#06','#09'] },
 
-  { id: 'discipline', name: '规训权力', fr: 'pouvoir disciplinaire', cat: 'core', x: 600, y: 420, r: 50,
-    def: '不可见的、连续的、规范化的权力形态。通过<strong>塑造肉体</strong>运作——它不压迫你,它<em>让你成为某种人</em>。这是整套思想的中心。',
-    src: '《规训与惩罚》第三编',
-    cases: ['dingtalk', 'a4'],
-    related: ['sovereign', 'biopower', 'panopticon', 'docile', 'exam', 'normalization', 'knowpower', 'time'],
-    eps: ['#00','#03','#04','#05','#06'] },
+  // ---- 方法论 · 分析框架（路径 B 入口）----
+  { id:'threerecipe', name:'三种配方', cat:'method', r:26,
+    def:'每期主案例的分析框架——<strong>(a) 强制性戏剧化权力时刻</strong>、<strong>(b) 持续性日常治理</strong>、<strong>(c) 自愿性自我经营</strong>；三者共享"<em>身份的连续可读化</em>"这一深层核心。从概念进入的读者理解八期共同语法的入口。',
+    src:'专栏方法论 · #01–#08 横向', related:['weibo','hcode','dingtalk','kidedu','a4','credit','algo','marriage'], eps:['#01','#02','#03','#04','#05','#06','#07','#08'],
+    limit:'另一每期框架"君主性／规训性／生命权力三层拆解"已由三个核心节点承载，此处不重复单列。' },
 
-  { id: 'biopower', name: '生命权力', fr: 'bio-pouvoir', cat: 'core', x: 980, y: 200, r: 40,
-    def: '以<strong>人口</strong>为对象、以统计为语言、以健康为旗帜的权力。它不管理"个人",它管理<em>生死的概率分布</em>。',
-    src: '《必须保卫社会》《性史》',
-    cases: ['hcode', 'marriage'],
-    related: ['discipline', 'governmentality', 'hcode', 'marriage'],
-    eps: ['#02','#08'] },
+  // ---- 装置 · 具体技术 ----
+  { id:'panopticon', name:'全景敞视主义', fr:'panoptisme', cat:'device', r:18,
+    def:'少数监视多数的几何学结构。被看者不需要每时每刻被看，只要他<em>不知道何时被看</em>，他就会一直按被看时的样子行动。',
+    src:'第三编 第三章', related:['discipline','knowpower','hierobs','benthampan'], eps:['#02','#07'] },
+  { id:'docile', name:'驯顺的肉体', fr:'corps dociles', cat:'device', r:18,
+    def:'通过细微纪律可被塑造、被使用的身体。<em>不需要镣铐——纪律已经长进了身体本身</em>。',
+    src:'第三编 第一章', related:['discipline','anatomy','corset','a4'], eps:['#05'] },
+  { id:'exam', name:'考试', fr:'examen', cat:'device', r:18,
+    def:'把权力关系内化为知识关系的核心仪式。考试既<strong>检验</strong>你，也<strong>制造</strong>你——分数让你变成可计算的个体。',
+    src:'第三编 第二章', related:['discipline','normalization','hierobs','dossier','kidedu'], eps:['#03','#04'] },
+  { id:'normalization', name:'规范化裁决', fr:'sanction normalisatrice', cat:'device', r:18,
+    def:'用"标准"取代"是非"的判定方式。不再问"你做错了什么"，而问"你<em>偏离</em>标准多少"。',
+    src:'第三编 第二章', related:['discipline','exam','hierobs','credit'], eps:['#04','#06'] },
+  { id:'hierobs', name:'层级化的监视', fr:'surveillance hiérarchique', cat:'device', r:17,
+    def:'用可见性的金字塔结构，让监视无所不在又无人在场。与考试、规范化裁决同为规训三手段。',
+    src:'第三编 第二章', related:['discipline','exam','normalization','panopticon'], eps:['#03','#04','#05'] },
+  { id:'discfour', name:'规训技术四件套', fr:'', cat:'device', r:17,
+    def:'时间安排·动作分解·活动控制·力量组合——把肉体拆解为可调度的单元。',
+    src:'第三编 第一章', related:['discipline','time','docile'], eps:['#03'] },
+  { id:'knowpower', name:'知识—权力', fr:'savoir-pouvoir', cat:'device', r:18,
+    def:'知识不在权力之外，知识就是权力本身。<em>知道你的人，就掌握了你</em>。',
+    src:'全书', related:['discipline','panopticon','surveilcap','algo'], eps:['#07'] },
+  { id:'micro', name:'微观物理学', fr:'microphysique', cat:'device', r:16,
+    def:'权力在最细节处的运作机制——一个动作、一个姿势、一个时间表。福柯坚持<strong>权力在毛细血管里</strong>。',
+    src:'第一编 第一章', related:['discipline','anatomy'], eps:[], cross:true },
+  { id:'counter', name:'反向引导', fr:'contre-conduite', cat:'device', r:17,
+    def:'不是宏大反对，是日常的、低声的"我不这样做"——每期"那然后呢"的理论锚。',
+    src:'福柯晚期讲座', related:['discipline','selftech'], eps:['#01','#02','#03','#07','#09'] },
+  { id:'selftech', name:'自我技术／关心自己', fr:'technologies de soi', cat:'device', r:17,
+    def:'福柯晚年那条没走完的线——主体如何主动构造与自身的关系；在权力关系里伦理地生存。',
+    src:'《性史》二·三卷 · 晚期讲座', related:['counter','archipelago','neoliberal','confucian'], eps:['#09'] },
+  { id:'dossier', name:'个体档案', fr:'dossier individuel', cat:'device', r:16,
+    def:'考试把人书写为"<strong>一个案例</strong>"；当代征信／平台／支付宝档案，是规训群岛扩散到全社会的关键媒介。',
+    src:'第三编 第二章（考试）', related:['exam','credit','archipelago'], eps:['#06'] },
+  { id:'population', name:'人口（作为治理对象）', fr:'population', cat:'device', r:17,
+    def:'与个体肉体相对的抽象集合，可加总、预测、引导。<strong>与已有节点分工</strong>：人口=对象，生命权力=权力形态，治理术=理性。',
+    src:'《安全、领土与人口》· 马尔萨斯', related:['biopower','governmentality','malthus','marriage'], eps:['#08'] },
 
-  // ---- 装置(规训权力的具体技术) ----
-  { id: 'panopticon', name: '全景敞视主义', fr: 'panoptisme', cat: 'device', x: 600, y: 620, r: 28,
-    def: '少数监视多数的几何学结构。被看者不需要每时每刻被看,只要他<em>不知道何时被看</em>,他就会一直按被看时的样子行动。',
-    src: '《规训与惩罚》第三编 第三章',
-    cases: ['hcode', 'algo'],
-    related: ['discipline', 'knowpower', 'hcode', 'algo'],
-    eps: ['#02','#07'] },
+  // ---- 历史 · 类比/源头 ----
+  { id:'damiens', name:'酷刑（达米安）', fr:'1757', cat:'history', r:16,
+    def:'《规训与惩罚》开篇案例。1757 年弑君犯达米安被四马分肢——君主权力的极端展演，用作<strong>距离感</strong>。',
+    src:'《规训与惩罚》开篇', related:['sovereign','prison','guillotine'], eps:['#00','#01'] },
+  { id:'guillotine', name:'断头台与公开处决的兴废', fr:'1789 → 1981', cat:'history', r:15,
+    def:'1789 断头台→1939 纳粹废→1981 法国废死；公开处决从未真正退场，只是换了广场。',
+    src:'#01 历史钩子', related:['sovereign','damiens','weibo'], eps:['#01'] },
+  { id:'time', name:'时间表', fr:'emploi du temps', cat:'history', r:15,
+    def:'规训对时间的精细切割。<em>一天被切成不可逆的格子</em>。从修道院到工厂到打卡软件，一脉相承。',
+    src:'第三编 第一章', related:['discipline','discfour','timediscipline','dingtalk'], eps:['#03'] },
+  { id:'timediscipline', name:'时间纪律的诞生', fr:'E. P. Thompson', cat:'history', r:15,
+    def:'人类第一次把时间切片、计价、写进工资单（曼彻斯特工厂大钟）。',
+    src:'E. P. Thompson', related:['time','dingtalk'], eps:['#03'] },
+  { id:'anatomy', name:'政治解剖学／解剖政治学', fr:'anatomo-politique', cat:'history', r:15,
+    def:'针对个体肉体的权力技术（与"人口的生命政治学"配对）。本书用「政治解剖学」；「解剖政治学」是《性史》一卷术语。',
+    src:'《规训与惩罚》第三编 · 《性史》一卷', related:['discipline','docile','biopower','micro'], eps:['#03','#05'] },
+  { id:'governmentality', name:'治理术', fr:'gouvernementalité', cat:'history', r:16,
+    def:'把人口当作管理对象的治理理性。<em>它不直接命令你，它配置情境，让你"自己"做出它需要的选择</em>。',
+    src:'《安全、领土与人口》', related:['biopower','population','neoliberal','hcode','marriage','kidedu'], eps:['#02','#08'] },
+  { id:'prison', name:'监狱', fr:'prison', cat:'history', r:16,
+    def:'现代规训装置的最终形态——但真意是：<strong>当所有地方都已经是监狱时，监狱就不需要墙了</strong>。',
+    src:'《规训与惩罚》第四编', related:['discipline','archipelago','damiens','easternstate','credit'], eps:['#06'] },
+  { id:'easternstate', name:'东方州立监狱', fr:'Eastern State, 1842', cat:'history', r:15,
+    def:'费城 1842，Panopticon 首次大规模实装；狄更斯/托克维尔来访，被视为"惩罚的未来"。',
+    src:'#06 历史钩子', related:['prison','panopticon'], eps:['#06'] },
+  { id:'benthampan', name:'边沁的圆形监狱图纸', fr:'Panopticon, 1791', cat:'history', r:15,
+    def:'躺了 230 年的图纸；#07 指出它被"反转"实装——多数主动暴露给少数。',
+    src:'边沁 1791', related:['panopticon','algo','hcode'], eps:['#02','#07'] },
+  { id:'emile', name:'《爱弥儿》vs 强制教育', fr:'1762 / 1763', cat:'history', r:15,
+    def:'卢梭 1762"孩子是孩子" vs 腓特烈 1763 首个国家强制教育——赢的是腓特烈那套。',
+    src:'#04 历史钩子', related:['exam','normalization','kidedu'], eps:['#04'] },
+  { id:'corset', name:'束腰（corset）', fr:'corset, 19c', cat:'history', r:15,
+    def:'19 世纪把"什么样的腰算腰"字面勒进身体的规训装置——A4 腰的历史原型。',
+    src:'#05 历史钩子', related:['docile','a4'], eps:['#05'] },
+  { id:'malthus', name:'马尔萨斯《人口论》', fr:'Malthus, 1798', cat:'history', r:15,
+    def:'1798，"国家必须管理人口"——把卧室里的事第一次提为国家治理对象。',
+    src:'马尔萨斯 1798', related:['biopower','population','marriage','popintervention'], eps:['#08'] },
+  { id:'popintervention', name:'20 世纪人口干预坐标', fr:'1934 / 770 / eugenics', cat:'history', r:15,
+    def:'苏联 1934 禁堕胎、罗马尼亚 770 号令、优生学——作"治理技术能走多深"的历史坐标。',
+    src:'#08 历史坐标', related:['biopower','malthus','stratify','marriage'], eps:['#08'],
+    limit:'作"治理技术能走多深"的历史坐标，<strong>非影射</strong>（照搬 #08 自注）。' },
 
-  { id: 'docile', name: '驯顺的肉体', fr: 'corps dociles', cat: 'device', x: 830, y: 470, r: 26,
-    def: '通过细微纪律可以被塑造、被使用的身体。<em>不需要镣铐——纪律已经长进了身体本身</em>。',
-    src: '《规训与惩罚》第三编 第一章',
-    cases: ['a4'],
-    related: ['discipline', 'anatomy', 'a4'],
-    eps: ['#05'] },
+  // ---- 当代理论 · 思想脊柱 ----
+  { id:'control', name:'控制社会／连续调制', cat:'theory', r:18, thinker:'德勒兹《控制社会后记》',
+    def:'规训社会靠封闭空间，控制社会靠<strong>连续调制</strong>——你不再"出厂门"，只是从一种被允许的状态滑到另一种。<strong>专题脊柱</strong>。',
+    src:'德勒兹 1990', related:['discipline','biopower','hcode','dingtalk','credit','algo'], eps:['#02','#03','#04','#06','#07','#08'] },
+  { id:'burnout', name:'自我剥削／倦怠社会', cat:'theory', r:17, thinker:'韩炳哲',
+    def:'暴政从"你不能"变成"你应该"，工人自己是自己的工头。<strong>须区分两种主动</strong>：能不能允许自己今天不做。',
+    src:'韩炳哲《倦怠社会》', related:['docile','discipline','dingtalk','a4'], eps:['#03','#04','#05'] },
+  { id:'psychopol', name:'精神政治学', cat:'theory', r:16, thinker:'韩炳哲',
+    def:'权力不再管身体，管你的注意力、情绪、欲望——而你自愿交出全部数据。',
+    src:'韩炳哲《精神政治学》', related:['biopower','surveilcap','hcode'], eps:['#02'] },
+  { id:'surveilcap', name:'行为剩余／监视资本主义', cat:'theory', r:18, thinker:'Shoshana Zuboff',
+    def:'平台真正想要的不是你给的数据，是你"溢出"的行为——被加工、定价、卖回给想塑造你的人。',
+    src:'Zuboff 2019', related:['panopticon','knowpower','algo','weibo'], eps:['#01','#02','#05','#07'] },
+  { id:'exposure', name:'暴露社会／镜面玻璃屋', cat:'theory', r:17, thinker:'Bernard Harcourt',
+    def:'Panopticon 的反转——不是被强迫可见，是渴望被看见；你以为在看，其实在被看。',
+    src:'Harcourt 2015', related:['panopticon','weibo','algo'], eps:['#01','#06','#07'] },
+  { id:'protocol', name:'协议权力', cat:'theory', r:16, thinker:'Alexander Galloway',
+    def:'它不"禁止"，只规定什么行为在系统里能发生——平台黑名单 ≠ 司法失信公示。',
+    src:'Galloway 2004', related:['normalization','credit'], eps:['#06'] },
+  { id:'capitals', name:'三种资本', cat:'theory', r:16, thinker:'布尔迪厄',
+    def:'经济·文化·社会资本——不平等不只是钱，更隐蔽、更代际传递。',
+    src:'布尔迪厄', related:['exam','kidedu','marriage'], eps:['#04','#08'] },
+  { id:'neoliberal', name:'新自由主义理性／人力资本', cat:'theory', r:18, thinker:'Dardot & Laval ／福柯《生命政治的诞生》',
+    def:'人本身是资本，需被持续投资优化；用市场语言看自己、配偶、孩子。',
+    src:'Dardot & Laval ／福柯', related:['governmentality','biopower','selftech','kidedu'], eps:['#04'],
+    limit:'<strong>福柯讲 Becker 是分析、非赞同——须标注</strong>。借其描述当代理性，不等于认同人力资本观本身。' },
+  { id:'barelife', name:'赤裸生命', cat:'theory', r:16, thinker:'阿甘本',
+    def:'还活着、但被共同体弃置在外。',
+    src:'阿甘本', related:['sovereign','weibo'], eps:['#01'],
+    limit:'<strong>仅用于"社会性死亡／排除"，不用于描述数字治理常态</strong>（守阿甘本红线）。' },
+  { id:'algogov', name:'算法治理性', cat:'theory', r:17, thinker:'Antoinette Rouvroy',
+    def:'算法不需要主体，只需要数据流——绕过"意识、意图、辩解"直接作用于行为倾向。#07 第三层最黑暗的一刀。',
+    src:'Rouvroy', related:['knowpower','algo','surveilcap','hcode'], eps:['#02','#07'],
+    limit:'借用"算法绕过主体"的提问结构，<strong>不主张当代中国算法权力已抵达该极端形态</strong>。' },
+  { id:'stratify', name:'分层／人口政治不均匀', cat:'theory', r:16, thinker:'Ann Laura Stoler',
+    def:'人口政治从来不是均匀的——"<em>谁的</em>生育被鼓励"这个问题从未真正消失，只换成更中性的词。',
+    src:'Stoler', related:['biopower','popintervention','marriage'], eps:['#08'] },
 
-  { id: 'exam', name: '考试', fr: 'examen', cat: 'device', x: 750, y: 580, r: 24,
-    def: '把权力关系内化为知识关系的核心仪式。考试既<strong>检验</strong>你,也<strong>制造</strong>你——分数让你变成可计算的个体。',
-    src: '《规训与惩罚》第三编 第三章',
-    cases: ['dingtalk', 'kidedu'],
-    related: ['discipline', 'normalization', 'dingtalk', 'kidedu'],
-    eps: ['#03','#04'] },
+  // ---- 外援 · 终刊补丁（走出福柯·#09，限度注脚为核心字段）----
+  { id:'natality', name:'出生性', fr:'natality', cat:'ally', r:18, thinker:'阿伦特',
+    def:'每个人的降生都是一个<strong>无法被预测的新开端</strong>——补福柯"行动"之缺。',
+    src:'阿伦特《人的境况》', related:['counter','discipline','selftech'], eps:['#09'],
+    limit:'补福柯"行动"之缺，但阿伦特轻看劳动与社会，其"行动"有<strong>精英气</strong>。' },
+  { id:'justice', name:'公平／原初状态', fr:'original position', cat:'ally', r:17, thinker:'罗尔斯',
+    def:'要说"这不公平"，需要一个<strong>能站住的公平标准</strong>——补福柯"规范"之缺。',
+    src:'罗尔斯《正义论》', related:['normalization','natality'], eps:['#09'],
+    limit:'补福柯"规范"之缺；但福柯会反问："你那个标准，又是谁的历史斗争的产物？"两者需互相牵制。' },
+  { id:'emptiness', name:'缘起／无自性', cat:'ally', r:17, thinker:'佛教',
+    def:'怀疑得比福柯更彻底——连"<em>被规训的我</em>"也是空的、缘起的——补福柯"主体未松到底"。',
+    src:'佛教', related:['selftech','natality'], eps:['#09'],
+    limit:'补福柯"主体未松到底"；但"空"若被误读为"无所谓"，会取消一切抵抗的动机——须读者自行验毒。' },
+  { id:'confucian', name:'修身／为己之学', cat:'ally', r:17, thinker:'儒家',
+    def:'与福柯晚期"自我技术"可深谈，但"礼"的等级规训性使其<strong>最双刃</strong>。',
+    src:'儒家', related:['selftech','emptiness'], eps:['#09'],
+    limit:'<strong>高危 · 不进正文 · 仅站点延伸阅读</strong>。"礼"的等级规训性使其成为最双刃的补丁，需读者自行验毒。' },
 
-  { id: 'normalization', name: '规范化裁决', fr: 'sanction normalisatrice', cat: 'device', x: 440, y: 580, r: 24,
-    def: '用"标准"取代"是非"的判定方式。不再问"你做错了什么",而问"你<em>偏离</em>标准多少"。',
-    src: '《规训与惩罚》第三编 第二章',
-    cases: ['kidedu', 'credit'],
-    related: ['discipline', 'exam', 'kidedu', 'credit'],
-    eps: ['#04','#06'] },
-
-  { id: 'knowpower', name: '知识—权力', fr: 'savoir-pouvoir', cat: 'device', x: 300, y: 480, r: 26,
-    def: '知识不在权力之外,知识就是权力本身。<em>知道你的人,就掌握了你</em>。',
-    src: '全书 + 后期讲座',
-    cases: ['algo'],
-    related: ['discipline', 'panopticon', 'algo'],
-    eps: ['#07'] },
-
-  { id: 'micro', name: '微观物理学', fr: 'microphysique', cat: 'device', x: 510, y: 320, r: 20,
-    def: '权力在最细节处的运作机制——一个动作、一个姿势、一个时间表。福柯反对"宏观权力"的想象,坚持<strong>权力在毛细血管里</strong>。',
-    src: '《规训与惩罚》第一编 第一章',
-    cases: [],
-    related: ['discipline', 'anatomy'],
-    eps: [] },
-
-  { id: 'anatomy', name: '解剖政治学', fr: 'anatomo-politique', cat: 'device', x: 720, y: 360, r: 20,
-    def: '针对个体的权力技术——把身体当作可以拆解、训练、组装的机器。和"生命权力"(对人口)成对出现。',
-    src: '《规训与惩罚》第三编 总论',
-    cases: [],
-    related: ['discipline', 'docile', 'micro'],
-    eps: ['#03','#05'] },
-
-  { id: 'time', name: '时间表', fr: 'emploi du temps', cat: 'device', x: 500, y: 680, r: 20,
-    def: '规训对时间的精细切割。<em>一天被切成不可逆的格子,每一格规定一种动作</em>。从修道院到工厂到打卡软件,一脉相承。',
-    src: '《规训与惩罚》第三编 第一章',
-    cases: ['dingtalk'],
-    related: ['discipline', 'exam', 'dingtalk'],
-    eps: ['#03'] },
-
-  // ---- 历史/类比节点 ----
-  { id: 'damiens', name: '酷刑(达米安)', fr: '1757', cat: 'history', x: 100, y: 90, r: 22,
-    def: '《规训与惩罚》的开篇案例。1757 年弑君犯达米安被四马分肢——君主权力的极端展演。福柯用它做<strong>距离感</strong>:让你看见今天的"文明刑罚"也只是另一种形态的权力。',
-    src: '《规训与惩罚》开篇',
-    cases: [],
-    related: ['sovereign', 'prison'],
-    eps: ['#00','#01'] },
-
-  { id: 'governmentality', name: '治理术', fr: 'gouvernementalité', cat: 'history', x: 1060, y: 320, r: 22,
-    def: '把人口当作管理对象的治理理性。<em>它不直接命令你,它配置情境,让你"自己"做出它需要的选择</em>。',
-    src: '《安全、领土与人口》',
-    cases: ['hcode', 'marriage'],
-    related: ['biopower', 'hcode', 'marriage'],
-    eps: ['#02','#04','#08'] },
-
-  { id: 'prison', name: '监狱', fr: 'prison', cat: 'history', x: 180, y: 700, r: 22,
-    def: '现代规训装置的最终形态——但福柯的真意是:<strong>当所有地方(学校、工厂、医院、家庭)都已经是监狱时,监狱就不需要墙了</strong>。',
-    src: '《规训与惩罚》第四编',
-    cases: ['credit'],
-    related: ['discipline', 'damiens', 'credit'],
-    eps: ['#06'] },
-
-  // ---- 当代案例(默认隐藏) ----
-  { id: 'weibo', name: '微博挂人', cat: 'case', x: 120, y: 290, r: 14,
-    def: '将一个人的隐私、行踪、人际关系一次性公开,在数小时内完成"社会处决"。形式像君主权力的复辟,但通过<strong>平台+人群</strong>实现。',
-    src: '当代现象 · #01',
-    cases: [],
-    related: ['sovereign'],
-    eps: ['#01'] },
-
-  { id: 'hcode', name: '健康码', cat: 'case', x: 900, y: 120, r: 14,
-    def: '一个二维码同时是君主令(强制)、规训装置(连续监测)、生命权力的入口(以"健康"为旗帜)。<em>三种权力共振的极端案例</em>。',
-    src: '当代现象 · #02',
-    cases: [],
-    related: ['biopower', 'panopticon', 'governmentality'],
-    eps: ['#02'] },
-
-  { id: 'dingtalk', name: '钉钉打卡', cat: 'case', x: 700, y: 720, r: 14,
-    def: '时间表 + 考试 + 微观物理学的合体——把"下班"这个私有边界从员工身体里抹除。',
-    src: '当代现象 · #03',
-    cases: [],
-    related: ['exam', 'time', 'discipline'],
-    eps: ['#03'] },
-
-  { id: 'kidedu', name: '鸡娃', cat: 'case', x: 350, y: 690, r: 14,
-    def: '父母不是在"逼孩子",是在替系统计算资产。考试 + 规范化裁决 + 治理术的家庭版。',
-    src: '当代现象 · #04',
-    cases: [],
-    related: ['exam', 'normalization', 'governmentality'],
-    eps: ['#04'] },
-
-  { id: 'a4', name: 'A4 腰', cat: 'case', x: 950, y: 540, r: 14,
-    def: '规训技术在身体上的最纯粹形态——<em>不需要任何人下令,身体自己已经在服从一把虚构的尺子</em>。',
-    src: '当代现象 · #05',
-    cases: [],
-    related: ['docile', 'discipline'],
-    eps: ['#05'] },
-
-  { id: 'credit', name: '信用分', cat: 'case', x: 230, y: 600, r: 14,
-    def: '惩罚的毛细化——你不会被关进"那个监狱",但一个分数会跟着你的每一次乘车、贷款、租房。',
-    src: '当代现象 · #06',
-    cases: [],
-    related: ['normalization', 'prison'],
-    eps: ['#06'] },
-
-  { id: 'algo', name: '算法推荐', cat: 'case', x: 200, y: 380, r: 14,
-    def: 'Panopticon 的反转——不再是少数监视多数,而是<strong>多数主动暴露给少数</strong>。你以为是你在选,其实是它在让你选。',
-    src: '当代现象 · #07',
-    cases: [],
-    related: ['panopticon', 'knowpower'],
-    eps: ['#07'] },
-
-  { id: 'marriage', name: '催婚与三胎', cat: 'case', x: 1100, y: 100, r: 14,
-    def: '最私密的事(性、生育)是怎么变成最公共的政策的。生命权力 + 治理术,在卧室里。',
-    src: '当代现象 · #08',
-    cases: [],
-    related: ['biopower', 'governmentality'],
-    eps: ['#08'] },
+  // ---- 当代案例（默认隐藏） ----
+  { id:'weibo', name:'微博挂人', cat:'case', r:15,
+    def:'将一个人的隐私、行踪、人际关系一次性公开，在数小时内完成"社会处决"。形式像君主权力的复辟，但通过<strong>平台+人群</strong>实现。',
+    src:'当代现象 · #01', related:['sovereign','guillotine','exposure','barelife','threerecipe'], eps:['#01'] },
+  { id:'hcode', name:'健康码', cat:'case', r:15,
+    def:'一个二维码同时是君主令、规训装置、生命权力入口。<em>三种权力共振的极端案例</em>。',
+    src:'当代现象 · #02', related:['biopower','panopticon','governmentality','control','threerecipe'], eps:['#02'] },
+  { id:'dingtalk', name:'钉钉打卡', cat:'case', r:15,
+    def:'时间表 + 考试 + 微观物理学的合体——把"下班"这个私有边界从员工身体里抹除。',
+    src:'当代现象 · #03', related:['time','discfour','exam','burnout','threerecipe'], eps:['#03'] },
+  { id:'kidedu', name:'鸡娃', cat:'case', r:15,
+    def:'父母不是在"逼孩子"，是在替系统计算资产。考试 + 规范化裁决 + 治理术的家庭版。',
+    src:'当代现象 · #04', related:['exam','normalization','governmentality','capitals','neoliberal','threerecipe'], eps:['#04'] },
+  { id:'a4', name:'A4 腰', cat:'case', r:15,
+    def:'规训技术在身体上的最纯粹形态——<em>不需要任何人下令，身体自己已经在服从一把虚构的尺子</em>。',
+    src:'当代现象 · #05', related:['docile','corset','burnout','threerecipe'], eps:['#05'] },
+  { id:'credit', name:'信用分', cat:'case', r:15,
+    def:'惩罚的毛细化——你不会被关进"那个监狱"，但一个分数会跟着你的每一次乘车、贷款、租房。',
+    src:'当代现象 · #06', related:['normalization','prison','archipelago','protocol','dossier','threerecipe'], eps:['#06'] },
+  { id:'algo', name:'算法推荐', cat:'case', r:15,
+    def:'Panopticon 的反转——不再是少数监视多数，而是<strong>多数主动暴露给少数</strong>。',
+    src:'当代现象 · #07', related:['panopticon','knowpower','surveilcap','exposure','algogov','threerecipe'], eps:['#07'] },
+  { id:'marriage', name:'催婚与三胎', cat:'case', r:15,
+    def:'最私密的事（性、生育）是怎么变成最公共的政策的。生命权力 + 治理术，在卧室里。',
+    src:'当代现象 · #08', related:['biopower','governmentality','population','capitals','stratify','threerecipe'], eps:['#08'] },
 ];
 
+/* ---- 配方子节点（独立命名概念，挂在对应案例与"三种配方"下）---- */
+const RECIPES = [
+  ['weibo','#01',  [['数字示众','公开羞辱在数字广场的复辟——人肉、开盒、塌房','a'],
+                     ['旁观者的自我审查','真正被规训的是没被挂的所有人——发言前那一秒犹豫','b'],
+                     ['先等一等','24 小时反转后内化的延迟——规训生效的时刻','c']]],
+  ['hcode','#02',  [['亮码通过','君主仪式的现代低强度版（已成专栏标志短语）','a'],
+                     ['持续身份认证','场所码·人脸门禁——仪式下沉为呼吸','b'],
+                     ['自愿身体量化','健身环·睡眠分——主动把身体翻译成数据上传','c']]],
+  ['dingtalk','#03',[['开除仪式','戏剧化、有脚本、被刻意公开的"组织优化"','a'],
+                     ['连续考核','周报·OKR·季度面谈——考试永远在进行中','b'],
+                     ['自我效率管理','番茄钟·个人 OKR——自己当自己的工头','c']]],
+  ['kidedu','#04', [['高考作为现代仪式','一年一次、不需加码、存在即规训','a'],
+                     ['学业资本积累','学区房·错题本——人力资本的家庭实装','b'],
+                     ['文化／社会资本经营','藤校规划顾问·"不像功利的功利"','c']]],
+  ['a4','#05',     [['瘦身对比剧场','朋友圈"前 vs 后"——胖丑羞辱的低强度君主仪式','a'],
+                     ['"亚健康"治理','被发明的"需被治理但尚未生病"人群','b'],
+                     ['身体作为简历','体脂秤·Keep 打卡——永远不能下班的简历','c']]],
+  ['credit','#06', [['失信公示','司法权力的可见仪式——有法律边界与申诉','a'],
+                     ['平台风控分','协议权力——无边界、黑箱、无申诉对象','b'],
+                     ['自愿信用经营','晒"芝麻 800"——把守信内化为品德','c']]],
+  ['algo','#07',   [['限流降权封号','算法的君主时刻——无声化的酷刑','a'],
+                     ['渴望被看见','Panopticon 反转——不被看见≈不存在','b'],
+                     ['制造噪点／浪费的权利','不服务任何目的的纯粹浪费——算法唯一吃不下的','c']]],
+  ['marriage','#08',[['政策转向作为仪式','人口政策的戏剧化转向——发生一次即规训','a'],
+                     ['婚恋简历语法','人力资本+生育力的合并报表，含隐藏性别语法','b'],
+                     ['自愿生育优化','AMH·生育力检测——为"被读取为人口前置指标"付费','c']]],
+];
+const KIND = { a:'强制性戏剧化', b:'持续性日常治理', c:'自愿性自我经营' };
+const EDGES_BASE = [];
+RECIPES.forEach(([pid, ep, items]) => {
+  const parent = NODES.find(n => n.id === pid);
+  items.forEach(([nm, d, k], i) => {
+    const id = pid + '-' + k;
+    NODES.push({ id, name: nm, cat: 'recipe', r: 8,
+      def: d + '。<br><span style="color:var(--ink-faint)">配方 (' + k + ') ' + KIND[k] + ' · 属于【' + (parent ? parent.name : pid) + '】</span>',
+      src: '当代现象 · ' + ep + ' 配方 (' + k + ')', related: [pid, 'threerecipe'], parent: pid, eps: [ep] });
+    EDGES_BASE.push({ from: id, to: pid, type: 'derive' });
+    if (i > 0) EDGES_BASE.push({ from: pid + '-' + items[i-1][2], to: id, type: 'cooccur',
+      note: '同一现象（' + ep + '）的三配方并列在场：' + KIND[items[i-1][2]] + ' 与 ' + KIND[k] + '。这不是"下沉"——下沉是保留给真·论证边的精确动词。' });
+  });
+});
+
+/* ==================== 边（静态结构 + 动态变形） ==================== */
+function E(from, to, type, note) { return { from, to, type, note }; }
 const EDGES = [
-  // 三核心权力之间
-  { from: 'sovereign', to: 'discipline', type: 'contrast' },
-  { from: 'discipline', to: 'biopower', type: 'cooccur' },
-  { from: 'sovereign', to: 'damiens', type: 'derive' },
-  // 规训权力派生
-  { from: 'discipline', to: 'panopticon', type: 'derive' },
-  { from: 'discipline', to: 'docile', type: 'derive' },
-  { from: 'discipline', to: 'exam', type: 'derive' },
-  { from: 'discipline', to: 'normalization', type: 'derive' },
-  { from: 'discipline', to: 'time', type: 'derive' },
-  { from: 'discipline', to: 'micro', type: 'derive' },
-  { from: 'discipline', to: 'anatomy', type: 'derive' },
-  { from: 'discipline', to: 'knowpower', type: 'cooccur' },
-  { from: 'discipline', to: 'prison', type: 'derive' },
-  // 装置之间
-  { from: 'exam', to: 'normalization', type: 'cooccur' },
-  { from: 'panopticon', to: 'knowpower', type: 'cooccur' },
-  { from: 'anatomy', to: 'docile', type: 'derive' },
-  { from: 'micro', to: 'anatomy', type: 'cooccur' },
-  // 生命权力派生
-  { from: 'biopower', to: 'governmentality', type: 'derive' },
-  // 历史
-  { from: 'damiens', to: 'prison', type: 'contrast' },
-  // 当代案例 → 概念
-  { from: 'weibo', to: 'sovereign', type: 'cooccur' },
-  { from: 'hcode', to: 'panopticon', type: 'cooccur' },
-  { from: 'hcode', to: 'biopower', type: 'cooccur' },
-  { from: 'hcode', to: 'governmentality', type: 'cooccur' },
-  { from: 'dingtalk', to: 'time', type: 'cooccur' },
-  { from: 'dingtalk', to: 'exam', type: 'cooccur' },
-  { from: 'kidedu', to: 'exam', type: 'cooccur' },
-  { from: 'kidedu', to: 'normalization', type: 'cooccur' },
-  { from: 'kidedu', to: 'governmentality', type: 'cooccur' },
-  { from: 'a4', to: 'docile', type: 'cooccur' },
-  { from: 'credit', to: 'normalization', type: 'cooccur' },
-  { from: 'credit', to: 'prison', type: 'cooccur' },
-  { from: 'algo', to: 'panopticon', type: 'cooccur' },
-  { from: 'algo', to: 'knowpower', type: 'cooccur' },
-  { from: 'marriage', to: 'biopower', type: 'cooccur' },
-  { from: 'marriage', to: 'governmentality', type: 'cooccur' },
-];
+  E('sovereign','discipline','contrast'),
+  E('discipline','biopower','cooccur'),
+  E('sovereign','biopower','contrast'),
+  E('discipline','archipelago','derive'),
+  E('archipelago','prison','cooccur'),
+  E('archipelago','credit','cooccur'),
+  E('archipelago','selftech','contrast'),
+  E('sovereign','damiens','derive'),
+  E('damiens','guillotine','cooccur'),
+  E('damiens','prison','contrast'),
+  E('discipline','panopticon','derive'),
+  E('discipline','docile','derive'),
+  E('discipline','exam','derive'),
+  E('discipline','normalization','derive'),
+  E('discipline','hierobs','derive'),
+  E('discipline','discfour','derive'),
+  E('discipline','micro','derive'),
+  E('discipline','time','derive'),
+  E('discipline','knowpower','cooccur'),
+  E('discipline','prison','derive'),
+  E('discipline','counter','contrast'),
+  E('discipline','selftech','contrast'),
+  E('exam','normalization','cooccur'),
+  E('exam','hierobs','cooccur'),
+  E('exam','dossier','derive'),
+  E('normalization','hierobs','cooccur'),
+  E('panopticon','knowpower','cooccur'),
+  E('panopticon','hierobs','derive'),
+  E('panopticon','benthampan','derive'),
+  E('discfour','time','derive'),
+  E('discfour','docile','derive'),
+  E('anatomy','docile','derive'),
+  E('anatomy','micro','cooccur'),
+  E('anatomy','biopower','cooccur'),
+  E('counter','selftech','cooccur'),
+  E('biopower','governmentality','derive'),
+  E('biopower','population','derive'),
+  E('biopower','malthus','derive'),
+  E('population','governmentality','cooccur'),
+  E('malthus','popintervention','cooccur'),
+  E('popintervention','stratify','cooccur'),
+  E('governmentality','hcode','cooccur'),
+  E('governmentality','marriage','cooccur'),
+  E('time','timediscipline','cooccur'),
+  E('timediscipline','dingtalk','cooccur'),
+  E('benthampan','easternstate','cooccur'),
+  E('easternstate','prison','cooccur'),
+  E('emile','exam','cooccur'),
+  E('emile','normalization','cooccur'),
+  E('corset','docile','cooccur'),
+  E('prison','easternstate','cooccur'),
+  E('dossier','credit','derive'),
+  // 当代理论
+  E('control','discipline','contrast'),
+  E('control','biopower','cooccur'),
+  E('control','hcode','cooccur'),
+  E('control','dingtalk','cooccur'),
+  E('control','credit','cooccur'),
+  E('control','algo','cooccur'),
+  E('burnout','docile','cooccur'),
+  E('burnout','dingtalk','cooccur'),
+  E('burnout','a4','cooccur'),
+  E('psychopol','biopower','cooccur'),
+  E('psychopol','hcode','cooccur'),
+  E('surveilcap','knowpower','cooccur'),
+  E('surveilcap','algo','cooccur'),
+  E('surveilcap','weibo','cooccur'),
+  E('exposure','weibo','cooccur'),
+  E('protocol','normalization','contrast'),
+  E('protocol','credit','cooccur'),
+  E('capitals','exam','cooccur'),
+  E('capitals','kidedu','cooccur'),
+  E('capitals','marriage','cooccur'),
+  E('neoliberal','governmentality','cooccur'),
+  E('neoliberal','kidedu','cooccur'),
+  E('barelife','sovereign','cooccur'),
+  E('barelife','weibo','cooccur'),
+  E('algogov','knowpower','cooccur'),
+  E('algogov','algo','cooccur'),
+  E('stratify','biopower','cooccur'),
+  E('stratify','marriage','cooccur'),
+  // 外援 · #09
+  E('natality','counter','cooccur'),
+  E('natality','discipline','contrast'),
+  E('justice','normalization','contrast'),
+  E('justice','natality','cooccur'),
+  E('emptiness','selftech','cooccur'),
+  E('emptiness','natality','cooccur'),
+  E('confucian','selftech','cooccur'),
+  E('confucian','emptiness','cooccur'),
+  // 案例 → 概念
+  E('weibo','sovereign','cooccur'),
+  E('hcode','panopticon','cooccur'),
+  E('hcode','biopower','cooccur'),
+  E('dingtalk','time','cooccur'),
+  E('dingtalk','exam','cooccur'),
+  E('kidedu','exam','cooccur'),
+  E('kidedu','normalization','cooccur'),
+  E('a4','docile','cooccur'),
+  E('credit','normalization','cooccur'),
+  E('algo','panopticon','cooccur'),
+  E('algo','knowpower','cooccur'),
+  E('marriage','biopower','cooccur'),
+  // ---- 三种配方：分析框架与八个案例的共生（A 方案下让方法论入口真正连上）----
+  E('threerecipe','weibo','cooccur','"三种配方"(强制／日常／自我经营)是分析这一现象的共同框架。'),
+  E('threerecipe','hcode','cooccur','"三种配方"(强制／日常／自我经营)是分析这一现象的共同框架。'),
+  E('threerecipe','dingtalk','cooccur','"三种配方"(强制／日常／自我经营)是分析这一现象的共同框架。'),
+  E('threerecipe','kidedu','cooccur','"三种配方"(强制／日常／自我经营)是分析这一现象的共同框架。'),
+  E('threerecipe','a4','cooccur','"三种配方"(强制／日常／自我经营)是分析这一现象的共同框架。'),
+  E('threerecipe','credit','cooccur','"三种配方"(强制／日常／自我经营)是分析这一现象的共同框架。'),
+  E('threerecipe','algo','cooccur','"三种配方"(强制／日常／自我经营)是分析这一现象的共同框架。'),
+  E('threerecipe','marriage','cooccur','"三种配方"(强制／日常／自我经营)是分析这一现象的共同框架。'),
+  // ---- 动态变形（动词即论证·点击看原文锐度）----
+  E('panopticon','exposure','reverse','Panopticon 被翻转了——不再是被强迫可见，而是渴望被看见（镜面玻璃屋）。原文："它被翻转了" #07'),
+  E('benthampan','algo','reverse','边沁图纸躺了 230 年后被反转实装：少数监视多数 → 多数主动暴露给少数。#07'),
+  E('credit','protocol','translate','"金融失败被翻译成了人格的污点。" #06'),
+  E('marriage','capitals','translate','结构问题（生育成本）被翻译成个人选择题（你到底生不生）。#08'),
+  E('guillotine','weibo','sink','国家示众下沉为平台黑名单——"下沉、退色、被习惯化"。#01'),
+  E('hcode','control','sink','应急性核验下沉为日常呼吸（场所码·人脸门禁）。#02'),
+  E('prison','credit','capillarize','监狱毛细化扩散为信用分——惩罚不再需要墙。"毛细化地扩散" #06'),
+  E('governmentality','kidedu','capillarize','治理术从学校毛细化进入家庭——鸡娃是它的家庭版。#04'),
+  E('benthampan','hcode','actualize','边沁图纸被字面实装为健康码——"18 世纪的图纸，21 世纪的实装"。#02'),
+  E('discfour','a4','actualize','士兵操典／规训四件套被实装为 Keep 打卡——专栏签名动词"字面实装"。#05'),
+].concat(EDGES_BASE);
 
 const CAT_LABEL = {
-  core: '核心 · 权力形态',
-  device: '装置 · 具体技术',
-  history: '历史 · 类比/源头',
-  case: '当代案例'
+  core:'核心 · 权力形态', method:'方法论 · 分析框架', device:'装置 · 具体技术',
+  history:'历史 · 类比/源头', theory:'当代理论 · 思想脊柱', ally:'外援 · 终刊补丁',
+  case:'当代案例 · 落地切片', recipe:'配方 · 案例子节点',
 };
+const EDGE_LABEL = {
+  derive:'派生 · A 是 B 的具体技术', cooccur:'共生 · 同一场景中同时在场', contrast:'反例 · 形态相反',
+  reverse:'反转 · reverse', translate:'翻译 · translate', sink:'下沉 · sink',
+  capillarize:'毛细化 · capillarize', actualize:'实装 · actualize',
+};
+const DYNAMIC = new Set(['reverse','translate','sink','capillarize','actualize']);
 
 const EP_URL = {
-  '#00': '群岛/规训群岛/00-发刊词/',
-  '#01': '群岛/规训群岛/01-微博挂人/',
-  '#02': '群岛/规训群岛/02-健康码/',
-  '#03': '群岛/规训群岛/03-钉钉打卡/',
-  '#04': '群岛/规训群岛/04-鸡娃父母/',
-  '#05': '群岛/规训群岛/05-A4腰/',
-  '#06': '群岛/规训群岛/06-信用分/',
-  '#07': '群岛/规训群岛/07-算法不是工具/',
-  '#08': '群岛/规训群岛/08-催婚与三胎/',
-  '#09': '群岛/规训群岛/09-那然后呢/',
+  '#00':'群岛/规训群岛/00-发刊词/', '#01':'群岛/规训群岛/01-微博挂人/',
+  '#02':'群岛/规训群岛/02-健康码/', '#03':'群岛/规训群岛/03-钉钉打卡/',
+  '#04':'群岛/规训群岛/04-鸡娃父母/', '#05':'群岛/规训群岛/05-A4腰/',
+  '#06':'群岛/规训群岛/06-信用分/', '#07':'群岛/规训群岛/07-算法是新的看守/',
+  '#08':'群岛/规训群岛/08-催婚三胎/', '#09':'群岛/规训群岛/09-终刊那然后呢/',
 };
 
-/* ==================== 渲染 ==================== */
-
+/* ==================== 渲染 + 力导向引擎 ==================== */
 const svg = document.getElementById('graph');
 const panel = document.getElementById('panel');
 const stage = document.getElementById('stage');
 const NS = 'http://www.w3.org/2000/svg';
 
-let activeCategories = new Set(['core', 'device', 'history']); // 默认隐藏 case
-let selectedId = null;
-let searchQuery = '';
+let activeCategories = new Set(['core','method','device','history','theory','ally']);
+let selectedId = null, searchQuery = '';
 
 function nodeById(id) { return NODES.find(n => n.id === id); }
 
-function render() {
-  svg.innerHTML = '';
+let vp = document.createElementNS(NS, 'g');
+vp.setAttribute('id', 'vp');
+svg.appendChild(vp);
+let viewT = { k: 0.72, x: 168, y: 112 };
+function applyView() { vp.setAttribute('transform', `translate(${viewT.x},${viewT.y}) scale(${viewT.k})`); }
 
-  // edges
-  EDGES.forEach(edge => {
-    const a = nodeById(edge.from);
-    const b = nodeById(edge.to);
-    if (!a || !b) return;
-    if (!activeCategories.has(a.cat) || !activeCategories.has(b.cat)) return;
-
-    const line = document.createElementNS(NS, 'line');
-    line.setAttribute('x1', a.x);
-    line.setAttribute('y1', a.y);
-    line.setAttribute('x2', b.x);
-    line.setAttribute('y2', b.y);
-    line.setAttribute('class', `edge edge-${edge.type}`);
-    line.dataset.from = a.id;
-    line.dataset.to = b.id;
-    svg.appendChild(line);
-  });
-
-  // nodes
+function seedPositions() {
+  const ring = { core:0, method:150, device:340, history:520, theory:420, ally:540, case:240, recipe:62 };
+  let idx = {}; const total = {};
+  NODES.forEach(n => { total[n.cat] = (total[n.cat] || 0) + 1; });
   NODES.forEach(n => {
-    if (!activeCategories.has(n.cat)) return;
+    if (n._init) return;
+    idx[n.cat] = idx[n.cat] || 0;
+    if (n.cat === 'recipe' && n.parent) {
+      const p = nodeById(n.parent), a = (idx[n.cat] % 3) / 3 * Math.PI * 2;
+      n.x = (p && p.x || CX) + Math.cos(a) * 44 + (Math.random()-.5)*8;
+      n.y = (p && p.y || CY) + Math.sin(a) * 44 + (Math.random()-.5)*8;
+    } else if (n.cat === 'core') {
+      const order = ['discipline','sovereign','biopower','archipelago'], k = order.indexOf(n.id);
+      const a = -Math.PI/2 + k * Math.PI/2;
+      n.x = CX + (n.id === 'discipline' ? 0 : Math.cos(a)*150);
+      n.y = CY + (n.id === 'discipline' ? 0 : Math.sin(a)*150);
+    } else {
+      const c = idx[n.cat], cnt = total[n.cat] || 1;
+      const a = c / cnt * Math.PI * 2 + (n.cat === 'theory' ? 0.5 : n.cat === 'ally' ? 2.4 : 0);
+      n.x = CX + Math.cos(a) * ring[n.cat] + (Math.random()-.5)*30;
+      n.y = CY + Math.sin(a) * ring[n.cat] + (Math.random()-.5)*30;
+    }
+    n.vx = 0; n.vy = 0; n._init = true; idx[n.cat]++;
+  });
+}
+seedPositions();
+
+let visNodes = [], visEdges = [], elById = {};
+
+function buildGraph() {
+  vp.innerHTML = ''; elById = {};
+  visNodes = NODES.filter(n => activeCategories.has(n.cat));
+  const vis = new Set(visNodes.map(n => n.id));
+  visEdges = EDGES.filter(e => vis.has(e.from) && vis.has(e.to));
+  visEdges.forEach(edge => {
+    const line = document.createElementNS(NS, 'line');
+    line.setAttribute('class', `edge edge-${edge.type}${DYNAMIC.has(edge.type) ? ' edge-dyn' : ''}`);
+    line.dataset.from = edge.from; line.dataset.to = edge.to;
+    if (edge.note || DYNAMIC.has(edge.type)) {
+      line.style.cursor = 'pointer';
+      line.addEventListener('click', (e) => { e.stopPropagation(); selectEdge(edge); });
+    }
+    vp.appendChild(line); edge._l = line;
+  });
+  visNodes.forEach(n => {
     const g = document.createElementNS(NS, 'g');
-    g.setAttribute('class', `node node-${n.cat}`);
-    g.setAttribute('transform', `translate(${n.x},${n.y})`);
-    g.dataset.id = n.id;
-
-    const c = document.createElementNS(NS, 'circle');
-    c.setAttribute('r', n.r);
-    g.appendChild(c);
-
-    const t = document.createElementNS(NS, 'text');
-    t.textContent = n.name;
-    g.appendChild(t);
-
-    g.addEventListener('click', (e) => { e.stopPropagation(); selectNode(n.id); });
+    g.setAttribute('class', `node node-${n.cat}`); g.dataset.id = n.id;
+    const c = document.createElementNS(NS, 'circle'); c.setAttribute('r', n.r); g.appendChild(c);
+    const t = document.createElementNS(NS, 'text'); t.setAttribute('y', n.r + 4); t.textContent = n.name; g.appendChild(t);
     g.addEventListener('mouseenter', () => highlightNeighbors(n.id));
     g.addEventListener('mouseleave', () => clearHighlight());
-    svg.appendChild(g);
+    addDrag(g, n);
+    vp.appendChild(g); elById[n.id] = g;
   });
-
-  applySearch();
-  applySelection();
+  applyView(); applySearch(); applySelection(); paint();
 }
+
+function paint() {
+  visNodes.forEach(n => { const g = elById[n.id]; if (g) g.setAttribute('transform', `translate(${n.x.toFixed(1)},${n.y.toFixed(1)})`); });
+  visEdges.forEach(e => {
+    const a = nodeById(e.from), b = nodeById(e.to), l = e._l; if (!l) return;
+    l.setAttribute('x1', a.x.toFixed(1)); l.setAttribute('y1', a.y.toFixed(1));
+    l.setAttribute('x2', b.x.toFixed(1)); l.setAttribute('y2', b.y.toFixed(1));
+  });
+}
+
+let alpha = 0, simRAF = null;
+function startSim(a = 1) { alpha = Math.max(alpha, a); if (!simRAF) simRAF = requestAnimationFrame(tick); }
+function tick() {
+  const n = visNodes, len = n.length;
+  for (let i = 0; i < len; i++) {
+    const a = n[i]; if (a._fx != null) continue;
+    let fx = (CX - a.x) * 0.0065, fy = (CY - a.y) * 0.0065;
+    for (let j = 0; j < len; j++) {
+      if (i === j) continue;
+      const b = n[j]; let dx = a.x - b.x, dy = a.y - b.y;
+      let d2 = dx*dx + dy*dy; if (d2 < 1) { d2 = 1; dx = Math.random(); dy = Math.random(); }
+      const d = Math.sqrt(d2), rep = 7000 / d2;
+      fx += dx/d*rep; fy += dy/d*rep;
+      const minD = a.r + b.r + 20;
+      if (d < minD) { const p = (minD-d)*0.65; fx += dx/d*p; fy += dy/d*p; }
+    }
+    a._fx2 = fx; a._fy2 = fy;
+  }
+  visEdges.forEach(e => {
+    const a = nodeById(e.from), b = nodeById(e.to);
+    const L = e.type === 'derive' ? 124 : e.type === 'cooccur' ? 170 : DYNAMIC.has(e.type) ? 190 : 215;
+    let dx = b.x-a.x, dy = b.y-a.y; const d = Math.sqrt(dx*dx+dy*dy) || 1;
+    const f = (d - L) * 0.045, ux = dx/d*f, uy = dy/d*f;
+    if (a._fx == null) { a._fx2 += ux; a._fy2 += uy; }
+    if (b._fx == null) { b._fx2 -= ux; b._fy2 -= uy; }
+  });
+  for (let i = 0; i < len; i++) {
+    const a = n[i];
+    if (a._fx != null) { a.x = a._fx; a.y = a._fy; continue; }
+    a.vx = (a.vx + a._fx2) * 0.82 * alpha;
+    a.vy = (a.vy + a._fy2) * 0.82 * alpha;
+    a.x += a.vx; a.y += a.vy;
+  }
+  paint();
+  alpha *= 0.979;
+  if (alpha > 0.02) simRAF = requestAnimationFrame(tick); else simRAF = null;
+}
+
+function svgPoint(evt) {
+  const ctm = svg.getScreenCTM().inverse();
+  let p = svg.createSVGPoint(); p.x = evt.clientX; p.y = evt.clientY; p = p.matrixTransform(ctm);
+  return { x: (p.x - viewT.x) / viewT.k, y: (p.y - viewT.y) / viewT.k };
+}
+function addDrag(g, n) {
+  let moved = false;
+  g.addEventListener('pointerdown', (e) => {
+    e.stopPropagation(); moved = false; g.setPointerCapture(e.pointerId);
+    const move = (ev) => { const p = svgPoint(ev); n._fx = p.x; n._fy = p.y; n.x = p.x; n.y = p.y; moved = true; startSim(0.4); paint(); };
+    const up = () => {
+      g.removeEventListener('pointermove', move); g.removeEventListener('pointerup', up);
+      n._fx = null; n._fy = null;
+      if (!moved) selectNode(n.id); else startSim(0.3);
+    };
+    g.addEventListener('pointermove', move); g.addEventListener('pointerup', up);
+  });
+}
+
+svg.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const ctm = svg.getScreenCTM().inverse();
+  let q = svg.createSVGPoint(); q.x = e.clientX; q.y = e.clientY; q = q.matrixTransform(ctm);
+  const f = e.deltaY < 0 ? 1.12 : 1/1.12, nk = Math.min(3.5, Math.max(0.3, viewT.k * f));
+  viewT.x = q.x - (q.x - viewT.x) * (nk/viewT.k);
+  viewT.y = q.y - (q.y - viewT.y) * (nk/viewT.k);
+  viewT.k = nk; applyView();
+}, { passive: false });
+
+let panning = null;
+svg.addEventListener('pointerdown', (e) => {
+  if (e.target.closest('.node') || e.target.closest('.edge')) return;
+  panning = { sx: e.clientX, sy: e.clientY, ox: viewT.x, oy: viewT.y, moved: false };
+});
+window.addEventListener('pointermove', (e) => {
+  if (!panning) return;
+  const ctm = svg.getScreenCTM(), s = ctm ? (ctm.a || 1) : 1;
+  viewT.x = panning.ox + (e.clientX - panning.sx)/s;
+  viewT.y = panning.oy + (e.clientY - panning.sy)/s;
+  panning.moved = true; applyView();
+});
+window.addEventListener('pointerup', () => { if (panning && !panning.moved) clearSelection(); panning = null; });
 
 function highlightNeighbors(id) {
-  if (selectedId) return; // when locked-in, don't preview hover
-  const neighbors = new Set([id]);
-  EDGES.forEach(e => {
-    if (e.from === id) neighbors.add(e.to);
-    if (e.to === id) neighbors.add(e.from);
-  });
-  svg.querySelectorAll('.node').forEach(g => {
-    g.classList.toggle('dimmed', !neighbors.has(g.dataset.id));
-  });
-  svg.querySelectorAll('.edge').forEach(line => {
-    const involved = line.dataset.from === id || line.dataset.to === id;
-    line.classList.toggle('dimmed', !involved);
-    line.classList.toggle('highlighted', involved);
+  if (selectedId) return;
+  const nb = new Set([id]);
+  visEdges.forEach(e => { if (e.from === id) nb.add(e.to); if (e.to === id) nb.add(e.from); });
+  vp.querySelectorAll('.node').forEach(g => g.classList.toggle('dimmed', !nb.has(g.dataset.id)));
+  vp.querySelectorAll('.edge').forEach(l => {
+    const inv = l.dataset.from === id || l.dataset.to === id;
+    l.classList.toggle('dimmed', !inv); l.classList.toggle('highlighted', inv);
   });
 }
-
 function clearHighlight() {
   if (selectedId) return;
-  svg.querySelectorAll('.node').forEach(g => g.classList.remove('dimmed'));
-  svg.querySelectorAll('.edge').forEach(line => { line.classList.remove('dimmed','highlighted'); });
+  vp.querySelectorAll('.node').forEach(g => g.classList.remove('dimmed'));
+  vp.querySelectorAll('.edge').forEach(l => l.classList.remove('dimmed','highlighted'));
 }
-
-function selectNode(id) {
-  selectedId = id;
-  applySelection();
-  const node = nodeById(id);
-  renderPanel(node);
-}
-
+function selectNode(id) { selectedId = id; applySelection(); renderPanel(nodeById(id)); }
 function clearSelection() {
-  selectedId = null;
-  applySelection();
+  selectedId = null; applySelection();
   panel.innerHTML = `<div class="panel-empty">
     <div class="panel-empty-mark">·</div>
-    <div class="panel-empty-msg">点击图中的任一节点,<br>看它的释义、出处、案例与对应期号。</div>
-    <div class="panel-empty-hint">提示 · 点击空白处取消选择</div>
+    <div class="panel-empty-msg">点击节点看释义、出处、相关概念、限度注脚;<br>点击<strong>动态变形边</strong>看那一句论证。</div>
+    <div class="panel-empty-hint">滚轮缩放 · 拖空白处平移 · 拖节点可移动</div>
   </div>`;
   clearHighlight();
 }
-
 function applySelection() {
-  svg.querySelectorAll('.node').forEach(g => g.classList.remove('selected', 'dimmed'));
-  svg.querySelectorAll('.edge').forEach(line => line.classList.remove('dimmed','highlighted'));
-  if (selectedId) {
-    const sel = svg.querySelector(`.node[data-id="${selectedId}"]`);
-    if (sel) sel.classList.add('selected');
-    const neighbors = new Set([selectedId]);
-    EDGES.forEach(e => {
-      if (e.from === selectedId) neighbors.add(e.to);
-      if (e.to === selectedId) neighbors.add(e.from);
-    });
-    svg.querySelectorAll('.node').forEach(g => {
-      if (!neighbors.has(g.dataset.id)) g.classList.add('dimmed');
-    });
-    svg.querySelectorAll('.edge').forEach(line => {
-      const involved = line.dataset.from === selectedId || line.dataset.to === selectedId;
-      if (involved) line.classList.add('highlighted');
-      else line.classList.add('dimmed');
-    });
-  }
+  vp.querySelectorAll('.node').forEach(g => g.classList.remove('selected','dimmed'));
+  vp.querySelectorAll('.edge').forEach(l => l.classList.remove('dimmed','highlighted'));
+  if (!selectedId) return;
+  const sel = vp.querySelector(`.node[data-id="${selectedId}"]`);
+  if (sel) sel.classList.add('selected');
+  const nb = new Set([selectedId]);
+  visEdges.forEach(e => { if (e.from === selectedId) nb.add(e.to); if (e.to === selectedId) nb.add(e.from); });
+  vp.querySelectorAll('.node').forEach(g => { if (!nb.has(g.dataset.id)) g.classList.add('dimmed'); });
+  vp.querySelectorAll('.edge').forEach(l => {
+    const inv = l.dataset.from === selectedId || l.dataset.to === selectedId;
+    l.classList.add(inv ? 'highlighted' : 'dimmed');
+  });
+}
+
+function selectEdge(edge) {
+  selectedId = null;
+  vp.querySelectorAll('.node').forEach(g => g.classList.add('dimmed'));
+  vp.querySelectorAll('.edge').forEach(l => l.classList.add('dimmed'));
+  vp.querySelectorAll('.node').forEach(g => { if (g.dataset.id === edge.from || g.dataset.id === edge.to) g.classList.remove('dimmed'); });
+  if (edge._l) { edge._l.classList.remove('dimmed'); edge._l.classList.add('highlighted'); }
+  const a = nodeById(edge.from), b = nodeById(edge.to);
+  panel.innerHTML = `
+    <div class="panel-cat" data-edge="${DYNAMIC.has(edge.type)?'dyn':'static'}"><span class="panel-cat-dot"></span>${DYNAMIC.has(edge.type)?'动态变形 · 动词即论证':'静态结构关系'}</div>
+    <div class="panel-name" style="font-size:22px">${a.name} <span style="color:var(--accent)">→</span> ${b.name}</div>
+    <div class="panel-fr">${EDGE_LABEL[edge.type] || edge.type}</div>
+    <div class="panel-def">${edge.note || EDGE_LABEL[edge.type]}</div>
+    <div class="panel-block"><div class="panel-block-label">两端节点</div>
+      <div class="pill-set"><button class="pill" data-id="${a.id}">${a.name}</button><button class="pill" data-id="${b.id}">${b.name}</button></div>
+    </div>`;
+  panel.querySelectorAll('.pill[data-id]').forEach(btn => btn.addEventListener('click', () => selectNode(btn.dataset.id)));
 }
 
 function renderPanel(n) {
-  const relatedHtml = n.related && n.related.length
-    ? `<div class="pill-set">${n.related.map(rid => {
-        const r = nodeById(rid);
-        return r ? `<button class="pill" data-id="${r.id}">${r.name}</button>` : '';
-      }).join('')}</div>`
-    : '<div class="panel-block-value" style="color: var(--ink-faint); font-style: italic;">尚未连接到其他节点</div>';
-
-  const epsHtml = n.eps && n.eps.length
+  if (!n) return;
+  // A 方案：相关概念从 EDGES 派生——面板邻居 = 图上连线 = hover 高亮，三者永远一致
+  const nbSet = [];
+  EDGES.forEach(e => {
+    if (e.from === n.id && !nbSet.includes(e.to)) nbSet.push(e.to);
+    else if (e.to === n.id && !nbSet.includes(e.from)) nbSet.push(e.from);
+  });
+  const relIds = nbSet.length ? nbSet : (n.parent && nodeById(n.parent) ? [n.parent] : []);
+  const relatedHtml = relIds.length
+    ? `<div class="pill-set">${relIds.map(rid => { const r = nodeById(rid); return r ? `<button class="pill" data-id="${r.id}">${r.name}</button>` : ''; }).join('')}</div>`
+    : '<div class="panel-block-value" style="color:var(--ink-faint);font-style:italic;">尚未连接到其他节点</div>';
+  const epsHtml = (n.eps && n.eps.length)
     ? `<div class="pill-set">${n.eps.map(ep => `<a class="pill ep" href="${EP_URL[ep] || '#'}">${ep}</a>`).join('')}</div>`
-    : '<div class="panel-block-value" style="color: var(--ink-faint); font-style: italic;">本专栏暂未涉及</div>';
-
+    : (n.cross ? '<div class="panel-block-value">横向 · 贯穿全专题</div>' : '<div class="panel-block-value" style="color:var(--ink-faint);font-style:italic;">本专栏暂未涉及</div>');
+  const thinkerHtml = n.thinker ? `<div class="panel-block"><div class="panel-block-label">来源思想家</div><div class="panel-block-value">${n.thinker}</div></div>` : '';
+  const limitHtml = n.limit ? `<div class="panel-limit"><div class="panel-limit-label">限度注脚 · 自我设限的诚实</div><div class="panel-limit-body">${n.limit}</div></div>` : '';
   panel.innerHTML = `
     <div class="panel-cat" data-cat="${n.cat}"><span class="panel-cat-dot"></span>${CAT_LABEL[n.cat]}</div>
     <div class="panel-name">${n.name}</div>
     ${n.fr ? `<div class="panel-fr">${n.fr}</div>` : ''}
     <div class="panel-def">${n.def}</div>
-    <div class="panel-block">
-      <div class="panel-block-label">原书出处</div>
-      <div class="panel-block-value">${n.src}</div>
-    </div>
-    <div class="panel-block">
-      <div class="panel-block-label">相关概念</div>
-      ${relatedHtml}
-    </div>
-    <div class="panel-block">
-      <div class="panel-block-label">出现期号</div>
-      ${epsHtml}
-    </div>
-  `;
-  // 相关概念点击跳转
+    ${limitHtml}
+    <div class="panel-block"><div class="panel-block-label">原书出处</div><div class="panel-block-value">${n.src}</div></div>
+    ${thinkerHtml}
+    <div class="panel-block"><div class="panel-block-label">相关概念</div>${relatedHtml}</div>
+    <div class="panel-block"><div class="panel-block-label">出现期号</div>${epsHtml}</div>`;
   panel.querySelectorAll('.pill[data-id]').forEach(btn => {
-    btn.addEventListener('click', () => selectNode(btn.dataset.id));
+    btn.addEventListener('click', () => {
+      const t = nodeById(btn.dataset.id);
+      if (t && !activeCategories.has(t.cat)) {
+        activeCategories.add(t.cat);
+        const chip = document.querySelector(`#chips .chip[data-cat="${t.cat}"]`);
+        if (chip) chip.classList.add('active');
+        buildGraph(); startSim(0.6); renderList();
+      }
+      selectNode(btn.dataset.id);
+    });
   });
 }
 
 function applySearch() {
-  if (!searchQuery) {
-    svg.querySelectorAll('.node').forEach(g => g.style.opacity = '');
-    return;
-  }
-  const q = searchQuery.toLowerCase();
-  svg.querySelectorAll('.node').forEach(g => {
+  const q = searchQuery.trim().toLowerCase();
+  vp.querySelectorAll('.node').forEach(g => {
+    if (!q) { g.style.opacity = ''; return; }
     const node = nodeById(g.dataset.id);
-    const match = node.name.toLowerCase().includes(q)
-      || (node.fr || '').toLowerCase().includes(q)
-      || (node.def || '').toLowerCase().includes(q);
-    g.style.opacity = match ? '' : '0.18';
+    const m = node.name.toLowerCase().includes(q) || (node.fr||'').toLowerCase().includes(q)
+      || (node.thinker||'').toLowerCase().includes(q) || (node.def||'').toLowerCase().includes(q);
+    g.style.opacity = m ? '' : '0.1';
   });
 }
 
-/* ==================== List view ==================== */
+/* ==================== 列表视图（逃生口） ==================== */
 function renderList() {
   const tbody = document.querySelector('#listTable tbody');
   tbody.innerHTML = NODES
@@ -1126,82 +1451,54 @@ function renderList() {
     .filter(n => {
       if (!searchQuery) return true;
       const q = searchQuery.toLowerCase();
-      return n.name.toLowerCase().includes(q)
-        || (n.fr || '').toLowerCase().includes(q)
-        || (n.def || '').toLowerCase().includes(q);
+      return n.name.toLowerCase().includes(q) || (n.fr||'').toLowerCase().includes(q)
+        || (n.thinker||'').toLowerCase().includes(q) || (n.def||'').toLowerCase().includes(q);
     })
     .map(n => `
       <tr class="row-${n.cat}" data-id="${n.id}">
         <td>${CAT_LABEL[n.cat].split(' · ')[0]}</td>
-        <td class="col-name">${n.name}${n.fr ? `<br><span style="font-family:var(--serif);font-style:italic;font-size:12px;color:var(--ink-faint)">${n.fr}</span>` : ''}</td>
-        <td class="col-def">${n.def.replace(/<[^>]+>/g,'')}</td>
+        <td class="col-name">${n.name}${(n.fr||n.thinker) ? `<br><span style="font-family:var(--serif);font-style:italic;font-size:12px;color:var(--ink-faint)">${n.fr||n.thinker}</span>` : ''}</td>
+        <td class="col-def">${n.def.replace(/<[^>]+>/g,'')}${n.limit ? ' 〔限度：' + n.limit.replace(/<[^>]+>/g,'') + '〕' : ''}</td>
         <td class="col-src">${n.src}</td>
-        <td class="col-eps">${(n.eps || []).join(' · ') || '—'}</td>
-      </tr>
-    `).join('');
+        <td class="col-eps">${(n.eps||[]).join(' · ') || (n.cross ? '横向' : '—')}</td>
+      </tr>`).join('');
   tbody.querySelectorAll('tr').forEach(tr => {
     tr.addEventListener('click', () => {
-      // 切回图谱视图并选中
       document.querySelector('.view-toggle button[data-view="graph"]').click();
-      selectNode(tr.dataset.id);
+      if (activeCategories.has(nodeById(tr.dataset.id).cat)) selectNode(tr.dataset.id);
     });
   });
 }
 
-/* ==================== Events ==================== */
-
-// 类别 chips
+/* ==================== 事件 ==================== */
 document.querySelectorAll('#chips .chip').forEach(chip => {
   chip.addEventListener('click', () => {
     const cat = chip.dataset.cat;
-    if (activeCategories.has(cat)) activeCategories.delete(cat);
-    else activeCategories.add(cat);
+    if (activeCategories.has(cat)) activeCategories.delete(cat); else activeCategories.add(cat);
     chip.classList.toggle('active');
     if (selectedId && !activeCategories.has(nodeById(selectedId).cat)) clearSelection();
-    render();
-    renderList();
+    buildGraph(); startSim(0.7); renderList();
   });
 });
-
-// 搜索
-document.getElementById('search').addEventListener('input', (e) => {
-  searchQuery = e.target.value;
-  applySearch();
-  renderList();
-});
-
-// 视图切换
+document.getElementById('search').addEventListener('input', (e) => { searchQuery = e.target.value; applySearch(); renderList(); });
 document.querySelectorAll('.view-toggle button').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    if (btn.dataset.view === 'list') {
-      stage.classList.add('list-mode');
-      renderList();
-    } else {
-      stage.classList.remove('list-mode');
-    }
+    if (btn.dataset.view === 'list') { stage.classList.add('list-mode'); renderList(); }
+    else { stage.classList.remove('list-mode'); startSim(0.3); }
   });
 });
 
-// 点击 svg 空白处取消选择
-svg.addEventListener('click', () => clearSelection());
-
-// 初次渲染
-render();
+buildGraph();
 renderList();
+startSim(1);
 
-// 入场动画
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
-  });
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.1 });
+document.querySelectorAll('section, header.hero').forEach(s => { s.classList.add('fade-in'); observer.observe(s); });
 
-document.querySelectorAll('section, header.hero').forEach(s => {
-  s.classList.add('fade-in');
-  observer.observe(s);
-});
 </script>
 
 </body>
