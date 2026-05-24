@@ -373,6 +373,11 @@
   .upcoming-veil .island-name { color: var(--ink-soft); font-weight: 500; }
   .upcoming-veil .island-tagline { color: var(--ink-faint); }
   .upcoming-veil .island-meta { color: var(--ink-faint); }
+  /* 筹备中、但已有「抢先读」内容的群岛:可点击 */
+  .island.upcoming.has-preview { cursor: pointer; }
+  .island.upcoming.has-preview:hover { transform: translateY(-2px); border-color: var(--accent-soft); }
+  .island.upcoming.has-preview .island-meta { color: var(--ink-faint); border-top-color: var(--rule); }
+  .island.upcoming.has-preview .island-meta strong { color: var(--accent); }
 
   /* ============ 三个入口 ============ */
   .three-doors {
@@ -833,21 +838,21 @@
       </div>
     </a>
 
-    <!-- 筹备中 1 -->
-    <div class="island upcoming">
+    <!-- 筹备中 1 · 已有抢先读 -->
+    <a href="备用素材/内卷/index.html" class="island upcoming has-preview">
       <svg class="island-icon" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">
         <ellipse cx="24" cy="22" rx="14" ry="4" fill="#8b8074" opacity="0.4"/>
         <ellipse cx="42" cy="23" rx="4" ry="1.5" fill="#8b8074" opacity="0.3"/>
       </svg>
       <div class="upcoming-veil">
-        <div class="island-label">筹备中</div>
+        <div class="island-label">筹备中 · 抢先读</div>
         <div class="island-name">内卷与意义崩塌</div>
         <div class="island-tagline">个体理性叠加出的结构性陷阱,<br>以及一个时代里"好"的尺子怎么变窄的。</div>
       </div>
-      <div class="island-meta upcoming-veil">
-        <span>立项中</span>
+      <div class="island-meta">
+        <span><strong>先发一篇</strong> · 内卷:一个被误用的词 →</span>
       </div>
-    </div>
+    </a>
 
     <!-- 筹备中 2 -->
     <div class="island upcoming">
@@ -973,6 +978,9 @@
   <div class="footer-line">把每一期对日常的追问,做成可以在浏览器里展开的研究刊</div>
   <div class="footer-line">规训群岛 · 内卷与意义崩塌 · 算法与新主体性 · 关系与亲密的语法 · ······</div>
   <div class="footer-rights">© 2026 大大黄油 · CC BY-NC 4.0 · 无商业合作</div>
+  <div style="margin-top: 16px; font-family: var(--sans); font-size: 10.5px; letter-spacing: 0.18em; color: rgba(245,241,234,0.28);">
+    <a href="备用素材/思维导图/index.html" style="color: inherit; border-bottom: 1px solid rgba(245,241,234,0.14); padding-bottom: 2px;">备用素材 · AI × 教育 连载思维导图</a>
+  </div>
 </footer>
 
 <script>

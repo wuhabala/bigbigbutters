@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>「AI 时代，教育守什么」· 连载导图（竖版）</title>
+<!--
+  竖版连载导图。两用:
+  ① 截长图 → 插入公众号正文(浏览器整页截图,或截 .wrap 区域)。
+  ② 整份挂到主站某 URL → 公众号文末「阅读原文」指过去(正文外链不可点,只有阅读原文能外跳)。
+  风格:墨黑 × 米白 · 思想刊物。宽度按手机阅读优化。
+-->
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #FAF7F0; color: #33302A;
+    font-family: -apple-system, 'PingFang SC', 'Helvetica Neue', sans-serif; line-height: 1.7; }
+  .serif { font-family: Georgia, 'Songti SC', 'STSong', serif; }
+  .wrap { max-width: 700px; margin: 0 auto; padding: 34px 26px 44px; }
+
+  /* 根 */
+  .head { text-align: center; border-top: 3px solid #1A1714; padding-top: 16px; margin-bottom: 26px; }
+  .eyebrow { font-size: 12px; letter-spacing: 0.3em; color: #8A8175; margin: 0 0 12px; }
+  .title { font-family: Georgia,'Songti SC','STSong',serif; font-size: 30px; font-weight: bold; color: #1A1714; margin: 0; letter-spacing: 0.02em; }
+  .sub { font-size: 12.5px; color: #8A8175; letter-spacing: 0.08em; margin: 11px 0 0; }
+
+  /* 主线 */
+  .mainline { background: #F1EBDD; border-top: 2px solid #1A1714; border-bottom: 2px solid #1A1714; text-align: center; padding: 18px 20px; margin: 0 0 24px; }
+  .mainline .lbl { font-size: 11px; letter-spacing: 0.22em; color: #8A8175; margin: 0 0 7px; }
+  .mainline .txt { font-family: Georgia,'Songti SC','STSong',serif; font-size: 16.5px; font-weight: bold; color: #1A1714; line-height: 1.7; margin: 0; }
+
+  /* 两问 */
+  .twoq { margin: 0 0 8px; }
+  .qcard { border: 1px solid #DCD4C5; background: #FFFDF8; padding: 14px 16px; margin-bottom: 12px; }
+  .qcard .qn { font-family: Georgia, serif; font-size: 12px; letter-spacing: 0.1em; color: #B0A893; }
+  .qcard .qh { font-family: Georgia,'Songti SC','STSong',serif; font-size: 17px; font-weight: bold; color: #1A1714; margin: 3px 0 5px; }
+  .qcard .qd { font-size: 13px; color: #5A5446; margin: 0; }
+
+  /* 起点 / 终点 */
+  .end { padding: 15px 18px; margin: 18px 0; }
+  .end.start { background: #F1EBDD; border: 1.5px solid #1A1714; }
+  .end.finish { background: #1A1714; }
+  .end .et { font-family: Georgia,'Songti SC','STSong',serif; font-weight: bold; }
+  .end.start .et { font-size: 17px; color: #1A1714; }
+  .end.finish .et { font-size: 17px; color: #F1EBDD; }
+  .end .es { font-size: 12.5px; margin-top: 4px; }
+  .end.start .es { color: #6F6A60; }
+  .end.finish .es { color: #C4B79A; }
+  .end .ek { font-family: Georgia, serif; font-size: 12px; letter-spacing: 0.12em; }
+  .end.start .ek { color: #B0A893; }
+  .end.finish .ek { color: #8A8175; }
+
+  /* 主干 + 阶段 */
+  .journey { border-left: 2px solid #1A1714; margin: 4px 0 4px 9px; }
+  .stage { position: relative; padding-left: 26px; margin-bottom: 26px; }
+  .stage::before { content: ''; position: absolute; left: 0; top: 13px; width: 18px; height: 2px; background: #1A1714; }
+  .stage::after { content: ''; position: absolute; left: -7px; top: 8px; width: 12px; height: 12px; border-radius: 50%; background: #1A1714; }
+  .sh { display: flex; align-items: baseline; gap: 10px; margin-bottom: 13px; }
+  .sh .sn { font-family: Georgia, serif; font-size: 24px; font-weight: bold; color: #C4B79A; }
+  .sh .st { font-family: Georgia,'Songti SC','STSong',serif; font-size: 18px; font-weight: bold; color: #1A1714; }
+  .sh .sd { font-size: 12px; color: #8A8175; }
+
+  /* 期卡片 */
+  .card { border: 1px solid #DCD4C5; background: #FFFDF8; padding: 13px 16px; margin-bottom: 12px; }
+  .card .ct { display: flex; align-items: baseline; gap: 10px; }
+  .card .num { font-family: Georgia, serif; font-size: 26px; font-weight: bold; color: #C4B79A; line-height: 1; }
+  .card .tt { font-family: Georgia,'Songti SC','STSong',serif; font-size: 17px; font-weight: bold; color: #1A1714; }
+  .card .src { font-size: 11px; color: #8A8175; margin-left: auto; align-self: center; }
+  .card .rl { margin-top: 9px; padding-top: 9px; border-top: 1px solid #ECE4D4; }
+  .card .rl .rk { font-size: 10.5px; letter-spacing: 0.12em; color: #B0A893; }
+  .card .rl .rq { font-family: Georgia,'Songti SC','STSong',serif; font-size: 13.5px; font-weight: bold; color: #1A1714; line-height: 1.5; margin-top: 3px; }
+
+  /* 尺子的尺子 */
+  .meta { border: 2px solid #1A1714; background: #F1EBDD; padding: 18px 20px; margin: 22px 0 18px; text-align: center; }
+  .meta .ml { font-size: 11px; letter-spacing: 0.2em; color: #8A8175; margin: 0 0 8px; }
+  .meta .mq { font-family: Georgia,'Songti SC','STSong',serif; font-size: 16px; font-weight: bold; color: #1A1714; line-height: 1.65; margin: 0 0 9px; }
+  .meta .mr { font-size: 14px; color: #5A5446; margin: 0; }
+  .meta .mr b { color: #1A1714; }
+
+  .foot { text-align: center; border-top: 1px solid #DCD4C5; margin-top: 22px; padding-top: 16px; }
+  .foot .fq { font-family: Georgia,'Songti SC','STSong',serif; font-size: 14.5px; font-weight: bold; color: #1A1714; line-height: 1.7; margin: 0 0 8px; }
+  .foot .fb { font-size: 12px; color: #8A8175; letter-spacing: 0.06em; margin: 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <p class="eyebrow">连 载 全 景 图</p>
+    <h1 class="title">AI 时代，教育守什么</h1>
+    <p class="sub">序 · 发刊词　+　10 期　+　收官</p>
+  </div>
+
+  <div class="mainline">
+    <p class="lbl">全 篇 主 线</p>
+    <p class="txt">凡是 AI 能「返还」给你的，都不该是教育的核心；<br>教育的核心，在它返还不了的地方。</p>
+  </div>
+
+  <div class="twoq">
+    <div class="qcard">
+      <span class="qn">真问题 · 一</span>
+      <div class="qh">AI 到底是什么？</div>
+      <p class="qd">一台「把过去还给你」的机器——擅长返还已有的。</p>
+    </div>
+    <div class="qcard">
+      <span class="qn">真问题 · 二</span>
+      <div class="qh">教育到底为了什么？</div>
+      <p class="qd">机器什么都能代劳时，哪些东西，无论如何不能交出去。</p>
+    </div>
+  </div>
+
+  <!-- 起点 -->
+  <div class="end start">
+    <span class="ek">序 · 发刊词</span>
+    <div class="et">我们可能从一开始，就问错了问题</div>
+    <div class="es">立框架 · 亮主线 · 铺 11 步地图</div>
+  </div>
+
+  <div class="journey">
+
+    <!-- 一 切身 -->
+    <div class="stage">
+      <div class="sh"><span class="sn">一</span><span class="st">切身</span><span class="sd">先打动你</span></div>
+
+      <div class="card">
+        <div class="ct"><span class="num">01</span><span class="tt">会变笨吗</span><span class="src">延展心智</span></div>
+        <div class="rl"><div class="rk">第 1 把尺子</div><div class="rq">被代劳的，是不是此刻正要练的那个能力？</div></div>
+      </div>
+      <div class="card">
+        <div class="ct"><span class="num">02</span><span class="tt">作业</span><span class="src">杜威</span></div>
+        <div class="rl"><div class="rk">第 2 把尺子</div><div class="rq">「探究」还在不在学生手里？评过程，不评成品。</div></div>
+      </div>
+      <div class="card">
+        <div class="ct"><span class="num">03</span><span class="tt">个性化</span><span class="src">福柯 / Williamson</span></div>
+        <div class="rl"><div class="rk">第 3 把尺子</div><div class="rq">扩展可能，还是锁进算法预测的轨道？</div></div>
+      </div>
+    </div>
+
+    <!-- 二 关系 -->
+    <div class="stage">
+      <div class="sh"><span class="sn">二</span><span class="st">关系</span><span class="sd">机器接不了的</span></div>
+
+      <div class="card">
+        <div class="ct"><span class="num">04</span><span class="tt">老师</span><span class="src">Biesta</span></div>
+        <div class="rl"><div class="rk">第 4 把尺子</div><div class="rq">当「主体」，还是当被优化的「数据对象」？</div></div>
+      </div>
+      <div class="card">
+        <div class="ct"><span class="num">05</span><span class="tt">陪伴</span><span class="src">Noddings</span></div>
+        <div class="rl"><div class="rk">第 5 把尺子</div><div class="rq">补充真实的关怀，还是替代它？</div></div>
+      </div>
+    </div>
+
+    <!-- 三 环境 -->
+    <div class="stage">
+      <div class="sh"><span class="sn">三</span><span class="st">环境</span><span class="sd">看不见的力</span></div>
+
+      <div class="card">
+        <div class="ct"><span class="num">06</span><span class="tt">注意力</span><span class="src">斯蒂格勒</span></div>
+        <div class="rl"><div class="rk">第 6 把尺子</div><div class="rq">在养注意力，还是在抢？</div></div>
+      </div>
+      <div class="card">
+        <div class="ct"><span class="num">07</span><span class="tt">公平</span><span class="src">布鲁姆 / O'Neil</span></div>
+        <div class="rl"><div class="rk">第 7 把尺子</div><div class="rq">缩小差距，还是用「人人可得」盖住新鸿沟？</div></div>
+      </div>
+    </div>
+
+    <!-- 四 拔高 -->
+    <div class="stage">
+      <div class="sh"><span class="sn">四</span><span class="st">拔高</span><span class="sd">退到根上</span></div>
+
+      <div class="card">
+        <div class="ct"><span class="num">08</span><span class="tt">还教什么</span><span class="src">Floridi</span></div>
+        <div class="rl"><div class="rk">第 8 把尺子</div><div class="rq">是「替」学生认知，还是「逼」学生认知？</div></div>
+      </div>
+      <div class="card">
+        <div class="ct"><span class="num">09</span><span class="tt">品格</span><span class="src">Vallor</span></div>
+        <div class="rl"><div class="rk">第 9 把尺子</div><div class="rq">保留还是拿走「亲自做判断」的机会？</div></div>
+      </div>
+      <div class="card">
+        <div class="ct"><span class="num">10</span><span class="tt">工具不中立</span><span class="src">后现象学</span></div>
+        <div class="rl"><div class="rk">第 10 把尺子</div><div class="rq">放大 / 缩减了什么？缩掉的是不是「有益的困难」？</div></div>
+      </div>
+    </div>
+
+  </div><!-- /journey -->
+
+  <!-- 终点 -->
+  <div class="end finish">
+    <span class="ek">收官</span>
+    <div class="et">AI 能返还一切，除了教育最要紧的东西</div>
+    <div class="es">十问归一 · 十把尺子合成一把</div>
+  </div>
+
+  <!-- 尺子的尺子 -->
+  <div class="meta">
+    <p class="ml">十 把 尺 子 的 尺 子</p>
+    <p class="mq">每一次，AI 是在「替」人做、想、判断，<br>还是在「逼」人自己做、想、判断？</p>
+    <p class="mr"><b>替 → 它在掏空　·　逼 → 它在成全</b></p>
+  </div>
+
+  <div class="foot">
+    <p class="fq">不再问「该不该用 AI」，<br>而问：AI 帮不上的那部分，我们守住了没有？</p>
+    <p class="fb">「AI 时代，教育守什么」· 全 12 篇</p>
+  </div>
+
+</div>
+</body>
+</html>
